@@ -1,1589 +1,1575 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>iPhone 17 Pro Max — Concorra Agora</title>
-  <meta name="description" content="Compre o ebook e concorra a um iPhone 17 Pro Max 0km. Frete e impostos pagos. Sorteio pela Loteria Federal."/>
-  <meta name="theme-color" content="#000000"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <style>
-/* =============================================
-   RESET & BASE
-   ============================================= */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Concorra ao iPhone 17 Pro — FaturouRifa</title>
+<meta name="description" content="Compre o ebook e concorra a um iPhone 17 Pro 0km. Frete e impostos pagos. Sorteio pela Loteria Federal. Autorizado SPA/ME."/>
+<meta name="theme-color" content="#0a0a0a"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ───────────────────────────────────────────
+   TOKENS
+─────────────────────────────────────────── */
 :root{
-  --black:#000;
-  --white:#fff;
-  --gray:#86868b;
-  --gray2:#1d1d1f;
-  --gray3:#6e6e73;
-  --accent:#FF6B00;
-  --accent2:#FF9A3C;
-  --blue:#0071e3;
-  --gold:#F5C518;
-  --green:#34c759;
-  --r:20px;
+  --bg:       #0e0e0e;
+  --bg1:      #141414;
+  --bg2:      #1a1a1a;
+  --bg3:      #212121;
+  --border:   rgba(255,255,255,.10);
+  --border2:  rgba(255,255,255,.06);
+
+  --orange:   #FF6B00;
+  --orange2:  #FF9233;
+  --gold:     #F0B429;
+  --green:    #30D158;
+  --red:      #FF453A;
+  --blue:     #0A84FF;
+  --white:    #FFFFFF;
+  --gray1:    #F5F5F7;
+  --gray2:    #A1A1A6;
+  --gray3:    #6E6E73;
+  --gray4:    #3A3A3C;
+
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --r:    16px;
+  --r2:   24px;
 }
-html{scroll-behavior:smooth;font-size:16px}
+
+/* ───────────────────────────────────────────
+   RESET
+─────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  background:var(--black);
-  color:var(--white);
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--gray1);
+  line-height:1.5;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-.container{width:100%;max-width:1080px;margin:0 auto;padding:0 22px}
+img{display:block;max-width:100%;height:auto}
+button{font-family:var(--font);cursor:pointer}
+input,select{font-family:var(--font)}
 
-/* =============================================
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px}
+.wrap-sm{max-width:760px;margin:0 auto;padding:0 20px}
+
+/* ───────────────────────────────────────────
    TOPBAR
-   ============================================= */
+─────────────────────────────────────────── */
 .topbar{
-  background:rgba(0,0,0,.85);
-  backdrop-filter:saturate(180%) blur(20px);
-  -webkit-backdrop-filter:saturate(180%) blur(20px);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  text-align:center;
-  padding:11px 20px;
-  font-size:.78rem;
-  color:#f5f5f7;
+  background:linear-gradient(90deg,#1a0600,#2a0e00,#1a0600);
+  border-bottom:1px solid rgba(255,107,0,.25);
+  text-align:center;padding:9px 16px;
+  font-size:.75rem;color:rgba(255,255,255,.65);
   letter-spacing:.2px;
-  position:relative;
-  z-index:200;
 }
-.topbar strong{color:var(--accent2)}
+.topbar strong{color:var(--orange2);font-weight:700}
+.topbar a{color:var(--orange2);text-decoration:underline}
 
-/* =============================================
-   HEADER / NAV
-   ============================================= */
+/* ───────────────────────────────────────────
+   NAV
+─────────────────────────────────────────── */
 .nav{
-  position:fixed;
-  top:0;left:0;right:0;
-  z-index:300;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:saturate(180%) blur(20px);
-  -webkit-backdrop-filter:saturate(180%) blur(20px);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  transition:background .3s;
+  position:sticky;top:0;z-index:200;
+  height:56px;
+  background:rgba(14,14,14,.92);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;
 }
-.nav-inner{
-  display:flex;align-items:center;justify-content:space-between;
-  max-width:1080px;margin:0 auto;padding:0 22px;height:52px;
-}
+.nav .wrap{display:flex;align-items:center;gap:0}
 .nav-logo{
-  display:flex;align-items:center;gap:8px;
-  font-weight:800;font-size:1rem;letter-spacing:-.3px;
+  font-size:1.05rem;font-weight:800;
+  display:flex;align-items:center;gap:7px;color:var(--white);
+  letter-spacing:-.3px;margin-right:auto;
 }
-.nav-logo span{color:var(--accent)}
-.nav-links{
-  display:flex;gap:28px;
-  font-size:.82rem;font-weight:500;color:rgba(255,255,255,.7);
+.nav-logo .dot{
+  width:28px;height:28px;border-radius:8px;
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;flex-shrink:0;
 }
-.nav-links a:hover{color:#fff}
-.nav-cta{
-  background:var(--accent);
-  color:#fff;
-  padding:8px 20px;
-  border-radius:50px;
-  font-size:.82rem;
-  font-weight:700;
-  transition:.2s;
+.nav-links{display:flex;gap:24px;margin-right:24px}
+.nav-links a{font-size:.82rem;font-weight:500;color:var(--gray2);transition:color .15s}
+.nav-links a:hover{color:var(--white)}
+.nav-btn{
+  background:var(--orange);color:#fff;
+  padding:8px 18px;border-radius:50px;
+  font-size:.8rem;font-weight:700;transition:.2s;border:none;
   white-space:nowrap;
 }
-.nav-cta:hover{background:var(--accent2);transform:scale(1.03)}
-.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-.ham span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
-.mobile-menu{
-  display:none;position:fixed;inset:0;z-index:290;
-  background:rgba(0,0,0,.97);
-  flex-direction:column;align-items:center;justify-content:center;gap:36px;
-  font-size:1.5rem;font-weight:700;
+.nav-btn:hover{background:var(--orange2)}
+.ham{
+  display:none;background:none;border:none;
+  flex-direction:column;gap:4px;padding:6px;margin-left:8px;
 }
-.mobile-menu.open{display:flex}
+.ham span{display:block;width:20px;height:1.5px;background:var(--gray2);border-radius:2px;transition:.3s}
 
-/* =============================================
+/* MENU MOBILE */
+.mob-menu{
+  display:none;position:fixed;top:56px;left:0;right:0;bottom:0;
+  z-index:190;background:rgba(10,10,10,.98);
+  flex-direction:column;padding:32px 24px;gap:4px;
+}
+.mob-menu.open{display:flex}
+.mob-menu a{
+  display:block;padding:16px 0;
+  font-size:1.2rem;font-weight:600;color:var(--gray1);
+  border-bottom:1px solid var(--border2);
+}
+.mob-menu a:last-child{border:none;margin-top:16px;color:var(--orange)}
+
+/* ───────────────────────────────────────────
    HERO
-   ============================================= */
+─────────────────────────────────────────── */
 .hero{
   min-height:100svh;
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;
-  position:relative;overflow:hidden;
-  padding:80px 22px 60px;
-  text-align:center;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:0;overflow:hidden;
+  position:relative;
 }
 
-/* Fundo com gradiente vivo */
+/* fundo esq */
 .hero::before{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 100% 70% at 50% -10%,rgba(255,107,0,.28) 0%,transparent 65%),
-    radial-gradient(ellipse 60% 50% at 80% 80%,rgba(0,113,227,.18) 0%,transparent 60%),
-    radial-gradient(ellipse 40% 40% at 20% 70%,rgba(245,197,24,.08) 0%,transparent 50%),
-    #000;
-  z-index:0;
+  content:'';
+  position:absolute;top:0;left:0;right:50%;bottom:0;
+  background:radial-gradient(ellipse 80% 80% at 20% 50%,rgba(255,107,0,.12) 0%,transparent 70%);
+  pointer-events:none;
 }
 
-/* Partículas decorativas */
-.hero::after{
-  content:'';position:absolute;inset:0;
-  background-image:
-    radial-gradient(1.5px 1.5px at 15% 25%,rgba(255,255,255,.3) 0%,transparent 100%),
-    radial-gradient(1px 1px at 85% 15%,rgba(255,255,255,.2) 0%,transparent 100%),
-    radial-gradient(2px 2px at 60% 80%,rgba(255,107,0,.4) 0%,transparent 100%),
-    radial-gradient(1px 1px at 30% 65%,rgba(255,255,255,.15) 0%,transparent 100%),
-    radial-gradient(1.5px 1.5px at 75% 55%,rgba(0,113,227,.5) 0%,transparent 100%);
-  z-index:0;pointer-events:none;
+.hero-text{
+  padding:120px 48px 80px 5%;
+  display:flex;flex-direction:column;gap:28px;
+  position:relative;z-index:2;
 }
 
-.hero-content{position:relative;z-index:1;width:100%;max-width:900px;margin:0 auto}
-
-.hero-legal{
-  display:inline-flex;align-items:center;gap:7px;
-  background:rgba(52,199,89,.12);
-  border:1px solid rgba(52,199,89,.3);
-  color:var(--green);
-  font-size:.72rem;font-weight:600;letter-spacing:.4px;
-  padding:6px 16px;border-radius:50px;margin-bottom:28px;
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;width:fit-content;
+  background:rgba(48,209,88,.1);border:1px solid rgba(48,209,88,.25);
+  color:var(--green);font-size:.72rem;font-weight:700;
+  letter-spacing:.6px;text-transform:uppercase;
+  padding:7px 14px;border-radius:50px;
 }
-.hero-legal::before{content:'●';font-size:.6rem;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-
-.hero-eyebrow{
-  font-size:.82rem;font-weight:500;
-  color:rgba(255,255,255,.5);
-  letter-spacing:1.5px;text-transform:uppercase;
-  margin-bottom:14px;
+.hero-badge::before{
+  content:'';width:7px;height:7px;border-radius:50%;
+  background:var(--green);flex-shrink:0;
+  box-shadow:0 0 8px var(--green);
+  animation:pulse-dot 2s ease-in-out infinite;
 }
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
 
 .hero-title{
-  font-size:clamp(2.8rem,8vw,5.5rem);
-  font-weight:900;
-  line-height:1.05;
-  letter-spacing:-2px;
-  margin-bottom:18px;
+  font-size:clamp(2.4rem,4.5vw,4rem);
+  font-weight:900;line-height:1.06;
+  letter-spacing:-1.5px;color:var(--white);
 }
-.hero-title .line1{display:block;color:#fff}
-.hero-title .line2{
-  display:block;
-  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 40%,var(--gold) 100%);
+.hero-title .accent{
+  background:linear-gradient(135deg,var(--orange) 0%,var(--orange2) 50%,var(--gold) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;
 }
-
 .hero-sub{
-  font-size:clamp(1rem,2.5vw,1.3rem);
-  color:rgba(255,255,255,.55);
-  font-weight:400;margin-bottom:36px;
-  max-width:560px;margin-left:auto;margin-right:auto;
+  font-size:1rem;color:var(--gray2);line-height:1.7;
+  max-width:420px;
 }
-.hero-sub strong{color:rgba(255,255,255,.85);font-weight:600}
+.hero-sub strong{color:var(--gray1);font-weight:600}
 
-/* Countdown */
-.countdown{
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:16px;padding:14px 22px;
-  margin-bottom:36px;flex-wrap:wrap;justify-content:center;
-}
-.cd-label{font-size:.72rem;color:rgba(255,255,255,.4);margin-right:6px;letter-spacing:.3px}
-.cd-unit{
-  display:flex;flex-direction:column;align-items:center;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:10px;
-  padding:8px 12px;min-width:52px;
-}
-.cd-unit span{font-size:1.6rem;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
-.cd-unit small{font-size:.58rem;color:rgba(255,255,255,.4);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
-.cd-colon{font-size:1.4rem;font-weight:800;color:var(--accent);line-height:1;align-self:flex-start;padding-top:8px}
-
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
-
-.btn-hero{
+/* countdown */
+.hero-cd{
   display:inline-flex;align-items:center;gap:8px;
-  padding:15px 34px;border-radius:50px;
-  font-weight:700;font-size:.95rem;
-  transition:all .25s;cursor:pointer;border:none;
-  font-family:inherit;letter-spacing:-.1px;
+  width:fit-content;flex-wrap:wrap;
 }
-.btn-fire{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
+.cd-label{font-size:.72rem;color:var(--gray3);white-space:nowrap}
+.cd-units{display:flex;align-items:center;gap:4px}
+.cd-u{
+  display:flex;flex-direction:column;align-items:center;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:10px;padding:8px 11px;min-width:50px;
+}
+.cd-u b{font-size:1.5rem;font-weight:800;color:var(--white);line-height:1;font-variant-numeric:tabular-nums}
+.cd-u small{font-size:.55rem;color:var(--gray3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.cd-sep{font-size:1.2rem;font-weight:800;color:var(--orange);line-height:1;margin-bottom:4px}
+
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:50px;
+  font-size:.92rem;font-weight:700;
+  transition:.2s;border:none;
+}
+.btn-cta-primary{
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
   color:#fff;
-  box-shadow:0 0 0 0 rgba(255,107,0,.5);
-  animation:glow 2.5s ease-in-out infinite;
+  box-shadow:0 2px 20px rgba(255,107,0,.35);
 }
-@keyframes glow{
-  0%,100%{box-shadow:0 4px 24px rgba(255,107,0,.35),0 0 0 0 rgba(255,107,0,.2)}
-  50%{box-shadow:0 4px 40px rgba(255,107,0,.6),0 0 0 8px rgba(255,107,0,0)}
+.btn-cta-primary:hover{transform:translateY(-2px);box-shadow:0 6px 32px rgba(255,107,0,.5)}
+.btn-cta-outline{
+  background:transparent;
+  color:var(--gray1);
+  border:1px solid var(--border);
 }
-.btn-fire:hover{transform:scale(1.04) translateY(-1px)}
-.btn-secondary{
-  background:rgba(255,255,255,.08);
-  color:rgba(255,255,255,.8);
-  border:1px solid rgba(255,255,255,.15);
-}
-.btn-secondary:hover{background:rgba(255,255,255,.14);color:#fff}
+.btn-cta-outline:hover{border-color:var(--gray2);color:var(--white)}
 
-/* =============================================
-   FOTO DO IPHONE (Hero)
-   ============================================= */
-.phone-showcase{
+/* mini stats em linha */
+.hero-stats{
+  display:flex;gap:20px;flex-wrap:wrap;
+  padding-top:8px;
+  border-top:1px solid var(--border2);
+}
+.hstat{display:flex;flex-direction:column;gap:2px}
+.hstat b{font-size:1.1rem;font-weight:800;color:var(--white)}
+.hstat span{font-size:.72rem;color:var(--gray3)}
+
+/* LADO DIREITO - foto */
+.hero-phone{
   position:relative;
-  display:inline-block;
-  margin-bottom:-40px;
+  height:100vh;min-height:600px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:linear-gradient(160deg,#181412 0%,#0e0e0e 60%);
+  border-left:1px solid var(--border2);
 }
-.phone-img-wrap{
-  position:relative;
-  display:inline-block;
+.hero-phone::before{
+  content:'';position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,0,.15) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
 }
-.phone-img{
-  width:clamp(260px,45vw,400px);
-  height:auto;
-  filter:drop-shadow(0 40px 80px rgba(255,107,0,.3)) drop-shadow(0 0 120px rgba(0,0,0,.8));
-  animation:float 6s ease-in-out infinite;
+.iphone-wrap{
+  position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;
 }
-@keyframes float{
-  0%,100%{transform:translateY(0) rotate(-2deg)}
-  50%{transform:translateY(-18px) rotate(2deg)}
+.iphone-img{
+  max-height:82vh;
+  width:auto;
+  max-width:300px;
+  object-fit:contain;
+  filter:drop-shadow(0 32px 80px rgba(0,0,0,.6));
+  transition:opacity .4s ease, filter .4s ease;
+  animation:float 7s ease-in-out infinite;
 }
-
-/* Reflexo no chão */
-.phone-reflection{
-  width:clamp(200px,35vw,300px);
-  height:40px;
-  background:radial-gradient(ellipse,rgba(255,107,0,.25) 0%,transparent 70%);
-  margin:0 auto;
-  filter:blur(16px);
-  margin-top:-10px;
-}
-
-/* Badges flutuantes */
-.float-badge{
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.iphone-glow{
   position:absolute;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:14px;
-  padding:10px 16px;
-  font-size:.75rem;
-  font-weight:600;
-  white-space:nowrap;
-  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,0,.2) 0%,transparent 70%);
+  bottom:15%;left:50%;transform:translateX(-50%);
+  filter:blur(32px);pointer-events:none;
+  transition:background .4s;
 }
-.fb-left{
-  top:18%;left:-18%;
-  animation:floatL 5s ease-in-out infinite;
-}
-.fb-right{
-  top:42%;right:-18%;
-  animation:floatR 4.5s ease-in-out infinite;
-}
-.fb-bottom{
-  bottom:18%;left:-12%;
-  animation:floatL 6s ease-in-out infinite .5s;
-}
-@keyframes floatL{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes floatR{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 
-.fb-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
-.dot-green{background:var(--green)}
-.dot-orange{background:var(--accent)}
-.dot-gold{background:var(--gold)}
-
-/* =============================================
-   PROGRESS STRIP
-   ============================================= */
-.progress-strip{
-  background:rgba(255,255,255,.03);
-  border-top:1px solid rgba(255,255,255,.07);
-  border-bottom:1px solid rgba(255,255,255,.07);
-  padding:20px 22px;
+/* ───────────────────────────────────────────
+   PROGRESS BAR
+─────────────────────────────────────────── */
+.prog-section{
+  background:var(--bg1);
+  border-top:1px solid var(--border2);
+  border-bottom:1px solid var(--border);
+  padding:18px 0;
 }
-.progress-strip .container{display:flex;flex-direction:column;gap:10px}
-.prog-row{display:flex;justify-content:space-between;align-items:center;font-size:.82rem}
-.prog-label{color:rgba(255,255,255,.5)}
-.prog-count strong{color:#fff}
-.prog-pct{color:var(--accent);font-weight:800;font-size:1rem}
-.prog-bar-bg{width:100%;height:6px;background:rgba(255,255,255,.08);border-radius:50px;overflow:hidden}
-.prog-bar-fill{
-  height:100%;
-  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--gold));
-  border-radius:50px;
-  position:relative;
+.prog-section .wrap{display:flex;flex-direction:column;gap:8px}
+.prog-top{display:flex;justify-content:space-between;align-items:center}
+.prog-top p{font-size:.82rem;color:var(--gray3)}
+.prog-top p strong{color:var(--gray1)}
+.prog-pct{font-size:1rem;font-weight:800;color:var(--orange)}
+.prog-track{
+  height:5px;background:var(--bg3);border-radius:99px;overflow:hidden;
+}
+.prog-fill{
+  height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--orange),var(--orange2),var(--gold));
   transition:width 1.2s cubic-bezier(.22,1,.36,1);
+  position:relative;
 }
-.prog-bar-fill::after{
-  content:'';position:absolute;right:0;top:0;bottom:0;width:30px;
-  background:rgba(255,255,255,.3);filter:blur(8px);border-radius:50px;
-  animation:shine 1.5s ease-in-out infinite;
+.prog-fill::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:24px;
+  background:rgba(255,255,255,.35);filter:blur(6px);border-radius:99px;
+  animation:sh 1.8s ease-in-out infinite;
 }
-@keyframes shine{0%,100%{opacity:.4}50%{opacity:1}}
-.prog-hint{font-size:.72rem;color:rgba(255,255,255,.35);text-align:center}
+@keyframes sh{0%,100%{opacity:.4}50%{opacity:1}}
+.prog-note{font-size:.7rem;color:var(--gray3);text-align:right}
 
-/* =============================================
-   SECTIONS GENÉRICAS
-   ============================================= */
-.section{padding:96px 0}
-.section-dark{background:#0a0a0a}
-.section-gray{background:#080808}
+/* ───────────────────────────────────────────
+   SEÇÕES GENÉRICAS
+─────────────────────────────────────────── */
+.sec{padding:88px 0}
+.sec-a{background:var(--bg)}
+.sec-b{background:var(--bg1)}
+.sec-c{background:var(--bg2)}
 
-.sec-label{
+.sec-head{margin-bottom:52px}
+.sec-head.center{text-align:center}
+.sec-head.center .sec-sub{margin:0 auto}
+.label{
   display:inline-block;
-  font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--accent);margin-bottom:14px;
+  font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--orange);margin-bottom:10px;
 }
-.sec-title{
-  font-size:clamp(2rem,5vw,3.2rem);
+.h2{
+  font-size:clamp(1.8rem,4vw,2.8rem);
   font-weight:800;line-height:1.1;letter-spacing:-1px;
-  color:#fff;margin-bottom:16px;
+  color:var(--white);margin-bottom:12px;
 }
-.sec-desc{
-  font-size:1rem;color:rgba(255,255,255,.5);
-  max-width:520px;line-height:1.7;
+.sec-sub{
+  font-size:.95rem;color:var(--gray2);line-height:1.75;
+  max-width:520px;
 }
-.text-center{text-align:center}
-.text-center .sec-desc{margin:0 auto}
 
-/* =============================================
+/* ───────────────────────────────────────────
    COMO FUNCIONA
-   ============================================= */
-.steps{
+─────────────────────────────────────────── */
+.steps-row{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:2px;margin-top:56px;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:24px;overflow:hidden;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border2);
+  border-radius:var(--r2);overflow:hidden;
+  border:1px solid var(--border2);
 }
 .step{
-  background:#0d0d0d;
-  padding:36px 28px;
-  position:relative;
-  transition:background .25s;
-}
-.step:hover{background:#111}
-.step:not(:last-child){border-right:1px solid rgba(255,255,255,.07)}
-.step-n{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:36px;height:36px;
-  background:var(--accent);
-  border-radius:50%;
-  font-size:.82rem;font-weight:900;
-  color:#fff;margin-bottom:18px;
-}
-.step-icon{font-size:1.8rem;margin-bottom:14px;display:block}
-.step h3{font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px}
-.step p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.7}
-
-/* Exemplo de apuração */
-.apuracao-card{
-  margin-top:48px;
-  background:#0d0d0d;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:24px;
-  padding:36px;
-  overflow:hidden;
-}
-.apuracao-card h3{font-size:1rem;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:24px}
-.lot-grid{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
-.lot-ball{
-  flex:1;min-width:90px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:14px;padding:14px 10px;text-align:center;
-}
-.lot-pos{font-size:.6rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.lot-num{font-family:'SF Mono','JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:2px}
-.lot-num .d{color:rgba(255,255,255,.3)}
-.lot-num .serie{color:var(--blue);text-decoration:underline}
-.lot-num .unit{color:var(--accent);font-weight:900}
-.lot-arrow{display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:rgba(255,255,255,.15)}
-.lot-result{
-  text-align:center;
-  background:rgba(245,197,24,.06);
-  border:1px solid rgba(245,197,24,.18);
-  border-radius:16px;padding:20px;
-}
-.lot-result p{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:8px}
-.lot-winner{
-  font-family:'SF Mono','JetBrains Mono',monospace;
-  font-size:2.5rem;font-weight:900;color:var(--gold);
-  letter-spacing:4px;
-  text-shadow:0 0 40px rgba(245,197,24,.5);
-}
-
-/* =============================================
-   PRÊMIO — IPHONE 17 SHOWCASE
-   ============================================= */
-.prize-section{
-  background:#000;
-  overflow:hidden;
-}
-.prize-inner{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;align-items:center;
-  min-height:70vh;padding:96px 0;
-}
-.prize-img-side{
-  position:relative;
-  display:flex;align-items:center;justify-content:center;
-}
-.prize-img{
-  width:100%;max-width:420px;
-  filter:drop-shadow(0 60px 100px rgba(255,107,0,.4));
-  animation:float 6s ease-in-out infinite;
-}
-.prize-glow{
-  position:absolute;
-  width:320px;height:320px;
-  background:radial-gradient(circle,rgba(255,107,0,.25) 0%,transparent 70%);
-  border-radius:50%;
-  filter:blur(40px);pointer-events:none;
-}
-.prize-text-side .sec-label{margin-bottom:10px}
-.prize-text-side .sec-title{margin-bottom:10px}
-.prize-desc{font-size:.95rem;color:rgba(255,255,255,.45);line-height:1.8;margin-bottom:28px}
-.prize-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
-.ptag{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:50px;padding:6px 16px;
-  font-size:.75rem;font-weight:600;color:rgba(255,255,255,.7);
-}
-.prize-value-box{
-  display:flex;align-items:center;gap:20px;
-  background:rgba(245,197,24,.06);
-  border:1px solid rgba(245,197,24,.2);
-  border-radius:16px;padding:18px 22px;
-  margin-bottom:28px;
-}
-.pval-label{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:4px}
-.pval-num{font-size:1.8rem;font-weight:900;color:var(--gold)}
-.pval-divider{width:1px;height:36px;background:rgba(255,255,255,.1)}
-.pval-sub{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.6}
-.pval-sub strong{color:var(--green)}
-
-/* Specs grid */
-.specs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
-.spec-item{
-  background:#0a0a0a;border:1px solid rgba(255,255,255,.07);
-  border-radius:14px;padding:14px 16px;
-}
-.spec-label{font-size:.65rem;color:rgba(255,255,255,.35);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
-.spec-val{font-size:.85rem;font-weight:600;color:#fff}
-
-/* Seletor de cor */
-.color-selector{margin-top:20px}
-.color-label{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:10px}
-.color-dots{display:flex;gap:10px;align-items:center}
-.color-dot{
-  width:26px;height:26px;border-radius:50%;cursor:pointer;
-  border:2px solid transparent;transition:.2s;
-  position:relative;
-}
-.color-dot.active::after{
-  content:'';position:absolute;inset:-4px;
-  border:2px solid rgba(255,255,255,.5);border-radius:50%;
-}
-.color-name{font-size:.78rem;color:rgba(255,255,255,.5);margin-left:6px}
-
-/* =============================================
-   PACOTES
-   ============================================= */
-.packages-section{background:#000}
-.pkgs-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:2px;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:24px;overflow:hidden;
-  margin-top:52px;
-}
-.pkg{
-  background:#0d0d0d;
-  padding:32px 26px;
-  position:relative;
-  display:flex;flex-direction:column;
+  background:var(--bg1);
+  padding:32px 24px;
   transition:background .2s;
+  position:relative;
 }
-.pkg:not(:last-child){border-right:1px solid rgba(255,255,255,.07)}
-.pkg:hover{background:#111}
-.pkg-hot{
-  background:#0f0a00!important;
-  border-left:none;border-right:none;
-  outline:1px solid rgba(255,107,0,.4);
-  outline-offset:-1px;
-}
-.pkg-hot-badge{
-  position:absolute;top:-1px;left:50%;transform:translateX(-50%);
-  background:var(--accent);color:#fff;
-  font-size:.65rem;font-weight:800;letter-spacing:.5px;
-  padding:4px 14px;border-radius:0 0 10px 10px;white-space:nowrap;
-}
-.pkg-tag{
-  display:inline-block;font-size:.65rem;font-weight:700;
-  letter-spacing:.8px;text-transform:uppercase;
-  padding:4px 12px;border-radius:50px;margin-bottom:16px;
-}
-.tag-popular{background:rgba(255,255,255,.07);color:rgba(255,255,255,.5)}
-.tag-prata{background:rgba(200,200,210,.1);color:#c8c8d2}
-.tag-ouro{background:rgba(245,197,24,.1);color:var(--gold)}
-.tag-elite{background:rgba(255,107,0,.12);color:var(--accent)}
-
-.pkg-name{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:20px}
-
-.pkg-nums{
-  text-align:center;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:14px;padding:18px;
+.step:hover{background:var(--bg2)}
+.step-num{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,107,0,.12);
+  border:1px solid rgba(255,107,0,.3);
+  color:var(--orange);
+  font-size:.8rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
   margin-bottom:18px;
 }
-.pkg-num-big{font-size:3.2rem;font-weight:900;color:#fff;line-height:1;display:block}
-.pkg-num-small{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:6px;display:block}
-.pkg-launch{
+.step-icon{font-size:1.6rem;margin-bottom:14px}
+.step h3{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:8px}
+.step p{font-size:.8rem;color:var(--gray3);line-height:1.7}
+
+/* apuração */
+.apur{
+  margin-top:40px;
+  background:var(--bg1);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  overflow:hidden;
+}
+.apur-head{
+  padding:18px 24px;
+  border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;gap:10px;
+}
+.apur-head h3{font-size:.85rem;font-weight:700;color:var(--gray2)}
+.apur-head span{
+  background:rgba(255,107,0,.1);
+  border:1px solid rgba(255,107,0,.2);
+  color:var(--orange);font-size:.68rem;font-weight:700;
+  padding:3px 10px;border-radius:50px;letter-spacing:.4px;
+}
+.apur-body{padding:24px;overflow-x:auto}
+.apur-grid{
+  display:flex;gap:8px;align-items:stretch;
+  min-width:580px;
+}
+.lot-card{
+  flex:1;
+  background:var(--bg2);
+  border:1px solid var(--border2);
+  border-radius:var(--r);
+  padding:14px 10px;
+  text-align:center;
+  min-width:90px;
+}
+.lot-pos{font-size:.6rem;color:var(--gray3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.lot-num-display{
+  font-family:'SF Mono','JetBrains Mono','Fira Code',monospace;
+  font-size:1.05rem;font-weight:700;color:var(--gray1);
+  letter-spacing:2px;margin-bottom:6px;
+}
+.lot-num-display .hd{color:var(--gray4)}
+.lot-num-display .s{color:var(--blue);text-decoration:underline dotted}
+.lot-num-display .u{color:var(--orange);font-weight:900}
+.lot-hint{font-size:.58rem;color:var(--gray3);line-height:1.5}
+.lot-hint b{color:var(--orange)}
+.lot-arrow-col{
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;color:var(--gray4);flex-shrink:0;
+  padding:0 2px;
+}
+.lot-result-card{
+  flex:1.4;
+  background:rgba(240,180,41,.06);
+  border:1px solid rgba(240,180,41,.2);
+  border-radius:var(--r);
+  padding:18px 12px;
+  text-align:center;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+  min-width:130px;
+}
+.lot-result-label{font-size:.65rem;color:rgba(255,255,255,.35);letter-spacing:.4px}
+.lot-winner-num{
+  font-family:'SF Mono','JetBrains Mono',monospace;
+  font-size:2rem;font-weight:900;color:var(--gold);
+  letter-spacing:3px;
+  text-shadow:0 0 32px rgba(240,180,41,.5);
+}
+.lot-winner-hint{font-size:.65rem;color:var(--gray3)}
+
+/* ───────────────────────────────────────────
+   PRÊMIO DETALHE
+─────────────────────────────────────────── */
+.prize-sec{background:var(--bg1)}
+.prize-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:48px;align-items:center;
+}
+.prize-phone-side{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;gap:24px;
+}
+.prize-img-main{
+  max-height:460px;width:auto;max-width:100%;
+  filter:drop-shadow(0 32px 64px rgba(255,107,0,.25));
+  transition:opacity .4s, filter .4s;
+}
+.prize-color-row{
+  display:flex;gap:10px;align-items:center;justify-content:center;
+}
+.c-dot{
+  width:28px;height:28px;border-radius:50%;
+  cursor:pointer;transition:.2s;position:relative;
+  border:2px solid transparent;
+}
+.c-dot:hover{transform:scale(1.1)}
+.c-dot.active{
+  border-color:rgba(255,255,255,.5);
+  box-shadow:0 0 0 3px rgba(255,255,255,.1);
+}
+.c-name{font-size:.78rem;color:var(--gray3);margin-left:8px}
+
+.prize-info{}
+.prize-info .label{margin-bottom:8px}
+.prize-info .h2{margin-bottom:6px}
+.prize-model{font-size:1.1rem;color:var(--gray2);margin-bottom:24px}
+.prize-desc{font-size:.9rem;color:var(--gray3);line-height:1.8;margin-bottom:24px}
+.prize-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chip{
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+  border-radius:50px;padding:6px 14px;
+  font-size:.74rem;font-weight:500;color:var(--gray2);
+}
+.chip.green{background:rgba(48,209,88,.08);border-color:rgba(48,209,88,.2);color:var(--green)}
+.prize-val-row{
+  display:flex;align-items:center;gap:20px;
+  background:rgba(240,180,41,.06);
+  border:1px solid rgba(240,180,41,.18);
+  border-radius:var(--r);padding:18px 20px;
+  margin-bottom:24px;
+}
+.prize-val-num{font-size:1.8rem;font-weight:900;color:var(--gold)}
+.divider-v{width:1px;height:36px;background:var(--border)}
+.prize-val-note{font-size:.78rem;color:var(--gray3);line-height:1.6}
+.prize-val-note strong{color:var(--green)}
+
+.specs-2x2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.spec-box{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:var(--r);padding:14px 16px;
+  transition:border-color .2s;
+}
+.spec-box:hover{border-color:var(--border)}
+.spec-box .sbl{font-size:.62rem;color:var(--gray3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.spec-box .sbv{font-size:.85rem;font-weight:600;color:var(--gray1)}
+
+/* ───────────────────────────────────────────
+   PACOTES
+─────────────────────────────────────────── */
+.pkg-banner{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,107,0,.07);
+  border:1px solid rgba(255,107,0,.2);
+  border-radius:var(--r);padding:14px 20px;
+  margin-bottom:36px;
+}
+.pkg-banner .icon{font-size:1.4rem;flex-shrink:0}
+.pkg-banner p{font-size:.82rem;color:var(--gray2);line-height:1.5}
+.pkg-banner p strong{color:var(--orange2)}
+
+.pkgs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.pkg{
+  background:var(--bg1);
+  border:1px solid var(--border2);
+  border-radius:var(--r2);padding:24px 20px;
+  display:flex;flex-direction:column;gap:0;
+  transition:border-color .2s,transform .2s;
+  position:relative;overflow:hidden;
+}
+.pkg:hover{border-color:var(--border);transform:translateY(-3px)}
+.pkg.featured{
+  border-color:rgba(255,107,0,.4);
+  background:linear-gradient(160deg,rgba(255,107,0,.06) 0%,var(--bg1) 60%);
+}
+.pkg-star{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  background:var(--orange);color:#fff;
+  font-size:.62rem;font-weight:800;letter-spacing:.5px;
+  padding:4px 14px;border-radius:0 0 12px 12px;
+}
+.pkg-tag{
   display:inline-block;
-  background:rgba(255,107,0,.12);
-  border:1px solid rgba(255,107,0,.25);
-  color:var(--accent2);
-  font-size:.7rem;font-weight:700;
-  padding:3px 10px;border-radius:50px;
+  font-size:.65rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 12px;border-radius:50px;margin-bottom:16px;
+  width:fit-content;
 }
+.tag-b{background:rgba(255,255,255,.06);color:var(--gray2)}
+.tag-p{background:rgba(200,200,220,.08);color:#c0c0cc}
+.tag-o{background:rgba(240,180,41,.1);color:var(--gold)}
+.tag-e{background:rgba(255,107,0,.12);color:var(--orange2)}
 
-.pkg-price{
-  font-size:1rem;color:rgba(255,255,255,.4);
-  margin-bottom:22px;
+.pkg-name{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:20px}
+
+.pkg-n-box{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border2);
+  border-radius:var(--r);
+  padding:16px 12px;text-align:center;margin-bottom:16px;
 }
-.pkg-price span{font-size:2rem;font-weight:900;color:#fff}
+.pkg-n-big{font-size:2.8rem;font-weight:900;color:var(--white);line-height:1}
+.pkg-n-label{font-size:.68rem;color:var(--gray3);margin-bottom:6px;display:block}
+.pkg-n-launch{
+  display:inline-block;
+  background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.2);
+  color:var(--orange2);font-size:.68rem;font-weight:700;
+  padding:3px 9px;border-radius:50px;
+}
+.pkg-price{font-size:.88rem;color:var(--gray3);margin-bottom:20px}
+.pkg-price span{font-size:1.7rem;font-weight:900;color:var(--white)}
 
-.pkg-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px;flex:1}
-.pkg-features li{font-size:.8rem;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:8px}
-.pkg-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.pkg-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px;flex:1}
+.pkg-list li{font-size:.78rem;color:var(--gray3);display:flex;align-items:center;gap:8px}
+.pkg-list li::before{content:'✓';color:var(--green);font-weight:700;font-size:.8rem;flex-shrink:0}
+.pkg-list li.bold{color:var(--gray1);font-weight:600}
 
 .btn-pkg{
-  display:block;width:100%;
-  padding:13px;border-radius:50px;
-  font-size:.85rem;font-weight:700;
-  text-align:center;transition:.2s;
-  cursor:pointer;border:none;font-family:inherit;
+  width:100%;padding:12px;border-radius:50px;
+  font-size:.82rem;font-weight:700;border:none;
+  transition:.2s;margin-top:auto;
 }
-.btn-pkg-fire{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.btn-pkg-fire{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff}
 .btn-pkg-fire:hover{filter:brightness(1.1);transform:scale(1.02)}
-.btn-pkg-ghost{background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.1)}
-.btn-pkg-ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn-pkg-ghost{
+  background:rgba(255,255,255,.06);
+  color:var(--gray2);border:1px solid var(--border);
+}
+.btn-pkg-ghost:hover{background:rgba(255,255,255,.1);color:var(--white)}
 
-/* Multiplicadores */
-.mults{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:2px;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:20px;overflow:hidden;
-  margin-top:40px;
+/* mults */
+.mults-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border2);
+  border-radius:var(--r2);overflow:hidden;
+  border:1px solid var(--border2);
+  margin-top:32px;
 }
-.mult-item{
-  background:#0a0a0a;padding:22px 20px;
-  border-right:1px solid rgba(255,255,255,.07);
-}
-.mult-item:last-child{border-right:none}
-.mult-icon{font-size:1.5rem;margin-bottom:10px}
-.mult-title{font-size:.85rem;font-weight:700;color:#fff;margin-bottom:4px}
-.mult-desc{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.6}
-.mult-badge{
-  display:inline-block;
-  background:rgba(255,107,0,.12);color:var(--accent);
-  font-size:.65rem;font-weight:800;
-  padding:2px 8px;border-radius:50px;margin-top:6px;
+.mult{background:var(--bg1);padding:20px;transition:background .2s}
+.mult:hover{background:var(--bg2)}
+.mult-ico{font-size:1.4rem;margin-bottom:10px}
+.mult-name{font-size:.85rem;font-weight:700;color:var(--white);margin-bottom:4px}
+.mult-desc{font-size:.75rem;color:var(--gray3);line-height:1.6}
+.mult-tag{
+  display:inline-block;margin-top:8px;
+  background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.2);
+  color:var(--orange);font-size:.62rem;font-weight:700;
+  padding:2px 9px;border-radius:50px;
 }
 
-/* =============================================
-   FORMULÁRIO DE COMPRA
-   ============================================= */
-.checkout-section{background:#050505}
+/* ───────────────────────────────────────────
+   CHECKOUT
+─────────────────────────────────────────── */
 .checkout-grid{
-  display:grid;grid-template-columns:1fr 360px;
-  gap:40px;align-items:start;margin-top:52px;
+  display:grid;grid-template-columns:1fr 340px;
+  gap:24px;align-items:start;
+  margin-top:48px;
 }
-.form-card{
-  background:#0d0d0d;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:24px;
-  padding:36px;
+.form-box{
+  background:var(--bg1);
+  border:1px solid var(--border);
+  border-radius:var(--r2);padding:32px;
 }
-.fgroup{margin-bottom:18px}
-.fgroup label{
-  display:block;font-size:.72rem;font-weight:600;
-  color:rgba(255,255,255,.4);letter-spacing:.3px;
-  margin-bottom:8px;text-transform:uppercase;
+.fg{margin-bottom:16px}
+.fg label{
+  display:block;font-size:.7rem;font-weight:600;
+  color:var(--gray3);letter-spacing:.3px;text-transform:uppercase;
+  margin-bottom:7px;
 }
-.fgroup input,.fgroup select{
-  width:100%;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:12px;
-  padding:13px 16px;
-  color:#fff;font-size:.9rem;font-family:inherit;
-  outline:none;transition:.2s;
-  appearance:none;-webkit-appearance:none;
+.fg input,.fg select{
+  width:100%;background:var(--bg2);
+  border:1px solid var(--border);border-radius:var(--r);
+  padding:12px 14px;color:var(--gray1);
+  font-size:.9rem;outline:none;transition:.2s;
+  -webkit-appearance:none;appearance:none;
 }
-.fgroup input:focus,.fgroup select:focus{
-  border-color:var(--accent);
-  background:rgba(255,107,0,.05);
-}
-.fgroup input::placeholder{color:rgba(255,255,255,.2)}
-.fgroup select option{background:#111}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.pm-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pm-opt{cursor:pointer}
-.pm-opt input{display:none}
+.fg input:focus,.fg select:focus{border-color:var(--orange);background:rgba(255,107,0,.04)}
+.fg input::placeholder{color:var(--gray4)}
+.fg select option{background:var(--bg2)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pm-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pm-label{cursor:pointer}
+.pm-label input{display:none}
 .pm-face{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:6px;
-  background:rgba(255,255,255,.04);
-  border:1.5px solid rgba(255,255,255,.1);
-  border-radius:14px;
-  padding:16px 12px;
-  transition:.2s;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.5);
-  text-align:center;
+  gap:5px;background:var(--bg2);border:1.5px solid var(--border);
+  border-radius:var(--r);padding:14px;transition:.2s;
+  font-size:.8rem;font-weight:600;color:var(--gray2);text-align:center;
 }
-.pm-face-icon{font-size:1.4rem}
-.pm-opt input:checked~.pm-face{
-  border-color:var(--accent);
-  background:rgba(255,107,0,.07);
-  color:#fff;
+.pm-face-icon{font-size:1.3rem}
+.pm-label input:checked~.pm-face{
+  border-color:var(--orange);background:rgba(255,107,0,.06);color:var(--white);
 }
-.pm-pix-hint{font-size:.65rem;color:var(--green);margin-top:2px}
-.terms-row{
-  display:flex;align-items:flex-start;gap:12px;
-  font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6;
-  cursor:pointer;
+.pm-hint{font-size:.62rem;color:var(--green)}
+.check-row{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.78rem;color:var(--gray3);line-height:1.6;cursor:pointer;
+  margin-bottom:16px;
 }
-.terms-row input{margin-top:3px;flex-shrink:0;accent-color:var(--accent)}
-.terms-row a{color:rgba(255,255,255,.6);text-decoration:underline}
+.check-row input{margin-top:3px;accent-color:var(--orange);flex-shrink:0}
+.check-row a{color:var(--gray2);text-decoration:underline}
 .btn-submit{
-  width:100%;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#fff;border:none;
-  padding:16px;border-radius:50px;
-  font-size:1rem;font-weight:800;
-  cursor:pointer;font-family:inherit;
-  transition:.2s;margin-top:4px;
-  letter-spacing:-.1px;
+  width:100%;padding:15px;border-radius:50px;
+  font-size:.95rem;font-weight:800;border:none;
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  color:#fff;transition:.2s;
 }
-.btn-submit:hover{filter:brightness(1.08);transform:scale(1.01)}
-.secure-note{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  font-size:.72rem;color:rgba(255,255,255,.3);margin-top:14px;
+.btn-submit:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.secure{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:.68rem;color:var(--gray3);margin-top:12px;
 }
 
-/* Sidebar */
-.summary-card{
-  background:#0d0d0d;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:24px;padding:28px;
-  position:sticky;top:80px;
+/* resumo */
+.summary-box{
+  background:var(--bg1);border:1px solid var(--border);
+  border-radius:var(--r2);padding:24px;
+  position:sticky;top:72px;
 }
-.summary-prize-box{
-  background:rgba(245,197,24,.05);
-  border:1px solid rgba(245,197,24,.15);
-  border-radius:14px;padding:16px;
-  display:flex;align-items:center;gap:14px;
-  margin-bottom:20px;
+.sum-prize{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(240,180,41,.05);border:1px solid rgba(240,180,41,.15);
+  border-radius:var(--r);padding:14px;margin-bottom:18px;
 }
-.spz-icon{font-size:2rem}
-.spz-name{font-size:.9rem;font-weight:700;color:#fff}
-.spz-sub{font-size:.72rem;color:var(--gold)}
-.summary-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-.sum-row{display:flex;justify-content:space-between;font-size:.82rem}
-.sum-row span:first-child{color:rgba(255,255,255,.4)}
-.sum-row span:last-child{color:#fff;font-weight:600}
-.sum-row .highlight{color:var(--accent);font-size:1rem;font-weight:800}
-.summary-pix-box{
-  background:rgba(255,107,0,.06);
-  border:1px solid rgba(255,107,0,.2);
-  border-radius:14px;padding:16px;
-  font-size:.8rem;
+.sum-prize-icon{font-size:1.8rem}
+.sum-prize-name{font-size:.88rem;font-weight:700;color:var(--white)}
+.sum-prize-sub{font-size:.7rem;color:var(--gold)}
+.sum-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.sum-row{display:flex;justify-content:space-between;font-size:.8rem}
+.sum-row span:first-child{color:var(--gray3)}
+.sum-row .val{color:var(--gray1);font-weight:600}
+.sum-row .val-big{color:var(--orange);font-weight:800;font-size:.95rem}
+.pix-box{
+  background:rgba(255,107,0,.05);border:1px solid rgba(255,107,0,.18);
+  border-radius:var(--r);padding:14px;text-align:center;
 }
-.summary-pix-box p{color:rgba(255,255,255,.5);margin-bottom:6px}
-.pix-key{font-size:1rem;font-weight:700;color:var(--accent);letter-spacing:1px;cursor:pointer}
-.pix-key:hover{color:var(--accent2)}
+.pix-box p{font-size:.7rem;color:var(--gray3);margin-bottom:6px}
+.pix-key{
+  font-size:1.1rem;font-weight:800;color:var(--orange);
+  letter-spacing:1.5px;cursor:pointer;
+  transition:color .15s;
+}
+.pix-key:hover{color:var(--orange2)}
+.pix-hint{font-size:.62rem;color:var(--gray3);margin-top:4px}
 
-/* =============================================
+/* ───────────────────────────────────────────
    FAQ
-   ============================================= */
-.faq-list{margin-top:48px;display:flex;flex-direction:column;gap:2px}
-.faq-item{
-  background:#0d0d0d;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:0;overflow:hidden;
-}
-.faq-list .faq-item:first-child{border-radius:20px 20px 0 0}
-.faq-list .faq-item:last-child{border-radius:0 0 20px 20px}
+─────────────────────────────────────────── */
+.faq-wrap{display:flex;flex-direction:column;gap:1px;margin-top:40px}
+.faq-item{border-radius:0;overflow:hidden;background:var(--bg1);border:1px solid var(--border2)}
+.faq-wrap .faq-item:first-child{border-radius:var(--r2) var(--r2) 0 0}
+.faq-wrap .faq-item:last-child{border-radius:0 0 var(--r2) var(--r2)}
+.faq-item+.faq-item{border-top:none}
 .faq-btn{
   width:100%;display:flex;justify-content:space-between;align-items:center;
-  background:none;border:none;color:#fff;
-  font-size:.9rem;font-weight:600;
-  padding:20px 24px;text-align:left;cursor:pointer;
-  font-family:inherit;transition:background .2s;gap:12px;
+  background:none;border:none;color:var(--gray1);
+  font-size:.88rem;font-weight:600;
+  padding:18px 22px;text-align:left;cursor:pointer;
+  gap:14px;transition:background .15s;
 }
-.faq-btn:hover{background:rgba(255,255,255,.03)}
-.faq-icon{
-  width:26px;height:26px;border-radius:50%;
-  background:rgba(255,255,255,.07);
+.faq-btn:hover{background:rgba(255,255,255,.02)}
+.faq-ic{
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  background:var(--bg3);
   display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;flex-shrink:0;
-  transition:transform .3s,background .2s;
-  color:rgba(255,255,255,.5);
+  font-size:.7rem;color:var(--gray3);
+  transition:transform .3s,background .2s,color .2s;
 }
-.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--accent);color:#fff}
+.faq-item.open .faq-ic{transform:rotate(45deg);background:var(--orange);color:#fff}
 .faq-body{
-  display:none;
-  padding:0 24px 20px;
-  font-size:.85rem;color:rgba(255,255,255,.45);
-  line-height:1.8;border-top:1px solid rgba(255,255,255,.05);
-  padding-top:16px;
+  display:none;padding:0 22px 18px;
+  font-size:.84rem;color:var(--gray3);line-height:1.8;
+  border-top:1px solid var(--border2);padding-top:14px;
 }
 .faq-item.open .faq-body{display:block}
 
-/* =============================================
+/* ───────────────────────────────────────────
    GANHADORES
-   ============================================= */
-.winners-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:2px;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:24px;overflow:hidden;
-  margin-top:48px;
-}
-.winner-card{
-  background:#0d0d0d;
-  padding:28px 24px;
-  border-right:1px solid rgba(255,255,255,.07);
-  display:flex;gap:14px;align-items:flex-start;
-}
-.winner-card:last-child{border-right:none}
-.w-avatar{
-  width:44px;height:44px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:1rem;color:#fff;
-}
-.w-name{font-size:.88rem;font-weight:700;color:#fff;margin-bottom:4px}
-.w-num{font-size:.72rem;color:rgba(255,255,255,.35);font-family:monospace;margin-bottom:4px}
-.w-prize{font-size:.72rem;color:var(--gold)}
-
-/* =============================================
-   ANTI-FRAUDE
-   ============================================= */
-.fraud-bar{
-  background:rgba(255,71,87,.06);
-  border-top:1px solid rgba(255,71,87,.15);
-  border-bottom:1px solid rgba(255,71,87,.15);
-  padding:24px 22px;text-align:center;
-}
-.fraud-bar h3{color:#ff4757;font-size:.9rem;margin-bottom:8px}
-.fraud-bar p{font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:10px;max-width:640px;margin-left:auto;margin-right:auto}
-.fraud-contacts{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:.78rem;color:rgba(255,255,255,.5)}
-.fraud-contacts strong{color:rgba(255,255,255,.75)}
-
-/* =============================================
-   REGULAMENTO
-   ============================================= */
-.reg-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:2px;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:20px;overflow:hidden;
+─────────────────────────────────────────── */
+.winners{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border2);
+  border-radius:var(--r2);overflow:hidden;border:1px solid var(--border2);
   margin-top:40px;
 }
-.reg-item{
-  background:#0d0d0d;padding:20px 22px;
-  border-right:1px solid rgba(255,255,255,.07);
+.winner{
+  background:var(--bg1);padding:24px;
+  display:flex;gap:14px;align-items:flex-start;
 }
-.reg-item:last-child{border-right:none}
-.reg-lbl{font-size:.62rem;color:rgba(255,255,255,.3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
-.reg-val{font-size:.85rem;color:#fff;font-weight:500}
+.w-av{
+  width:42px;height:42px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.9rem;color:#fff;
+}
+.w-n{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:3px}
+.w-num{font-size:.7rem;color:var(--gray3);font-family:monospace;margin-bottom:3px}
+.w-prize{font-size:.72rem;color:var(--gold)}
 
-/* =============================================
+/* ───────────────────────────────────────────
+   FRAUDE
+─────────────────────────────────────────── */
+.fraud{
+  background:rgba(255,69,58,.04);
+  border-top:1px solid rgba(255,69,58,.12);
+  border-bottom:1px solid rgba(255,69,58,.12);
+  padding:24px 0;
+}
+.fraud .wrap{text-align:center}
+.fraud h3{color:var(--red);font-size:.88rem;font-weight:700;margin-bottom:8px}
+.fraud p{font-size:.78rem;color:var(--gray3);margin-bottom:10px;max-width:600px;margin-left:auto;margin-right:auto}
+.fraud-contacts{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:.76rem;color:var(--gray3)}
+.fraud-contacts strong{color:var(--gray2)}
+
+/* ───────────────────────────────────────────
+   REGULAMENTO
+─────────────────────────────────────────── */
+.reg-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border2);
+  border-radius:var(--r2);overflow:hidden;border:1px solid var(--border2);
+  margin-top:40px;
+}
+.reg-cell{background:var(--bg1);padding:18px 20px}
+.reg-lbl{font-size:.62rem;color:var(--gray3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.reg-val{font-size:.84rem;color:var(--gray1);font-weight:500}
+
+/* ───────────────────────────────────────────
    FOOTER
-   ============================================= */
-.footer{background:#050505;border-top:1px solid rgba(255,255,255,.07);padding:64px 0 32px}
+─────────────────────────────────────────── */
+.footer{
+  background:var(--bg1);
+  border-top:1px solid var(--border2);
+  padding:56px 0 28px;
+}
 .footer-grid{
   display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;
-  gap:40px;margin-bottom:48px;
+  gap:40px;margin-bottom:40px;
 }
-.f-brand p{font-size:.78rem;color:rgba(255,255,255,.3);margin-top:12px;line-height:1.7}
-.f-social{display:flex;gap:14px;margin-top:16px}
+.f-logo{margin-bottom:12px}
+.f-desc{font-size:.78rem;color:var(--gray3);line-height:1.7;margin-bottom:16px}
+.f-social{display:flex;gap:8px}
 .f-social a{
-  width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.08);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;transition:.2s;
+  width:34px;height:34px;border-radius:50%;
+  background:var(--bg2);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;
+  transition:.15s;
 }
-.f-social a:hover{background:rgba(255,107,0,.15);border-color:rgba(255,107,0,.3)}
-.f-col h4{font-size:.75rem;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
-.f-col a{display:block;font-size:.8rem;color:rgba(255,255,255,.3);margin-bottom:10px;transition:.2s}
-.f-col a:hover{color:rgba(255,255,255,.7)}
-.f-col p{font-size:.8rem;color:rgba(255,255,255,.3);margin-bottom:8px;line-height:1.6}
-.pay-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.pay-chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:6px 12px;font-size:.7rem;color:rgba(255,255,255,.4)}
+.f-social a:hover{border-color:var(--border)}
+.f-col h4{font-size:.7rem;font-weight:700;color:var(--gray3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
+.f-col a{display:block;font-size:.8rem;color:var(--gray3);margin-bottom:9px;transition:color .15s}
+.f-col a:hover{color:var(--gray1)}
+.f-col p{font-size:.8rem;color:var(--gray3);margin-bottom:7px;line-height:1.5}
+.pay-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.pay-tag{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:7px;padding:5px 10px;font-size:.68rem;color:var(--gray3);
+}
 .footer-bottom{
-  border-top:1px solid rgba(255,255,255,.06);
-  padding-top:24px;text-align:center;
-  font-size:.72rem;color:rgba(255,255,255,.2);line-height:2;
+  border-top:1px solid var(--border2);
+  padding-top:20px;text-align:center;
+  font-size:.68rem;color:var(--gray3);line-height:2;
 }
 
-/* =============================================
-   WHATSAPP BTN FLUTUANTE
-   ============================================= */
-.wa-btn{
-  position:fixed;bottom:24px;right:20px;z-index:500;
-  width:58px;height:58px;border-radius:50%;
+/* WhatsApp float */
+.wa{
+  position:fixed;bottom:22px;right:18px;z-index:500;
+  width:54px;height:54px;border-radius:50%;
   background:linear-gradient(135deg,#25D366,#128C7E);
   display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;
-  box-shadow:0 4px 20px rgba(37,211,102,.4);
-  transition:.25s;text-decoration:none;
+  font-size:1.4rem;
+  box-shadow:0 4px 16px rgba(37,211,102,.35);
+  transition:.2s;
 }
-.wa-btn:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(37,211,102,.6)}
+.wa:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.5)}
 
-/* =============================================
+/* ───────────────────────────────────────────
    MODAL
-   ============================================= */
-.modal-ov{
+─────────────────────────────────────────── */
+.modal-bg{
   display:none;position:fixed;inset:0;z-index:600;
-  background:rgba(0,0,0,.85);backdrop-filter:blur(10px);
+  background:rgba(0,0,0,.8);backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
   align-items:center;justify-content:center;padding:20px;
 }
-.modal-ov.open{display:flex}
+.modal-bg.open{display:flex}
 .modal{
-  background:#111;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:24px;padding:36px;
-  max-width:460px;width:100%;
-  position:relative;
-  animation:mIn .3s ease;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r2);padding:32px;
+  max-width:440px;width:100%;
+  position:relative;animation:mIn .28s ease;
 }
-@keyframes mIn{from{opacity:0;transform:scale(.92) translateY(16px)}to{opacity:1;transform:none}}
-.modal-close{
-  position:absolute;top:16px;right:18px;
-  background:rgba(255,255,255,.07);border:none;
-  width:32px;height:32px;border-radius:50%;
-  color:rgba(255,255,255,.5);font-size:.9rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:.2s;
+@keyframes mIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.modal-x{
+  position:absolute;top:14px;right:16px;
+  background:var(--bg3);border:none;
+  width:30px;height:30px;border-radius:50%;
+  color:var(--gray2);font-size:.82rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.15s;
 }
-.modal-close:hover{background:rgba(255,255,255,.12);color:#fff}
-.modal h2{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:6px}
-.modal p{font-size:.82rem;color:rgba(255,255,255,.4);margin-bottom:22px}
-.confirm-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
-.cr{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:10px;font-size:.83rem}
-.cr span:first-child{color:rgba(255,255,255,.4)}
-.cr strong{color:#fff}
-.pix-confirm-box{background:rgba(255,107,0,.06);border:1px solid rgba(255,107,0,.2);border-radius:14px;padding:16px;text-align:center;margin-bottom:22px}
-.pix-confirm-box p{color:rgba(255,255,255,.4);font-size:.75rem;margin-bottom:6px}
-.pix-confirm-key{font-size:1.3rem;font-weight:800;color:var(--accent);letter-spacing:2px;cursor:pointer}
+.modal-x:hover{background:var(--bg2);color:var(--white)}
+.modal h2{font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:4px}
+.modal .sub{font-size:.8rem;color:var(--gray3);margin-bottom:20px}
+.c-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.c-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:9px 13px;background:rgba(255,255,255,.03);border-radius:10px;
+  font-size:.82rem;
+}
+.c-row span:first-child{color:var(--gray3)}
+.c-row strong{color:var(--gray1)}
+.c-row .hl{color:var(--orange);font-weight:800;font-size:.95rem}
+.pix-confirm{
+  background:rgba(255,107,0,.06);border:1px solid rgba(255,107,0,.2);
+  border-radius:var(--r);padding:14px;text-align:center;margin-bottom:18px;
+}
+.pix-confirm p{font-size:.72rem;color:var(--gray3);margin-bottom:6px}
+.pix-confirm .key{font-size:1.15rem;font-weight:800;color:var(--orange);letter-spacing:2px;cursor:pointer}
+.pix-confirm .key:hover{color:var(--orange2)}
 .modal-btns{display:flex;gap:10px}
-.modal-btns button{flex:1;padding:13px;border-radius:50px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:.2s}
-.mbtn-cancel{background:rgba(255,255,255,.07);color:rgba(255,255,255,.6)}
-.mbtn-confirm{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-.mbtn-confirm:hover{filter:brightness(1.1)}
+.modal-btns button{flex:1;padding:12px;border-radius:50px;font-size:.85rem;font-weight:700;border:none;transition:.15s;cursor:pointer;font-family:var(--font)}
+.m-back{background:var(--bg3);color:var(--gray2)}
+.m-confirm{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff}
+.m-confirm:hover{filter:brightness(1.1)}
 
-/* =============================================
-   TOAST
-   ============================================= */
-#toasts{position:fixed;bottom:96px;right:20px;z-index:700;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+/* ───────────────────────────────────────────
+   TOASTS
+─────────────────────────────────────────── */
+#toasts{position:fixed;bottom:86px;right:18px;z-index:700;display:flex;flex-direction:column;gap:7px;pointer-events:none}
 .toast{
-  background:#1a1a1a;border-radius:12px;
-  padding:12px 18px;font-size:.82rem;color:#fff;
-  border-left:3px solid var(--accent);
-  box-shadow:0 4px 20px rgba(0,0,0,.5);
-  animation:tIn .3s ease;max-width:300px;
+  background:var(--bg2);border-radius:10px;border:1px solid var(--border);
+  border-left:3px solid var(--orange);
+  padding:11px 16px;font-size:.8rem;color:var(--gray1);
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+  animation:tIn .25s ease;max-width:280px;
+  line-height:1.4;
 }
-@keyframes tIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@keyframes tIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
 
-/* =============================================
-   RESPONSIVO MOBILE
-   ============================================= */
-@media(max-width:900px){
-  .nav-links{display:none}
-  .nav-cta{display:none}
-  .ham{display:flex}
-  .float-badge{display:none}
-  .prize-inner{grid-template-columns:1fr;gap:40px;text-align:center;padding:64px 0}
-  .prize-img-side{order:-1}
-  .prize-text-side .sec-desc,.prize-text-side .prize-tags,.prize-text-side .prize-value-box{margin-left:auto;margin-right:auto}
-  .specs{grid-template-columns:1fr 1fr}
-  .checkout-grid{grid-template-columns:1fr}
-  .summary-card{position:static}
+/* ───────────────────────────────────────────
+   SCROLL REVEAL
+─────────────────────────────────────────── */
+.reveal{
+  opacity:0;transform:translateY(18px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.reveal.in{opacity:1;transform:none}
+
+/* ───────────────────────────────────────────
+   RESPONSIVE
+─────────────────────────────────────────── */
+@media(max-width:1024px){
+  .pkgs{grid-template-columns:repeat(2,1fr)}
+  .mults-row{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr}
-  .winners-grid{grid-template-columns:1fr}
-  .winner-card{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
-  .steps{grid-template-columns:1fr}
-  .step:not(:last-child){border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
-  .pkgs-grid{grid-template-columns:1fr}
-  .pkg:not(:last-child){border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
-  .mults{grid-template-columns:1fr 1fr}
-  .mult-item{border-right:none}
   .reg-grid{grid-template-columns:1fr 1fr}
-  .reg-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
 }
 
-@media(max-width:560px){
-  .hero-title{letter-spacing:-1px}
-  .hero-btns{flex-direction:column;align-items:center}
-  .btn-hero{width:100%;justify-content:center;max-width:340px}
-  .countdown{padding:12px 14px;gap:4px}
-  .cd-unit{min-width:44px;padding:6px 8px}
-  .cd-unit span{font-size:1.3rem}
-  .frow{grid-template-columns:1fr}
-  .pm-grid{grid-template-columns:1fr 1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .specs{grid-template-columns:1fr}
-  .mults{grid-template-columns:1fr}
-  .reg-grid{grid-template-columns:1fr}
-  .lot-grid{gap:4px}
-  .lot-ball{min-width:60px;padding:10px 6px}
-  .lot-num{font-size:.9rem}
-  .section{padding:64px 0}
-  .apuracao-card{padding:20px}
+@media(max-width:860px){
+  .nav-links,.nav-btn{display:none}
+  .ham{display:flex}
+
+  /* HERO VIRA COLUNA */
+  .hero{
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+  .hero-phone{
+    height:55vw;min-height:280px;max-height:380px;
+    border-left:none;
+    border-top:1px solid var(--border2);
+    order:-1;
+  }
+  .hero-text{
+    padding:40px 20px 48px;
+    align-items:center;text-align:center;
+  }
+  .hero-badge,.hero-actions,.hero-stats{justify-content:center}
+  .hero-sub{text-align:center;max-width:100%}
+  .hero-cd{justify-content:center}
+
+  .prize-grid{grid-template-columns:1fr;text-align:center}
+  .prize-phone-side{order:-1}
+  .prize-img-main{max-height:320px}
+  .specs-2x2{grid-template-columns:1fr 1fr}
+  .prize-color-row,.prize-chips,.prize-val-row{justify-content:center}
+
+  .checkout-grid{grid-template-columns:1fr}
+  .summary-box{position:static}
+
+  .winners{grid-template-columns:1fr}
+  .steps-row{grid-template-columns:1fr 1fr}
+
+  .pkgs{grid-template-columns:1fr 1fr}
 }
-  </style>
+
+@media(max-width:600px){
+  .steps-row{grid-template-columns:1fr}
+  .pkgs{grid-template-columns:1fr}
+  .mults-row{grid-template-columns:1fr 1fr}
+  .reg-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+
+  .frow{grid-template-columns:1fr}
+  .pm-row{grid-template-columns:1fr 1fr}
+
+  .hero-title{letter-spacing:-.8px}
+  .hero-cd{gap:4px}
+  .cd-u{min-width:44px;padding:6px 8px}
+  .cd-u b{font-size:1.2rem}
+
+  .apur-body{padding:16px 12px}
+
+  .lot-winner-num{font-size:1.6rem}
+
+  .sec{padding:60px 0}
+  .sec-head{margin-bottom:36px}
+
+  /* apuração scroll horizontal no mobile */
+  .apur-grid{gap:4px}
+  .lot-card{min-width:78px;padding:10px 6px}
+  .lot-num-display{font-size:.9rem;letter-spacing:1px}
+}
+</style>
 </head>
 <body>
 
 <!-- TOPBAR -->
 <div class="topbar">
-  🔥 LANÇAMENTO — Primeiros 10 dias: <strong>3× mais números!</strong> &nbsp;·&nbsp; Sorteio pela Loteria Federal &nbsp;·&nbsp; ✅ Autorizado SPA/ME
+  🔥 Lançamento: <strong>3× mais números</strong> nos primeiros 10 dias &nbsp;·&nbsp; ✅ Autorizado SPA/ME &nbsp;·&nbsp; <a href="#participar">Participar agora →</a>
 </div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <div class="nav-inner">
-    <div class="nav-logo">📱 Faturou<span>Rifa</span></div>
+  <div class="wrap">
+    <div class="nav-logo">
+      <div class="dot">📱</div>
+      FaturouRifa
+    </div>
     <div class="nav-links">
       <a href="#premio">Prêmio</a>
       <a href="#pacotes">Pacotes</a>
       <a href="#como-funciona">Como Funciona</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a href="#participar" class="nav-cta">Participar agora →</a>
-    <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="nav-btn" onclick="scrollTo('participar')">Participar →</button>
+    <button class="ham" id="hamBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#premio" onclick="closeMenu()">Prêmio</a>
-  <a href="#pacotes" onclick="closeMenu()">Pacotes</a>
-  <a href="#como-funciona" onclick="closeMenu()">Como Funciona</a>
-  <a href="#faq" onclick="closeMenu()">FAQ</a>
-  <a href="#participar" onclick="closeMenu()" style="color:var(--accent)">→ Participar</a>
+<!-- MENU MOBILE -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#premio"       onclick="closeMob()">O Prêmio</a>
+  <a href="#pacotes"      onclick="closeMob()">Pacotes</a>
+  <a href="#como-funciona" onclick="closeMob()">Como Funciona</a>
+  <a href="#faq"          onclick="closeMob()">FAQ</a>
+  <a href="#participar"   onclick="closeMob()">→ Participar agora</a>
 </div>
 
-<!-- ===== HERO ===== -->
-<section class="hero" id="inicio" style="padding-top:100px">
-  <div class="hero-content">
-    <div class="hero-legal"><span class="dot-green" style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span>Autorização SPA/ME · Promoção 100% Legal</div>
-    <p class="hero-eyebrow">Concorra ao prêmio mais desejado do mundo</p>
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero" id="inicio">
+
+  <!-- Texto -->
+  <div class="hero-text">
+    <div class="hero-badge">Autorizado SPA/ME · Promoção Legal</div>
+
     <h1 class="hero-title">
-      <span class="line1">Ganhe um</span>
-      <span class="line2">iPhone 17 Pro Max</span>
+      Ganhe um<br/>
+      <span class="accent">iPhone 17 Pro</span><br/>
+      0km
     </h1>
-    <p class="hero-sub">Compre nosso ebook e receba seus números automaticamente.<br/><strong>Frete e impostos 100% pagos.</strong></p>
 
-    <!-- COUNTDOWN -->
-    <div class="countdown">
-      <span class="cd-label">⏳ Encerra em</span>
-      <div class="cd-unit"><span id="cd-d">00</span><small>dias</small></div>
-      <span class="cd-colon">:</span>
-      <div class="cd-unit"><span id="cd-h">00</span><small>horas</small></div>
-      <span class="cd-colon">:</span>
-      <div class="cd-unit"><span id="cd-m">00</span><small>min</small></div>
-      <span class="cd-colon">:</span>
-      <div class="cd-unit"><span id="cd-s">00</span><small>seg</small></div>
+    <p class="hero-sub">
+      Compre nosso ebook e receba seus números da sorte.<br/>
+      <strong>Frete, impostos e nota fiscal pagos por nós.</strong>
+    </p>
+
+    <!-- Countdown -->
+    <div class="hero-cd">
+      <span class="cd-label">Encerra em</span>
+      <div class="cd-units">
+        <div class="cd-u"><b id="cd-d">00</b><small>dias</small></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-u"><b id="cd-h">00</b><small>h</small></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-u"><b id="cd-m">00</b><small>min</small></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-u"><b id="cd-s">00</b><small>seg</small></div>
+      </div>
     </div>
 
-    <!-- BOTÕES -->
-    <div class="hero-btns">
-      <a href="#participar" class="btn-hero btn-fire">🎯 Quero concorrer agora</a>
-      <a href="#como-funciona" class="btn-hero btn-secondary">Como funciona?</a>
+    <div class="hero-actions">
+      <a href="#participar" class="btn-cta btn-cta-primary">🎯 Quero concorrer</a>
+      <a href="#como-funciona" class="btn-cta btn-cta-outline">Como funciona?</a>
     </div>
 
-    <!-- IPHONE FOTO -->
-    <div class="phone-showcase">
-      <!-- Badges flutuantes -->
-      <div class="float-badge fb-left">
-        <span class="fb-dot dot-green"></span>A19 Pro · Chip mais rápido
-      </div>
-      <div class="float-badge fb-right">
-        <span class="fb-dot dot-orange"></span>Câmera 48MP Fusion
-      </div>
-      <div class="float-badge fb-bottom">
-        <span class="fb-dot dot-gold"></span>30h de bateria 🔋
-      </div>
+    <div class="hero-stats">
+      <div class="hstat"><b id="h-sold">347</b><span>números vendidos</span></div>
+      <div class="hstat"><b>653</b><span>ainda disponíveis</span></div>
+      <div class="hstat"><b>R$ 9.999</b><span>valor do prêmio</span></div>
+    </div>
+  </div>
 
-      <!-- FOTO OFICIAL APPLE -->
-      <div class="phone-img-wrap">
-        <img
-          src="https://www.apple.com/v/iphone-17-pro/f/images/overview/welcome/hero__bsveixlwbms2_xlarge.jpg"
-          alt="iPhone 17 Pro Max Cosmic Orange"
-          class="phone-img"
-          id="heroPhone"
-          onerror="this.onerror=null;this.src='https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bsveixlwbms2_large.jpg'"
-        />
-      </div>
-      <div class="phone-reflection"></div>
+  <!-- Foto do iPhone - retrato -->
+  <div class="hero-phone">
+    <div class="iphone-wrap">
+      <img
+        id="heroImg"
+        class="iphone-img"
+        src="https://www.apple.com/v/iphone-17-pro/f/images/overview/product-viewer/colors_orange__cr2oq3n1dwk2_large.jpg"
+        alt="iPhone 17 Pro Cosmic Orange"
+        onerror="this.src='https://www.apple.com/v/iphone-17-pro/d/images/overview/product-viewer/colors_orange__cr2oq3n1dwk2_large.jpg'"
+      />
+      <div class="iphone-glow" id="heroGlow"></div>
     </div>
   </div>
 </section>
 
-<!-- PROGRESS STRIP -->
-<div class="progress-strip">
-  <div class="container">
-    <div class="prog-row">
-      <span class="prog-label">📊 Números vendidos</span>
-      <span class="prog-count"><strong id="numSold">347</strong> / <strong>1.000</strong></span>
-      <span class="prog-pct" id="progPct">34,7%</span>
+<!-- PROGRESSO -->
+<div class="prog-section">
+  <div class="wrap">
+    <div class="prog-top">
+      <p>📊 Números vendidos: <strong id="pSold">347</strong> de <strong>1.000</strong></p>
+      <span class="prog-pct" id="pPct">34,7%</span>
     </div>
-    <div class="prog-bar-bg">
-      <div class="prog-bar-fill" id="progBar" style="width:34.7%"></div>
+    <div class="prog-track">
+      <div class="prog-fill" id="pFill" style="width:34.7%"></div>
     </div>
-    <p class="prog-hint">⚡ Números se esgotam a cada compra — garanta o seu agora</p>
+    <p class="prog-note">⚡ Números se esgotam a cada compra</p>
   </div>
 </div>
 
-<!-- ===== PRÊMIO ===== -->
-<section class="prize-section section" id="premio">
-  <div class="container">
-    <div class="prize-inner">
-      <div class="prize-img-side">
-        <div class="prize-glow"></div>
-        <img
-          src="https://www.apple.com/v/iphone-17-pro/f/images/overview/cameras/intro/hero_camera__f42igewygpqy_xlarge.jpg"
-          alt="iPhone 17 Pro Max"
-          class="prize-img"
-          id="prizePhone"
-          onerror="this.onerror=null;this.src='https://www.apple.com/v/iphone-17-pro/d/images/overview/cameras/intro/hero_camera__f42igewygpqy_large.jpg'"
-        />
-      </div>
-      <div class="prize-text-side">
-        <span class="sec-label">🏆 O Prêmio</span>
-        <h2 class="sec-title">iPhone 17<br/>Pro Max</h2>
-        <p class="prize-desc">O smartphone mais avançado já criado pela Apple. Chip A19 Pro, câmera Fusion de 48MP, tela de 6,9" com ProMotion 120Hz e a maior bateria da história do iPhone.</p>
-
-        <!-- Seletor de cor -->
-        <div class="color-selector">
-          <p class="color-label">Cor disponível no sorteio:</p>
-          <div class="color-dots">
-            <div class="color-dot active" style="background:linear-gradient(135deg,#FF6B35,#FF9A5C)" title="Cosmic Orange"></div>
-            <div class="color-dot" style="background:linear-gradient(135deg,#1a3a5c,#2563a8)" title="Deep Blue"></div>
-            <div class="color-dot" style="background:linear-gradient(135deg,#d0d0d8,#f0f0f5)" title="Silver"></div>
-            <span class="color-name" id="colorName">Cosmic Orange</span>
-          </div>
-        </div>
-
-        <div class="prize-tags" style="margin-top:20px">
-          <span class="ptag">✅ Nota Fiscal</span>
-          <span class="ptag">🚚 Frete Grátis</span>
-          <span class="ptag">🍎 Garantia Apple 1 ano</span>
-          <span class="ptag">📦 Lacrado</span>
-        </div>
-
-        <div class="prize-value-box">
-          <div>
-            <div class="pval-label">Valor do prêmio</div>
-            <div class="pval-num">R$ 9.999</div>
-          </div>
-          <div class="pval-divider"></div>
-          <div class="pval-sub">
-            Frete e impostos<br/><strong>100% pagos pela empresa</strong>
-          </div>
-        </div>
-
-        <div class="specs">
-          <div class="spec-item">
-            <div class="spec-label">Tela</div>
-            <div class="spec-val">6,9" · 120Hz · OLED</div>
-          </div>
-          <div class="spec-item">
-            <div class="spec-label">Chip</div>
-            <div class="spec-val">Apple A19 Pro</div>
-          </div>
-          <div class="spec-item">
-            <div class="spec-label">Câmera</div>
-            <div class="spec-val">48MP Fusion + 48MP Ultra</div>
-          </div>
-          <div class="spec-item">
-            <div class="spec-label">Bateria</div>
-            <div class="spec-val">30h de vídeo</div>
-          </div>
-          <div class="spec-item">
-            <div class="spec-label">Armazenamento</div>
-            <div class="spec-val">256GB</div>
-          </div>
-          <div class="spec-item">
-            <div class="spec-label">Material</div>
-            <div class="spec-val">Alumínio premium</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== COMO FUNCIONA ===== -->
-<section class="section section-dark" id="como-funciona">
-  <div class="container">
-    <div class="text-center">
-      <span class="sec-label">Transparência total</span>
-      <h2 class="sec-title">Como funciona?</h2>
-      <p class="sec-desc">Simples, justo e regulamentado pelo governo federal. Você compra, recebe seus números, e o resultado é público.</p>
+<!-- ══════════════ COMO FUNCIONA ══════════════ -->
+<section class="sec sec-b" id="como-funciona">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="label">Transparência total</span>
+      <h2 class="h2">Como funciona?</h2>
+      <p class="sec-sub">Você compra, recebe seus números e o resultado é público — decidido pela Loteria Federal, sem intervenção nossa.</p>
     </div>
 
-    <div class="steps">
+    <div class="steps-row reveal">
       <div class="step">
-        <div class="step-n">1</div>
-        <span class="step-icon">📚</span>
+        <div class="step-num">1</div>
+        <div class="step-icon">📚</div>
         <h3>Compre o Ebook</h3>
-        <p>Escolha seu pacote e adquira nosso ebook digital. Pagamento seguro via PIX ou cartão.</p>
+        <p>Escolha o pacote e adquira nosso ebook digital. PIX ou cartão, seguro e rápido.</p>
       </div>
       <div class="step">
-        <div class="step-n">2</div>
-        <span class="step-icon">⚡</span>
+        <div class="step-num">2</div>
+        <div class="step-icon">⚡</div>
         <h3>Receba os Números</h3>
-        <p>Após confirmação do pagamento, seus números da sorte chegam automaticamente no e-mail.</p>
+        <p>Após o pagamento confirmado, seus números chegam automaticamente por e-mail.</p>
       </div>
       <div class="step">
-        <div class="step-n">3</div>
-        <span class="step-icon">🏦</span>
+        <div class="step-num">3</div>
+        <div class="step-icon">🏦</div>
         <h3>Loteria Federal decide</h3>
-        <p>O ganhador é calculado pelos resultados públicos da Loteria Federal da Caixa. Nós não controlamos nada.</p>
+        <p>O ganhador é calculado pelo resultado público da Loteria Federal da Caixa. Não controlamos nada.</p>
       </div>
       <div class="step">
-        <div class="step-n">4</div>
-        <span class="step-icon">🏆</span>
-        <h3>Ganhe o iPhone!</h3>
-        <p>Se seu número for o vencedor, entramos em contato e entregamos o iPhone na sua porta.</p>
+        <div class="step-num">4</div>
+        <div class="step-icon">📦</div>
+        <h3>iPhone na sua porta</h3>
+        <p>Se o seu número vencer, entregamos o iPhone 17 Pro onde você estiver. Frete pago.</p>
       </div>
     </div>
 
-    <!-- Exemplo de apuração -->
-    <div class="apuracao-card">
-      <h3>🔢 Exemplo real de apuração — Loteria Federal</h3>
-      <div class="lot-grid">
-        <div class="lot-ball">
-          <div class="lot-pos">1º Prêmio</div>
-          <div class="lot-num"><span class="d">12</span><span class="serie">5</span><span class="unit">9</span><span class="d">5</span>→<span style="color:rgba(255,255,255,.3)">espera</span></div>
-          <!-- simplificado abaixo -->
-          <div class="lot-num" style="margin-top:6px"><span class="d">1</span><span class="d">2</span><span class="d">5</span><span class="serie">9</span><span class="unit">5</span></div>
-          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Dezena=<b style="color:var(--blue)">9</b> · Unid=<b style="color:var(--accent)">5</b></div>
-        </div>
-        <div class="lot-ball">
-          <div class="lot-pos">2º Prêmio</div>
-          <div class="lot-num"><span class="d">3444</span><span class="unit">7</span></div>
-          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Unid=<b style="color:var(--accent)">7</b></div>
-        </div>
-        <div class="lot-ball">
-          <div class="lot-pos">3º Prêmio</div>
-          <div class="lot-num"><span class="d">9410</span><span class="unit">1</span></div>
-          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Unid=<b style="color:var(--accent)">1</b></div>
-        </div>
-        <div class="lot-ball">
-          <div class="lot-pos">4º Prêmio</div>
-          <div class="lot-num"><span class="d">3211</span><span class="unit">0</span></div>
-          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Unid=<b style="color:var(--accent)">0</b></div>
-        </div>
-        <div class="lot-ball">
-          <div class="lot-pos">5º Prêmio</div>
-          <div class="lot-num"><span class="d">2036</span><span class="unit">2</span></div>
-          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Unid=<b style="color:var(--accent)">2</b></div>
-        </div>
-        <div class="lot-result">
-          <p>Número vencedor</p>
-          <div class="lot-winner">9.57102</div>
-          <p style="font-size:.7rem;color:rgba(255,255,255,.3);margin-top:6px">Série 9 · Elemento 57102</p>
+    <!-- Apuração -->
+    <div class="apur reveal">
+      <div class="apur-head">
+        <h3>Exemplo de apuração pelo resultado da Loteria Federal</h3>
+        <span>Como é calculado</span>
+      </div>
+      <div class="apur-body">
+        <div class="apur-grid">
+          <div class="lot-card">
+            <div class="lot-pos">1º Prêmio</div>
+            <div class="lot-num-display">
+              <span class="hd">12</span><span class="s">5</span><span class="u">9</span><span class="hd">5</span>
+            </div>
+            <div class="lot-hint">Dezena → Série: <b>9</b><br/>Unidade → <b>5</b></div>
+          </div>
+          <div class="lot-arrow-col">→</div>
+          <div class="lot-card">
+            <div class="lot-pos">2º Prêmio</div>
+            <div class="lot-num-display"><span class="hd">3444</span><span class="u">7</span></div>
+            <div class="lot-hint">Unidade → <b>7</b></div>
+          </div>
+          <div class="lot-arrow-col">→</div>
+          <div class="lot-card">
+            <div class="lot-pos">3º Prêmio</div>
+            <div class="lot-num-display"><span class="hd">9410</span><span class="u">1</span></div>
+            <div class="lot-hint">Unidade → <b>1</b></div>
+          </div>
+          <div class="lot-arrow-col">→</div>
+          <div class="lot-card">
+            <div class="lot-pos">4º Prêmio</div>
+            <div class="lot-num-display"><span class="hd">3211</span><span class="u">0</span></div>
+            <div class="lot-hint">Unidade → <b>0</b></div>
+          </div>
+          <div class="lot-arrow-col">→</div>
+          <div class="lot-card">
+            <div class="lot-pos">5º Prêmio</div>
+            <div class="lot-num-display"><span class="hd">2036</span><span class="u">2</span></div>
+            <div class="lot-hint">Unidade → <b>2</b></div>
+          </div>
+          <div class="lot-arrow-col">=</div>
+          <div class="lot-result-card">
+            <span class="lot-result-label">Número vencedor</span>
+            <span class="lot-winner-num">9.57102</span>
+            <span class="lot-winner-hint">Série <b style="color:var(--blue)">9</b> · Elemento <b style="color:var(--orange)">57102</b></span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PACOTES ===== -->
-<section class="section packages-section" id="pacotes">
-  <div class="container">
-    <div class="text-center">
-      <span class="sec-label">Participe agora</span>
-      <h2 class="sec-title">Escolha seu pacote</h2>
-      <p class="sec-desc">Mais números = mais chances de ganhar. Todos incluem o ebook completo.</p>
-    </div>
+<!-- ══════════════ PRÊMIO ══════════════ -->
+<section class="sec sec-a prize-sec" id="premio">
+  <div class="wrap">
+    <div class="prize-grid">
 
-    <!-- Banner lançamento -->
-    <div style="background:rgba(255,107,0,.07);border:1px solid rgba(255,107,0,.2);border-radius:16px;padding:16px 22px;display:flex;align-items:center;gap:14px;margin-top:32px;flex-wrap:wrap">
-      <span style="font-size:1.6rem">⚡</span>
-      <div>
-        <strong style="color:var(--accent2);display:block;font-size:.9rem">OFERTA DE LANÇAMENTO — 10 primeiros dias</strong>
-        <span style="font-size:.8rem;color:rgba(255,255,255,.4)">Compre agora e ganhe <strong style="color:#fff">3× mais números</strong>. Oferta expira em <span id="launchTimer" style="color:var(--accent)">...</span></span>
+      <!-- Foto -->
+      <div class="prize-phone-side reveal">
+        <img
+          id="prizeImg"
+          class="prize-img-main"
+          src="https://www.apple.com/v/iphone-17-pro/f/images/overview/product-viewer/colors_orange__cr2oq3n1dwk2_large.jpg"
+          alt="iPhone 17 Pro Cosmic Orange"
+          onerror="this.src='https://www.apple.com/v/iphone-17-pro/d/images/overview/product-viewer/colors_orange__cr2oq3n1dwk2_large.jpg'"
+        />
+        <!-- Seletor de cor -->
+        <div class="prize-color-row">
+          <div class="c-dot active" style="background:linear-gradient(135deg,#FF6B00,#FF9A3C)" title="Cosmic Orange"
+            data-img="https://www.apple.com/v/iphone-17-pro/f/images/overview/product-viewer/colors_orange__cr2oq3n1dwk2_large.jpg"
+            data-glow="rgba(255,107,0,.25)" data-name="Cosmic Orange"
+            onclick="changeColor(this)"></div>
+          <div class="c-dot" style="background:linear-gradient(135deg,#1a3a5c,#2a6db5)" title="Deep Blue"
+            data-img="https://www.apple.com/v/iphone-17-pro/f/images/overview/product-viewer/colors_blue__li170wg4gkae_large.jpg"
+            data-glow="rgba(10,132,255,.2)" data-name="Deep Blue"
+            onclick="changeColor(this)"></div>
+          <div class="c-dot" style="background:linear-gradient(135deg,#c8c8d0,#e8e8f0)" title="Silver"
+            data-img="https://www.apple.com/v/iphone-17-pro/f/images/overview/product-viewer/colors_silver__eb8fu7zfvwmu_large.jpg"
+            data-glow="rgba(200,200,220,.15)" data-name="Silver"
+            onclick="changeColor(this)"></div>
+          <span class="c-name" id="colorName">Cosmic Orange</span>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="prize-info reveal">
+        <span class="label">🏆 O Prêmio</span>
+        <h2 class="h2">iPhone 17 Pro</h2>
+        <p class="prize-model">256GB · <span id="prizeColor">Cosmic Orange</span> · Alumínio premium</p>
+        <p class="prize-desc">A câmera mais avançada que a Apple já colocou num iPhone. Sistema Fusion de 48MP, tetraprism 48MP, chip A19 Pro com Neural Engine de nova geração e a maior bateria da história do iPhone — 30 horas de vídeo.</p>
+
+        <div class="prize-chips">
+          <span class="chip green">✅ Nota Fiscal</span>
+          <span class="chip green">🚚 Frete Grátis</span>
+          <span class="chip">🍎 Garantia Apple 1 ano</span>
+          <span class="chip">📦 Lacrado de Fábrica</span>
+        </div>
+
+        <div class="prize-val-row">
+          <div>
+            <div style="font-size:.7rem;color:var(--gray3);margin-bottom:4px">Valor de mercado</div>
+            <div class="prize-val-num">R$ 9.999</div>
+          </div>
+          <div class="divider-v"></div>
+          <div class="prize-val-note">
+            Frete e impostos<br/>
+            <strong>pagos pela empresa</strong>
+          </div>
+        </div>
+
+        <div class="specs-2x2">
+          <div class="spec-box"><div class="sbl">Tela</div><div class="sbv">6,3" · OLED · 120Hz</div></div>
+          <div class="spec-box"><div class="sbl">Chip</div><div class="sbv">Apple A19 Pro</div></div>
+          <div class="spec-box"><div class="sbl">Câmera</div><div class="sbv">48MP Fusion + 48MP Ultra</div></div>
+          <div class="spec-box"><div class="sbl">Bateria</div><div class="sbv">30h de vídeo</div></div>
+          <div class="spec-box"><div class="sbl">Armazenamento</div><div class="sbv">256GB</div></div>
+          <div class="spec-box"><div class="sbl">Conectividade</div><div class="sbv">5G · Wi-Fi 7</div></div>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="pkgs-grid">
-      <!-- Popular -->
-      <div class="pkg">
-        <span class="pkg-tag tag-popular">Popular</span>
+<!-- ══════════════ PACOTES ══════════════ -->
+<section class="sec sec-b" id="pacotes">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="label">Escolha seu pacote</span>
+      <h2 class="h2">Mais números, mais chances</h2>
+      <p class="sec-sub">Todos os pacotes incluem o ebook completo. Os números chegam no e-mail logo após o pagamento.</p>
+    </div>
+
+    <div class="pkg-banner">
+      <span class="icon">⚡</span>
+      <p><strong>Oferta de lançamento ativa!</strong> Compre nos primeiros 10 dias e receba <strong>3× mais números</strong> automaticamente. Expira em <span id="launchExp" style="color:var(--orange2);font-weight:700">...</span></p>
+    </div>
+
+    <div class="pkgs">
+      <div class="pkg reveal">
+        <span class="pkg-tag tag-b">Popular</span>
         <div class="pkg-name">Pacote Básico</div>
-        <div class="pkg-nums">
-          <span class="pkg-num-big">5</span>
-          <span class="pkg-num-small">números base</span>
-          <span class="pkg-launch">→ 15 no lançamento 🔥</span>
+        <div class="pkg-n-box">
+          <span class="pkg-n-label">números base</span>
+          <span class="pkg-n-big">5</span>
+          <span class="pkg-n-launch">→ 15 no lançamento</span>
         </div>
         <div class="pkg-price">R$ <span>19,90</span></div>
-        <ul class="pkg-features">
-          <li>Ebook completo em PDF</li>
+        <ul class="pkg-list">
+          <li>Ebook em PDF</li>
           <li>5 números da sorte</li>
-          <li>Envio automático por e-mail</li>
+          <li>E-mail automático</li>
           <li>Área do cliente</li>
         </ul>
-        <button class="btn-pkg btn-pkg-ghost" onclick="selecionarPkg('popular')">Quero este →</button>
+        <button class="btn-pkg btn-pkg-ghost" onclick="selectPkg('popular')">Quero este</button>
       </div>
 
-      <!-- Prata -->
-      <div class="pkg">
-        <span class="pkg-tag tag-prata">Prata</span>
+      <div class="pkg reveal">
+        <span class="pkg-tag tag-p">Prata</span>
         <div class="pkg-name">Pacote Prata</div>
-        <div class="pkg-nums">
-          <span class="pkg-num-big">12</span>
-          <span class="pkg-num-small">números base</span>
-          <span class="pkg-launch">→ 36 no lançamento 🔥</span>
+        <div class="pkg-n-box">
+          <span class="pkg-n-label">números base</span>
+          <span class="pkg-n-big">12</span>
+          <span class="pkg-n-launch">→ 36 no lançamento</span>
         </div>
         <div class="pkg-price">R$ <span>39,90</span></div>
-        <ul class="pkg-features">
-          <li>Ebook completo em PDF</li>
+        <ul class="pkg-list">
+          <li>Ebook em PDF</li>
           <li>12 números da sorte</li>
-          <li>Envio automático por e-mail</li>
+          <li>E-mail automático</li>
           <li>Área do cliente</li>
           <li>Suporte prioritário</li>
         </ul>
-        <button class="btn-pkg btn-pkg-ghost" onclick="selecionarPkg('prata')">Quero este →</button>
+        <button class="btn-pkg btn-pkg-ghost" onclick="selectPkg('prata')">Quero este</button>
       </div>
 
-      <!-- Ouro — DESTAQUE -->
-      <div class="pkg pkg-hot">
-        <div class="pkg-hot-badge">⭐ MAIS POPULAR</div>
-        <span class="pkg-tag tag-ouro">Ouro</span>
+      <div class="pkg featured reveal">
+        <div class="pkg-star">⭐ MAIS POPULAR</div>
+        <span class="pkg-tag tag-o">Ouro</span>
         <div class="pkg-name">Pacote Ouro</div>
-        <div class="pkg-nums">
-          <span class="pkg-num-big">20</span>
-          <span class="pkg-num-small">números base</span>
-          <span class="pkg-launch">→ 60 no lançamento 🔥</span>
+        <div class="pkg-n-box">
+          <span class="pkg-n-label">números base</span>
+          <span class="pkg-n-big">20</span>
+          <span class="pkg-n-launch">→ 60 no lançamento</span>
         </div>
         <div class="pkg-price">R$ <span>59,90</span></div>
-        <ul class="pkg-features">
-          <li>Ebook completo em PDF</li>
+        <ul class="pkg-list">
+          <li>Ebook em PDF</li>
           <li>20 números da sorte</li>
-          <li>Envio automático por e-mail</li>
+          <li>E-mail automático</li>
           <li>Área do cliente</li>
           <li>Suporte VIP</li>
-          <li>Notificação do sorteio</li>
+          <li class="bold">Notificação do sorteio</li>
         </ul>
-        <button class="btn-pkg btn-pkg-fire" onclick="selecionarPkg('ouro')">Quero este →</button>
+        <button class="btn-pkg btn-pkg-fire" onclick="selectPkg('ouro')">Quero este</button>
       </div>
 
-      <!-- Elite -->
-      <div class="pkg">
-        <span class="pkg-tag tag-elite">Elite 🔥</span>
+      <div class="pkg reveal">
+        <span class="pkg-tag tag-e">Elite 🔥</span>
         <div class="pkg-name">Pacote Elite</div>
-        <div class="pkg-nums">
-          <span class="pkg-num-big">50</span>
-          <span class="pkg-num-small">números base</span>
-          <span class="pkg-launch">→ 150 no lançamento 🔥</span>
+        <div class="pkg-n-box">
+          <span class="pkg-n-label">números base</span>
+          <span class="pkg-n-big">50</span>
+          <span class="pkg-n-launch">→ 150 no lançamento</span>
         </div>
         <div class="pkg-price">R$ <span>99,90</span></div>
-        <ul class="pkg-features">
-          <li>Ebook completo em PDF</li>
+        <ul class="pkg-list">
+          <li>Ebook em PDF</li>
           <li>50 números da sorte</li>
-          <li>Envio automático por e-mail</li>
+          <li>E-mail automático</li>
           <li>Área do cliente</li>
           <li>Suporte VIP exclusivo</li>
-          <li>Notificação do sorteio</li>
-          <li>TURBO 2× via PIX</li>
+          <li class="bold">Notificação do sorteio</li>
+          <li class="bold">TURBO: 2× no PIX</li>
         </ul>
-        <button class="btn-pkg btn-pkg-ghost" onclick="selecionarPkg('elite')">Quero este →</button>
+        <button class="btn-pkg btn-pkg-ghost" onclick="selectPkg('elite')">Quero este</button>
       </div>
     </div>
 
-    <!-- Multiplicadores -->
-    <div class="mults">
-      <div class="mult-item">
-        <div class="mult-icon">⚡</div>
-        <div class="mult-title">TURBO 2×</div>
-        <div class="mult-desc">Pacote Elite + PIX ou Cartão = dobro de números</div>
-        <span class="mult-badge">Pacote Elite</span>
-      </div>
-      <div class="mult-item">
-        <div class="mult-icon">🚀</div>
-        <div class="mult-title">Lançamento 3×</div>
-        <div class="mult-desc">Primeiros 10 dias: triplique todos os seus números</div>
-        <span class="mult-badge">Ativo agora!</span>
-      </div>
-      <div class="mult-item">
-        <div class="mult-icon">📱</div>
-        <div class="mult-title">App 3×</div>
-        <div class="mult-desc">Compre pelo app oficial e triplique seus números</div>
-        <span class="mult-badge">Em breve</span>
-      </div>
-      <div class="mult-item">
-        <div class="mult-icon">👑</div>
-        <div class="mult-title">Prime 6×</div>
-        <div class="mult-desc">Assinante Prime: 6× mais números em toda compra</div>
-        <span class="mult-badge">Assine já</span>
-      </div>
+    <div class="mults-row reveal">
+      <div class="mult"><div class="mult-ico">⚡</div><div class="mult-name">TURBO 2×</div><div class="mult-desc">Pacote Elite + PIX ou Cartão: dobra todos os seus números</div><span class="mult-tag">Pacote Elite</span></div>
+      <div class="mult"><div class="mult-ico">🚀</div><div class="mult-name">Lançamento 3×</div><div class="mult-desc">Nos primeiros 10 dias: todos os pacotes com 3× mais números</div><span class="mult-tag" style="background:rgba(48,209,88,.1);border-color:rgba(48,209,88,.2);color:var(--green)">Ativo agora!</span></div>
+      <div class="mult"><div class="mult-ico">📱</div><div class="mult-name">App 3×</div><div class="mult-desc">Compre pelo app oficial e triplique seus números automaticamente</div><span class="mult-tag">Em breve</span></div>
+      <div class="mult"><div class="mult-ico">👑</div><div class="mult-name">Prime 6×</div><div class="mult-desc">Assinantes Prime recebem 6× mais números em toda compra</div><span class="mult-tag">Assinar</span></div>
     </div>
   </div>
 </section>
 
-<!-- ===== FORMULÁRIO ===== -->
-<section class="section checkout-section" id="participar">
-  <div class="container">
-    <div class="text-center">
-      <span class="sec-label">Finalizar participação</span>
-      <h2 class="sec-title">Seus dados</h2>
-      <p class="sec-desc">Preencha abaixo. Seus números chegam no e-mail logo após a confirmação.</p>
+<!-- ══════════════ PARTICIPAR ══════════════ -->
+<section class="sec sec-c" id="participar">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="label">Finalizar participação</span>
+      <h2 class="h2">Preencha seus dados</h2>
+      <p class="sec-sub">Seus números chegam no e-mail em até 5 minutos após o pagamento confirmado.</p>
     </div>
+
     <div class="checkout-grid">
-      <form class="form-card" id="mainForm" onsubmit="submitForm(event)">
-        <div class="fgroup">
+      <form class="form-box" id="mainForm" onsubmit="submitForm(event)" novalidate>
+        <div class="fg">
           <label>Nome completo</label>
           <input type="text" id="f-nome" placeholder="Seu nome completo" required/>
         </div>
         <div class="frow">
-          <div class="fgroup">
+          <div class="fg">
             <label>CPF</label>
             <input type="text" id="f-cpf" placeholder="000.000.000-00" maxlength="14" required/>
           </div>
-          <div class="fgroup">
-            <label>Nascimento</label>
+          <div class="fg">
+            <label>Data de nascimento</label>
             <input type="date" id="f-nasc" required/>
           </div>
         </div>
         <div class="frow">
-          <div class="fgroup">
+          <div class="fg">
             <label>E-mail</label>
             <input type="email" id="f-email" placeholder="seu@email.com" required/>
           </div>
-          <div class="fgroup">
+          <div class="fg">
             <label>WhatsApp</label>
             <input type="tel" id="f-tel" placeholder="(11) 99999-9999" required/>
           </div>
         </div>
-        <div class="fgroup">
+        <div class="fg">
           <label>Endereço completo</label>
-          <input type="text" id="f-end" placeholder="Rua, número, bairro, cidade - UF" required/>
+          <input type="text" id="f-end" placeholder="Rua, número, bairro, cidade — UF" required/>
         </div>
-        <div class="fgroup">
+        <div class="fg">
           <label>Pacote</label>
           <select id="f-pkg" required onchange="updateSummary()">
-            <option value="">— Selecione —</option>
+            <option value="">— Selecione seu pacote —</option>
             <option value="popular">Básico — 5 números — R$ 19,90</option>
             <option value="prata">Prata — 12 números — R$ 39,90</option>
             <option value="ouro">Ouro — 20 números — R$ 59,90 ⭐</option>
             <option value="elite">Elite — 50 números — R$ 99,90 🔥</option>
           </select>
         </div>
-        <div class="fgroup">
-          <label>Pagamento</label>
-          <div class="pm-grid">
-            <label class="pm-opt">
+        <div class="fg">
+          <label>Forma de pagamento</label>
+          <div class="pm-row">
+            <label class="pm-label">
               <input type="radio" name="pm" value="pix" checked onchange="updateSummary()"/>
-              <div class="pm-face"><span class="pm-face-icon">💠</span>PIX<span class="pm-pix-hint">Aprovação imediata</span></div>
+              <div class="pm-face">
+                <span class="pm-face-icon">💠</span>
+                PIX
+                <span class="pm-hint">Aprovação imediata</span>
+              </div>
             </label>
-            <label class="pm-opt">
+            <label class="pm-label">
               <input type="radio" name="pm" value="cartao" onchange="updateSummary()"/>
-              <div class="pm-face"><span class="pm-face-icon">💳</span>Cartão<span class="pm-pix-hint">Parcelado</span></div>
+              <div class="pm-face">
+                <span class="pm-face-icon">💳</span>
+                Cartão
+                <span class="pm-hint">Parcelado</span>
+              </div>
             </label>
           </div>
         </div>
-        <label class="terms-row">
+        <label class="check-row">
           <input type="checkbox" required/>
-          <span>Li e aceito o <a href="#regulamento">Regulamento</a> e a <a href="#regulamento">Política de Privacidade</a>. Confirmo ter 18 anos ou mais.</span>
+          <span>Li e aceito o <a href="#regulamento">Regulamento</a> e a <a href="#regulamento">Política de Privacidade</a>. Tenho 18 anos ou mais.</span>
         </label>
-        <button type="submit" class="btn-submit">🎯 CONFIRMAR E PAGAR</button>
-        <div class="secure-note">🔒 Pagamento seguro · Dados criptografados · LGPD</div>
+        <button type="submit" class="btn-submit">🎯 Confirmar e Pagar</button>
+        <div class="secure">🔒 Ambiente seguro · Dados criptografados · LGPD</div>
       </form>
 
-      <!-- Resumo -->
-      <div class="summary-card">
-        <div class="summary-prize-box">
-          <span class="spz-icon">📱</span>
+      <div class="summary-box">
+        <div class="sum-prize">
+          <span class="sum-prize-icon">📱</span>
           <div>
-            <div class="spz-name">iPhone 17 Pro Max</div>
-            <div class="spz-sub">256GB · Cosmic Orange</div>
+            <div class="sum-prize-name">iPhone 17 Pro</div>
+            <div class="sum-prize-sub">256GB · <span id="s-color">Cosmic Orange</span></div>
           </div>
         </div>
-        <div class="summary-rows">
-          <div class="sum-row"><span>📦 Pacote</span><span id="s-pkg">—</span></div>
-          <div class="sum-row"><span>🎲 Números</span><span class="highlight" id="s-nums">—</span></div>
-          <div class="sum-row"><span>⚡ Multiplicador</span><span id="s-mult">—</span></div>
-          <div class="sum-row"><span>💰 Total</span><span id="s-val" style="color:var(--gold);font-weight:800">—</span></div>
-          <div class="sum-row"><span>📅 Sorteio</span><span>Loteria Federal</span></div>
-          <div class="sum-row"><span>✅ Autorização</span><span>SPA/ME</span></div>
+        <div class="sum-rows">
+          <div class="sum-row"><span>Pacote</span><span class="val" id="s-pkg">—</span></div>
+          <div class="sum-row"><span>Números</span><span class="val-big" id="s-nums">—</span></div>
+          <div class="sum-row"><span>Multiplicador</span><span class="val" id="s-mult">—</span></div>
+          <div class="sum-row"><span>Total</span><span class="val" id="s-val" style="color:var(--gold);font-weight:800">—</span></div>
+          <div class="sum-row"><span>Sorteio</span><span class="val">Loteria Federal</span></div>
         </div>
-        <div class="summary-pix-box" id="summaryPix">
-          <p>💠 Chave PIX para pagamento:</p>
+        <div class="pix-box">
+          <p>💠 Chave PIX para pagamento</p>
           <div class="pix-key" id="pixKey" onclick="copyPix()">Selecione um pacote</div>
-          <p style="font-size:.68rem;color:rgba(255,255,255,.3);margin-top:6px">Clique para copiar · Números chegam após confirmação</p>
+          <p class="pix-hint">Clique para copiar · Números chegam após confirmação</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== GANHADORES ===== -->
-<section class="section section-gray">
-  <div class="container">
-    <div class="text-center">
-      <span class="sec-label">Histórico</span>
-      <h2 class="sec-title">Ganhadores anteriores</h2>
-      <p class="sec-desc">Veja quem já foi contemplado. Resultados verificáveis na Loteria Federal.</p>
+<!-- ══════════════ GANHADORES ══════════════ -->
+<section class="sec sec-b">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="label">Histórico</span>
+      <h2 class="h2">Ganhadores anteriores</h2>
+      <p class="sec-sub">Resultados verificáveis nos extratos públicos da Loteria Federal.</p>
     </div>
-    <div class="winners-grid">
-      <div class="winner-card">
-        <div class="w-avatar">M</div>
+    <div class="winners reveal">
+      <div class="winner">
+        <div class="w-av">M</div>
         <div>
-          <div class="w-name">Maria S. · São Paulo</div>
+          <div class="w-n">Maria S. · São Paulo</div>
           <div class="w-num">Número: 3.41205</div>
           <div class="w-prize">🏆 iPhone 16 Pro Max</div>
         </div>
       </div>
-      <div class="winner-card">
-        <div class="w-avatar">J</div>
+      <div class="winner">
+        <div class="w-av">J</div>
         <div>
-          <div class="w-name">João P. · Rio de Janeiro</div>
+          <div class="w-n">João P. · Rio de Janeiro</div>
           <div class="w-num">Número: 7.89034</div>
           <div class="w-prize">🏆 iPhone 16 Pro Max</div>
         </div>
       </div>
-      <div class="winner-card">
-        <div class="w-avatar">A</div>
+      <div class="winner">
+        <div class="w-av">A</div>
         <div>
-          <div class="w-name">Ana L. · Belo Horizonte</div>
+          <div class="w-n">Ana L. · Belo Horizonte</div>
           <div class="w-num">Número: 1.22891</div>
           <div class="w-prize">🏆 MacBook Air M3</div>
         </div>
       </div>
     </div>
-    <p style="text-align:center;font-size:.72rem;color:rgba(255,255,255,.2);margin-top:16px">* Dados exibidos com autorização. Sorteios verificáveis nos resultados oficiais da Loteria Federal.</p>
+    <p style="text-align:center;font-size:.7rem;color:var(--gray3);margin-top:14px">* Divulgado com autorização dos ganhadores.</p>
   </div>
 </section>
 
-<!-- ===== FAQ ===== -->
-<section class="section section-dark" id="faq">
-  <div class="container">
-    <div class="text-center">
-      <span class="sec-label">Dúvidas</span>
-      <h2 class="sec-title">Perguntas frequentes</h2>
+<!-- ══════════════ FAQ ══════════════ -->
+<section class="sec sec-a" id="faq">
+  <div class="wrap-sm">
+    <div class="sec-head center">
+      <span class="label">Dúvidas</span>
+      <h2 class="h2">Perguntas frequentes</h2>
     </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-btn">Como funciona a promoção?<div class="faq-icon">+</div></button>
-        <div class="faq-body">Você compra nosso ebook digital e recebe automaticamente números da sorte. O ganhador é apurado com base nos resultados públicos da Loteria Federal da Caixa Econômica Federal — garantindo transparência total. Nós não controlamos o resultado.</div>
+    <div class="faq-wrap">
+      <div class="faq-item reveal">
+        <button class="faq-btn">Como funciona a promoção?<div class="faq-ic">+</div></button>
+        <div class="faq-body">Você compra nosso ebook digital e recebe automaticamente números da sorte. O ganhador é apurado pelos resultados públicos da Loteria Federal da Caixa Econômica Federal — garantindo transparência total. Não interferimos no resultado.</div>
       </div>
-      <div class="faq-item">
-        <button class="faq-btn">Quando recebo meus números?<div class="faq-icon">+</div></button>
-        <div class="faq-body">Os números são enviados automaticamente por e-mail imediatamente após a confirmação do pagamento. Via PIX, a confirmação é quase instantânea. Via cartão, pode levar alguns minutos.</div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">Quando recebo meus números?<div class="faq-ic">+</div></button>
+        <div class="faq-body">Os números são enviados automaticamente por e-mail logo após a confirmação do pagamento. Via PIX, a confirmação é quase instantânea. Via cartão, pode levar alguns minutos.</div>
       </div>
-      <div class="faq-item">
-        <button class="faq-btn">Como é feita a apuração do ganhador?<div class="faq-icon">+</div></button>
-        <div class="faq-body">A apuração usa os 5 primeiros prêmios da Loteria Federal. A dezena do 1º prêmio define a série (0–9), e as unidades dos 5 prêmios formam o elemento de 5 dígitos. O número completo (ex: 9.57102) é verificado na nossa base de participantes elegíveis.</div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">Como o ganhador é calculado?<div class="faq-ic">+</div></button>
+        <div class="faq-body">A apuração usa os 5 primeiros prêmios da Loteria Federal. A dezena do 1º prêmio define a série (0–9), e as unidades dos 5 prêmios formam o elemento de 5 dígitos. O número completo (ex: 9.57102) é cruzado com nossa base de participantes elegíveis.</div>
       </div>
-      <div class="faq-item">
-        <button class="faq-btn">E se meu número não foi o exato sorteado?<div class="faq-icon">+</div></button>
-        <div class="faq-body">Se o número exato não foi distribuído, o sistema busca automaticamente o número imediatamente superior na mesma série. Se não houver, busca o inferior. Se a série estiver vazia, avança para a próxima série. Sempre haverá um ganhador.</div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">E se o número sorteado não foi distribuído?<div class="faq-ic">+</div></button>
+        <div class="faq-body">Se o número exato não foi distribuído, o sistema busca automaticamente o número imediatamente superior na mesma série. Se não houver, busca o inferior. Se a série estiver vazia, avança para a próxima série. Sempre haverá um ganhador entre os participantes elegíveis.</div>
       </div>
-      <div class="faq-item">
-        <button class="faq-btn">O que é o multiplicador de lançamento?<div class="faq-icon">+</div></button>
-        <div class="faq-body">Nos primeiros 10 dias da campanha, você recebe 3× mais números do que o padrão do pacote escolhido — sem custo adicional. É nossa forma de recompensar quem confia desde o início!</div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">O que é o multiplicador de lançamento?<div class="faq-ic">+</div></button>
+        <div class="faq-body">Nos primeiros 10 dias da campanha, você recebe 3× mais números do que o padrão do pacote — sem custo adicional. É nossa forma de recompensar quem acredita desde o início.</div>
       </div>
-      <div class="faq-item">
-        <button class="faq-btn">A promoção é legalizada?<div class="faq-icon">+</div></button>
-        <div class="faq-body">Sim. Esta é uma Promoção Comercial com Distribuição Gratuita de Prêmios, autorizada pela SPA (Secretaria de Prêmios e Apostas do Ministério da Fazenda), conforme a Lei Federal nº 5.768/71. O certificado de autorização está disponível no regulamento.</div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">A promoção é legalizada?<div class="faq-ic">+</div></button>
+        <div class="faq-body">Sim. Esta é uma Promoção Comercial com Distribuição Gratuita de Prêmios, autorizada pela SPA (Secretaria de Prêmios e Apostas do Ministério da Fazenda), conforme a Lei Federal nº 5.768/71.</div>
       </div>
-      <div class="faq-item">
-        <button class="faq-btn">Como recebo o iPhone se ganhar?<div class="faq-icon">+</div></button>
-        <div class="faq-body">Após a apuração, entramos em contato pelo e-mail e WhatsApp cadastrados. O iPhone é entregue pelos Correios com frete pago, acompanhado de nota fiscal. O ganhador tem 180 dias para retirar o prêmio.</div>
+      <div class="faq-item reveal">
+        <button class="faq-btn">Como recebo o iPhone se ganhar?<div class="faq-ic">+</div></button>
+        <div class="faq-body">Após a apuração, entramos em contato pelo e-mail e WhatsApp cadastrados. O iPhone é entregue pelos Correios com frete pago, acompanhado de nota fiscal. O ganhador tem 180 dias para resgatar o prêmio.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ANTI FRAUDE -->
-<div class="fraud-bar">
-  <div class="container">
+<!-- FRAUDE -->
+<div class="fraud">
+  <div class="wrap">
     <h3>⚠️ Atenção — Prevenção contra golpes</h3>
-    <p><strong>NÃO fazemos ligações solicitando dados bancários ou pedindo depósitos para liberar prêmios.</strong> Nosso único contato oficial é por e-mail cadastrado na compra.</p>
+    <p><strong>NÃO fazemos ligações pedindo depósito ou dados bancários para liberar prêmios.</strong> Desconfie de qualquer contato fora dos canais abaixo.</p>
     <div class="fraud-contacts">
       <span>📧 <strong>contato@faturourifa.com.br</strong></span>
-      <span>💬 <strong>(11) 99999-9999</strong></span>
-      <span>📷 <strong>@faturourifa</strong></span>
+      <span>💬 WhatsApp: <strong>(11) 99999-9999</strong></span>
+      <span>📷 Instagram: <strong>@faturourifa</strong></span>
     </div>
   </div>
 </div>
 
-<!-- ===== REGULAMENTO ===== -->
-<section class="section section-dark" id="regulamento">
-  <div class="container">
-    <div class="text-center">
-      <span class="sec-label">Legal</span>
-      <h2 class="sec-title">Regulamento</h2>
-      <p class="sec-desc">Promoção autorizada e transparente. Todos os detalhes abaixo.</p>
+<!-- ══════════════ REGULAMENTO ══════════════ -->
+<section class="sec sec-b" id="regulamento">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="label">Legal</span>
+      <h2 class="h2">Regulamento</h2>
     </div>
-    <div class="reg-grid">
-      <div class="reg-item">
-        <div class="reg-lbl">Modalidade</div>
-        <div class="reg-val">Promoção Comercial · Distribuição Gratuita de Prêmios</div>
-      </div>
-      <div class="reg-item">
-        <div class="reg-lbl">Período de participação</div>
-        <div class="reg-val">[DATA INÍCIO] até [DATA FIM]</div>
-      </div>
-      <div class="reg-item">
-        <div class="reg-lbl">Extração da Loteria</div>
-        <div class="reg-val">[DATA] — Loteria Federal CEF</div>
-      </div>
-      <div class="reg-item">
-        <div class="reg-lbl">Apuração</div>
-        <div class="reg-val">[DATA] às 09h00 (Brasília)</div>
-      </div>
-      <div class="reg-item">
-        <div class="reg-lbl">Prêmio</div>
-        <div class="reg-val">1× iPhone 17 Pro Max 256GB Cosmic Orange</div>
-      </div>
-      <div class="reg-item">
-        <div class="reg-lbl">Prazo para reclamação</div>
-        <div class="reg-val">180 dias após divulgação</div>
-      </div>
-      <div class="reg-item">
-        <div class="reg-lbl">Autorização</div>
-        <div class="reg-val">SPA/ME nº [NÚMERO DA AUTORIZAÇÃO]</div>
-      </div>
-      <div class="reg-item" style="display:flex;align-items:center">
-        <a href="#" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:10px 18px;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.7);transition:.2s" onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='rgba(255,255,255,.07)'">📄 Baixar Regulamento PDF</a>
+    <div class="reg-grid reveal">
+      <div class="reg-cell"><div class="reg-lbl">Modalidade</div><div class="reg-val">Promoção Comercial · Distribuição Gratuita de Prêmios</div></div>
+      <div class="reg-cell"><div class="reg-lbl">Período</div><div class="reg-val">[DATA INÍCIO] até [DATA FIM]</div></div>
+      <div class="reg-cell"><div class="reg-lbl">Extração</div><div class="reg-val">[DATA] — Loteria Federal CEF</div></div>
+      <div class="reg-cell"><div class="reg-lbl">Apuração</div><div class="reg-val">[DATA] às 09h00 (Brasília)</div></div>
+      <div class="reg-cell"><div class="reg-lbl">Prêmio</div><div class="reg-val">1× iPhone 17 Pro 256GB</div></div>
+      <div class="reg-cell"><div class="reg-lbl">Reclamação</div><div class="reg-val">Prazo de 180 dias após divulgação</div></div>
+      <div class="reg-cell"><div class="reg-lbl">Autorização</div><div class="reg-val">SPA/ME nº [NÚMERO]</div></div>
+      <div class="reg-cell" style="display:flex;align-items:center">
+        <a href="#" style="display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--border);border-radius:50px;padding:9px 16px;font-size:.76rem;font-weight:600;color:var(--gray2);transition:.15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray2)'">📄 Baixar Regulamento PDF</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══════════════ FOOTER ══════════════ -->
 <footer class="footer">
-  <div class="container">
+  <div class="wrap">
     <div class="footer-grid">
-      <div class="f-brand">
-        <div class="nav-logo" style="margin-bottom:12px">📱 Faturou<span style="color:var(--accent)">Rifa</span></div>
-        <p>Promoção Comercial regulamentada e autorizada pela SPA/ME. Transparência total — o resultado é decidido pela Loteria Federal da Caixa, sem interferência.</p>
+      <div>
+        <div class="f-logo nav-logo" style="margin-bottom:12px">
+          <div class="dot">📱</div> FaturouRifa
+        </div>
+        <p class="f-desc">Promoção Comercial autorizada pela SPA/ME. Sorteio pelo resultado público da Loteria Federal — sem interferência nossa.</p>
         <div class="f-social">
           <a href="#" title="Instagram">📷</a>
           <a href="#" title="WhatsApp">💬</a>
@@ -1592,46 +1578,45 @@ img{display:block;max-width:100%}
         </div>
       </div>
       <div class="f-col">
-        <h4>Links</h4>
+        <h4>Navegação</h4>
         <a href="#premio">O Prêmio</a>
         <a href="#pacotes">Pacotes</a>
         <a href="#como-funciona">Como Funciona</a>
         <a href="#faq">FAQ</a>
-        <a href="#regulamento">Regulamento</a>
-        <a href="admin.html">Área Admin</a>
+        <a href="admin.html">Painel Admin</a>
       </div>
       <div class="f-col">
         <h4>Legal</h4>
         <a href="#">Política de Privacidade</a>
         <a href="#">Termos de Uso</a>
-        <a href="#">Regulamento Completo</a>
-        <a href="#">LGPD — Seus Dados</a>
+        <a href="#">Regulamento</a>
+        <a href="#">LGPD · Seus Dados</a>
       </div>
       <div class="f-col">
         <h4>Contato</h4>
         <p>📧 contato@faturourifa.com.br</p>
         <p>💬 (11) 99999-9999</p>
         <p>📷 @faturourifa</p>
-        <div class="pay-chips">
-          <span class="pay-chip">💠 PIX</span>
-          <span class="pay-chip">💳 Cartão</span>
+        <div class="pay-row">
+          <span class="pay-tag">💠 PIX</span>
+          <span class="pay-tag">💳 Cartão</span>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 FaturouRifa — Promoção Comercial autorizada por SPA/ME · CNPJ: XX.XXX.XXX/0001-XX</p>
-      <p>Conforme a Lei Federal nº 5.768/71 regulamentada pela Secretaria de Prêmios e Apostas do Ministério da Fazenda.</p>
+      <p>© 2026 FaturouRifa · Promoção Comercial autorizada por SPA/ME · CNPJ: XX.XXX.XXX/0001-XX</p>
+      <p>Conforme Lei Federal nº 5.768/71 · Secretaria de Prêmios e Apostas do Ministério da Fazenda</p>
     </div>
   </div>
 </footer>
 
 <!-- WhatsApp -->
-<a class="wa-btn" href="https://wa.me/5511999999999?text=Olá! Tenho dúvida sobre a rifa do iPhone 17 Pro Max." target="_blank" title="WhatsApp">💬</a>
+<a class="wa" href="https://wa.me/5511999999999?text=Olá! Tenho dúvida sobre a rifa do iPhone 17 Pro." target="_blank" title="WhatsApp">💬</a>
 
-<!-- Modal de confirmação -->
-<div class="modal-ov" id="modalOv">
+<!-- Modal -->
+<div class="modal-bg" id="modalBg">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-x" onclick="closeModal()">✕</button>
     <div id="modalBody"></div>
   </div>
 </div>
@@ -1639,302 +1624,244 @@ img{display:block;max-width:100%}
 <div id="toasts"></div>
 
 <script>
-/* =============================================
-   CONFIG
-   ============================================= */
-const CFG = {
-  dataFim: new Date('2026-08-01T23:59:59'),
-  dataInicio: new Date('2026-05-25'),
-  diasLanc: 10,
-  pixKey: '11999999999',
-  totalNums: 1000,
-  vendidos: 347,
-  pacotes: {
-    popular: {nome:'Básico',  nums:5,  val:19.90},
-    prata:   {nome:'Prata',   nums:12, val:39.90},
-    ouro:    {nome:'Ouro',    nums:20, val:59.90},
-    elite:   {nome:'Elite',   nums:50, val:99.90},
+/* ── CONFIG ── */
+const C = {
+  dataFim:   new Date('2026-08-01T23:59:59'),
+  dataStart: new Date('2026-05-25'),
+  diasLanc:  10,
+  pix:       '11999999999',
+  total:     1000,
+  vendidos:  347,
+  pkgs: {
+    popular: {nome:'Básico',  n:5,  v:19.90},
+    prata:   {nome:'Prata',   n:12, v:39.90},
+    ouro:    {nome:'Ouro',    n:20, v:59.90},
+    elite:   {nome:'Elite',   n:50, v:99.90},
   }
 };
 
-/* =============================================
-   COUNTDOWN PRINCIPAL
-   ============================================= */
-function tick() {
-  const diff = CFG.dataFim - new Date();
-  if (diff <= 0) return;
-  const d = Math.floor(diff/86400000);
-  const h = Math.floor((diff%86400000)/3600000);
-  const m = Math.floor((diff%3600000)/60000);
-  const s = Math.floor((diff%60000)/1000);
-  const p = n => String(n).padStart(2,'0');
-  document.getElementById('cd-d').textContent = p(d);
-  document.getElementById('cd-h').textContent = p(h);
-  document.getElementById('cd-m').textContent = p(m);
-  document.getElementById('cd-s').textContent = p(s);
+/* ── COUNTDOWN ── */
+(function tick(){
+  const d = C.dataFim - Date.now();
+  if(d<=0) return;
+  const p = n=>String(n).padStart(2,'0');
+  document.getElementById('cd-d').textContent = p(Math.floor(d/86400000));
+  document.getElementById('cd-h').textContent = p(Math.floor(d%86400000/3600000));
+  document.getElementById('cd-m').textContent = p(Math.floor(d%3600000/60000));
+  document.getElementById('cd-s').textContent = p(Math.floor(d%60000/1000));
+  setTimeout(tick,1000);
+})();
+
+/* ── LANÇAMENTO ── */
+(function tickL(){
+  const fim = new Date(C.dataStart);
+  fim.setDate(fim.getDate()+C.diasLanc);
+  const d = fim - Date.now();
+  const el = document.getElementById('launchExp');
+  if(!el) return;
+  if(d<=0){el.textContent='EXPIRADO';return;}
+  const days=Math.floor(d/86400000), hrs=Math.floor(d%86400000/3600000);
+  el.textContent=`${days}d ${String(hrs).padStart(2,'0')}h`;
+  setTimeout(tickL,60000);
+})();
+
+/* ── PROGRESSO ── */
+let sold = C.vendidos;
+function updProg(){
+  const pct=(sold/C.total*100).toFixed(1);
+  ['pFill'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.width=pct+'%'; });
+  const ps=document.getElementById('pSold'), pp=document.getElementById('pPct'), hs=document.getElementById('h-sold');
+  if(ps) ps.textContent=sold;
+  if(pp) pp.textContent=pct.replace('.',',')+' %';
+  if(hs) hs.textContent=sold;
 }
-tick(); setInterval(tick, 1000);
+updProg();
+setInterval(()=>{ if(sold<C.total){sold+=Math.floor(Math.random()*2)+1;updProg();} },30000);
 
-/* =============================================
-   COUNTDOWN LANÇAMENTO
-   ============================================= */
-function tickLaunch() {
-  const fim = new Date(CFG.dataInicio);
-  fim.setDate(fim.getDate() + CFG.diasLanc);
-  const diff = fim - new Date();
-  const el = document.getElementById('launchTimer');
-  if (!el) return;
-  if (diff <= 0) { el.textContent = 'EXPIRADO'; return; }
-  const d = Math.floor(diff/86400000);
-  const h = Math.floor((diff%86400000)/3600000);
-  el.textContent = `${d}d ${String(h).padStart(2,'0')}h`;
-}
-tickLaunch(); setInterval(tickLaunch, 60000);
+/* ── HAMBURGER ── */
+const hamBtn=document.getElementById('hamBtn');
+const mobMenu=document.getElementById('mobMenu');
+hamBtn.addEventListener('click',()=>mobMenu.classList.toggle('open'));
+window.closeMob=()=>mobMenu.classList.remove('open');
 
-/* =============================================
-   PROGRESSO
-   ============================================= */
-let sold = CFG.vendidos;
-function updateProg() {
-  const pct = (sold/CFG.totalNums*100).toFixed(1);
-  const pctBR = pct.replace('.',',');
-  const b = document.getElementById('progBar');
-  const n = document.getElementById('numSold');
-  const p = document.getElementById('progPct');
-  if (b) b.style.width = pct+'%';
-  if (n) n.textContent = sold.toLocaleString('pt-BR');
-  if (p) p.textContent = pctBR+'%';
-}
-updateProg();
-setInterval(() => {
-  if (sold < CFG.totalNums) { sold += Math.floor(Math.random()*2)+1; updateProg(); }
-}, 28000);
-
-/* =============================================
-   NAV HAMBURGER
-   ============================================= */
-const ham = document.getElementById('ham');
-const mm  = document.getElementById('mobileMenu');
-ham.addEventListener('click', () => mm.classList.toggle('open'));
-window.closeMenu = () => mm.classList.remove('open');
-mm.addEventListener('click', e => { if(e.target === mm) closeMenu(); });
-
-/* =============================================
-   FAQ
-   ============================================= */
-document.querySelectorAll('.faq-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const open = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!open) item.classList.add('open');
+/* ── SCROLL ── */
+window.scrollTo=function(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+};
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
   });
 });
 
-/* =============================================
-   SELETOR DE COR
-   ============================================= */
-const colors = [
-  {el: null, name: 'Cosmic Orange'},
-  {el: null, name: 'Deep Blue'},
-  {el: null, name: 'Silver'},
-];
-document.querySelectorAll('.color-dot').forEach((dot, i) => {
-  dot.addEventListener('click', () => {
-    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-    dot.classList.add('active');
-    const nameEl = document.getElementById('colorName');
-    if (nameEl) nameEl.textContent = colors[i]?.name || '';
+/* ── FAQ ── */
+document.querySelectorAll('.faq-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item');
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!open) item.classList.add('open');
   });
 });
 
-/* =============================================
-   MÁSCARA CPF e TEL
-   ============================================= */
-document.getElementById('f-cpf').addEventListener('input', function() {
-  let v = this.value.replace(/\D/g,'').slice(0,11);
-  if (v.length>9) v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
-  else if (v.length>6) v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
-  else if (v.length>3) v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
-  this.value = v;
+/* ── TROCA DE COR DO IPHONE ── */
+window.changeColor=function(dot){
+  document.querySelectorAll('.c-dot').forEach(d=>d.classList.remove('active'));
+  dot.classList.add('active');
+
+  const img  = dot.dataset.img;
+  const glow = dot.dataset.glow;
+  const name = dot.dataset.name;
+
+  // Atualiza imagem hero
+  const heroImg = document.getElementById('heroImg');
+  if(heroImg){ heroImg.style.opacity='0'; setTimeout(()=>{ heroImg.src=img; heroImg.style.opacity='1'; },200); }
+
+  // Atualiza imagem prêmio
+  const prizeImg = document.getElementById('prizeImg');
+  if(prizeImg){ prizeImg.style.opacity='0'; setTimeout(()=>{ prizeImg.src=img; prizeImg.style.opacity='1'; },200); }
+
+  // Atualiza glow hero
+  const heroGlow = document.getElementById('heroGlow');
+  if(heroGlow) heroGlow.style.background=`radial-gradient(circle,${glow} 0%,transparent 70%)`;
+
+  // Atualiza textos
+  document.getElementById('colorName').textContent=name;
+  document.getElementById('prizeColor').textContent=name;
+  const sc=document.getElementById('s-color'); if(sc) sc.textContent=name;
+
+  toast('Cor alterada: '+name,'#FF6B00');
+};
+
+/* ── MÁSCARAS ── */
+document.getElementById('f-cpf').addEventListener('input',function(){
+  let v=this.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>9)v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
+  else if(v.length>6)v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
+  else if(v.length>3)v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
+  this.value=v;
 });
-document.getElementById('f-tel').addEventListener('input', function() {
-  let v = this.value.replace(/\D/g,'').slice(0,11);
-  if (v.length>10) v=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
-  else if (v.length>6) v=v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');
-  else if (v.length>2) v=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
-  this.value = v;
+document.getElementById('f-tel').addEventListener('input',function(){
+  let v=this.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>10)v=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+  else if(v.length>6)v=v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');
+  else if(v.length>2)v=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
+  this.value=v;
 });
 
-/* =============================================
-   RESUMO DINÂMICO
-   ============================================= */
-function diasLanc() {
-  return Math.floor((new Date() - CFG.dataInicio)/86400000);
+/* ── RESUMO ── */
+function diasDesde(){ return Math.floor((Date.now()-C.dataStart)/86400000); }
+function calcN(pkg,pm){
+  const b=C.pkgs[pkg]?.n||0, d=diasDesde();
+  if(pkg==='elite'&&(pm==='pix'||pm==='cartao')) return {n:b*2,t:'TURBO 2×'};
+  if(d<=10) return {n:b*3,t:'Lançamento 3×'};
+  if(d<=17) return {n:b+5,t:'Lançamento +5'};
+  return {n:b,t:'—'};
 }
-function calcNums(pkg, pm) {
-  const base = CFG.pacotes[pkg]?.nums || 0;
-  const dias  = diasLanc();
-  if (pkg === 'elite' && (pm === 'pix' || pm === 'cartao')) return { n: base*2, tag:'TURBO 2×' };
-  if (dias <= 10) return { n: base*3, tag:'Lançamento 3×' };
-  if (dias <= 17) return { n: base+5, tag:'Lançamento +5' };
-  return { n: base, tag:'Nenhum' };
+function updateSummary(){
+  const pkg=document.getElementById('f-pkg').value;
+  const pm=document.querySelector('input[name="pm"]:checked')?.value||'pix';
+  const set=(id,v)=>{ const el=document.getElementById(id); if(el) el.textContent=v; };
+  if(!pkg){ ['s-pkg','s-nums','s-mult','s-val'].forEach(id=>set(id,'—')); return; }
+  const d=C.pkgs[pkg], {n,t}=calcN(pkg,pm);
+  set('s-pkg', d.nome);
+  set('s-nums', `${n} números`);
+  set('s-mult', t);
+  set('s-val',  `R$ ${d.v.toFixed(2).replace('.',',')} `);
+  const pk=document.getElementById('pixKey');
+  if(pk) pk.textContent = pm==='pix' ? C.pix : 'Pague via cartão no checkout';
 }
+document.getElementById('f-pkg').addEventListener('change',updateSummary);
+document.querySelectorAll('input[name="pm"]').forEach(r=>r.addEventListener('change',updateSummary));
 
-function updateSummary() {
-  const pkg = document.getElementById('f-pkg').value;
-  const pm  = document.querySelector('input[name="pm"]:checked')?.value || 'pix';
-  const sp  = document.getElementById('s-pkg');
-  const sn  = document.getElementById('s-nums');
-  const sm  = document.getElementById('s-mult');
-  const sv  = document.getElementById('s-val');
-  const pk  = document.getElementById('pixKey');
-
-  if (!pkg) {
-    if(sp) sp.textContent = '—';
-    if(sn) sn.textContent = '—';
-    if(sm) sm.textContent = '—';
-    if(sv) sv.textContent = '—';
-    if(pk) pk.textContent = 'Selecione um pacote';
-    return;
-  }
-  const dados = CFG.pacotes[pkg];
-  const {n, tag} = calcNums(pkg, pm);
-  if(sp) sp.textContent = dados.nome;
-  if(sn) sn.textContent = `${n} números`;
-  if(sm) sm.textContent = tag;
-  if(sv) sv.textContent = `R$ ${dados.val.toFixed(2).replace('.',',')}`;
-  if(pk) pk.textContent = CFG.pixKey;
-}
-document.getElementById('f-pkg').addEventListener('change', updateSummary);
-document.querySelectorAll('input[name="pm"]').forEach(r => r.addEventListener('change', updateSummary));
-
-/* =============================================
-   SELECIONAR PACOTE VIA BOTÃO
-   ============================================= */
-window.selecionarPkg = function(pkg) {
-  document.getElementById('f-pkg').value = pkg;
+/* ── SELECIONAR PACOTE VIA BOTÃO ── */
+window.selectPkg=function(pkg){
+  document.getElementById('f-pkg').value=pkg;
   updateSummary();
-  document.getElementById('participar').scrollIntoView({behavior:'smooth', block:'start'});
-  toast('Pacote '+CFG.pacotes[pkg]?.nome+' selecionado!', '#FF6B00');
+  document.getElementById('participar').scrollIntoView({behavior:'smooth',block:'start'});
+  toast('Pacote '+C.pkgs[pkg]?.nome+' selecionado!','#FF6B00');
 };
 
-/* =============================================
-   COPIAR PIX
-   ============================================= */
-window.copyPix = function() {
-  navigator.clipboard?.writeText(CFG.pixKey).then(() => toast('📋 Chave PIX copiada!', '#34c759'));
+/* ── COPIAR PIX ── */
+window.copyPix=function(){
+  const k=document.getElementById('pixKey')?.textContent||'';
+  navigator.clipboard?.writeText(k).then(()=>toast('📋 Chave PIX copiada!','#30D158'));
 };
 
-/* =============================================
-   SUBMIT FORM
-   ============================================= */
-window.submitForm = function(e) {
+/* ── SUBMIT ── */
+window.submitForm=function(e){
   e.preventDefault();
-  const nome = document.getElementById('f-nome').value.trim();
-  const cpf  = document.getElementById('f-cpf').value.replace(/\D/g,'');
-  const email = document.getElementById('f-email').value.trim();
-  const nasc = document.getElementById('f-nasc').value;
-  const pkg  = document.getElementById('f-pkg').value;
-  const pm   = document.querySelector('input[name="pm"]:checked')?.value;
-
-  if (cpf.length !== 11) { toast('CPF inválido.', '#FF4757'); return; }
-  if (!pkg) { toast('Selecione um pacote.', '#FF4757'); return; }
-  const idade = (new Date() - new Date(nasc)) / (365.25*24*3600*1000);
-  if (nasc && idade < 18) { toast('É necessário ter 18 anos ou mais.', '#FF4757'); return; }
-
-  const dados = CFG.pacotes[pkg];
-  const {n, tag} = calcNums(pkg, pm);
-  showModal(nome, email, dados, n, tag, pm);
+  const nome=document.getElementById('f-nome').value.trim();
+  const cpf=document.getElementById('f-cpf').value.replace(/\D/g,'');
+  const email=document.getElementById('f-email').value.trim();
+  const nasc=document.getElementById('f-nasc').value;
+  const pkg=document.getElementById('f-pkg').value;
+  const pm=document.querySelector('input[name="pm"]:checked')?.value;
+  if(!nome){toast('Informe seu nome.','#FF453A');return;}
+  if(cpf.length!==11){toast('CPF inválido.','#FF453A');return;}
+  if(!email||!email.includes('@')){toast('E-mail inválido.','#FF453A');return;}
+  if(!pkg){toast('Selecione um pacote.','#FF453A');return;}
+  if(nasc){ const a=(Date.now()-new Date(nasc))/31557600000; if(a<18){toast('É necessário ter 18 anos ou mais.','#FF453A');return;} }
+  const d=C.pkgs[pkg], {n,t}=calcN(pkg,pm);
+  showModal({nome,email,d,n,t,pm});
 };
 
-function showModal(nome, email, pkg, nums, mult, pm) {
-  const body = document.getElementById('modalBody');
-  const pixHtml = pm === 'pix'
-    ? `<div class="pix-confirm-box"><p>Chave PIX para pagamento:</p><div class="pix-confirm-key" onclick="navigator.clipboard?.writeText('${CFG.pixKey}').then(()=>toast('PIX copiado!','#34c759'))">${CFG.pixKey}</div><p style="font-size:.65rem;color:rgba(255,255,255,.3);margin-top:4px">Clique para copiar</p></div>`
-    : `<div class="pix-confirm-box"><p>💳 Você será redirecionado ao gateway seguro após confirmar.</p></div>`;
-
-  body.innerHTML = `
-    <h2>✅ Confirme seu pedido</h2>
-    <p>Revise antes de finalizar</p>
-    <div class="confirm-rows">
-      <div class="cr"><span>👤 Nome</span><strong>${nome}</strong></div>
-      <div class="cr"><span>📧 E-mail</span><strong>${email}</strong></div>
-      <div class="cr"><span>📦 Pacote</span><strong>${pkg.nome}</strong></div>
-      <div class="cr"><span>🎲 Números</span><strong style="color:var(--accent)">${nums} números${mult!=='Nenhum'?' 🔥 '+mult:''}</strong></div>
-      <div class="cr"><span>💰 Total</span><strong style="color:var(--gold)">R$ ${pkg.val.toFixed(2).replace('.',',')}</strong></div>
-      <div class="cr"><span>💳 Pagamento</span><strong>${pm==='pix'?'💠 PIX':'💳 Cartão'}</strong></div>
+function showModal({nome,email,d,n,t,pm}){
+  const pix = pm==='pix'
+    ? `<div class="pix-confirm"><p>Chave PIX para pagamento:</p><div class="key" onclick="copyPix()">${C.pix}</div></div>`
+    : `<div class="pix-confirm"><p>💳 Pagamento por cartão — você será redirecionado ao checkout seguro.</p></div>`;
+  document.getElementById('modalBody').innerHTML=`
+    <h2>Confirme seu pedido</h2>
+    <p class="sub">Revise antes de finalizar.</p>
+    <div class="c-rows">
+      <div class="c-row"><span>Nome</span><strong>${nome}</strong></div>
+      <div class="c-row"><span>E-mail</span><strong>${email}</strong></div>
+      <div class="c-row"><span>Pacote</span><strong>${d.nome}</strong></div>
+      <div class="c-row"><span>Números</span><strong class="hl">${n}${t!=='—'?' 🔥 '+t:''}</strong></div>
+      <div class="c-row"><span>Total</span><strong style="color:var(--gold)">R$ ${d.v.toFixed(2).replace('.',',')}</strong></div>
+      <div class="c-row"><span>Pagamento</span><strong>${pm==='pix'?'💠 PIX':'💳 Cartão'}</strong></div>
     </div>
-    ${pixHtml}
+    ${pix}
     <div class="modal-btns">
-      <button class="mbtn-cancel" onclick="closeModal()">Voltar</button>
-      <button class="mbtn-confirm" onclick="confirmarPedido('${nome}')">Confirmar →</button>
+      <button class="m-back" onclick="closeModal()">Voltar</button>
+      <button class="m-confirm" onclick="confirmar('${nome}')">Confirmar →</button>
     </div>
-    <p style="font-size:.68rem;color:rgba(255,255,255,.25);text-align:center;margin-top:12px">Números chegam no e-mail em até 5 min após confirmação</p>
+    <p style="font-size:.65rem;color:var(--gray3);text-align:center;margin-top:12px">Números chegam no e-mail em até 5 min após confirmação.</p>
   `;
-  document.getElementById('modalOv').classList.add('open');
+  document.getElementById('modalBg').classList.add('open');
 }
-
-window.confirmarPedido = function(nome) {
+window.confirmar=function(nome){
   closeModal();
-  toast(`🎉 Pedido de ${nome} confirmado! Verifique seu e-mail.`, '#34c759');
+  toast('🎉 Pedido confirmado! Verifique seu e-mail.','#30D158');
   document.getElementById('mainForm').reset();
   updateSummary();
 };
-window.closeModal = function() {
-  document.getElementById('modalOv').classList.remove('open');
+window.closeModal=function(){
+  document.getElementById('modalBg').classList.remove('open');
 };
-document.getElementById('modalOv').addEventListener('click', e => {
-  if (e.target === document.getElementById('modalOv')) closeModal();
+document.getElementById('modalBg').addEventListener('click',e=>{
+  if(e.target===document.getElementById('modalBg')) closeModal();
 });
 
-/* =============================================
-   TOAST
-   ============================================= */
-function toast(msg, color='#FF6B00') {
-  const area = document.getElementById('toasts');
-  const t = document.createElement('div');
-  t.className = 'toast';
-  t.style.borderLeftColor = color;
-  t.textContent = msg;
-  area.appendChild(t);
-  setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 4000);
+/* ── TOAST ── */
+function toast(msg,color='#FF6B00'){
+  const a=document.getElementById('toasts');
+  const t=document.createElement('div');
+  t.className='toast';
+  t.style.borderLeftColor=color;
+  t.textContent=msg;
+  a.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(()=>t.remove(),300);},4000);
 }
 
-/* =============================================
-   SMOOTH SCROLL
-   ============================================= */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href').slice(1);
-    const el = document.getElementById(id);
-    if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
-  });
-});
-
-/* =============================================
-   SCROLL REVEAL (Intersection Observer)
-   ============================================= */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(en => {
-    if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.step, .pkg, .spec-item, .winner-card, .faq-item, .reg-item, .mult-item')
-  .forEach(el => {
-    el.style.cssText += 'opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease';
-    io.observe(el);
-  });
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('.visible')?.classList.add('visible');
-});
-
-// Adicionar classe visible via observer
-const style = document.createElement('style');
-style.textContent = '.visible{opacity:1!important;transform:none!important}';
-document.head.appendChild(style);
+/* ── SCROLL REVEAL ── */
+const rv=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');rv.unobserve(e.target);} });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>rv.observe(el));
 </script>
 </body>
 </html>

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "PowerShell(Start-Process \"C:\\\\Users\\\\Jeferson\\\\Documents\\\\RIFAS\\\\site\\\\index.html\")",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:www.apple.com)"
     ]
   }
 }

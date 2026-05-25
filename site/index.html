@@ -1,728 +1,1940 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iPhone 16 Pro Max — Compre o Ebook e Concorra</title>
-  <meta name="description" content="Compre nosso ebook e concorra a um iPhone 16 Pro Max 0km. Frete e impostos pagos. Sorteio pela Loteria Federal." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>iPhone 17 Pro Max — Concorra Agora</title>
+  <meta name="description" content="Compre o ebook e concorra a um iPhone 17 Pro Max 0km. Frete e impostos pagos. Sorteio pela Loteria Federal."/>
+  <meta name="theme-color" content="#000000"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#000;
+  --white:#fff;
+  --gray:#86868b;
+  --gray2:#1d1d1f;
+  --gray3:#6e6e73;
+  --accent:#FF6B00;
+  --accent2:#FF9A3C;
+  --blue:#0071e3;
+  --gold:#F5C518;
+  --green:#34c759;
+  --r:20px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--black);
+  color:var(--white);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.container{width:100%;max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* =============================================
+   TOPBAR
+   ============================================= */
+.topbar{
+  background:rgba(0,0,0,.85);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  text-align:center;
+  padding:11px 20px;
+  font-size:.78rem;
+  color:#f5f5f7;
+  letter-spacing:.2px;
+  position:relative;
+  z-index:200;
+}
+.topbar strong{color:var(--accent2)}
+
+/* =============================================
+   HEADER / NAV
+   ============================================= */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:300;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background .3s;
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  max-width:1080px;margin:0 auto;padding:0 22px;height:52px;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:8px;
+  font-weight:800;font-size:1rem;letter-spacing:-.3px;
+}
+.nav-logo span{color:var(--accent)}
+.nav-links{
+  display:flex;gap:28px;
+  font-size:.82rem;font-weight:500;color:rgba(255,255,255,.7);
+}
+.nav-links a:hover{color:#fff}
+.nav-cta{
+  background:var(--accent);
+  color:#fff;
+  padding:8px 20px;
+  border-radius:50px;
+  font-size:.82rem;
+  font-weight:700;
+  transition:.2s;
+  white-space:nowrap;
+}
+.nav-cta:hover{background:var(--accent2);transform:scale(1.03)}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.ham span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:290;
+  background:rgba(0,0,0,.97);
+  flex-direction:column;align-items:center;justify-content:center;gap:36px;
+  font-size:1.5rem;font-weight:700;
+}
+.mobile-menu.open{display:flex}
+
+/* =============================================
+   HERO
+   ============================================= */
+.hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;
+  position:relative;overflow:hidden;
+  padding:80px 22px 60px;
+  text-align:center;
+}
+
+/* Fundo com gradiente vivo */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 100% 70% at 50% -10%,rgba(255,107,0,.28) 0%,transparent 65%),
+    radial-gradient(ellipse 60% 50% at 80% 80%,rgba(0,113,227,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 70%,rgba(245,197,24,.08) 0%,transparent 50%),
+    #000;
+  z-index:0;
+}
+
+/* Partículas decorativas */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 25%,rgba(255,255,255,.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 85% 15%,rgba(255,255,255,.2) 0%,transparent 100%),
+    radial-gradient(2px 2px at 60% 80%,rgba(255,107,0,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 30% 65%,rgba(255,255,255,.15) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 75% 55%,rgba(0,113,227,.5) 0%,transparent 100%);
+  z-index:0;pointer-events:none;
+}
+
+.hero-content{position:relative;z-index:1;width:100%;max-width:900px;margin:0 auto}
+
+.hero-legal{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(52,199,89,.12);
+  border:1px solid rgba(52,199,89,.3);
+  color:var(--green);
+  font-size:.72rem;font-weight:600;letter-spacing:.4px;
+  padding:6px 16px;border-radius:50px;margin-bottom:28px;
+}
+.hero-legal::before{content:'●';font-size:.6rem;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero-eyebrow{
+  font-size:.82rem;font-weight:500;
+  color:rgba(255,255,255,.5);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:14px;
+}
+
+.hero-title{
+  font-size:clamp(2.8rem,8vw,5.5rem);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-2px;
+  margin-bottom:18px;
+}
+.hero-title .line1{display:block;color:#fff}
+.hero-title .line2{
+  display:block;
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 40%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero-sub{
+  font-size:clamp(1rem,2.5vw,1.3rem);
+  color:rgba(255,255,255,.55);
+  font-weight:400;margin-bottom:36px;
+  max-width:560px;margin-left:auto;margin-right:auto;
+}
+.hero-sub strong{color:rgba(255,255,255,.85);font-weight:600}
+
+/* Countdown */
+.countdown{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:14px 22px;
+  margin-bottom:36px;flex-wrap:wrap;justify-content:center;
+}
+.cd-label{font-size:.72rem;color:rgba(255,255,255,.4);margin-right:6px;letter-spacing:.3px}
+.cd-unit{
+  display:flex;flex-direction:column;align-items:center;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;
+  padding:8px 12px;min-width:52px;
+}
+.cd-unit span{font-size:1.6rem;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.cd-unit small{font-size:.58rem;color:rgba(255,255,255,.4);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.cd-colon{font-size:1.4rem;font-weight:800;color:var(--accent);line-height:1;align-self:flex-start;padding-top:8px}
+
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+
+.btn-hero{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:15px 34px;border-radius:50px;
+  font-weight:700;font-size:.95rem;
+  transition:all .25s;cursor:pointer;border:none;
+  font-family:inherit;letter-spacing:-.1px;
+}
+.btn-fire{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;
+  box-shadow:0 0 0 0 rgba(255,107,0,.5);
+  animation:glow 2.5s ease-in-out infinite;
+}
+@keyframes glow{
+  0%,100%{box-shadow:0 4px 24px rgba(255,107,0,.35),0 0 0 0 rgba(255,107,0,.2)}
+  50%{box-shadow:0 4px 40px rgba(255,107,0,.6),0 0 0 8px rgba(255,107,0,0)}
+}
+.btn-fire:hover{transform:scale(1.04) translateY(-1px)}
+.btn-secondary{
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.8);
+  border:1px solid rgba(255,255,255,.15);
+}
+.btn-secondary:hover{background:rgba(255,255,255,.14);color:#fff}
+
+/* =============================================
+   FOTO DO IPHONE (Hero)
+   ============================================= */
+.phone-showcase{
+  position:relative;
+  display:inline-block;
+  margin-bottom:-40px;
+}
+.phone-img-wrap{
+  position:relative;
+  display:inline-block;
+}
+.phone-img{
+  width:clamp(260px,45vw,400px);
+  height:auto;
+  filter:drop-shadow(0 40px 80px rgba(255,107,0,.3)) drop-shadow(0 0 120px rgba(0,0,0,.8));
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-18px) rotate(2deg)}
+}
+
+/* Reflexo no chão */
+.phone-reflection{
+  width:clamp(200px,35vw,300px);
+  height:40px;
+  background:radial-gradient(ellipse,rgba(255,107,0,.25) 0%,transparent 70%);
+  margin:0 auto;
+  filter:blur(16px);
+  margin-top:-10px;
+}
+
+/* Badges flutuantes */
+.float-badge{
+  position:absolute;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:10px 16px;
+  font-size:.75rem;
+  font-weight:600;
+  white-space:nowrap;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+}
+.fb-left{
+  top:18%;left:-18%;
+  animation:floatL 5s ease-in-out infinite;
+}
+.fb-right{
+  top:42%;right:-18%;
+  animation:floatR 4.5s ease-in-out infinite;
+}
+.fb-bottom{
+  bottom:18%;left:-12%;
+  animation:floatL 6s ease-in-out infinite .5s;
+}
+@keyframes floatL{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes floatR{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+.fb-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.dot-green{background:var(--green)}
+.dot-orange{background:var(--accent)}
+.dot-gold{background:var(--gold)}
+
+/* =============================================
+   PROGRESS STRIP
+   ============================================= */
+.progress-strip{
+  background:rgba(255,255,255,.03);
+  border-top:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  padding:20px 22px;
+}
+.progress-strip .container{display:flex;flex-direction:column;gap:10px}
+.prog-row{display:flex;justify-content:space-between;align-items:center;font-size:.82rem}
+.prog-label{color:rgba(255,255,255,.5)}
+.prog-count strong{color:#fff}
+.prog-pct{color:var(--accent);font-weight:800;font-size:1rem}
+.prog-bar-bg{width:100%;height:6px;background:rgba(255,255,255,.08);border-radius:50px;overflow:hidden}
+.prog-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--gold));
+  border-radius:50px;
+  position:relative;
+  transition:width 1.2s cubic-bezier(.22,1,.36,1);
+}
+.prog-bar-fill::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:30px;
+  background:rgba(255,255,255,.3);filter:blur(8px);border-radius:50px;
+  animation:shine 1.5s ease-in-out infinite;
+}
+@keyframes shine{0%,100%{opacity:.4}50%{opacity:1}}
+.prog-hint{font-size:.72rem;color:rgba(255,255,255,.35);text-align:center}
+
+/* =============================================
+   SECTIONS GENÉRICAS
+   ============================================= */
+.section{padding:96px 0}
+.section-dark{background:#0a0a0a}
+.section-gray{background:#080808}
+
+.sec-label{
+  display:inline-block;
+  font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;
+}
+.sec-title{
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:800;line-height:1.1;letter-spacing:-1px;
+  color:#fff;margin-bottom:16px;
+}
+.sec-desc{
+  font-size:1rem;color:rgba(255,255,255,.5);
+  max-width:520px;line-height:1.7;
+}
+.text-center{text-align:center}
+.text-center .sec-desc{margin:0 auto}
+
+/* =============================================
+   COMO FUNCIONA
+   ============================================= */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:2px;margin-top:56px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:24px;overflow:hidden;
+}
+.step{
+  background:#0d0d0d;
+  padding:36px 28px;
+  position:relative;
+  transition:background .25s;
+}
+.step:hover{background:#111}
+.step:not(:last-child){border-right:1px solid rgba(255,255,255,.07)}
+.step-n{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;
+  background:var(--accent);
+  border-radius:50%;
+  font-size:.82rem;font-weight:900;
+  color:#fff;margin-bottom:18px;
+}
+.step-icon{font-size:1.8rem;margin-bottom:14px;display:block}
+.step h3{font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px}
+.step p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.7}
+
+/* Exemplo de apuração */
+.apuracao-card{
+  margin-top:48px;
+  background:#0d0d0d;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:24px;
+  padding:36px;
+  overflow:hidden;
+}
+.apuracao-card h3{font-size:1rem;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:24px}
+.lot-grid{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.lot-ball{
+  flex:1;min-width:90px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:14px 10px;text-align:center;
+}
+.lot-pos{font-size:.6rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.lot-num{font-family:'SF Mono','JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:2px}
+.lot-num .d{color:rgba(255,255,255,.3)}
+.lot-num .serie{color:var(--blue);text-decoration:underline}
+.lot-num .unit{color:var(--accent);font-weight:900}
+.lot-arrow{display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:rgba(255,255,255,.15)}
+.lot-result{
+  text-align:center;
+  background:rgba(245,197,24,.06);
+  border:1px solid rgba(245,197,24,.18);
+  border-radius:16px;padding:20px;
+}
+.lot-result p{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:8px}
+.lot-winner{
+  font-family:'SF Mono','JetBrains Mono',monospace;
+  font-size:2.5rem;font-weight:900;color:var(--gold);
+  letter-spacing:4px;
+  text-shadow:0 0 40px rgba(245,197,24,.5);
+}
+
+/* =============================================
+   PRÊMIO — IPHONE 17 SHOWCASE
+   ============================================= */
+.prize-section{
+  background:#000;
+  overflow:hidden;
+}
+.prize-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;align-items:center;
+  min-height:70vh;padding:96px 0;
+}
+.prize-img-side{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.prize-img{
+  width:100%;max-width:420px;
+  filter:drop-shadow(0 60px 100px rgba(255,107,0,.4));
+  animation:float 6s ease-in-out infinite;
+}
+.prize-glow{
+  position:absolute;
+  width:320px;height:320px;
+  background:radial-gradient(circle,rgba(255,107,0,.25) 0%,transparent 70%);
+  border-radius:50%;
+  filter:blur(40px);pointer-events:none;
+}
+.prize-text-side .sec-label{margin-bottom:10px}
+.prize-text-side .sec-title{margin-bottom:10px}
+.prize-desc{font-size:.95rem;color:rgba(255,255,255,.45);line-height:1.8;margin-bottom:28px}
+.prize-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.ptag{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:50px;padding:6px 16px;
+  font-size:.75rem;font-weight:600;color:rgba(255,255,255,.7);
+}
+.prize-value-box{
+  display:flex;align-items:center;gap:20px;
+  background:rgba(245,197,24,.06);
+  border:1px solid rgba(245,197,24,.2);
+  border-radius:16px;padding:18px 22px;
+  margin-bottom:28px;
+}
+.pval-label{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:4px}
+.pval-num{font-size:1.8rem;font-weight:900;color:var(--gold)}
+.pval-divider{width:1px;height:36px;background:rgba(255,255,255,.1)}
+.pval-sub{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.6}
+.pval-sub strong{color:var(--green)}
+
+/* Specs grid */
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.spec-item{
+  background:#0a0a0a;border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:14px 16px;
+}
+.spec-label{font-size:.65rem;color:rgba(255,255,255,.35);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.spec-val{font-size:.85rem;font-weight:600;color:#fff}
+
+/* Seletor de cor */
+.color-selector{margin-top:20px}
+.color-label{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:10px}
+.color-dots{display:flex;gap:10px;align-items:center}
+.color-dot{
+  width:26px;height:26px;border-radius:50%;cursor:pointer;
+  border:2px solid transparent;transition:.2s;
+  position:relative;
+}
+.color-dot.active::after{
+  content:'';position:absolute;inset:-4px;
+  border:2px solid rgba(255,255,255,.5);border-radius:50%;
+}
+.color-name{font-size:.78rem;color:rgba(255,255,255,.5);margin-left:6px}
+
+/* =============================================
+   PACOTES
+   ============================================= */
+.packages-section{background:#000}
+.pkgs-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:2px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:24px;overflow:hidden;
+  margin-top:52px;
+}
+.pkg{
+  background:#0d0d0d;
+  padding:32px 26px;
+  position:relative;
+  display:flex;flex-direction:column;
+  transition:background .2s;
+}
+.pkg:not(:last-child){border-right:1px solid rgba(255,255,255,.07)}
+.pkg:hover{background:#111}
+.pkg-hot{
+  background:#0f0a00!important;
+  border-left:none;border-right:none;
+  outline:1px solid rgba(255,107,0,.4);
+  outline-offset:-1px;
+}
+.pkg-hot-badge{
+  position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  background:var(--accent);color:#fff;
+  font-size:.65rem;font-weight:800;letter-spacing:.5px;
+  padding:4px 14px;border-radius:0 0 10px 10px;white-space:nowrap;
+}
+.pkg-tag{
+  display:inline-block;font-size:.65rem;font-weight:700;
+  letter-spacing:.8px;text-transform:uppercase;
+  padding:4px 12px;border-radius:50px;margin-bottom:16px;
+}
+.tag-popular{background:rgba(255,255,255,.07);color:rgba(255,255,255,.5)}
+.tag-prata{background:rgba(200,200,210,.1);color:#c8c8d2}
+.tag-ouro{background:rgba(245,197,24,.1);color:var(--gold)}
+.tag-elite{background:rgba(255,107,0,.12);color:var(--accent)}
+
+.pkg-name{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:20px}
+
+.pkg-nums{
+  text-align:center;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;padding:18px;
+  margin-bottom:18px;
+}
+.pkg-num-big{font-size:3.2rem;font-weight:900;color:#fff;line-height:1;display:block}
+.pkg-num-small{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:6px;display:block}
+.pkg-launch{
+  display:inline-block;
+  background:rgba(255,107,0,.12);
+  border:1px solid rgba(255,107,0,.25);
+  color:var(--accent2);
+  font-size:.7rem;font-weight:700;
+  padding:3px 10px;border-radius:50px;
+}
+
+.pkg-price{
+  font-size:1rem;color:rgba(255,255,255,.4);
+  margin-bottom:22px;
+}
+.pkg-price span{font-size:2rem;font-weight:900;color:#fff}
+
+.pkg-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px;flex:1}
+.pkg-features li{font-size:.8rem;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:8px}
+.pkg-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+
+.btn-pkg{
+  display:block;width:100%;
+  padding:13px;border-radius:50px;
+  font-size:.85rem;font-weight:700;
+  text-align:center;transition:.2s;
+  cursor:pointer;border:none;font-family:inherit;
+}
+.btn-pkg-fire{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.btn-pkg-fire:hover{filter:brightness(1.1);transform:scale(1.02)}
+.btn-pkg-ghost{background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.1)}
+.btn-pkg-ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+
+/* Multiplicadores */
+.mults{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:2px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:20px;overflow:hidden;
+  margin-top:40px;
+}
+.mult-item{
+  background:#0a0a0a;padding:22px 20px;
+  border-right:1px solid rgba(255,255,255,.07);
+}
+.mult-item:last-child{border-right:none}
+.mult-icon{font-size:1.5rem;margin-bottom:10px}
+.mult-title{font-size:.85rem;font-weight:700;color:#fff;margin-bottom:4px}
+.mult-desc{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.6}
+.mult-badge{
+  display:inline-block;
+  background:rgba(255,107,0,.12);color:var(--accent);
+  font-size:.65rem;font-weight:800;
+  padding:2px 8px;border-radius:50px;margin-top:6px;
+}
+
+/* =============================================
+   FORMULÁRIO DE COMPRA
+   ============================================= */
+.checkout-section{background:#050505}
+.checkout-grid{
+  display:grid;grid-template-columns:1fr 360px;
+  gap:40px;align-items:start;margin-top:52px;
+}
+.form-card{
+  background:#0d0d0d;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:24px;
+  padding:36px;
+}
+.fgroup{margin-bottom:18px}
+.fgroup label{
+  display:block;font-size:.72rem;font-weight:600;
+  color:rgba(255,255,255,.4);letter-spacing:.3px;
+  margin-bottom:8px;text-transform:uppercase;
+}
+.fgroup input,.fgroup select{
+  width:100%;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  padding:13px 16px;
+  color:#fff;font-size:.9rem;font-family:inherit;
+  outline:none;transition:.2s;
+  appearance:none;-webkit-appearance:none;
+}
+.fgroup input:focus,.fgroup select:focus{
+  border-color:var(--accent);
+  background:rgba(255,107,0,.05);
+}
+.fgroup input::placeholder{color:rgba(255,255,255,.2)}
+.fgroup select option{background:#111}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pm-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pm-opt{cursor:pointer}
+.pm-opt input{display:none}
+.pm-face{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;
+  background:rgba(255,255,255,.04);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:14px;
+  padding:16px 12px;
+  transition:.2s;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.5);
+  text-align:center;
+}
+.pm-face-icon{font-size:1.4rem}
+.pm-opt input:checked~.pm-face{
+  border-color:var(--accent);
+  background:rgba(255,107,0,.07);
+  color:#fff;
+}
+.pm-pix-hint{font-size:.65rem;color:var(--green);margin-top:2px}
+.terms-row{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6;
+  cursor:pointer;
+}
+.terms-row input{margin-top:3px;flex-shrink:0;accent-color:var(--accent)}
+.terms-row a{color:rgba(255,255,255,.6);text-decoration:underline}
+.btn-submit{
+  width:100%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border:none;
+  padding:16px;border-radius:50px;
+  font-size:1rem;font-weight:800;
+  cursor:pointer;font-family:inherit;
+  transition:.2s;margin-top:4px;
+  letter-spacing:-.1px;
+}
+.btn-submit:hover{filter:brightness(1.08);transform:scale(1.01)}
+.secure-note{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:.72rem;color:rgba(255,255,255,.3);margin-top:14px;
+}
+
+/* Sidebar */
+.summary-card{
+  background:#0d0d0d;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:24px;padding:28px;
+  position:sticky;top:80px;
+}
+.summary-prize-box{
+  background:rgba(245,197,24,.05);
+  border:1px solid rgba(245,197,24,.15);
+  border-radius:14px;padding:16px;
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:20px;
+}
+.spz-icon{font-size:2rem}
+.spz-name{font-size:.9rem;font-weight:700;color:#fff}
+.spz-sub{font-size:.72rem;color:var(--gold)}
+.summary-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.sum-row{display:flex;justify-content:space-between;font-size:.82rem}
+.sum-row span:first-child{color:rgba(255,255,255,.4)}
+.sum-row span:last-child{color:#fff;font-weight:600}
+.sum-row .highlight{color:var(--accent);font-size:1rem;font-weight:800}
+.summary-pix-box{
+  background:rgba(255,107,0,.06);
+  border:1px solid rgba(255,107,0,.2);
+  border-radius:14px;padding:16px;
+  font-size:.8rem;
+}
+.summary-pix-box p{color:rgba(255,255,255,.5);margin-bottom:6px}
+.pix-key{font-size:1rem;font-weight:700;color:var(--accent);letter-spacing:1px;cursor:pointer}
+.pix-key:hover{color:var(--accent2)}
+
+/* =============================================
+   FAQ
+   ============================================= */
+.faq-list{margin-top:48px;display:flex;flex-direction:column;gap:2px}
+.faq-item{
+  background:#0d0d0d;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:0;overflow:hidden;
+}
+.faq-list .faq-item:first-child{border-radius:20px 20px 0 0}
+.faq-list .faq-item:last-child{border-radius:0 0 20px 20px}
+.faq-btn{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  background:none;border:none;color:#fff;
+  font-size:.9rem;font-weight:600;
+  padding:20px 24px;text-align:left;cursor:pointer;
+  font-family:inherit;transition:background .2s;gap:12px;
+}
+.faq-btn:hover{background:rgba(255,255,255,.03)}
+.faq-icon{
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;flex-shrink:0;
+  transition:transform .3s,background .2s;
+  color:rgba(255,255,255,.5);
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--accent);color:#fff}
+.faq-body{
+  display:none;
+  padding:0 24px 20px;
+  font-size:.85rem;color:rgba(255,255,255,.45);
+  line-height:1.8;border-top:1px solid rgba(255,255,255,.05);
+  padding-top:16px;
+}
+.faq-item.open .faq-body{display:block}
+
+/* =============================================
+   GANHADORES
+   ============================================= */
+.winners-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:24px;overflow:hidden;
+  margin-top:48px;
+}
+.winner-card{
+  background:#0d0d0d;
+  padding:28px 24px;
+  border-right:1px solid rgba(255,255,255,.07);
+  display:flex;gap:14px;align-items:flex-start;
+}
+.winner-card:last-child{border-right:none}
+.w-avatar{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:1rem;color:#fff;
+}
+.w-name{font-size:.88rem;font-weight:700;color:#fff;margin-bottom:4px}
+.w-num{font-size:.72rem;color:rgba(255,255,255,.35);font-family:monospace;margin-bottom:4px}
+.w-prize{font-size:.72rem;color:var(--gold)}
+
+/* =============================================
+   ANTI-FRAUDE
+   ============================================= */
+.fraud-bar{
+  background:rgba(255,71,87,.06);
+  border-top:1px solid rgba(255,71,87,.15);
+  border-bottom:1px solid rgba(255,71,87,.15);
+  padding:24px 22px;text-align:center;
+}
+.fraud-bar h3{color:#ff4757;font-size:.9rem;margin-bottom:8px}
+.fraud-bar p{font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:10px;max-width:640px;margin-left:auto;margin-right:auto}
+.fraud-contacts{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:.78rem;color:rgba(255,255,255,.5)}
+.fraud-contacts strong{color:rgba(255,255,255,.75)}
+
+/* =============================================
+   REGULAMENTO
+   ============================================= */
+.reg-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:2px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:20px;overflow:hidden;
+  margin-top:40px;
+}
+.reg-item{
+  background:#0d0d0d;padding:20px 22px;
+  border-right:1px solid rgba(255,255,255,.07);
+}
+.reg-item:last-child{border-right:none}
+.reg-lbl{font-size:.62rem;color:rgba(255,255,255,.3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+.reg-val{font-size:.85rem;color:#fff;font-weight:500}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer{background:#050505;border-top:1px solid rgba(255,255,255,.07);padding:64px 0 32px}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;
+  gap:40px;margin-bottom:48px;
+}
+.f-brand p{font-size:.78rem;color:rgba(255,255,255,.3);margin-top:12px;line-height:1.7}
+.f-social{display:flex;gap:14px;margin-top:16px}
+.f-social a{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:.2s;
+}
+.f-social a:hover{background:rgba(255,107,0,.15);border-color:rgba(255,107,0,.3)}
+.f-col h4{font-size:.75rem;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
+.f-col a{display:block;font-size:.8rem;color:rgba(255,255,255,.3);margin-bottom:10px;transition:.2s}
+.f-col a:hover{color:rgba(255,255,255,.7)}
+.f-col p{font-size:.8rem;color:rgba(255,255,255,.3);margin-bottom:8px;line-height:1.6}
+.pay-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pay-chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:6px 12px;font-size:.7rem;color:rgba(255,255,255,.4)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding-top:24px;text-align:center;
+  font-size:.72rem;color:rgba(255,255,255,.2);line-height:2;
+}
+
+/* =============================================
+   WHATSAPP BTN FLUTUANTE
+   ============================================= */
+.wa-btn{
+  position:fixed;bottom:24px;right:20px;z-index:500;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;
+  box-shadow:0 4px 20px rgba(37,211,102,.4);
+  transition:.25s;text-decoration:none;
+}
+.wa-btn:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(37,211,102,.6)}
+
+/* =============================================
+   MODAL
+   ============================================= */
+.modal-ov{
+  display:none;position:fixed;inset:0;z-index:600;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(10px);
+  align-items:center;justify-content:center;padding:20px;
+}
+.modal-ov.open{display:flex}
+.modal{
+  background:#111;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:24px;padding:36px;
+  max-width:460px;width:100%;
+  position:relative;
+  animation:mIn .3s ease;
+}
+@keyframes mIn{from{opacity:0;transform:scale(.92) translateY(16px)}to{opacity:1;transform:none}}
+.modal-close{
+  position:absolute;top:16px;right:18px;
+  background:rgba(255,255,255,.07);border:none;
+  width:32px;height:32px;border-radius:50%;
+  color:rgba(255,255,255,.5);font-size:.9rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.2s;
+}
+.modal-close:hover{background:rgba(255,255,255,.12);color:#fff}
+.modal h2{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:6px}
+.modal p{font-size:.82rem;color:rgba(255,255,255,.4);margin-bottom:22px}
+.confirm-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.cr{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:10px;font-size:.83rem}
+.cr span:first-child{color:rgba(255,255,255,.4)}
+.cr strong{color:#fff}
+.pix-confirm-box{background:rgba(255,107,0,.06);border:1px solid rgba(255,107,0,.2);border-radius:14px;padding:16px;text-align:center;margin-bottom:22px}
+.pix-confirm-box p{color:rgba(255,255,255,.4);font-size:.75rem;margin-bottom:6px}
+.pix-confirm-key{font-size:1.3rem;font-weight:800;color:var(--accent);letter-spacing:2px;cursor:pointer}
+.modal-btns{display:flex;gap:10px}
+.modal-btns button{flex:1;padding:13px;border-radius:50px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:.2s}
+.mbtn-cancel{background:rgba(255,255,255,.07);color:rgba(255,255,255,.6)}
+.mbtn-confirm{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.mbtn-confirm:hover{filter:brightness(1.1)}
+
+/* =============================================
+   TOAST
+   ============================================= */
+#toasts{position:fixed;bottom:96px;right:20px;z-index:700;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{
+  background:#1a1a1a;border-radius:12px;
+  padding:12px 18px;font-size:.82rem;color:#fff;
+  border-left:3px solid var(--accent);
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+  animation:tIn .3s ease;max-width:300px;
+}
+@keyframes tIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+
+/* =============================================
+   RESPONSIVO MOBILE
+   ============================================= */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .ham{display:flex}
+  .float-badge{display:none}
+  .prize-inner{grid-template-columns:1fr;gap:40px;text-align:center;padding:64px 0}
+  .prize-img-side{order:-1}
+  .prize-text-side .sec-desc,.prize-text-side .prize-tags,.prize-text-side .prize-value-box{margin-left:auto;margin-right:auto}
+  .specs{grid-template-columns:1fr 1fr}
+  .checkout-grid{grid-template-columns:1fr}
+  .summary-card{position:static}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .winners-grid{grid-template-columns:1fr}
+  .winner-card{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .steps{grid-template-columns:1fr}
+  .step:not(:last-child){border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .pkgs-grid{grid-template-columns:1fr}
+  .pkg:not(:last-child){border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .mults{grid-template-columns:1fr 1fr}
+  .mult-item{border-right:none}
+  .reg-grid{grid-template-columns:1fr 1fr}
+  .reg-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+}
+
+@media(max-width:560px){
+  .hero-title{letter-spacing:-1px}
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn-hero{width:100%;justify-content:center;max-width:340px}
+  .countdown{padding:12px 14px;gap:4px}
+  .cd-unit{min-width:44px;padding:6px 8px}
+  .cd-unit span{font-size:1.3rem}
+  .frow{grid-template-columns:1fr}
+  .pm-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .specs{grid-template-columns:1fr}
+  .mults{grid-template-columns:1fr}
+  .reg-grid{grid-template-columns:1fr}
+  .lot-grid{gap:4px}
+  .lot-ball{min-width:60px;padding:10px 6px}
+  .lot-num{font-size:.9rem}
+  .section{padding:64px 0}
+  .apuracao-card{padding:20px}
+}
+  </style>
 </head>
 <body>
 
-<!-- ===== BARRA TOPO ===== -->
+<!-- TOPBAR -->
 <div class="topbar">
-  🔥 LANÇAMENTO — Primeiros 10 dias: <strong>3x mais números!</strong> &nbsp;|&nbsp; Sorteio pela Loteria Federal
+  🔥 LANÇAMENTO — Primeiros 10 dias: <strong>3× mais números!</strong> &nbsp;·&nbsp; Sorteio pela Loteria Federal &nbsp;·&nbsp; ✅ Autorizado SPA/ME
 </div>
 
-<!-- ===== HEADER ===== -->
-<header class="header" id="topo">
-  <div class="container header-inner">
-    <div class="logo">
-      <span class="logo-icon">📱</span>
-      <span class="logo-text">RifaTech<span class="logo-accent">Pro</span></span>
-    </div>
-    <nav class="nav-menu" id="navMenu">
-      <a href="#galeria">Galeria</a>
-      <a href="#ganhadores">Ganhadores</a>
-      <a href="#concorra">Concorra</a>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">📱 Faturou<span>Rifa</span></div>
+    <div class="nav-links">
+      <a href="#premio">Prêmio</a>
+      <a href="#pacotes">Pacotes</a>
       <a href="#como-funciona">Como Funciona</a>
       <a href="#faq">FAQ</a>
-    </nav>
-    <a href="#concorra" class="btn btn-nav">Quero Concorrer</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    </div>
+    <a href="#participar" class="nav-cta">Participar agora →</a>
+    <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
-</header>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#premio" onclick="closeMenu()">Prêmio</a>
+  <a href="#pacotes" onclick="closeMenu()">Pacotes</a>
+  <a href="#como-funciona" onclick="closeMenu()">Como Funciona</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#participar" onclick="closeMenu()" style="color:var(--accent)">→ Participar</a>
+</div>
 
 <!-- ===== HERO ===== -->
-<section class="hero" id="inicio">
-  <div class="hero-bg"></div>
-  <div class="container hero-content">
-    <div class="hero-badge">✅ Autorizado SPA/ME — Promoção Comercial Legal</div>
+<section class="hero" id="inicio" style="padding-top:100px">
+  <div class="hero-content">
+    <div class="hero-legal"><span class="dot-green" style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span>Autorização SPA/ME · Promoção 100% Legal</div>
+    <p class="hero-eyebrow">Concorra ao prêmio mais desejado do mundo</p>
     <h1 class="hero-title">
-      Você pode ganhar este<br/>
-      <span class="gradient-text">iPhone 16 Pro Max</span>
+      <span class="line1">Ganhe um</span>
+      <span class="line2">iPhone 17 Pro Max</span>
     </h1>
-    <p class="hero-sub">256GB · Titânio Natural · Frete e Impostos <strong>100% Pagos</strong></p>
+    <p class="hero-sub">Compre nosso ebook e receba seus números automaticamente.<br/><strong>Frete e impostos 100% pagos.</strong></p>
 
-    <!-- Countdown -->
-    <div class="countdown-box">
-      <span class="countdown-label">⏳ Encerramento em:</span>
-      <div class="countdown-timer" id="countdown">
-        <div class="cd-unit"><span id="cd-dias">00</span><small>dias</small></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit"><span id="cd-horas">00</span><small>horas</small></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit"><span id="cd-min">00</span><small>min</small></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit"><span id="cd-seg">00</span><small>seg</small></div>
-      </div>
+    <!-- COUNTDOWN -->
+    <div class="countdown">
+      <span class="cd-label">⏳ Encerra em</span>
+      <div class="cd-unit"><span id="cd-d">00</span><small>dias</small></div>
+      <span class="cd-colon">:</span>
+      <div class="cd-unit"><span id="cd-h">00</span><small>horas</small></div>
+      <span class="cd-colon">:</span>
+      <div class="cd-unit"><span id="cd-m">00</span><small>min</small></div>
+      <span class="cd-colon">:</span>
+      <div class="cd-unit"><span id="cd-s">00</span><small>seg</small></div>
     </div>
 
-    <div class="hero-actions">
-      <a href="#concorra" class="btn btn-primary btn-xl pulse">
-        🎯 QUERO CONCORRER AGORA
-      </a>
-      <a href="#como-funciona" class="btn btn-ghost btn-xl">Como funciona?</a>
+    <!-- BOTÕES -->
+    <div class="hero-btns">
+      <a href="#participar" class="btn-hero btn-fire">🎯 Quero concorrer agora</a>
+      <a href="#como-funciona" class="btn-hero btn-secondary">Como funciona?</a>
     </div>
 
-    <!-- Prêmio visual -->
-    <div class="prize-visual">
-      <div class="prize-card">
-        <div class="prize-img-placeholder">
-          <div class="phone-mock">
-            <div class="phone-screen">
-              <div class="phone-notch"></div>
-              <span>iPhone 16<br/>Pro Max</span>
-            </div>
-          </div>
-        </div>
-        <div class="prize-info">
-          <h3>🏆 PRÊMIO</h3>
-          <p class="prize-name">iPhone 16 Pro Max</p>
-          <p class="prize-detail">256GB • Titânio Natural</p>
-          <p class="prize-value">Valor: <strong>R$ 9.999,00</strong></p>
-          <div class="prize-tags">
-            <span>✅ Frete Pago</span>
-            <span>✅ Nota Fiscal</span>
-            <span>✅ Garantia Apple</span>
-          </div>
-        </div>
+    <!-- IPHONE FOTO -->
+    <div class="phone-showcase">
+      <!-- Badges flutuantes -->
+      <div class="float-badge fb-left">
+        <span class="fb-dot dot-green"></span>A19 Pro · Chip mais rápido
       </div>
+      <div class="float-badge fb-right">
+        <span class="fb-dot dot-orange"></span>Câmera 48MP Fusion
+      </div>
+      <div class="float-badge fb-bottom">
+        <span class="fb-dot dot-gold"></span>30h de bateria 🔋
+      </div>
+
+      <!-- FOTO OFICIAL APPLE -->
+      <div class="phone-img-wrap">
+        <img
+          src="https://www.apple.com/v/iphone-17-pro/f/images/overview/welcome/hero__bsveixlwbms2_xlarge.jpg"
+          alt="iPhone 17 Pro Max Cosmic Orange"
+          class="phone-img"
+          id="heroPhone"
+          onerror="this.onerror=null;this.src='https://www.apple.com/v/iphone-17-pro/d/images/overview/welcome/hero__bsveixlwbms2_large.jpg'"
+        />
+      </div>
+      <div class="phone-reflection"></div>
     </div>
   </div>
 </section>
 
-<!-- ===== BARRA DE PROGRESSO ===== -->
-<section class="progress-section">
+<!-- PROGRESS STRIP -->
+<div class="progress-strip">
   <div class="container">
-    <div class="progress-info">
-      <span>📊 Números vendidos: <strong id="numVendidos">347</strong> / <strong>1.000</strong></span>
-      <span class="progress-pct" id="progressPct">34,7%</span>
+    <div class="prog-row">
+      <span class="prog-label">📊 Números vendidos</span>
+      <span class="prog-count"><strong id="numSold">347</strong> / <strong>1.000</strong></span>
+      <span class="prog-pct" id="progPct">34,7%</span>
     </div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar" id="progressBar" style="width: 34.7%"></div>
+    <div class="prog-bar-bg">
+      <div class="prog-bar-fill" id="progBar" style="width:34.7%"></div>
     </div>
-    <p class="progress-hint">⚡ Corra! A cada compra os números se esgotam mais rápido.</p>
+    <p class="prog-hint">⚡ Números se esgotam a cada compra — garanta o seu agora</p>
+  </div>
+</div>
+
+<!-- ===== PRÊMIO ===== -->
+<section class="prize-section section" id="premio">
+  <div class="container">
+    <div class="prize-inner">
+      <div class="prize-img-side">
+        <div class="prize-glow"></div>
+        <img
+          src="https://www.apple.com/v/iphone-17-pro/f/images/overview/cameras/intro/hero_camera__f42igewygpqy_xlarge.jpg"
+          alt="iPhone 17 Pro Max"
+          class="prize-img"
+          id="prizePhone"
+          onerror="this.onerror=null;this.src='https://www.apple.com/v/iphone-17-pro/d/images/overview/cameras/intro/hero_camera__f42igewygpqy_large.jpg'"
+        />
+      </div>
+      <div class="prize-text-side">
+        <span class="sec-label">🏆 O Prêmio</span>
+        <h2 class="sec-title">iPhone 17<br/>Pro Max</h2>
+        <p class="prize-desc">O smartphone mais avançado já criado pela Apple. Chip A19 Pro, câmera Fusion de 48MP, tela de 6,9" com ProMotion 120Hz e a maior bateria da história do iPhone.</p>
+
+        <!-- Seletor de cor -->
+        <div class="color-selector">
+          <p class="color-label">Cor disponível no sorteio:</p>
+          <div class="color-dots">
+            <div class="color-dot active" style="background:linear-gradient(135deg,#FF6B35,#FF9A5C)" title="Cosmic Orange"></div>
+            <div class="color-dot" style="background:linear-gradient(135deg,#1a3a5c,#2563a8)" title="Deep Blue"></div>
+            <div class="color-dot" style="background:linear-gradient(135deg,#d0d0d8,#f0f0f5)" title="Silver"></div>
+            <span class="color-name" id="colorName">Cosmic Orange</span>
+          </div>
+        </div>
+
+        <div class="prize-tags" style="margin-top:20px">
+          <span class="ptag">✅ Nota Fiscal</span>
+          <span class="ptag">🚚 Frete Grátis</span>
+          <span class="ptag">🍎 Garantia Apple 1 ano</span>
+          <span class="ptag">📦 Lacrado</span>
+        </div>
+
+        <div class="prize-value-box">
+          <div>
+            <div class="pval-label">Valor do prêmio</div>
+            <div class="pval-num">R$ 9.999</div>
+          </div>
+          <div class="pval-divider"></div>
+          <div class="pval-sub">
+            Frete e impostos<br/><strong>100% pagos pela empresa</strong>
+          </div>
+        </div>
+
+        <div class="specs">
+          <div class="spec-item">
+            <div class="spec-label">Tela</div>
+            <div class="spec-val">6,9" · 120Hz · OLED</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">Chip</div>
+            <div class="spec-val">Apple A19 Pro</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">Câmera</div>
+            <div class="spec-val">48MP Fusion + 48MP Ultra</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">Bateria</div>
+            <div class="spec-val">30h de vídeo</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">Armazenamento</div>
+            <div class="spec-val">256GB</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">Material</div>
+            <div class="spec-val">Alumínio premium</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ===== COMO FUNCIONA ===== -->
-<section class="section" id="como-funciona">
+<section class="section section-dark" id="como-funciona">
   <div class="container">
-    <div class="section-header">
-      <span class="section-badge">❓ Transparência</span>
-      <h2>Como Funciona?</h2>
-      <p>Simples, seguro e regulamentado pelo governo federal</p>
+    <div class="text-center">
+      <span class="sec-label">Transparência total</span>
+      <h2 class="sec-title">Como funciona?</h2>
+      <p class="sec-desc">Simples, justo e regulamentado pelo governo federal. Você compra, recebe seus números, e o resultado é público.</p>
     </div>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <div class="step-icon">📚</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <span class="step-icon">📚</span>
         <h3>Compre o Ebook</h3>
-        <p>Escolha um dos pacotes e adquira nosso ebook digital. O pagamento é processado de forma segura.</p>
+        <p>Escolha seu pacote e adquira nosso ebook digital. Pagamento seguro via PIX ou cartão.</p>
       </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <div class="step-icon">🎲</div>
-        <h3>Receba seus Números</h3>
-        <p>Após confirmação do pagamento, você recebe automaticamente seus números da sorte por e-mail.</p>
+      <div class="step">
+        <div class="step-n">2</div>
+        <span class="step-icon">⚡</span>
+        <h3>Receba os Números</h3>
+        <p>Após confirmação do pagamento, seus números da sorte chegam automaticamente no e-mail.</p>
       </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <div class="step-icon">🏦</div>
-        <h3>Sorteio pela Loteria Federal</h3>
-        <p>O ganhador é apurado pelos resultados públicos da Loteria Federal da Caixa. Nós não controlamos o resultado.</p>
+      <div class="step">
+        <div class="step-n">3</div>
+        <span class="step-icon">🏦</span>
+        <h3>Loteria Federal decide</h3>
+        <p>O ganhador é calculado pelos resultados públicos da Loteria Federal da Caixa. Nós não controlamos nada.</p>
       </div>
-      <div class="step-card">
-        <div class="step-num">4</div>
-        <div class="step-icon">🏆</div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <span class="step-icon">🏆</span>
         <h3>Ganhe o iPhone!</h3>
-        <p>Se o seu número for o vencedor, entramos em contato e entregamos o iPhone 16 Pro Max na sua porta.</p>
+        <p>Se seu número for o vencedor, entramos em contato e entregamos o iPhone na sua porta.</p>
       </div>
     </div>
 
     <!-- Exemplo de apuração -->
-    <div class="apuracao-box">
-      <h3>🔢 Exemplo de Apuração pelo Resultado da Loteria Federal</h3>
-      <div class="loteria-example">
-        <div class="loteria-premios">
-          <table>
-            <thead><tr><th>Prêmio</th><th>Número</th><th>Dígito utilizado</th></tr></thead>
-            <tbody>
-              <tr><td>1º Prêmio</td><td class="mono">1<u>2</u>59<strong>5</strong></td><td><span class="tag-serie">Dezena → Série: <b>9</b></span> + <span class="tag-el">Unidade → <b>5</b></span></td></tr>
-              <tr><td>2º Prêmio</td><td class="mono">2444<strong>7</strong></td><td><span class="tag-el">Unidade → <b>7</b></span></td></tr>
-              <tr><td>3º Prêmio</td><td class="mono">9410<strong>1</strong></td><td><span class="tag-el">Unidade → <b>1</b></span></td></tr>
-              <tr><td>4º Prêmio</td><td class="mono">3211<strong>0</strong></td><td><span class="tag-el">Unidade → <b>0</b></span></td></tr>
-              <tr><td>5º Prêmio</td><td class="mono">2036<strong>2</strong></td><td><span class="tag-el">Unidade → <b>2</b></span></td></tr>
-            </tbody>
-          </table>
+    <div class="apuracao-card">
+      <h3>🔢 Exemplo real de apuração — Loteria Federal</h3>
+      <div class="lot-grid">
+        <div class="lot-ball">
+          <div class="lot-pos">1º Prêmio</div>
+          <div class="lot-num"><span class="d">12</span><span class="serie">5</span><span class="unit">9</span><span class="d">5</span>→<span style="color:rgba(255,255,255,.3)">espera</span></div>
+          <!-- simplificado abaixo -->
+          <div class="lot-num" style="margin-top:6px"><span class="d">1</span><span class="d">2</span><span class="d">5</span><span class="serie">9</span><span class="unit">5</span></div>
+          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Dezena=<b style="color:var(--blue)">9</b> · Unid=<b style="color:var(--accent)">5</b></div>
         </div>
-        <div class="loteria-result">
-          <p>Número Vencedor Calculado:</p>
-          <div class="numero-vencedor">9.57102</div>
-          <p class="result-desc">Série <b>9</b> (dezena do 1º prêmio) + Elemento <b>57102</b> (unidades dos 5 prêmios)</p>
+        <div class="lot-ball">
+          <div class="lot-pos">2º Prêmio</div>
+          <div class="lot-num"><span class="d">3444</span><span class="unit">7</span></div>
+          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Unid=<b style="color:var(--accent)">7</b></div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== EBOOK / PRODUTO ===== -->
-<section class="section section-dark" id="ebook">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-badge">📚 O Produto</span>
-      <h2>O Ebook que você leva</h2>
-      <p>Conteúdo de valor + seus números para o sorteio</p>
-    </div>
-    <div class="ebook-showcase">
-      <div class="ebook-cover">
-        <div class="ebook-mock">
-          <div class="ebook-mock-inner">
-            <div class="ebook-mock-title">TECNOLOGIA<br/><span>DO FUTURO</span></div>
-            <div class="ebook-mock-sub">Guia Completo</div>
-          </div>
+        <div class="lot-ball">
+          <div class="lot-pos">3º Prêmio</div>
+          <div class="lot-num"><span class="d">9410</span><span class="unit">1</span></div>
+          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Unid=<b style="color:var(--accent)">1</b></div>
         </div>
-        <div class="ebook-meta">
-          <div class="meta-item"><span>📄</span> 52 páginas</div>
-          <div class="meta-item"><span>📁</span> Formato PDF</div>
-          <div class="meta-item"><span>🌐</span> Português</div>
-          <div class="meta-item"><span>💾</span> Download imediato</div>
+        <div class="lot-ball">
+          <div class="lot-pos">4º Prêmio</div>
+          <div class="lot-num"><span class="d">3211</span><span class="unit">0</span></div>
+          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Unid=<b style="color:var(--accent)">0</b></div>
         </div>
-      </div>
-      <div class="ebook-info">
-        <h3>Tecnologia do Futuro: O Guia Completo</h3>
-        <p>Um guia prático e direto sobre as principais tendências tecnológicas que estão transformando o mundo. Do smartphone que vai dominar a próxima década às ferramentas de IA que já mudam sua vida — tudo explicado de forma simples.</p>
-        <ul class="ebook-topics">
-          <li>✅ Inteligência Artificial no dia a dia</li>
-          <li>✅ Como escolher o smartphone perfeito</li>
-          <li>✅ Privacidade e segurança digital</li>
-          <li>✅ Tendências tech para 2025-2030</li>
-          <li>✅ Apps que vão mudar sua rotina</li>
-          <li>✅ Dicas exclusivas de produtividade</li>
-        </ul>
-        <div class="ebook-plus">
-          <span class="plus-badge">🎁 BÔNUS</span>
-          <span>Ao comprar, você também recebe seus <strong>números da sorte</strong> automaticamente!</span>
+        <div class="lot-ball">
+          <div class="lot-pos">5º Prêmio</div>
+          <div class="lot-num"><span class="d">2036</span><span class="unit">2</span></div>
+          <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-top:4px">Unid=<b style="color:var(--accent)">2</b></div>
+        </div>
+        <div class="lot-result">
+          <p>Número vencedor</p>
+          <div class="lot-winner">9.57102</div>
+          <p style="font-size:.7rem;color:rgba(255,255,255,.3);margin-top:6px">Série 9 · Elemento 57102</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PACOTES / CONCORRA ===== -->
-<section class="section" id="concorra">
+<!-- ===== PACOTES ===== -->
+<section class="section packages-section" id="pacotes">
   <div class="container">
-    <div class="section-header">
-      <span class="section-badge">🎯 Participe</span>
-      <h2>Escolha seu Pacote</h2>
-      <p>Mais números = mais chances de ganhar o iPhone 16 Pro Max</p>
+    <div class="text-center">
+      <span class="sec-label">Participe agora</span>
+      <h2 class="sec-title">Escolha seu pacote</h2>
+      <p class="sec-desc">Mais números = mais chances de ganhar. Todos incluem o ebook completo.</p>
     </div>
 
-    <!-- Banner de lançamento -->
-    <div class="launch-banner">
-      <div class="launch-icon">⚡</div>
-      <div class="launch-text">
-        <strong>OFERTA DE LANÇAMENTO — 10 PRIMEIROS DIAS</strong>
-        <p>Compre agora e ganhe <strong>3x mais números</strong>! Oferta expira em <span id="launchCountdown">...</span></p>
+    <!-- Banner lançamento -->
+    <div style="background:rgba(255,107,0,.07);border:1px solid rgba(255,107,0,.2);border-radius:16px;padding:16px 22px;display:flex;align-items:center;gap:14px;margin-top:32px;flex-wrap:wrap">
+      <span style="font-size:1.6rem">⚡</span>
+      <div>
+        <strong style="color:var(--accent2);display:block;font-size:.9rem">OFERTA DE LANÇAMENTO — 10 primeiros dias</strong>
+        <span style="font-size:.8rem;color:rgba(255,255,255,.4)">Compre agora e ganhe <strong style="color:#fff">3× mais números</strong>. Oferta expira em <span id="launchTimer" style="color:var(--accent)">...</span></span>
       </div>
     </div>
 
-    <div class="packages-grid">
-
+    <div class="pkgs-grid">
       <!-- Popular -->
-      <div class="pkg-card">
-        <div class="pkg-tag">Popular</div>
-        <h3 class="pkg-name">Pacote Básico</h3>
-        <div class="pkg-numbers">
-          <span class="pkg-num-main">5</span>
-          <span class="pkg-num-label">números base</span>
-          <span class="pkg-num-launch">→ <strong>15</strong> no lançamento! 🔥</span>
+      <div class="pkg">
+        <span class="pkg-tag tag-popular">Popular</span>
+        <div class="pkg-name">Pacote Básico</div>
+        <div class="pkg-nums">
+          <span class="pkg-num-big">5</span>
+          <span class="pkg-num-small">números base</span>
+          <span class="pkg-launch">→ 15 no lançamento 🔥</span>
         </div>
         <div class="pkg-price">R$ <span>19,90</span></div>
         <ul class="pkg-features">
-          <li>✅ Ebook completo (PDF)</li>
-          <li>✅ 5 números da sorte</li>
-          <li>✅ Envio por e-mail</li>
-          <li>✅ Acesso à área do cliente</li>
+          <li>Ebook completo em PDF</li>
+          <li>5 números da sorte</li>
+          <li>Envio automático por e-mail</li>
+          <li>Área do cliente</li>
         </ul>
-        <a href="#comprar" class="btn btn-outline pkg-btn" data-pkg="popular">Quero este pacote</a>
+        <button class="btn-pkg btn-pkg-ghost" onclick="selecionarPkg('popular')">Quero este →</button>
       </div>
 
-      <!-- Prata — Destaque -->
-      <div class="pkg-card pkg-featured">
-        <div class="pkg-badge-top">⭐ MAIS POPULAR</div>
-        <div class="pkg-tag pkg-tag-prata">Prata</div>
-        <h3 class="pkg-name">Pacote Prata</h3>
-        <div class="pkg-numbers">
-          <span class="pkg-num-main">12</span>
-          <span class="pkg-num-label">números base</span>
-          <span class="pkg-num-launch">→ <strong>36</strong> no lançamento! 🔥</span>
+      <!-- Prata -->
+      <div class="pkg">
+        <span class="pkg-tag tag-prata">Prata</span>
+        <div class="pkg-name">Pacote Prata</div>
+        <div class="pkg-nums">
+          <span class="pkg-num-big">12</span>
+          <span class="pkg-num-small">números base</span>
+          <span class="pkg-launch">→ 36 no lançamento 🔥</span>
         </div>
         <div class="pkg-price">R$ <span>39,90</span></div>
         <ul class="pkg-features">
-          <li>✅ Ebook completo (PDF)</li>
-          <li>✅ 12 números da sorte</li>
-          <li>✅ Envio por e-mail</li>
-          <li>✅ Acesso à área do cliente</li>
-          <li>✅ Suporte prioritário</li>
+          <li>Ebook completo em PDF</li>
+          <li>12 números da sorte</li>
+          <li>Envio automático por e-mail</li>
+          <li>Área do cliente</li>
+          <li>Suporte prioritário</li>
         </ul>
-        <a href="#comprar" class="btn btn-primary pkg-btn" data-pkg="prata">Quero este pacote</a>
+        <button class="btn-pkg btn-pkg-ghost" onclick="selecionarPkg('prata')">Quero este →</button>
       </div>
 
-      <!-- Ouro -->
-      <div class="pkg-card">
-        <div class="pkg-tag pkg-tag-ouro">Ouro</div>
-        <h3 class="pkg-name">Pacote Ouro</h3>
-        <div class="pkg-numbers">
-          <span class="pkg-num-main">20</span>
-          <span class="pkg-num-label">números base</span>
-          <span class="pkg-num-launch">→ <strong>60</strong> no lançamento! 🔥</span>
+      <!-- Ouro — DESTAQUE -->
+      <div class="pkg pkg-hot">
+        <div class="pkg-hot-badge">⭐ MAIS POPULAR</div>
+        <span class="pkg-tag tag-ouro">Ouro</span>
+        <div class="pkg-name">Pacote Ouro</div>
+        <div class="pkg-nums">
+          <span class="pkg-num-big">20</span>
+          <span class="pkg-num-small">números base</span>
+          <span class="pkg-launch">→ 60 no lançamento 🔥</span>
         </div>
         <div class="pkg-price">R$ <span>59,90</span></div>
         <ul class="pkg-features">
-          <li>✅ Ebook completo (PDF)</li>
-          <li>✅ 20 números da sorte</li>
-          <li>✅ Envio por e-mail</li>
-          <li>✅ Acesso à área do cliente</li>
-          <li>✅ Suporte VIP</li>
-          <li>✅ Notificação do sorteio</li>
+          <li>Ebook completo em PDF</li>
+          <li>20 números da sorte</li>
+          <li>Envio automático por e-mail</li>
+          <li>Área do cliente</li>
+          <li>Suporte VIP</li>
+          <li>Notificação do sorteio</li>
         </ul>
-        <a href="#comprar" class="btn btn-outline pkg-btn" data-pkg="ouro">Quero este pacote</a>
+        <button class="btn-pkg btn-pkg-fire" onclick="selecionarPkg('ouro')">Quero este →</button>
       </div>
 
-      <!-- VIP -->
-      <div class="pkg-card">
-        <div class="pkg-tag pkg-tag-vip">Elite</div>
-        <h3 class="pkg-name">Pacote Elite</h3>
-        <div class="pkg-numbers">
-          <span class="pkg-num-main">50</span>
-          <span class="pkg-num-label">números base</span>
-          <span class="pkg-num-launch">→ <strong>150</strong> no lançamento! 🔥</span>
+      <!-- Elite -->
+      <div class="pkg">
+        <span class="pkg-tag tag-elite">Elite 🔥</span>
+        <div class="pkg-name">Pacote Elite</div>
+        <div class="pkg-nums">
+          <span class="pkg-num-big">50</span>
+          <span class="pkg-num-small">números base</span>
+          <span class="pkg-launch">→ 150 no lançamento 🔥</span>
         </div>
         <div class="pkg-price">R$ <span>99,90</span></div>
         <ul class="pkg-features">
-          <li>✅ Ebook completo (PDF)</li>
-          <li>✅ 50 números da sorte</li>
-          <li>✅ Envio por e-mail</li>
-          <li>✅ Acesso à área do cliente</li>
-          <li>✅ Suporte VIP exclusivo</li>
-          <li>✅ Notificação do sorteio</li>
-          <li>✅ 🔥 TURBO: 2x no PIX</li>
+          <li>Ebook completo em PDF</li>
+          <li>50 números da sorte</li>
+          <li>Envio automático por e-mail</li>
+          <li>Área do cliente</li>
+          <li>Suporte VIP exclusivo</li>
+          <li>Notificação do sorteio</li>
+          <li>TURBO 2× via PIX</li>
         </ul>
-        <a href="#comprar" class="btn btn-outline pkg-btn" data-pkg="elite">Quero este pacote</a>
+        <button class="btn-pkg btn-pkg-ghost" onclick="selecionarPkg('elite')">Quero este →</button>
       </div>
-
     </div>
 
-    <!-- Multiplicadores info -->
-    <div class="multiplier-info">
-      <h3>⚡ Multiplicadores de Números</h3>
-      <div class="mult-grid">
-        <div class="mult-item">
-          <span class="mult-icon">⚡</span>
-          <div>
-            <strong>TURBO 2x</strong>
-            <p>Pague via PIX ou Cartão e dobre seus números (pacote Elite)</p>
-          </div>
-        </div>
-        <div class="mult-item">
-          <span class="mult-icon">🚀</span>
-          <div>
-            <strong>LANÇAMENTO 3x</strong>
-            <p>Compre nos primeiros 10 dias e triplique seus números</p>
-          </div>
-        </div>
-        <div class="mult-item">
-          <span class="mult-icon">📱</span>
-          <div>
-            <strong>APP 3x</strong>
-            <p>Compre pelo nosso app oficial e triplique seus números</p>
-          </div>
-        </div>
+    <!-- Multiplicadores -->
+    <div class="mults">
+      <div class="mult-item">
+        <div class="mult-icon">⚡</div>
+        <div class="mult-title">TURBO 2×</div>
+        <div class="mult-desc">Pacote Elite + PIX ou Cartão = dobro de números</div>
+        <span class="mult-badge">Pacote Elite</span>
+      </div>
+      <div class="mult-item">
+        <div class="mult-icon">🚀</div>
+        <div class="mult-title">Lançamento 3×</div>
+        <div class="mult-desc">Primeiros 10 dias: triplique todos os seus números</div>
+        <span class="mult-badge">Ativo agora!</span>
+      </div>
+      <div class="mult-item">
+        <div class="mult-icon">📱</div>
+        <div class="mult-title">App 3×</div>
+        <div class="mult-desc">Compre pelo app oficial e triplique seus números</div>
+        <span class="mult-badge">Em breve</span>
+      </div>
+      <div class="mult-item">
+        <div class="mult-icon">👑</div>
+        <div class="mult-title">Prime 6×</div>
+        <div class="mult-desc">Assinante Prime: 6× mais números em toda compra</div>
+        <span class="mult-badge">Assine já</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== MODAL DE COMPRA ===== -->
-<section class="section section-dark" id="comprar">
+<!-- ===== FORMULÁRIO ===== -->
+<section class="section checkout-section" id="participar">
   <div class="container">
-    <div class="section-header">
-      <span class="section-badge">💳 Pagamento</span>
-      <h2>Finalize sua Participação</h2>
-      <p>Preencha seus dados e realize o pagamento</p>
+    <div class="text-center">
+      <span class="sec-label">Finalizar participação</span>
+      <h2 class="sec-title">Seus dados</h2>
+      <p class="sec-desc">Preencha abaixo. Seus números chegam no e-mail logo após a confirmação.</p>
     </div>
-    <div class="checkout-wrap">
-      <form class="checkout-form" id="checkoutForm">
-        <div class="form-group">
-          <label>Nome completo *</label>
-          <input type="text" name="nome" placeholder="Seu nome completo" required />
+    <div class="checkout-grid">
+      <form class="form-card" id="mainForm" onsubmit="submitForm(event)">
+        <div class="fgroup">
+          <label>Nome completo</label>
+          <input type="text" id="f-nome" placeholder="Seu nome completo" required/>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>CPF *</label>
-            <input type="text" name="cpf" placeholder="000.000.000-00" maxlength="14" required />
+        <div class="frow">
+          <div class="fgroup">
+            <label>CPF</label>
+            <input type="text" id="f-cpf" placeholder="000.000.000-00" maxlength="14" required/>
           </div>
-          <div class="form-group">
-            <label>Data de Nascimento *</label>
-            <input type="date" name="nascimento" required />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>E-mail *</label>
-            <input type="email" name="email" placeholder="seu@email.com" required />
-          </div>
-          <div class="form-group">
-            <label>Telefone/WhatsApp *</label>
-            <input type="tel" name="telefone" placeholder="(11) 99999-9999" required />
+          <div class="fgroup">
+            <label>Nascimento</label>
+            <input type="date" id="f-nasc" required/>
           </div>
         </div>
-        <div class="form-group">
-          <label>Endereço completo *</label>
-          <input type="text" name="endereco" placeholder="Rua, número, bairro, cidade, estado" required />
+        <div class="frow">
+          <div class="fgroup">
+            <label>E-mail</label>
+            <input type="email" id="f-email" placeholder="seu@email.com" required/>
+          </div>
+          <div class="fgroup">
+            <label>WhatsApp</label>
+            <input type="tel" id="f-tel" placeholder="(11) 99999-9999" required/>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Pacote selecionado *</label>
-          <select name="pacote" id="pacoteSelect" required>
-            <option value="">— Selecione um pacote —</option>
+        <div class="fgroup">
+          <label>Endereço completo</label>
+          <input type="text" id="f-end" placeholder="Rua, número, bairro, cidade - UF" required/>
+        </div>
+        <div class="fgroup">
+          <label>Pacote</label>
+          <select id="f-pkg" required onchange="updateSummary()">
+            <option value="">— Selecione —</option>
             <option value="popular">Básico — 5 números — R$ 19,90</option>
-            <option value="prata">Prata — 12 números — R$ 39,90 ⭐ Mais Popular</option>
-            <option value="ouro">Ouro — 20 números — R$ 59,90</option>
-            <option value="elite">Elite — 50 números — R$ 99,90 🔥 TURBO</option>
+            <option value="prata">Prata — 12 números — R$ 39,90</option>
+            <option value="ouro">Ouro — 20 números — R$ 59,90 ⭐</option>
+            <option value="elite">Elite — 50 números — R$ 99,90 🔥</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Forma de Pagamento *</label>
-          <div class="payment-methods">
-            <label class="pm-option">
-              <input type="radio" name="pagamento" value="pix" checked />
-              <span class="pm-label">
-                <span class="pm-icon">💠</span>
-                PIX
-                <span class="pm-badge">Aprovação imediata</span>
-              </span>
+        <div class="fgroup">
+          <label>Pagamento</label>
+          <div class="pm-grid">
+            <label class="pm-opt">
+              <input type="radio" name="pm" value="pix" checked onchange="updateSummary()"/>
+              <div class="pm-face"><span class="pm-face-icon">💠</span>PIX<span class="pm-pix-hint">Aprovação imediata</span></div>
             </label>
-            <label class="pm-option">
-              <input type="radio" name="pagamento" value="cartao" />
-              <span class="pm-label">
-                <span class="pm-icon">💳</span>
-                Cartão de Crédito
-                <span class="pm-badge">Parcelamento disponível</span>
-              </span>
+            <label class="pm-opt">
+              <input type="radio" name="pm" value="cartao" onchange="updateSummary()"/>
+              <div class="pm-face"><span class="pm-face-icon">💳</span>Cartão<span class="pm-pix-hint">Parcelado</span></div>
             </label>
           </div>
         </div>
-        <div class="form-group">
-          <label class="checkbox-label">
-            <input type="checkbox" name="termos" required />
-            <span>Li e aceito o <a href="#regulamento" target="_blank">Regulamento da Promoção</a> e a <a href="#privacidade">Política de Privacidade</a>. Confirmo ter 18 anos ou mais.</span>
-          </label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-xl btn-block">
-          🎯 CONFIRMAR E PAGAR
-        </button>
-        <div class="checkout-secure">
-          🔒 Ambiente 100% seguro · Dados criptografados · LGPD
-        </div>
+        <label class="terms-row">
+          <input type="checkbox" required/>
+          <span>Li e aceito o <a href="#regulamento">Regulamento</a> e a <a href="#regulamento">Política de Privacidade</a>. Confirmo ter 18 anos ou mais.</span>
+        </label>
+        <button type="submit" class="btn-submit">🎯 CONFIRMAR E PAGAR</button>
+        <div class="secure-note">🔒 Pagamento seguro · Dados criptografados · LGPD</div>
       </form>
 
-      <!-- Resumo lateral -->
-      <div class="checkout-summary" id="checkoutSummary">
-        <h3>🧾 Resumo do Pedido</h3>
-        <div class="summary-prize">
-          <span>🏆</span>
+      <!-- Resumo -->
+      <div class="summary-card">
+        <div class="summary-prize-box">
+          <span class="spz-icon">📱</span>
           <div>
-            <strong>iPhone 16 Pro Max</strong>
-            <small>256GB · Titânio Natural</small>
+            <div class="spz-name">iPhone 17 Pro Max</div>
+            <div class="spz-sub">256GB · Cosmic Orange</div>
           </div>
         </div>
-        <div class="summary-pkg" id="summaryPkg">
-          <p>📦 <span id="summaryPkgName">Nenhum pacote selecionado</span></p>
-          <p>🎲 Números: <strong id="summaryNumeros">—</strong></p>
-          <p>💰 Valor: <strong id="summaryValor">—</strong></p>
+        <div class="summary-rows">
+          <div class="sum-row"><span>📦 Pacote</span><span id="s-pkg">—</span></div>
+          <div class="sum-row"><span>🎲 Números</span><span class="highlight" id="s-nums">—</span></div>
+          <div class="sum-row"><span>⚡ Multiplicador</span><span id="s-mult">—</span></div>
+          <div class="sum-row"><span>💰 Total</span><span id="s-val" style="color:var(--gold);font-weight:800">—</span></div>
+          <div class="sum-row"><span>📅 Sorteio</span><span>Loteria Federal</span></div>
+          <div class="sum-row"><span>✅ Autorização</span><span>SPA/ME</span></div>
         </div>
-        <div class="summary-info">
-          <p>📧 Seus números chegam por e-mail após confirmação do pagamento</p>
-          <p>📅 Sorteio: <strong>via Loteria Federal</strong></p>
-          <p>✅ Autorização: <strong>SPA/ME</strong></p>
-        </div>
-        <div class="summary-pix" id="summaryPix">
-          <p>💠 <strong>PIX preferido?</strong></p>
-          <p>Após confirmação, você receberá a chave PIX para pagamento.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== GALERIA ===== -->
-<section class="section" id="galeria">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-badge">📸 Conheça o Prêmio</span>
-      <h2>iPhone 16 Pro Max</h2>
-      <p>O smartphone mais poderoso da Apple — e ele pode ser seu</p>
-    </div>
-    <div class="gallery-grid">
-      <div class="gallery-item g-main">
-        <div class="gallery-placeholder">
-          <div class="phone-mock-lg">
-            <div class="phone-screen-lg">
-              <div class="phone-notch-lg"></div>
-              <span>16 Pro Max</span>
-            </div>
-          </div>
-          <p>iPhone 16 Pro Max · Titânio Natural</p>
+        <div class="summary-pix-box" id="summaryPix">
+          <p>💠 Chave PIX para pagamento:</p>
+          <div class="pix-key" id="pixKey" onclick="copyPix()">Selecione um pacote</div>
+          <p style="font-size:.68rem;color:rgba(255,255,255,.3);margin-top:6px">Clique para copiar · Números chegam após confirmação</p>
         </div>
       </div>
-      <div class="gallery-item">
-        <div class="gallery-placeholder gp-sm">
-          <span>Câmera<br/>Pro 48MP</span>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-placeholder gp-sm">
-          <span>Chip<br/>A18 Pro</span>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-placeholder gp-sm">
-          <span>Tela<br/>6.9" ProMotion</span>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-placeholder gp-sm">
-          <span>Bateria<br/>Todo o dia</span>
-        </div>
-      </div>
-    </div>
-    <div class="specs-grid">
-      <div class="spec-item"><span>📱</span><strong>Tela</strong><p>6.9" Super Retina XDR OLED 120Hz</p></div>
-      <div class="spec-item"><span>⚡</span><strong>Chip</strong><p>Apple A18 Pro com Neural Engine</p></div>
-      <div class="spec-item"><span>📸</span><strong>Câmera</strong><p>48MP principal + 48MP ultra + 12MP 5x</p></div>
-      <div class="spec-item"><span>💾</span><strong>Armazenamento</strong><p>256GB</p></div>
-      <div class="spec-item"><span>🌐</span><strong>Conectividade</strong><p>5G, Wi-Fi 7, Bluetooth 5.3</p></div>
-      <div class="spec-item"><span>🎨</span><strong>Cor</strong><p>Titânio Natural</p></div>
     </div>
   </div>
 </section>
 
 <!-- ===== GANHADORES ===== -->
-<section class="section section-dark" id="ganhadores">
+<section class="section section-gray">
   <div class="container">
-    <div class="section-header">
-      <span class="section-badge">🏆 Histórico</span>
-      <h2>Ganhadores Anteriores</h2>
-      <p>Veja quem já foi contemplado em nossas promoções</p>
+    <div class="text-center">
+      <span class="sec-label">Histórico</span>
+      <h2 class="sec-title">Ganhadores anteriores</h2>
+      <p class="sec-desc">Veja quem já foi contemplado. Resultados verificáveis na Loteria Federal.</p>
     </div>
     <div class="winners-grid">
       <div class="winner-card">
-        <div class="winner-avatar">M</div>
-        <div class="winner-info">
-          <strong>Maria S. — SP</strong>
-          <small>Número: 3.41205</small>
-          <small>Prêmio: iPhone 15 Pro</small>
+        <div class="w-avatar">M</div>
+        <div>
+          <div class="w-name">Maria S. · São Paulo</div>
+          <div class="w-num">Número: 3.41205</div>
+          <div class="w-prize">🏆 iPhone 16 Pro Max</div>
         </div>
-        <span class="winner-check">✅</span>
       </div>
       <div class="winner-card">
-        <div class="winner-avatar">J</div>
-        <div class="winner-info">
-          <strong>João P. — RJ</strong>
-          <small>Número: 7.89034</small>
-          <small>Prêmio: iPhone 15 Pro Max</small>
+        <div class="w-avatar">J</div>
+        <div>
+          <div class="w-name">João P. · Rio de Janeiro</div>
+          <div class="w-num">Número: 7.89034</div>
+          <div class="w-prize">🏆 iPhone 16 Pro Max</div>
         </div>
-        <span class="winner-check">✅</span>
       </div>
       <div class="winner-card">
-        <div class="winner-avatar">A</div>
-        <div class="winner-info">
-          <strong>Ana L. — MG</strong>
-          <small>Número: 1.22891</small>
-          <small>Prêmio: MacBook Air</small>
+        <div class="w-avatar">A</div>
+        <div>
+          <div class="w-name">Ana L. · Belo Horizonte</div>
+          <div class="w-num">Número: 1.22891</div>
+          <div class="w-prize">🏆 MacBook Air M3</div>
         </div>
-        <span class="winner-check">✅</span>
       </div>
     </div>
-    <p class="winners-disclaimer">* Dados exibidos com autorização dos ganhadores. Sorteios verificáveis nos resultados públicos da Loteria Federal.</p>
+    <p style="text-align:center;font-size:.72rem;color:rgba(255,255,255,.2);margin-top:16px">* Dados exibidos com autorização. Sorteios verificáveis nos resultados oficiais da Loteria Federal.</p>
   </div>
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="section" id="faq">
+<section class="section section-dark" id="faq">
   <div class="container">
-    <div class="section-header">
-      <span class="section-badge">❓ Dúvidas</span>
-      <h2>Perguntas Frequentes</h2>
+    <div class="text-center">
+      <span class="sec-label">Dúvidas</span>
+      <h2 class="sec-title">Perguntas frequentes</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q">Como funciona a promoção? <span class="faq-arrow">▼</span></button>
-        <div class="faq-a">
-          <p>Você compra nosso ebook digital e recebe automaticamente números da sorte. O ganhador é determinado pelos resultados da Loteria Federal da Caixa Econômica Federal — nós não controlamos o resultado, garantindo total transparência.</p>
-        </div>
+        <button class="faq-btn">Como funciona a promoção?<div class="faq-icon">+</div></button>
+        <div class="faq-body">Você compra nosso ebook digital e recebe automaticamente números da sorte. O ganhador é apurado com base nos resultados públicos da Loteria Federal da Caixa Econômica Federal — garantindo transparência total. Nós não controlamos o resultado.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Quando recebo meus números? <span class="faq-arrow">▼</span></button>
-        <div class="faq-a">
-          <p>Os números são enviados automaticamente por e-mail imediatamente após a confirmação do pagamento. No PIX, a confirmação é quase imediata. No cartão, pode levar até alguns minutos.</p>
-        </div>
+        <button class="faq-btn">Quando recebo meus números?<div class="faq-icon">+</div></button>
+        <div class="faq-body">Os números são enviados automaticamente por e-mail imediatamente após a confirmação do pagamento. Via PIX, a confirmação é quase instantânea. Via cartão, pode levar alguns minutos.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Como é feita a apuração do ganhador? <span class="faq-arrow">▼</span></button>
-        <div class="faq-a">
-          <p>A apuração usa os 5 primeiros prêmios da Loteria Federal. A dezena do 1º prêmio define a série (0-9), e as unidades dos 5 prêmios formam o elemento de 5 dígitos. O número completo (ex: 9.57102) é comparado com nossa base de participantes.</p>
-        </div>
+        <button class="faq-btn">Como é feita a apuração do ganhador?<div class="faq-icon">+</div></button>
+        <div class="faq-body">A apuração usa os 5 primeiros prêmios da Loteria Federal. A dezena do 1º prêmio define a série (0–9), e as unidades dos 5 prêmios formam o elemento de 5 dígitos. O número completo (ex: 9.57102) é verificado na nossa base de participantes elegíveis.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">E se o número sorteado não foi distribuído? <span class="faq-arrow">▼</span></button>
-        <div class="faq-a">
-          <p>Se o número exato não foi distribuído, o sistema busca automaticamente o número imediatamente superior na mesma série. Se não encontrar, busca o inferior. Se a série estiver vazia, avança para a próxima série. Sempre haverá um ganhador entre os participantes elegíveis.</p>
-        </div>
+        <button class="faq-btn">E se meu número não foi o exato sorteado?<div class="faq-icon">+</div></button>
+        <div class="faq-body">Se o número exato não foi distribuído, o sistema busca automaticamente o número imediatamente superior na mesma série. Se não houver, busca o inferior. Se a série estiver vazia, avança para a próxima série. Sempre haverá um ganhador.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">O que é o multiplicador de lançamento? <span class="faq-arrow">▼</span></button>
-        <div class="faq-a">
-          <p>Nos primeiros 10 dias da campanha, todos os compradores recebem 3x mais números do que o padrão do pacote escolhido. É nossa forma de recompensar quem acredita logo de início!</p>
-        </div>
+        <button class="faq-btn">O que é o multiplicador de lançamento?<div class="faq-icon">+</div></button>
+        <div class="faq-body">Nos primeiros 10 dias da campanha, você recebe 3× mais números do que o padrão do pacote escolhido — sem custo adicional. É nossa forma de recompensar quem confia desde o início!</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">A promoção é legalizada? <span class="faq-arrow">▼</span></button>
-        <div class="faq-a">
-          <p>Sim! Esta é uma Promoção Comercial autorizada pela SPA (Secretaria de Prêmios e Apostas do Ministério da Fazenda), conforme a Lei Federal nº 5.768/71. Você pode consultar o regulamento completo e o certificado de autorização nesta página.</p>
-        </div>
+        <button class="faq-btn">A promoção é legalizada?<div class="faq-icon">+</div></button>
+        <div class="faq-body">Sim. Esta é uma Promoção Comercial com Distribuição Gratuita de Prêmios, autorizada pela SPA (Secretaria de Prêmios e Apostas do Ministério da Fazenda), conforme a Lei Federal nº 5.768/71. O certificado de autorização está disponível no regulamento.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Como recebo o prêmio? <span class="faq-arrow">▼</span></button>
-        <div class="faq-a">
-          <p>Após a apuração, entramos em contato pelos dados cadastrados (e-mail e telefone). O iPhone é entregue pelos Correios com frete pago, acompanhado de nota fiscal. O ganhador tem 180 dias para reclamar o prêmio.</p>
-        </div>
+        <button class="faq-btn">Como recebo o iPhone se ganhar?<div class="faq-icon">+</div></button>
+        <div class="faq-body">Após a apuração, entramos em contato pelo e-mail e WhatsApp cadastrados. O iPhone é entregue pelos Correios com frete pago, acompanhado de nota fiscal. O ganhador tem 180 dias para retirar o prêmio.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== ALERTA ANTI-FRAUDE ===== -->
-<section class="alert-section">
+<!-- ANTI FRAUDE -->
+<div class="fraud-bar">
   <div class="container">
-    <div class="fraud-alert">
-      <h3>⚠️ ATENÇÃO: Prevenção contra Golpes</h3>
-      <p><strong>NÃO fazemos ligações para entrega de prêmios.</strong> Nosso único contato oficial é por e-mail cadastrado na compra e pelo WhatsApp oficial abaixo.</p>
-      <p>Desconfie de pessoas se passando por representantes desta promoção. Em caso de dúvida, entre em contato pelos canais oficiais.</p>
-      <div class="official-contacts">
-        <span>📧 Email: <strong>contato@rifatech.pro</strong></span>
-        <span>💬 WhatsApp: <strong>(11) 99999-9999</strong></span>
-        <span>📷 Instagram: <strong>@rifatechpro</strong></span>
-      </div>
+    <h3>⚠️ Atenção — Prevenção contra golpes</h3>
+    <p><strong>NÃO fazemos ligações solicitando dados bancários ou pedindo depósitos para liberar prêmios.</strong> Nosso único contato oficial é por e-mail cadastrado na compra.</p>
+    <div class="fraud-contacts">
+      <span>📧 <strong>contato@faturourifa.com.br</strong></span>
+      <span>💬 <strong>(11) 99999-9999</strong></span>
+      <span>📷 <strong>@faturourifa</strong></span>
     </div>
   </div>
-</section>
+</div>
 
 <!-- ===== REGULAMENTO ===== -->
 <section class="section section-dark" id="regulamento">
   <div class="container">
-    <div class="section-header">
-      <span class="section-badge">📋 Legal</span>
-      <h2>Regulamento da Promoção</h2>
+    <div class="text-center">
+      <span class="sec-label">Legal</span>
+      <h2 class="sec-title">Regulamento</h2>
+      <p class="sec-desc">Promoção autorizada e transparente. Todos os detalhes abaixo.</p>
     </div>
-    <div class="regulamento-box">
+    <div class="reg-grid">
       <div class="reg-item">
-        <strong>📌 Modalidade:</strong> Promoção Comercial com Distribuição Gratuita de Prêmios
+        <div class="reg-lbl">Modalidade</div>
+        <div class="reg-val">Promoção Comercial · Distribuição Gratuita de Prêmios</div>
       </div>
       <div class="reg-item">
-        <strong>📅 Período de participação:</strong> [DATA INÍCIO] a [DATA FIM]
+        <div class="reg-lbl">Período de participação</div>
+        <div class="reg-val">[DATA INÍCIO] até [DATA FIM]</div>
       </div>
       <div class="reg-item">
-        <strong>🏦 Extração da Loteria:</strong> [DATA DA EXTRAÇÃO — Loteria Federal CEF]
+        <div class="reg-lbl">Extração da Loteria</div>
+        <div class="reg-val">[DATA] — Loteria Federal CEF</div>
       </div>
       <div class="reg-item">
-        <strong>📊 Apuração:</strong> [DATA DA APURAÇÃO], às 09h00 (Horário de Brasília)
+        <div class="reg-lbl">Apuração</div>
+        <div class="reg-val">[DATA] às 09h00 (Brasília)</div>
       </div>
       <div class="reg-item">
-        <strong>🏆 Prêmio:</strong> 1 (um) iPhone 16 Pro Max 256GB, cor Titânio Natural
+        <div class="reg-lbl">Prêmio</div>
+        <div class="reg-val">1× iPhone 17 Pro Max 256GB Cosmic Orange</div>
       </div>
       <div class="reg-item">
-        <strong>⏰ Prazo de reclamação:</strong> 180 dias após divulgação do resultado
+        <div class="reg-lbl">Prazo para reclamação</div>
+        <div class="reg-val">180 dias após divulgação</div>
       </div>
       <div class="reg-item">
-        <strong>✅ Autorização:</strong> SPA/ME nº [NÚMERO DA AUTORIZAÇÃO]
+        <div class="reg-lbl">Autorização</div>
+        <div class="reg-val">SPA/ME nº [NÚMERO DA AUTORIZAÇÃO]</div>
       </div>
-      <a href="#" class="btn btn-outline">📄 Baixar Regulamento Completo (PDF)</a>
+      <div class="reg-item" style="display:flex;align-items:center">
+        <a href="#" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:10px 18px;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.7);transition:.2s" onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='rgba(255,255,255,.07)'">📄 Baixar Regulamento PDF</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="logo">
-          <span class="logo-icon">📱</span>
-          <span class="logo-text">RifaTech<span class="logo-accent">Pro</span></span>
-        </div>
-        <p>Promoção comercial regulamentada e autorizada pela SPA/ME. Transparência total pelo resultado público da Loteria Federal.</p>
-        <div class="footer-social">
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="WhatsApp">💬</a>
-          <a href="#" aria-label="YouTube">▶️</a>
+      <div class="f-brand">
+        <div class="nav-logo" style="margin-bottom:12px">📱 Faturou<span style="color:var(--accent)">Rifa</span></div>
+        <p>Promoção Comercial regulamentada e autorizada pela SPA/ME. Transparência total — o resultado é decidido pela Loteria Federal da Caixa, sem interferência.</p>
+        <div class="f-social">
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="WhatsApp">💬</a>
+          <a href="#" title="YouTube">▶️</a>
+          <a href="#" title="TikTok">🎵</a>
         </div>
       </div>
-      <div class="footer-links">
+      <div class="f-col">
         <h4>Links</h4>
+        <a href="#premio">O Prêmio</a>
+        <a href="#pacotes">Pacotes</a>
         <a href="#como-funciona">Como Funciona</a>
-        <a href="#concorra">Concorra</a>
-        <a href="#ganhadores">Ganhadores</a>
         <a href="#faq">FAQ</a>
         <a href="#regulamento">Regulamento</a>
-        <a href="#">Minha Conta</a>
+        <a href="admin.html">Área Admin</a>
       </div>
-      <div class="footer-links">
+      <div class="f-col">
         <h4>Legal</h4>
         <a href="#">Política de Privacidade</a>
         <a href="#">Termos de Uso</a>
         <a href="#">Regulamento Completo</a>
         <a href="#">LGPD — Seus Dados</a>
       </div>
-      <div class="footer-contact">
+      <div class="f-col">
         <h4>Contato</h4>
-        <p>📧 contato@rifatech.pro</p>
-        <p>💬 WhatsApp: (11) 99999-9999</p>
-        <p>📷 @rifatechpro</p>
-        <div class="payment-icons">
-          <span title="PIX">💠 PIX</span>
-          <span title="Cartão">💳 Cartão</span>
+        <p>📧 contato@faturourifa.com.br</p>
+        <p>💬 (11) 99999-9999</p>
+        <p>📷 @faturourifa</p>
+        <div class="pay-chips">
+          <span class="pay-chip">💠 PIX</span>
+          <span class="pay-chip">💳 Cartão</span>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 RifaTechPro — Promoção Comercial autorizada por SPA/ME. | CNPJ: XX.XXX.XXX/0001-XX</p>
-      <p>Esta promoção segue a Lei Federal nº 5.768/71 e é regulamentada pela Secretaria de Prêmios e Apostas do Ministério da Fazenda.</p>
+      <p>© 2026 FaturouRifa — Promoção Comercial autorizada por SPA/ME · CNPJ: XX.XXX.XXX/0001-XX</p>
+      <p>Conforme a Lei Federal nº 5.768/71 regulamentada pela Secretaria de Prêmios e Apostas do Ministério da Fazenda.</p>
     </div>
   </div>
 </footer>
 
-<!-- ===== BOTÃO FLUTUANTE WHATSAPP ===== -->
-<a href="https://wa.me/5511999999999?text=Olá! Tenho dúvidas sobre a rifa do iPhone 16 Pro Max." class="whatsapp-btn" target="_blank" title="Fale conosco no WhatsApp">
-  💬
-</a>
+<!-- WhatsApp -->
+<a class="wa-btn" href="https://wa.me/5511999999999?text=Olá! Tenho dúvida sobre a rifa do iPhone 17 Pro Max." target="_blank" title="WhatsApp">💬</a>
 
-<!-- ===== MODAL COMPRA ===== -->
-<div class="modal-overlay" id="modalOverlay">
+<!-- Modal de confirmação -->
+<div class="modal-ov" id="modalOv">
   <div class="modal">
-    <button class="modal-close" id="modalClose">✕</button>
-    <div class="modal-content" id="modalContent">
-      <!-- conteúdo gerado por JS -->
-    </div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalBody"></div>
   </div>
 </div>
 
-<script src="app.js"></script>
+<div id="toasts"></div>
+
+<script>
+/* =============================================
+   CONFIG
+   ============================================= */
+const CFG = {
+  dataFim: new Date('2026-08-01T23:59:59'),
+  dataInicio: new Date('2026-05-25'),
+  diasLanc: 10,
+  pixKey: '11999999999',
+  totalNums: 1000,
+  vendidos: 347,
+  pacotes: {
+    popular: {nome:'Básico',  nums:5,  val:19.90},
+    prata:   {nome:'Prata',   nums:12, val:39.90},
+    ouro:    {nome:'Ouro',    nums:20, val:59.90},
+    elite:   {nome:'Elite',   nums:50, val:99.90},
+  }
+};
+
+/* =============================================
+   COUNTDOWN PRINCIPAL
+   ============================================= */
+function tick() {
+  const diff = CFG.dataFim - new Date();
+  if (diff <= 0) return;
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  const p = n => String(n).padStart(2,'0');
+  document.getElementById('cd-d').textContent = p(d);
+  document.getElementById('cd-h').textContent = p(h);
+  document.getElementById('cd-m').textContent = p(m);
+  document.getElementById('cd-s').textContent = p(s);
+}
+tick(); setInterval(tick, 1000);
+
+/* =============================================
+   COUNTDOWN LANÇAMENTO
+   ============================================= */
+function tickLaunch() {
+  const fim = new Date(CFG.dataInicio);
+  fim.setDate(fim.getDate() + CFG.diasLanc);
+  const diff = fim - new Date();
+  const el = document.getElementById('launchTimer');
+  if (!el) return;
+  if (diff <= 0) { el.textContent = 'EXPIRADO'; return; }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  el.textContent = `${d}d ${String(h).padStart(2,'0')}h`;
+}
+tickLaunch(); setInterval(tickLaunch, 60000);
+
+/* =============================================
+   PROGRESSO
+   ============================================= */
+let sold = CFG.vendidos;
+function updateProg() {
+  const pct = (sold/CFG.totalNums*100).toFixed(1);
+  const pctBR = pct.replace('.',',');
+  const b = document.getElementById('progBar');
+  const n = document.getElementById('numSold');
+  const p = document.getElementById('progPct');
+  if (b) b.style.width = pct+'%';
+  if (n) n.textContent = sold.toLocaleString('pt-BR');
+  if (p) p.textContent = pctBR+'%';
+}
+updateProg();
+setInterval(() => {
+  if (sold < CFG.totalNums) { sold += Math.floor(Math.random()*2)+1; updateProg(); }
+}, 28000);
+
+/* =============================================
+   NAV HAMBURGER
+   ============================================= */
+const ham = document.getElementById('ham');
+const mm  = document.getElementById('mobileMenu');
+ham.addEventListener('click', () => mm.classList.toggle('open'));
+window.closeMenu = () => mm.classList.remove('open');
+mm.addEventListener('click', e => { if(e.target === mm) closeMenu(); });
+
+/* =============================================
+   FAQ
+   ============================================= */
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
+
+/* =============================================
+   SELETOR DE COR
+   ============================================= */
+const colors = [
+  {el: null, name: 'Cosmic Orange'},
+  {el: null, name: 'Deep Blue'},
+  {el: null, name: 'Silver'},
+];
+document.querySelectorAll('.color-dot').forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+    const nameEl = document.getElementById('colorName');
+    if (nameEl) nameEl.textContent = colors[i]?.name || '';
+  });
+});
+
+/* =============================================
+   MÁSCARA CPF e TEL
+   ============================================= */
+document.getElementById('f-cpf').addEventListener('input', function() {
+  let v = this.value.replace(/\D/g,'').slice(0,11);
+  if (v.length>9) v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
+  else if (v.length>6) v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
+  else if (v.length>3) v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
+  this.value = v;
+});
+document.getElementById('f-tel').addEventListener('input', function() {
+  let v = this.value.replace(/\D/g,'').slice(0,11);
+  if (v.length>10) v=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+  else if (v.length>6) v=v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');
+  else if (v.length>2) v=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
+  this.value = v;
+});
+
+/* =============================================
+   RESUMO DINÂMICO
+   ============================================= */
+function diasLanc() {
+  return Math.floor((new Date() - CFG.dataInicio)/86400000);
+}
+function calcNums(pkg, pm) {
+  const base = CFG.pacotes[pkg]?.nums || 0;
+  const dias  = diasLanc();
+  if (pkg === 'elite' && (pm === 'pix' || pm === 'cartao')) return { n: base*2, tag:'TURBO 2×' };
+  if (dias <= 10) return { n: base*3, tag:'Lançamento 3×' };
+  if (dias <= 17) return { n: base+5, tag:'Lançamento +5' };
+  return { n: base, tag:'Nenhum' };
+}
+
+function updateSummary() {
+  const pkg = document.getElementById('f-pkg').value;
+  const pm  = document.querySelector('input[name="pm"]:checked')?.value || 'pix';
+  const sp  = document.getElementById('s-pkg');
+  const sn  = document.getElementById('s-nums');
+  const sm  = document.getElementById('s-mult');
+  const sv  = document.getElementById('s-val');
+  const pk  = document.getElementById('pixKey');
+
+  if (!pkg) {
+    if(sp) sp.textContent = '—';
+    if(sn) sn.textContent = '—';
+    if(sm) sm.textContent = '—';
+    if(sv) sv.textContent = '—';
+    if(pk) pk.textContent = 'Selecione um pacote';
+    return;
+  }
+  const dados = CFG.pacotes[pkg];
+  const {n, tag} = calcNums(pkg, pm);
+  if(sp) sp.textContent = dados.nome;
+  if(sn) sn.textContent = `${n} números`;
+  if(sm) sm.textContent = tag;
+  if(sv) sv.textContent = `R$ ${dados.val.toFixed(2).replace('.',',')}`;
+  if(pk) pk.textContent = CFG.pixKey;
+}
+document.getElementById('f-pkg').addEventListener('change', updateSummary);
+document.querySelectorAll('input[name="pm"]').forEach(r => r.addEventListener('change', updateSummary));
+
+/* =============================================
+   SELECIONAR PACOTE VIA BOTÃO
+   ============================================= */
+window.selecionarPkg = function(pkg) {
+  document.getElementById('f-pkg').value = pkg;
+  updateSummary();
+  document.getElementById('participar').scrollIntoView({behavior:'smooth', block:'start'});
+  toast('Pacote '+CFG.pacotes[pkg]?.nome+' selecionado!', '#FF6B00');
+};
+
+/* =============================================
+   COPIAR PIX
+   ============================================= */
+window.copyPix = function() {
+  navigator.clipboard?.writeText(CFG.pixKey).then(() => toast('📋 Chave PIX copiada!', '#34c759'));
+};
+
+/* =============================================
+   SUBMIT FORM
+   ============================================= */
+window.submitForm = function(e) {
+  e.preventDefault();
+  const nome = document.getElementById('f-nome').value.trim();
+  const cpf  = document.getElementById('f-cpf').value.replace(/\D/g,'');
+  const email = document.getElementById('f-email').value.trim();
+  const nasc = document.getElementById('f-nasc').value;
+  const pkg  = document.getElementById('f-pkg').value;
+  const pm   = document.querySelector('input[name="pm"]:checked')?.value;
+
+  if (cpf.length !== 11) { toast('CPF inválido.', '#FF4757'); return; }
+  if (!pkg) { toast('Selecione um pacote.', '#FF4757'); return; }
+  const idade = (new Date() - new Date(nasc)) / (365.25*24*3600*1000);
+  if (nasc && idade < 18) { toast('É necessário ter 18 anos ou mais.', '#FF4757'); return; }
+
+  const dados = CFG.pacotes[pkg];
+  const {n, tag} = calcNums(pkg, pm);
+  showModal(nome, email, dados, n, tag, pm);
+};
+
+function showModal(nome, email, pkg, nums, mult, pm) {
+  const body = document.getElementById('modalBody');
+  const pixHtml = pm === 'pix'
+    ? `<div class="pix-confirm-box"><p>Chave PIX para pagamento:</p><div class="pix-confirm-key" onclick="navigator.clipboard?.writeText('${CFG.pixKey}').then(()=>toast('PIX copiado!','#34c759'))">${CFG.pixKey}</div><p style="font-size:.65rem;color:rgba(255,255,255,.3);margin-top:4px">Clique para copiar</p></div>`
+    : `<div class="pix-confirm-box"><p>💳 Você será redirecionado ao gateway seguro após confirmar.</p></div>`;
+
+  body.innerHTML = `
+    <h2>✅ Confirme seu pedido</h2>
+    <p>Revise antes de finalizar</p>
+    <div class="confirm-rows">
+      <div class="cr"><span>👤 Nome</span><strong>${nome}</strong></div>
+      <div class="cr"><span>📧 E-mail</span><strong>${email}</strong></div>
+      <div class="cr"><span>📦 Pacote</span><strong>${pkg.nome}</strong></div>
+      <div class="cr"><span>🎲 Números</span><strong style="color:var(--accent)">${nums} números${mult!=='Nenhum'?' 🔥 '+mult:''}</strong></div>
+      <div class="cr"><span>💰 Total</span><strong style="color:var(--gold)">R$ ${pkg.val.toFixed(2).replace('.',',')}</strong></div>
+      <div class="cr"><span>💳 Pagamento</span><strong>${pm==='pix'?'💠 PIX':'💳 Cartão'}</strong></div>
+    </div>
+    ${pixHtml}
+    <div class="modal-btns">
+      <button class="mbtn-cancel" onclick="closeModal()">Voltar</button>
+      <button class="mbtn-confirm" onclick="confirmarPedido('${nome}')">Confirmar →</button>
+    </div>
+    <p style="font-size:.68rem;color:rgba(255,255,255,.25);text-align:center;margin-top:12px">Números chegam no e-mail em até 5 min após confirmação</p>
+  `;
+  document.getElementById('modalOv').classList.add('open');
+}
+
+window.confirmarPedido = function(nome) {
+  closeModal();
+  toast(`🎉 Pedido de ${nome} confirmado! Verifique seu e-mail.`, '#34c759');
+  document.getElementById('mainForm').reset();
+  updateSummary();
+};
+window.closeModal = function() {
+  document.getElementById('modalOv').classList.remove('open');
+};
+document.getElementById('modalOv').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOv')) closeModal();
+});
+
+/* =============================================
+   TOAST
+   ============================================= */
+function toast(msg, color='#FF6B00') {
+  const area = document.getElementById('toasts');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.style.borderLeftColor = color;
+  t.textContent = msg;
+  area.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 4000);
+}
+
+/* =============================================
+   SMOOTH SCROLL
+   ============================================= */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+
+/* =============================================
+   SCROLL REVEAL (Intersection Observer)
+   ============================================= */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.step, .pkg, .spec-item, .winner-card, .faq-item, .reg-item, .mult-item')
+  .forEach(el => {
+    el.style.cssText += 'opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease';
+    io.observe(el);
+  });
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('.visible')?.classList.add('visible');
+});
+
+// Adicionar classe visible via observer
+const style = document.createElement('style');
+style.textContent = '.visible{opacity:1!important;transform:none!important}';
+document.head.appendChild(style);
+</script>
 </body>
 </html>

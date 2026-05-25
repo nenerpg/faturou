@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — RifaTechPro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:      #0D0D1A;
+      --bg2:     #13132B;
+      --card:    #1A1A35;
+      --border:  rgba(108,99,255,0.25);
+      --primary: #6C63FF;
+      --accent:  #FF6B35;
+      --gold:    #FFD700;
+      --green:   #00D4AA;
+      --red:     #FF4757;
+      --yellow:  #FFB347;
+      --text:    #E8E8F0;
+      --muted:   #8888AA;
+      --mono:    'JetBrains Mono', monospace;
+      --r:       12px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex}
+
+    /* SIDEBAR */
+    .sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--border);padding:24px 0;display:flex;flex-direction:column;gap:4px;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto}
+    .sidebar-logo{padding:0 20px 20px;border-bottom:1px solid var(--border);margin-bottom:12px}
+    .sidebar-logo span{font-size:1.1rem;font-weight:800;color:#fff}
+    .sidebar-logo small{display:block;font-size:0.7rem;color:var(--muted);margin-top:2px}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;border-radius:0;font-size:0.85rem;font-weight:500;color:var(--muted);transition:.2s;border-left:3px solid transparent}
+    .nav-item:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+    .nav-item.active{color:#fff;background:rgba(108,99,255,0.12);border-left-color:var(--primary)}
+    .nav-icon{font-size:1.1rem;width:20px;text-align:center}
+    .nav-sep{height:1px;background:var(--border);margin:8px 0}
+
+    /* MAIN */
+    .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+    .topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;justify-content:space-between;align-items:center}
+    .topbar h1{font-size:1rem;font-weight:700;color:#fff}
+    .topbar-badges{display:flex;gap:10px}
+    .badge{padding:4px 12px;border-radius:50px;font-size:0.72rem;font-weight:700;letter-spacing:.3px}
+    .badge-green{background:rgba(0,212,170,.15);color:var(--green);border:1px solid rgba(0,212,170,.3)}
+    .badge-yellow{background:rgba(255,179,71,.15);color:var(--yellow);border:1px solid rgba(255,179,71,.3)}
+
+    .content{flex:1;padding:28px;overflow-y:auto;display:none}
+    .content.active{display:block}
+
+    /* CARDS */
+    .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:28px}
+    .stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+    .stat-label{font-size:0.75rem;color:var(--muted);margin-bottom:6px;font-weight:600;letter-spacing:.3px}
+    .stat-value{font-size:2rem;font-weight:900;color:#fff;line-height:1}
+    .stat-sub{font-size:0.75rem;color:var(--muted);margin-top:6px}
+    .stat-card.green .stat-value{color:var(--green)}
+    .stat-card.yellow .stat-value{color:var(--yellow)}
+    .stat-card.red .stat-value{color:var(--red)}
+    .stat-card.gold .stat-value{color:var(--gold)}
+
+    /* PANEL */
+    .panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:24px}
+    .panel-title{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+    .panel-title span{font-size:1.1rem}
+
+    /* FORM */
+    .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+    label{font-size:0.78rem;font-weight:600;color:var(--muted);display:block;margin-bottom:5px}
+    input,select{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 12px;color:var(--text);font-size:0.85rem;font-family:inherit;outline:none;transition:.2s}
+    input:focus,select:focus{border-color:var(--primary)}
+    select option{background:var(--bg2)}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:50px;font-weight:700;font-size:0.82rem;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap}
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-primary:hover{background:#5b54e0;transform:translateY(-1px)}
+    .btn-green{background:var(--green);color:#000}
+    .btn-green:hover{opacity:.9}
+    .btn-red{background:var(--red);color:#fff}
+    .btn-red:hover{opacity:.9}
+    .btn-outline{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+    .btn-outline:hover{background:var(--primary);color:#fff}
+    .btn-ghost{background:rgba(255,255,255,0.06);color:var(--text);border:1px solid rgba(255,255,255,0.1)}
+    .btn-ghost:hover{background:rgba(255,255,255,0.1)}
+    .btn-sm{padding:6px 14px;font-size:0.75rem}
+
+    /* TABLE */
+    .table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border)}
+    table{width:100%;border-collapse:collapse;font-size:0.82rem}
+    th{background:rgba(108,99,255,0.1);color:var(--primary);padding:10px 14px;text-align:left;font-weight:700;font-size:0.72rem;letter-spacing:.4px;white-space:nowrap}
+    td{padding:10px 14px;border-top:1px solid rgba(255,255,255,0.04);color:var(--text);vertical-align:middle}
+    tr:hover td{background:rgba(255,255,255,0.02)}
+    .mono{font-family:var(--mono);font-size:0.82rem;letter-spacing:1px}
+    .chip{display:inline-block;padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:700}
+    .chip-green{background:rgba(0,212,170,.15);color:var(--green)}
+    .chip-red{background:rgba(255,71,87,.15);color:var(--red)}
+    .chip-yellow{background:rgba(255,179,71,.15);color:var(--yellow)}
+    .chip-blue{background:rgba(108,99,255,.2);color:#a89eff}
+    .chip-gold{background:rgba(255,215,0,.15);color:var(--gold)}
+
+    /* LOG */
+    .log-box{background:rgba(0,0,0,.4);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:var(--mono);font-size:0.78rem;line-height:1.8;max-height:260px;overflow-y:auto;color:var(--muted)}
+    .log-box .ok{color:var(--green)}
+    .log-box .err{color:var(--red)}
+    .log-box .info{color:var(--primary)}
+    .log-box .warn{color:var(--yellow)}
+
+    /* RESULTADO */
+    .result-box{background:rgba(255,215,0,.06);border:2px solid rgba(255,215,0,.3);border-radius:var(--r);padding:24px;text-align:center;display:none}
+    .result-box.show{display:block}
+    .result-numero{font-size:3.5rem;font-weight:900;color:var(--gold);font-family:var(--mono);letter-spacing:4px;margin:12px 0;text-shadow:0 0 40px rgba(255,215,0,.5)}
+    .result-tipo{font-size:0.8rem;color:var(--muted);margin-bottom:8px}
+    .result-nome{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:4px}
+    .result-email{font-size:0.85rem;color:var(--muted)}
+
+    /* NUMEROS TAG */
+    .nums-wrap{display:flex;flex-wrap:wrap;gap:6px;max-height:120px;overflow-y:auto}
+    .num-tag{background:rgba(108,99,255,.15);border:1px solid rgba(108,99,255,.3);border-radius:6px;padding:3px 9px;font-family:var(--mono);font-size:0.72rem;color:#a89eff}
+    .num-tag.winner{background:rgba(255,215,0,.15);border-color:rgba(255,215,0,.4);color:var(--gold)}
+
+    /* ALERT */
+    .alert{padding:12px 16px;border-radius:8px;font-size:0.82rem;margin-bottom:16px}
+    .alert-info{background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.3);color:#a89eff}
+    .alert-warn{background:rgba(255,179,71,.1);border:1px solid rgba(255,179,71,.3);color:var(--yellow)}
+
+    /* TOAST */
+    #toastArea{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+    .toast{background:var(--bg2);border-radius:8px;padding:12px 18px;font-size:0.82rem;animation:tin .3s ease;border-left:4px solid var(--primary);max-width:300px}
+    @keyframes tin{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+    /* RESPONSIVE */
+    @media(max-width:700px){
+      .sidebar{display:none}
+      .form-grid{grid-template-columns:1fr}
+    }
+
+    .divider{height:1px;background:var(--border);margin:20px 0}
+    .flex-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+    .section-sub{font-size:0.8rem;color:var(--muted);margin-bottom:16px}
+    .empty-state{text-align:center;padding:40px;color:var(--muted);font-size:0.85rem}
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <span>📱 RifaTechPro</span>
+    <small>Painel Administrativo</small>
+  </div>
+  <div class="nav-item active" data-tab="dashboard">
+    <span class="nav-icon">📊</span> Dashboard
+  </div>
+  <div class="nav-item" data-tab="gerar">
+    <span class="nav-icon">🎲</span> Gerar Números
+  </div>
+  <div class="nav-item" data-tab="participantes">
+    <span class="nav-icon">👥</span> Participantes
+  </div>
+  <div class="nav-item" data-tab="apuracao">
+    <span class="nav-icon">🏆</span> Apuração
+  </div>
+  <div class="nav-item" data-tab="csv">
+    <span class="nav-icon">📄</span> Exportar CSV
+  </div>
+  <div class="nav-sep"></div>
+  <div class="nav-item" data-tab="config">
+    <span class="nav-icon">⚙️</span> Configurações
+  </div>
+  <div class="nav-item" onclick="resetarTudo()" style="color:var(--red);margin-top:auto">
+    <span class="nav-icon">🗑️</span> Limpar Tudo
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <h1 id="pageTitle">📊 Dashboard</h1>
+    <div class="topbar-badges">
+      <span class="badge badge-green">🟢 Demonstração</span>
+      <span class="badge badge-yellow" id="campanhaBadge">Campanha Ativa</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ DASHBOARD ═══════════════════ -->
+  <div class="content active" id="tab-dashboard">
+    <div class="stats-row" id="statsRow">
+      <!-- preenchido por JS -->
+    </div>
+
+    <div class="panel">
+      <div class="panel-title"><span>⚡</span> Ações Rápidas</div>
+      <div class="flex-row">
+        <button class="btn btn-primary" onclick="irPara('gerar')">🎲 Simular Compra</button>
+        <button class="btn btn-outline" onclick="irPara('apuracao')">🏆 Realizar Apuração</button>
+        <button class="btn btn-ghost" onclick="irPara('participantes')">👥 Ver Participantes</button>
+        <button class="btn btn-ghost" onclick="irPara('csv')">📄 Exportar CSV</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title"><span>📈</span> Últimas Compras</div>
+      <div id="ultimasCompras">
+        <div class="empty-state">Nenhuma compra ainda. Vá em <strong>Gerar Números</strong> para simular.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ GERAR NÚMEROS ═══════════════════ -->
+  <div class="content" id="tab-gerar">
+    <div class="panel">
+      <div class="panel-title"><span>🎲</span> Simular Compra e Gerar Números</div>
+      <p class="section-sub">Preencha os dados do participante. O sistema gera números únicos e aleatórios automaticamente.</p>
+
+      <div class="form-grid">
+        <div>
+          <label>Nome completo *</label>
+          <input type="text" id="g-nome" placeholder="Ex: João da Silva"/>
+        </div>
+        <div>
+          <label>CPF *</label>
+          <input type="text" id="g-cpf" placeholder="000.000.000-00" maxlength="14"/>
+        </div>
+        <div>
+          <label>E-mail *</label>
+          <input type="email" id="g-email" placeholder="joao@email.com"/>
+        </div>
+        <div>
+          <label>Telefone *</label>
+          <input type="text" id="g-tel" placeholder="(11) 99999-9999"/>
+        </div>
+        <div>
+          <label>Pacote *</label>
+          <select id="g-pacote">
+            <option value="popular">Popular — 5 números — R$ 19,90</option>
+            <option value="prata" selected>Prata — 12 números — R$ 39,90</option>
+            <option value="ouro">Ouro — 20 números — R$ 59,90</option>
+            <option value="elite">Elite — 50 números — R$ 99,90</option>
+          </select>
+        </div>
+        <div>
+          <label>Forma de Pagamento *</label>
+          <select id="g-pgto">
+            <option value="pix">PIX</option>
+            <option value="cartao">Cartão de Crédito</option>
+            <option value="boleto">Boleto</option>
+          </select>
+        </div>
+        <div>
+          <label>Multiplicador extra</label>
+          <select id="g-mult">
+            <option value="auto">Automático (pela data)</option>
+            <option value="lancamento10">Lançamento 10 dias (3×)</option>
+            <option value="lancamento11">Lançamento 11–17 dias (+5)</option>
+            <option value="app">App (3×)</option>
+            <option value="prime">Assinante Prime (6×)</option>
+            <option value="assinante">Assinante Regular (3×)</option>
+            <option value="nenhum">Nenhum</option>
+          </select>
+        </div>
+        <div>
+          <label>Status do Pagamento</label>
+          <select id="g-status">
+            <option value="confirmado">✅ Confirmado</option>
+            <option value="pendente">⏳ Pendente</option>
+            <option value="cancelado">❌ Cancelado</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Preview dos números -->
+      <div id="previewNumeros" style="margin-bottom:16px">
+        <label>Preview — Números que serão gerados:</label>
+        <div style="margin-top:8px" id="previewBox">
+          <div class="alert alert-info">Selecione o pacote e pagamento para ver o preview.</div>
+        </div>
+      </div>
+
+      <div class="flex-row">
+        <button class="btn btn-primary" onclick="simularCompra()">🎲 Gerar e Registrar</button>
+        <button class="btn btn-ghost" onclick="limparFormGerar()">✕ Limpar</button>
+        <button class="btn btn-outline btn-sm" onclick="gerarAleatorio()">🎰 Preencher aleatório (teste)</button>
+      </div>
+    </div>
+
+    <!-- Resultado da geração -->
+    <div class="panel" id="geradoResult" style="display:none">
+      <div class="panel-title"><span>✅</span> Números Gerados com Sucesso!</div>
+      <div id="geradoContent"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title"><span>📖</span> Como funciona a geração</div>
+      <div class="log-box" id="logGeracao">
+        <span class="info">Aguardando geração...</span><br/>
+        <span class="info">Os números são gerados de forma ALEATÓRIA e ÚNICA.</span><br/>
+        <span class="info">Formato: SERIE.ELEMENTO  ex: 9.57102</span><br/>
+        <span class="info">Cada campanha tem até 1.000.000 números (10 séries × 100.000 elementos).</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ PARTICIPANTES ═══════════════════ -->
+  <div class="content" id="tab-participantes">
+    <div class="panel">
+      <div class="panel-title"><span>👥</span> Todos os Participantes</div>
+      <div class="flex-row" style="margin-bottom:16px">
+        <input type="text" id="searchPart" placeholder="🔍 Buscar por nome, CPF, e-mail..." style="max-width:320px" oninput="renderParticipantes()"/>
+        <select id="filterStatus" onchange="renderParticipantes()" style="max-width:160px">
+          <option value="">Todos os status</option>
+          <option value="confirmado">Confirmado</option>
+          <option value="pendente">Pendente</option>
+          <option value="cancelado">Cancelado</option>
+        </select>
+        <button class="btn btn-red btn-sm" onclick="cancelarSelecionados()">❌ Cancelar selecionados</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="checkAll" onchange="toggleCheckAll()"/></th>
+              <th>#</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Pacote</th>
+              <th>Pagamento</th>
+              <th>Multiplicador</th>
+              <th>Números</th>
+              <th>Status</th>
+              <th>Elegível</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaParticipantes">
+            <tr><td colspan="11" class="empty-state">Nenhum participante cadastrado.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Detalhe do participante -->
+    <div class="panel" id="detalheParticipante" style="display:none">
+      <div class="panel-title"><span>🔍</span> Números do Participante</div>
+      <div id="detalheContent"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ APURAÇÃO ═══════════════════ -->
+  <div class="content" id="tab-apuracao">
+    <div class="alert alert-warn">
+      ⚠️ <strong>Atenção:</strong> Em produção, os números da Loteria Federal devem ser obtidos do site oficial
+      <strong>loterias.caixa.gov.br</strong> na data definida no regulamento.
+      Aqui você pode inserir manualmente para testar a lógica.
+    </div>
+
+    <div class="panel">
+      <div class="panel-title"><span>🏦</span> Resultado da Loteria Federal</div>
+      <p class="section-sub">Insira os 5 primeiros prêmios da extração (5 dígitos cada):</p>
+      <div class="form-grid">
+        <div>
+          <label>1º Prêmio *</label>
+          <input type="text" id="lot1" placeholder="Ex: 12595" maxlength="5" class="mono" oninput="this.value=this.value.replace(/\D/g,'').slice(0,5);atualizarPreviewApuracao()"/>
+        </div>
+        <div>
+          <label>2º Prêmio *</label>
+          <input type="text" id="lot2" placeholder="Ex: 34447" maxlength="5" class="mono" oninput="this.value=this.value.replace(/\D/g,'').slice(0,5);atualizarPreviewApuracao()"/>
+        </div>
+        <div>
+          <label>3º Prêmio *</label>
+          <input type="text" id="lot3" placeholder="Ex: 94101" maxlength="5" class="mono" oninput="this.value=this.value.replace(/\D/g,'').slice(0,5);atualizarPreviewApuracao()"/>
+        </div>
+        <div>
+          <label>4º Prêmio *</label>
+          <input type="text" id="lot4" placeholder="Ex: 32110" maxlength="5" class="mono" oninput="this.value=this.value.replace(/\D/g,'').slice(0,5);atualizarPreviewApuracao()"/>
+        </div>
+        <div>
+          <label>5º Prêmio *</label>
+          <input type="text" id="lot5" placeholder="Ex: 20362" maxlength="5" class="mono" oninput="this.value=this.value.replace(/\D/g,'').slice(0,5);atualizarPreviewApuracao()"/>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end">
+          <button class="btn btn-ghost btn-sm" onclick="preencherExemplo()" style="height:38px">📋 Preencher exemplo</button>
+        </div>
+      </div>
+
+      <!-- Preview cálculo -->
+      <div class="divider"></div>
+      <div id="previewApuracao" style="font-family:var(--mono);font-size:0.82rem;color:var(--muted)">
+        Digite os prêmios para ver o cálculo em tempo real...
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title"><span>▶️</span> Executar Apuração</div>
+      <div class="flex-row" style="margin-bottom:16px">
+        <button class="btn btn-primary" onclick="executarApuracao()">🏆 APURAR GANHADOR</button>
+        <button class="btn btn-ghost" onclick="limparApuracao()">✕ Limpar</button>
+      </div>
+
+      <!-- Resultado -->
+      <div class="result-box" id="resultBox">
+        <div class="result-tipo" id="resultTipo"></div>
+        <div class="result-numero" id="resultNumero"></div>
+        <div class="result-nome" id="resultNome"></div>
+        <div class="result-email" id="resultEmail"></div>
+        <div style="margin-top:20px">
+          <button class="btn btn-green btn-sm" onclick="exportarApuracao()">📄 Exportar Resultado</button>
+        </div>
+      </div>
+
+      <!-- Log da apuração -->
+      <div class="panel-title" style="margin-top:20px"><span>📋</span> Log de Apuração</div>
+      <div class="log-box" id="logApuracao">
+        <span class="info">Aguardando apuração...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ CSV ═══════════════════ -->
+  <div class="content" id="tab-csv">
+    <div class="panel">
+      <div class="panel-title"><span>📄</span> Exportar CSV — Formato SCPC/SPA</div>
+      <p class="section-sub">
+        Exporta a lista de participantes elegíveis no formato exigido pela SPA para upload no SCPC.
+        Deve ser enviado <strong>antes</strong> da data da extração da Loteria Federal.
+      </p>
+
+      <div class="alert alert-warn">
+        ⚠️ <strong>Prazo legal:</strong> Os números devem ser divulgados aos participantes com no mínimo
+        <strong>24 horas</strong> de antecedência em relação à extração da Loteria Federal.
+      </div>
+
+      <div class="divider"></div>
+      <div class="panel-title" style="font-size:.8rem;color:var(--muted)">PREVIEW DO CSV</div>
+      <div class="log-box" id="csvPreview" style="max-height:360px">
+        <!-- gerado por JS -->
+      </div>
+      <div class="divider"></div>
+      <div class="flex-row">
+        <button class="btn btn-primary" onclick="exportarCSV()">⬇️ Baixar CSV</button>
+        <button class="btn btn-ghost" onclick="renderCSVPreview()">🔄 Atualizar Preview</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title"><span>📋</span> Especificação das Colunas</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Regra</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>CPF/CNPJ</td><td>VARCHAR(11)</td><td>Só dígitos</td><td class="mono">12345678900</td></tr>
+            <tr><td>Nome</td><td>VARCHAR</td><td>Nome completo</td><td>João da Silva</td></tr>
+            <tr><td>Numero_Serie</td><td>TINYINT 0–9</td><td>Série do número</td><td class="mono">9</td></tr>
+            <tr><td>Elemento_Sorteavel</td><td>CHAR(5)</td><td><strong>Zero-padding obrigatório</strong></td><td class="mono">57102</td></tr>
+            <tr><td>Data</td><td>DATE</td><td>YYYY-MM-DD</td><td class="mono">2026-05-15</td></tr>
+            <tr><td>Horario</td><td>TIME</td><td>HH:MM:SS</td><td class="mono">14:32:00</td></tr>
+            <tr><td>Email</td><td>VARCHAR</td><td>E-mail cadastrado</td><td>joao@email.com</td></tr>
+            <tr><td>Telefone</td><td>VARCHAR</td><td>Só dígitos</td><td class="mono">11999999999</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ CONFIG ═══════════════════ -->
+  <div class="content" id="tab-config">
+    <div class="panel">
+      <div class="panel-title"><span>⚙️</span> Configurações da Campanha</div>
+      <div class="form-grid">
+        <div>
+          <label>Nome da Campanha</label>
+          <input type="text" id="cfg-nome" value="iPhone 16 Pro Max — Campanha 2026"/>
+        </div>
+        <div>
+          <label>Total de Séries (1–10)</label>
+          <input type="number" id="cfg-series" min="1" max="10" value="10"/>
+        </div>
+        <div>
+          <label>Elementos por Série</label>
+          <input type="number" id="cfg-elementos" value="100000"/>
+        </div>
+        <div>
+          <label>Série Inicial</label>
+          <input type="number" id="cfg-serieInicial" min="0" max="9" value="0"/>
+        </div>
+        <div>
+          <label>Data de Início</label>
+          <input type="date" id="cfg-inicio" value="2026-05-25"/>
+        </div>
+        <div>
+          <label>Data de Encerramento</label>
+          <input type="date" id="cfg-fim" value="2026-08-01"/>
+        </div>
+        <div>
+          <label>Data Extração Loteria</label>
+          <input type="date" id="cfg-extracao" value="2026-08-01"/>
+        </div>
+        <div>
+          <label>Data da Apuração</label>
+          <input type="date" id="cfg-apuracao" value="2026-08-03"/>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <button class="btn btn-primary" onclick="salvarConfig()">💾 Salvar Configurações</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title"><span>📊</span> Estatísticas Internas</div>
+      <div class="log-box" id="logStats"><!-- JS --></div>
+    </div>
+  </div>
+
+</main>
+
+<div id="toastArea"></div>
+
+<script>
+/* ═══════════════════════════════════════════
+   DATABASE — localStorage como banco de dados
+   ═══════════════════════════════════════════ */
+const DB = {
+  get participantes() { return JSON.parse(localStorage.getItem('rifa_participantes') || '[]') },
+  set participantes(v){ localStorage.setItem('rifa_participantes', JSON.stringify(v)) },
+  get numerosUsados()  { return JSON.parse(localStorage.getItem('rifa_numeros') || '[]') },
+  set numerosUsados(v) { localStorage.setItem('rifa_numeros', JSON.stringify(v)) },
+  get config()         { return JSON.parse(localStorage.getItem('rifa_config') || 'null') || CONFIG_PADRAO },
+  set config(v)        { localStorage.setItem('rifa_config', JSON.stringify(v)) },
+  get apuracoes()      { return JSON.parse(localStorage.getItem('rifa_apuracoes') || '[]') },
+  set apuracoes(v)     { localStorage.setItem('rifa_apuracoes', JSON.stringify(v)) },
+};
+
+const CONFIG_PADRAO = {
+  nome: 'iPhone 16 Pro Max — Campanha 2026',
+  totalSeries: 10,
+  elementosPorSerie: 100000,
+  serieInicial: 0,
+  dataInicio: '2026-05-25',
+  dataFim: '2026-08-01',
+  dataExtracao: '2026-08-01',
+  dataApuracao: '2026-08-03',
+};
+
+const PACOTES = {
+  popular: { nome: 'Básico',  tag: 'Popular', numeros: 5,  valor: 19.90 },
+  prata:   { nome: 'Prata',   tag: 'Prata',   numeros: 12, valor: 39.90 },
+  ouro:    { nome: 'Ouro',    tag: 'Ouro',    numeros: 20, valor: 59.90 },
+  elite:   { nome: 'Elite',   tag: 'Elite',   numeros: 50, valor: 99.90 },
+};
+
+const MULT_LABELS = {
+  turbo: 'TURBO 2×', lancamento10: 'Lançamento 3×',
+  lancamento11: 'Lançamento +5', app: 'App 3×',
+  prime: 'Prime 6×', assinante: 'Assinante 3×', nenhum: 'Nenhum',
+};
+
+/* ═══════════════════════════════════════════
+   ENGINE DE GERAÇÃO DE NÚMEROS
+   ═══════════════════════════════════════════ */
+function calcMultiplicador(tagPacote, pagamento, multOverride) {
+  // Override manual pelo admin
+  if (multOverride && multOverride !== 'auto' && multOverride !== 'nenhum') {
+    const fatores = { lancamento10: {f:3,bonus:0}, lancamento11:{f:1,bonus:5},
+                      app:{f:3,bonus:0}, prime:{f:6,bonus:0}, assinante:{f:3,bonus:0} };
+    const m = fatores[multOverride] || {f:1,bonus:0};
+    return { fator: m.f, bonus: m.bonus, tipo: multOverride };
+  }
+  if (multOverride === 'nenhum') return { fator:1, bonus:0, tipo:'nenhum' };
+
+  // Hierarquia automática
+  if (tagPacote === 'Elite' && (pagamento === 'pix' || pagamento === 'cartao')) {
+    return { fator:2, bonus:0, tipo:'turbo' };
+  }
+  // Data de lançamento
+  const inicio = new Date(DB.config.dataInicio);
+  const dias   = Math.floor((new Date() - inicio) / 86400000);
+  if (dias <= 10) return { fator:3, bonus:0, tipo:'lancamento10' };
+  if (dias <= 17) return { fator:1, bonus:5, tipo:'lancamento11' };
+  return { fator:1, bonus:0, tipo:'nenhum' };
+}
+
+function calcNumerosFinais(baseNumeros, mult) {
+  return (baseNumeros * mult.fator) + mult.bonus;
+}
+
+/**
+ * Gera N números únicos aleatórios no formato "S.EEEEE"
+ * sem repetição com a base já existente.
+ */
+function gerarNumerosAleatorios(quantidade) {
+  const cfg = DB.config;
+  const usados = new Set(DB.numerosUsados);
+  const maxNumeros = cfg.totalSeries * cfg.elementosPorSerie;
+  const gerados = [];
+  const log = [];
+
+  log.push(`Iniciando geração de ${quantidade} número(s)...`);
+  log.push(`Série inicial: ${cfg.serieInicial} | Total séries: ${cfg.totalSeries} | Elementos/série: ${cfg.elementosPorSerie.toLocaleString('pt-BR')}`);
+  log.push(`Números já usados na campanha: ${usados.size.toLocaleString('pt-BR')} / ${maxNumeros.toLocaleString('pt-BR')}`);
+
+  if (usados.size + quantidade > maxNumeros) {
+    log.push(`ERRO: Campanha lotada! Máximo: ${maxNumeros.toLocaleString('pt-BR')}`);
+    return { numeros: [], log, erro: true };
+  }
+
+  let tentativas = 0;
+  while (gerados.length < quantidade) {
+    tentativas++;
+    if (tentativas > quantidade * 100) {
+      log.push(`ERRO: Muitas tentativas. Campanha pode estar quase lotada.`);
+      break;
+    }
+
+    // Gera série aleatória dentro do range configurado
+    const serie = cfg.serieInicial + Math.floor(Math.random() * cfg.totalSeries);
+    // Gera elemento aleatório
+    const elemento = Math.floor(Math.random() * cfg.elementosPorSerie);
+    const numero = `${serie}.${String(elemento).padStart(5, '0')}`;
+
+    if (!usados.has(numero) && !gerados.includes(numero)) {
+      gerados.push(numero);
+      usados.add(numero);
+      log.push(`  ✅ Gerado: ${numero}  (série ${serie}, elemento ${String(elemento).padStart(5,'0')})`);
+    }
+  }
+
+  log.push(`Geração concluída: ${gerados.length} número(s) em ${tentativas} tentativa(s).`);
+  return { numeros: gerados, log, erro: false };
+}
+
+/* ═══════════════════════════════════════════
+   SIMULAÇÃO DE COMPRA
+   ═══════════════════════════════════════════ */
+function simularCompra() {
+  const nome   = document.getElementById('g-nome').value.trim();
+  const cpf    = document.getElementById('g-cpf').value.replace(/\D/g,'');
+  const email  = document.getElementById('g-email').value.trim();
+  const tel    = document.getElementById('g-tel').value.replace(/\D/g,'');
+  const pacote = document.getElementById('g-pacote').value;
+  const pgto   = document.getElementById('g-pgto').value;
+  const multOv = document.getElementById('g-mult').value;
+  const status = document.getElementById('g-status').value;
+
+  // Validações básicas
+  if (!nome || !cpf || !email || !pacote) {
+    toast('Preencha os campos obrigatórios (nome, CPF, e-mail, pacote).', 'red'); return;
+  }
+  if (cpf.length !== 11) { toast('CPF inválido.', 'red'); return; }
+
+  // CPF duplicado
+  const existente = DB.participantes.find(p => p.cpf === cpf);
+  if (existente) {
+    toast(`CPF já cadastrado! (${existente.nome})`, 'yellow'); return;
+  }
+
+  const pkg  = PACOTES[pacote];
+  const mult = calcMultiplicador(pkg.tag, pgto, multOv);
+  const qtd  = calcNumerosFinais(pkg.numeros, mult);
+
+  // Gera os números
+  const { numeros, log, erro } = gerarNumerosAleatorios(qtd);
+  renderLog('logGeracao', log);
+
+  if (erro || numeros.length === 0) {
+    toast('Erro na geração de números. Verifique o log.', 'red'); return;
+  }
+
+  // Salva na base
+  const participante = {
+    id: Date.now(),
+    nome, cpf, email, tel,
+    pacote, nomePacote: pkg.nome,
+    pagamento: pgto,
+    valorPago: pkg.valor,
+    multiplicadorTipo: mult.tipo,
+    multiplicadorFator: mult.fator,
+    multiplicadorBonus: mult.bonus,
+    numerosGerados: numeros,
+    statusPagamento: status,
+    elegivel: status === 'confirmado',
+    created_at: new Date().toISOString(),
+  };
+
+  const lista = DB.participantes;
+  lista.push(participante);
+  DB.participantes = lista;
+
+  // Marca números como usados
+  const usados = DB.numerosUsados;
+  numeros.forEach(n => usados.push(n));
+  DB.numerosUsados = usados;
+
+  // Exibe resultado
+  mostrarResultadoGeracao(participante);
+  toast(`✅ ${numeros.length} número(s) gerado(s) para ${nome}!`, 'green');
+  atualizarStats();
+}
+
+function mostrarResultadoGeracao(p) {
+  const box = document.getElementById('geradoResult');
+  const content = document.getElementById('geradoContent');
+  box.style.display = 'block';
+
+  const chips = p.numerosGerados.map(n =>
+    `<span class="num-tag">${n}</span>`
+  ).join('');
+
+  const multLabel = MULT_LABELS[p.multiplicadorTipo] || p.multiplicadorTipo;
+
+  content.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px">
+      <div><span class="chip chip-blue">${p.nomePacote}</span><br/><small style="color:var(--muted)">${p.pacote}</small></div>
+      <div><strong style="color:#fff">${p.nome}</strong><br/><small style="color:var(--muted)">${p.cpf}</small></div>
+      <div><span style="color:var(--muted)">Multiplicador:</span><br/><strong style="color:var(--yellow)">${multLabel}</strong></div>
+      <div><span style="color:var(--muted)">Total de números:</span><br/><strong style="color:var(--green);font-size:1.5rem">${p.numerosGerados.length}</strong></div>
+      <div><span style="color:var(--muted)">Status:</span><br/><span class="chip chip-${p.elegivel?'green':'yellow'}">${p.statusPagamento}</span></div>
+    </div>
+    <div style="margin-bottom:8px;font-size:0.78rem;color:var(--muted)">NÚMEROS GERADOS:</div>
+    <div class="nums-wrap">${chips}</div>
+  `;
+}
+
+function limparFormGerar() {
+  ['g-nome','g-cpf','g-email','g-tel'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('g-pacote').value = 'prata';
+  document.getElementById('g-pgto').value = 'pix';
+  document.getElementById('g-mult').value = 'auto';
+  document.getElementById('g-status').value = 'confirmado';
+  document.getElementById('geradoResult').style.display = 'none';
+  atualizarPreviewGeracao();
+}
+
+// Nomes e CPFs fictícios para teste rápido
+const NOMES_TESTE = ['Maria Silva','João Santos','Ana Oliveira','Pedro Costa','Larissa Pereira',
+  'Rafael Alves','Fernanda Lima','Bruno Souza','Carla Mendes','Diego Rocha'];
+let _nomeIdx = 0;
+
+function gerarAleatorio() {
+  const nome = NOMES_TESTE[_nomeIdx % NOMES_TESTE.length];
+  _nomeIdx++;
+  const cpf = String(Math.floor(Math.random()*89999999999)+10000000000);
+  const formatado = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4');
+  document.getElementById('g-nome').value  = nome;
+  document.getElementById('g-cpf').value   = formatado;
+  document.getElementById('g-email').value = nome.toLowerCase().replace(' ','.') + Math.floor(Math.random()*99) + '@email.com';
+  document.getElementById('g-tel').value   = `(${10+Math.floor(Math.random()*89)}) 9${String(Math.floor(Math.random()*89999999)+10000000)}`;
+  atualizarPreviewGeracao();
+  toast('Dados de teste preenchidos!', 'blue');
+}
+
+function atualizarPreviewGeracao() {
+  const pacote = document.getElementById('g-pacote')?.value;
+  const pgto   = document.getElementById('g-pgto')?.value;
+  const multOv = document.getElementById('g-mult')?.value;
+  const box    = document.getElementById('previewBox');
+  if (!box || !pacote) return;
+
+  const pkg  = PACOTES[pacote];
+  const mult = calcMultiplicador(pkg.tag, pgto, multOv);
+  const qtd  = calcNumerosFinais(pkg.numeros, mult);
+  const label = MULT_LABELS[mult.tipo] || mult.tipo;
+
+  box.innerHTML = `
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <div style="background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);border-radius:8px;padding:12px 20px;text-align:center">
+        <div style="font-size:2.5rem;font-weight:900;color:var(--green)">${qtd}</div>
+        <div style="font-size:0.72rem;color:var(--muted)">números</div>
+      </div>
+      <div style="font-size:0.82rem;color:var(--muted)">
+        <p>📦 Pacote: <strong style="color:var(--text)">${pkg.nome}</strong> (base ${pkg.numeros})</p>
+        <p>⚡ Multiplicador: <strong style="color:var(--yellow)">${label}</strong></p>
+        <p>💳 Pagamento: <strong style="color:var(--text)">${pgto.toUpperCase()}</strong></p>
+        <p>💰 Valor: <strong style="color:var(--gold)">R$ ${pkg.valor.toFixed(2).replace('.',',')}</strong></p>
+      </div>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════
+   PARTICIPANTES
+   ═══════════════════════════════════════════ */
+function renderParticipantes() {
+  const tbody  = document.getElementById('tabelaParticipantes');
+  const search = document.getElementById('searchPart')?.value.toLowerCase() || '';
+  const filter = document.getElementById('filterStatus')?.value || '';
+  let lista = DB.participantes;
+
+  if (search) lista = lista.filter(p =>
+    p.nome.toLowerCase().includes(search) ||
+    p.cpf.includes(search.replace(/\D/g,'')) ||
+    p.email.toLowerCase().includes(search)
+  );
+  if (filter) lista = lista.filter(p => p.statusPagamento === filter);
+
+  if (!lista.length) {
+    tbody.innerHTML = '<tr><td colspan="11" class="empty-state">Nenhum participante encontrado.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = lista.map((p, i) => {
+    const statusChip = {confirmado:'chip-green',pendente:'chip-yellow',cancelado:'chip-red'}[p.statusPagamento] || 'chip-blue';
+    const multLabel  = MULT_LABELS[p.multiplicadorTipo] || p.multiplicadorTipo;
+    return `
+      <tr>
+        <td><input type="checkbox" class="check-part" data-id="${p.id}"/></td>
+        <td style="color:var(--muted)">${i+1}</td>
+        <td><strong>${p.nome}</strong><br/><small style="color:var(--muted)">${p.email}</small></td>
+        <td class="mono">${p.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4')}</td>
+        <td><span class="chip chip-blue">${p.nomePacote}</span></td>
+        <td>${p.pagamento.toUpperCase()}</td>
+        <td><span class="chip chip-gold">${multLabel}</span></td>
+        <td>
+          <span style="color:var(--green);font-weight:700">${p.numerosGerados.length}</span>
+          <button class="btn btn-ghost btn-sm" onclick="verNumeros(${p.id})" style="margin-left:6px;padding:2px 8px;font-size:0.7rem">ver</button>
+        </td>
+        <td><span class="chip ${statusChip}">${p.statusPagamento}</span></td>
+        <td>${p.elegivel ? '<span class="chip chip-green">✅ Sim</span>' : '<span class="chip chip-red">❌ Não</span>'}</td>
+        <td>
+          <div style="display:flex;gap:4px">
+            <button class="btn btn-ghost btn-sm" onclick="toggleElegivel(${p.id})" title="Alternar elegibilidade">⚡</button>
+            <button class="btn btn-red btn-sm" onclick="cancelarParticipante(${p.id})" title="Cancelar">❌</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function verNumeros(id) {
+  const p = DB.participantes.find(x => x.id === id);
+  if (!p) return;
+  const box = document.getElementById('detalheParticipante');
+  const content = document.getElementById('detalheContent');
+  box.style.display = 'block';
+  const chips = p.numerosGerados.map(n => `<span class="num-tag">${n}</span>`).join('');
+  content.innerHTML = `
+    <p style="margin-bottom:12px"><strong style="color:#fff">${p.nome}</strong> — ${p.numerosGerados.length} número(s)</p>
+    <div class="nums-wrap">${chips}</div>
+  `;
+  box.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function cancelarParticipante(id) {
+  const lista = DB.participantes.map(p => {
+    if (p.id === id) return {...p, statusPagamento:'cancelado', elegivel:false};
+    return p;
+  });
+  DB.participantes = lista;
+  renderParticipantes();
+  atualizarStats();
+  toast('Participante cancelado e marcado como inelegível.', 'yellow');
+}
+
+function toggleElegivel(id) {
+  const lista = DB.participantes.map(p => {
+    if (p.id === id) return {...p, elegivel: !p.elegivel};
+    return p;
+  });
+  DB.participantes = lista;
+  renderParticipantes();
+  toast('Elegibilidade alterada.', 'blue');
+}
+
+function toggleCheckAll() {
+  const all = document.getElementById('checkAll').checked;
+  document.querySelectorAll('.check-part').forEach(c => c.checked = all);
+}
+
+function cancelarSelecionados() {
+  const ids = [...document.querySelectorAll('.check-part:checked')].map(c => parseInt(c.dataset.id));
+  if (!ids.length) { toast('Nenhum selecionado.', 'yellow'); return; }
+  const lista = DB.participantes.map(p =>
+    ids.includes(p.id) ? {...p, statusPagamento:'cancelado', elegivel:false} : p
+  );
+  DB.participantes = lista;
+  renderParticipantes();
+  atualizarStats();
+  toast(`${ids.length} participante(s) cancelado(s).`, 'yellow');
+}
+
+/* ═══════════════════════════════════════════
+   APURAÇÃO
+   ═══════════════════════════════════════════ */
+function atualizarPreviewApuracao() {
+  const vals = [1,2,3,4,5].map(i => (document.getElementById('lot'+i)?.value || '').padStart(5,'0'));
+  const box  = document.getElementById('previewApuracao');
+  if (!box) return;
+
+  if (vals.some(v => v === '00000' && !v)) {
+    box.innerHTML = 'Digite os prêmios para ver o cálculo...'; return;
+  }
+
+  const serie    = calcSerie(vals[0]);
+  const elemento = calcElemento(vals);
+
+  box.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px">
+      ${vals.map((v,i) => `
+        <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:0.65rem;color:var(--muted);margin-bottom:4px">${i+1}º Prêmio</div>
+          <div class="mono" style="font-size:1rem;color:#fff">${v.slice(0,-2)}<u style="color:var(--primary)">${v.slice(-2,-1)}</u>${v.slice(-2,-1)===v.slice(-1)?'<strong style="color:var(--accent)">'+v.slice(-1)+'</strong>':'<strong style="color:var(--accent)">'+v.slice(-1)+'</strong>'}</div>
+          ${i===0?`<div style="font-size:0.65rem;color:var(--primary);margin-top:3px">Dezena=Série</div>`:''}
+          <div style="font-size:0.65rem;color:var(--accent);margin-top:3px">Unidade=${v.slice(-1)}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <div>Série: <strong style="color:var(--primary);font-size:1.2rem">${serie}</strong> <span style="color:var(--muted)">(dezena de ${vals[0]})</span></div>
+      <div>Elemento: <strong style="color:var(--accent);font-family:var(--mono)">${elemento}</strong> <span style="color:var(--muted)">(unidades dos 5 prêmios)</span></div>
+      <div>Número vencedor: <strong style="color:var(--gold);font-size:1.3rem;font-family:var(--mono)">${serie}.${elemento}</strong></div>
+    </div>
+  `;
+}
+
+function calcSerie(premio1) {
+  const s = String(premio1).padStart(5,'0');
+  return parseInt(s.slice(-2,-1));
+}
+
+function calcElemento(premios) {
+  return premios.map(p => String(p).padStart(5,'0').slice(-1)).join('');
+}
+
+function preencherExemplo() {
+  document.getElementById('lot1').value = '12595';
+  document.getElementById('lot2').value = '34447';
+  document.getElementById('lot3').value = '94101';
+  document.getElementById('lot4').value = '32110';
+  document.getElementById('lot5').value = '20362';
+  atualizarPreviewApuracao();
+  toast('Exemplo preenchido: resultado esperado 9.57102', 'blue');
+}
+
+function executarApuracao() {
+  const premios = [1,2,3,4,5].map(i => document.getElementById('lot'+i)?.value?.trim());
+  if (premios.some(p => !p || p.length !== 5)) {
+    toast('Preencha todos os 5 prêmios com 5 dígitos cada.', 'red'); return;
+  }
+
+  const serie    = calcSerie(premios[0]);
+  const elemento = calcElemento(premios);
+  const log      = [];
+
+  log.push(`=== APURAÇÃO INICIADA ===`);
+  log.push(`Prêmios: [${premios.join(', ')}]`);
+  log.push(`Série calculada: ${serie}  (dezena do 1º prêmio = ${String(premios[0]).padStart(5,'0').slice(-2,-1)})`);
+  log.push(`Elemento calculado: ${elemento}  (unidades dos 5 prêmios)`);
+  log.push(`Número vencedor calculado: ${serie}.${elemento}`);
+  log.push(`---`);
+
+  // Monta base de dados
+  const baseDados = {};
+  DB.participantes.forEach(p => {
+    p.numerosGerados.forEach(num => {
+      const [s, e] = num.split('.');
+      baseDados[num] = {
+        ...p,
+        serie: parseInt(s),
+        elemento: parseInt(e),
+        elegivel: p.elegivel,
+      };
+    });
+  });
+
+  log.push(`Participantes na base: ${DB.participantes.length}`);
+  log.push(`Números totais na base: ${Object.keys(baseDados).length}`);
+  log.push(`Números elegíveis: ${Object.values(baseDados).filter(x=>x.elegivel).length}`);
+  log.push(`---`);
+
+  if (Object.keys(baseDados).length === 0) {
+    log.push(`ERRO: Nenhum participante na base. Cadastre participantes primeiro.`);
+    renderLog('logApuracao', log);
+    toast('Nenhum participante cadastrado!', 'red'); return;
+  }
+
+  // Algoritmo de apuração
+  const resultado = apurar(serie, parseInt(elemento), baseDados, log);
+
+  renderLog('logApuracao', log);
+
+  // Exibe resultado
+  const box = document.getElementById('resultBox');
+  box.classList.add('show');
+
+  const tipoLabel = {
+    exato: '🎯 Número exato encontrado!',
+    aproximacao_superior: '⬆️ Aproximação por número SUPERIOR',
+    aproximacao_inferior: '⬇️ Aproximação por número INFERIOR',
+    troca_serie: '🔄 Troca de série aplicada',
+    sem_ganhador: '❌ Nenhum ganhador encontrado',
+  };
+
+  document.getElementById('resultTipo').textContent    = tipoLabel[resultado.tipo] || resultado.tipo;
+  document.getElementById('resultNumero').textContent  = resultado.numero || '—';
+  document.getElementById('resultNome').textContent    = resultado.ganhador ? resultado.ganhador.nome : 'Sem ganhador';
+  document.getElementById('resultEmail').textContent   = resultado.ganhador ? resultado.ganhador.email : '';
+
+  // Destaca o número vencedor na tabela de participantes
+  if (resultado.ganhador) {
+    toast(`🏆 Ganhador: ${resultado.ganhador.nome} — ${resultado.numero}`, 'green');
+
+    // Salva apuração
+    const aps = DB.apuracoes;
+    aps.push({ ...resultado, premios, dataApuracao: new Date().toISOString(), log });
+    DB.apuracoes = aps;
+  }
+}
+
+function apurar(serieInicial, elementoInicial, baseDados, log) {
+  let serie   = serieInicial;
+  let elemento = elementoInicial;
+  const seriesVisitadas = new Set();
+  const cfg = DB.config;
+
+  while (true) {
+    if (seriesVisitadas.has(serie)) {
+      log.push(`ERRO: Voltou à série ${serie}. Nenhum ganhador encontrado.`);
+      return { ganhador: null, numero: null, tipo: 'sem_ganhador' };
+    }
+    seriesVisitadas.add(serie);
+
+    // CASO 1: Exato
+    const chaveExata = `${serie}.${String(elemento).padStart(5,'0')}`;
+    if (baseDados[chaveExata]) {
+      if (baseDados[chaveExata].elegivel) {
+        log.push(`✅ GANHADOR EXATO: ${chaveExata}`);
+        return { ganhador: baseDados[chaveExata], numero: chaveExata, tipo: 'exato' };
+      } else {
+        log.push(`⚠️ Número exato ${chaveExata} existe mas participante INELEGÍVEL.`);
+      }
+    } else {
+      log.push(`Número exato ${chaveExata} não distribuído.`);
+    }
+
+    // CASO 2: Superior
+    log.push(`Buscando superior na série ${serie} a partir do elemento ${elemento+1}...`);
+    let achouSuperior = false;
+    for (let e = elemento + 1; e < cfg.elementosPorSerie; e++) {
+      const chave = `${serie}.${String(e).padStart(5,'0')}`;
+      if (baseDados[chave] && baseDados[chave].elegivel) {
+        log.push(`✅ GANHADOR por aproximação SUPERIOR: ${chave}`);
+        return { ganhador: baseDados[chave], numero: chave, tipo: 'aproximacao_superior' };
+      }
+    }
+
+    // CASO 3: Inferior
+    log.push(`Nenhum superior. Buscando inferior na série ${serie}...`);
+    for (let e = elemento - 1; e >= 0; e--) {
+      const chave = `${serie}.${String(e).padStart(5,'0')}`;
+      if (baseDados[chave] && baseDados[chave].elegivel) {
+        log.push(`✅ GANHADOR por aproximação INFERIOR: ${chave}`);
+        return { ganhador: baseDados[chave], numero: chave, tipo: 'aproximacao_inferior' };
+      }
+    }
+
+    // CASO 4: Próxima série
+    const proxima = (serie + 1) % 10;
+    log.push(`Série ${serie} vazia. Avançando para série ${proxima}.`);
+    serie = proxima;
+    elemento = 0;
+  }
+}
+
+function limparApuracao() {
+  [1,2,3,4,5].forEach(i => document.getElementById('lot'+i).value = '');
+  document.getElementById('previewApuracao').textContent = 'Digite os prêmios para ver o cálculo...';
+  document.getElementById('resultBox').classList.remove('show');
+  document.getElementById('logApuracao').innerHTML = '<span class="info">Aguardando apuração...</span>';
+}
+
+function exportarApuracao() {
+  const aps = DB.apuracoes;
+  if (!aps.length) { toast('Nenhuma apuração realizada.', 'yellow'); return; }
+  const ultimo = aps[aps.length-1];
+  const json = JSON.stringify(ultimo, null, 2);
+  downloadArquivo('apuracao_resultado.json', json, 'application/json');
+  toast('Resultado exportado!', 'green');
+}
+
+/* ═══════════════════════════════════════════
+   CSV SCPC
+   ═══════════════════════════════════════════ */
+function gerarLinhasCSV() {
+  const cabecalho = 'CPF/CNPJ,Nome,Numero_Serie,Elemento_Sorteavel,Data,Horario,Email,Telefone';
+  const participantes = DB.participantes.filter(p => p.elegivel);
+  const linhas = [];
+
+  participantes.forEach(p => {
+    p.numerosGerados.forEach(num => {
+      const [serie, elemento] = num.split('.');
+      const dt = new Date(p.created_at);
+      const data  = dt.toISOString().split('T')[0];
+      const hora  = dt.toTimeString().slice(0,8);
+      const elem5 = String(elemento).padStart(5,'0'); // zero-padding obrigatório
+      const cpfNum = p.cpf.replace(/\D/g,'');
+      const telNum = p.tel?.replace(/\D/g,'') || '';
+      linhas.push(`${cpfNum},${p.nome},${serie},${elem5},${data},${hora},${p.email},${telNum}`);
+    });
+  });
+
+  return { cabecalho, linhas };
+}
+
+function renderCSVPreview() {
+  const box = document.getElementById('csvPreview');
+  const { cabecalho, linhas } = gerarLinhasCSV();
+
+  if (!linhas.length) {
+    box.innerHTML = '<span class="warn">Nenhum participante elegível. Cadastre participantes com status "Confirmado".</span>';
+    return;
+  }
+
+  const preview = [cabecalho, ...linhas].slice(0, 30);
+  box.innerHTML = preview.map((l, i) => {
+    const cls = i === 0 ? 'info' : '';
+    return `<span class="${cls}">${l}</span>`;
+  }).join('<br/>') + (linhas.length > 29 ? `<br/><span class="warn">... e mais ${linhas.length-29} linha(s)</span>` : '');
+}
+
+function exportarCSV() {
+  const { cabecalho, linhas } = gerarLinhasCSV();
+  if (!linhas.length) { toast('Nenhum participante elegível para exportar.', 'yellow'); return; }
+  const conteudo = [cabecalho, ...linhas].join('\n');
+  downloadArquivo('participantes_scpc.csv', conteudo, 'text/csv;charset=utf-8');
+  toast(`CSV exportado: ${linhas.length} linha(s)`, 'green');
+}
+
+/* ═══════════════════════════════════════════
+   CONFIG
+   ═══════════════════════════════════════════ */
+function salvarConfig() {
+  DB.config = {
+    nome:              document.getElementById('cfg-nome').value,
+    totalSeries:       parseInt(document.getElementById('cfg-series').value),
+    elementosPorSerie: parseInt(document.getElementById('cfg-elementos').value),
+    serieInicial:      parseInt(document.getElementById('cfg-serieInicial').value),
+    dataInicio:        document.getElementById('cfg-inicio').value,
+    dataFim:           document.getElementById('cfg-fim').value,
+    dataExtracao:      document.getElementById('cfg-extracao').value,
+    dataApuracao:      document.getElementById('cfg-apuracao').value,
+  };
+  toast('Configurações salvas!', 'green');
+  renderLogStats();
+}
+
+function carregarConfig() {
+  const cfg = DB.config;
+  document.getElementById('cfg-nome').value         = cfg.nome;
+  document.getElementById('cfg-series').value       = cfg.totalSeries;
+  document.getElementById('cfg-elementos').value    = cfg.elementosPorSerie;
+  document.getElementById('cfg-serieInicial').value = cfg.serieInicial;
+  document.getElementById('cfg-inicio').value       = cfg.dataInicio;
+  document.getElementById('cfg-fim').value          = cfg.dataFim;
+  document.getElementById('cfg-extracao').value     = cfg.dataExtracao;
+  document.getElementById('cfg-apuracao').value     = cfg.dataApuracao;
+}
+
+function renderLogStats() {
+  const cfg = DB.config;
+  const box = document.getElementById('logStats');
+  if (!box) return;
+  const max = cfg.totalSeries * cfg.elementosPorSerie;
+  const usados = DB.numerosUsados.length;
+  const partic = DB.participantes.length;
+  const elegiveis = DB.participantes.filter(p=>p.elegivel).length;
+  box.innerHTML = `
+    <span class="info">Campanha: ${cfg.nome}</span><br/>
+    <span class="info">Período: ${cfg.dataInicio} até ${cfg.dataFim}</span><br/>
+    <span class="info">Extração: ${cfg.dataExtracao} | Apuração: ${cfg.dataApuracao}</span><br/>
+    <span>---</span><br/>
+    <span>Capacidade total: ${max.toLocaleString('pt-BR')} números</span><br/>
+    <span>Números gerados: ${usados.toLocaleString('pt-BR')} (${((usados/max)*100).toFixed(2)}%)</span><br/>
+    <span class="ok">Disponíveis: ${(max-usados).toLocaleString('pt-BR')}</span><br/>
+    <span>---</span><br/>
+    <span>Participantes: ${partic}</span><br/>
+    <span class="ok">Elegíveis: ${elegiveis}</span><br/>
+    <span class="err">Inelegíveis: ${partic-elegiveis}</span><br/>
+    <span>---</span><br/>
+    <span>Apurações realizadas: ${DB.apuracoes.length}</span>
+  `;
+}
+
+/* ═══════════════════════════════════════════
+   DASHBOARD
+   ═══════════════════════════════════════════ */
+function atualizarStats() {
+  const participantes = DB.participantes;
+  const numerosUsados = DB.numerosUsados.length;
+  const cfg = DB.config;
+  const max = cfg.totalSeries * cfg.elementosPorSerie;
+  const confirmados = participantes.filter(p => p.statusPagamento === 'confirmado').length;
+  const cancelados  = participantes.filter(p => p.statusPagamento === 'cancelado').length;
+  const receita = participantes
+    .filter(p => p.statusPagamento === 'confirmado')
+    .reduce((a, p) => a + p.valorPago, 0);
+
+  const row = document.getElementById('statsRow');
+  if (!row) return;
+  row.innerHTML = `
+    <div class="stat-card green">
+      <div class="stat-label">PARTICIPANTES ELEGÍVEIS</div>
+      <div class="stat-value">${confirmados}</div>
+      <div class="stat-sub">de ${participantes.length} total</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-label">NÚMEROS GERADOS</div>
+      <div class="stat-value">${numerosUsados.toLocaleString('pt-BR')}</div>
+      <div class="stat-sub">de ${max.toLocaleString('pt-BR')} máximo</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">RECEITA CONFIRMADA</div>
+      <div class="stat-value" style="font-size:1.4rem">R$${receita.toFixed(2).replace('.',',')}</div>
+      <div class="stat-sub">${confirmados} venda(s)</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-label">CANCELADOS</div>
+      <div class="stat-value">${cancelados}</div>
+      <div class="stat-sub">inelegíveis</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">APURAÇÕES</div>
+      <div class="stat-value">${DB.apuracoes.length}</div>
+      <div class="stat-sub">realizadas</div>
+    </div>
+  `;
+
+  // Últimas compras
+  const ul = document.getElementById('ultimasCompras');
+  if (ul) {
+    const recentes = [...participantes].reverse().slice(0, 5);
+    if (!recentes.length) {
+      ul.innerHTML = '<div class="empty-state">Nenhuma compra ainda.</div>'; return;
+    }
+    ul.innerHTML = `<div class="table-wrap"><table>
+      <thead><tr><th>Nome</th><th>Pacote</th><th>Números</th><th>Status</th><th>Data</th></tr></thead>
+      <tbody>
+        ${recentes.map(p => `
+          <tr>
+            <td><strong>${p.nome}</strong></td>
+            <td><span class="chip chip-blue">${p.nomePacote}</span></td>
+            <td style="color:var(--green);font-weight:700">${p.numerosGerados.length}</td>
+            <td><span class="chip chip-${p.statusPagamento==='confirmado'?'green':p.statusPagamento==='cancelado'?'red':'yellow'}">${p.statusPagamento}</span></td>
+            <td style="color:var(--muted);font-size:0.78rem">${new Date(p.created_at).toLocaleString('pt-BR')}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table></div>`;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   UTILS
+   ═══════════════════════════════════════════ */
+function renderLog(id, linhas) {
+  const box = document.getElementById(id);
+  if (!box) return;
+  box.innerHTML = linhas.map(l => {
+    if (l.startsWith('✅')) return `<span class="ok">${l}</span>`;
+    if (l.startsWith('ERRO')) return `<span class="err">${l}</span>`;
+    if (l.startsWith('⚠️')) return `<span class="warn">${l}</span>`;
+    if (l.startsWith('===')) return `<span class="info">${l}</span>`;
+    return `<span>${l}</span>`;
+  }).join('<br/>');
+  box.scrollTop = box.scrollHeight;
+}
+
+function downloadArquivo(nome, conteudo, tipo) {
+  const blob = new Blob([conteudo], {type: tipo});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = nome; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function toast(msg, cor='blue') {
+  const area = document.getElementById('toastArea');
+  const t = document.createElement('div');
+  const cores = { green:'var(--green)', red:'var(--red)', yellow:'var(--yellow)', blue:'var(--primary)' };
+  t.className = 'toast';
+  t.style.borderLeftColor = cores[cor] || cores.blue;
+  t.textContent = msg;
+  area.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 4000);
+}
+
+function irPara(tab) {
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.tab === tab);
+  });
+  document.querySelectorAll('.content').forEach(c => {
+    c.classList.toggle('active', c.id === 'tab-'+tab);
+  });
+  const titles = { dashboard:'📊 Dashboard', gerar:'🎲 Gerar Números', participantes:'👥 Participantes',
+    apuracao:'🏆 Apuração', csv:'📄 Exportar CSV', config:'⚙️ Configurações' };
+  document.getElementById('pageTitle').textContent = titles[tab] || tab;
+
+  if (tab === 'participantes') renderParticipantes();
+  if (tab === 'csv') renderCSVPreview();
+  if (tab === 'config') { carregarConfig(); renderLogStats(); }
+  if (tab === 'dashboard') atualizarStats();
+}
+
+function resetarTudo() {
+  if (!confirm('⚠️ Isso apagará TODOS os participantes, números e apurações.\nTem certeza?')) return;
+  localStorage.removeItem('rifa_participantes');
+  localStorage.removeItem('rifa_numeros');
+  localStorage.removeItem('rifa_apuracoes');
+  atualizarStats();
+  renderParticipantes();
+  toast('Base de dados limpa!', 'yellow');
+}
+
+// Máscara CPF
+document.getElementById('g-cpf').addEventListener('input', function() {
+  let v = this.value.replace(/\D/g,'').slice(0,11);
+  if (v.length>9) v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
+  else if (v.length>6) v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
+  else if (v.length>3) v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
+  this.value=v;
+});
+
+// Atualiza preview ao mudar pacote/pgto/mult
+['g-pacote','g-pgto','g-mult'].forEach(id => {
+  document.getElementById(id)?.addEventListener('change', atualizarPreviewGeracao);
+});
+
+// NAVEGAÇÃO
+document.querySelectorAll('.nav-item[data-tab]').forEach(item => {
+  item.addEventListener('click', () => irPara(item.dataset.tab));
+});
+
+// INIT
+window.addEventListener('DOMContentLoaded', () => {
+  atualizarStats();
+  atualizarPreviewGeracao();
+  renderLogStats();
+});
+</script>
+</body>
+</html>

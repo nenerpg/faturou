@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="100%" style="stop-color:#0d0d0d"/>
+    </linearGradient>
+    <linearGradient id="goldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C8860A"/>
+      <stop offset="30%" style="stop-color:#E8A420"/>
+      <stop offset="60%" style="stop-color:#B8720A"/>
+      <stop offset="100%" style="stop-color:#8B5A00"/>
+    </linearGradient>
+    <linearGradient id="goldLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0C040"/>
+      <stop offset="50%" style="stop-color:#D4920C"/>
+      <stop offset="100%" style="stop-color:#A06800"/>
+    </linearGradient>
+    <linearGradient id="goldDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#9A6000"/>
+      <stop offset="100%" style="stop-color:#5A3500"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="200" height="200" rx="36" ry="36" fill="url(#bg)"/>
+
+  <!-- Crown body - main silhouette -->
+  <g transform="translate(100,100)">
+    <!-- Base arc -->
+    <path d="M-60,35 Q0,28 60,35" stroke="url(#goldMain)" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Second arc -->
+    <path d="M-52,44 Q0,37 52,44" stroke="url(#goldMain)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Crown main shape -->
+    <path d="
+      M-58,32
+      L-58,6
+      L-44,-18
+      L-28,10
+      L-16,-8
+
+      L0,-38
+      L4,-48
+      L8,-38
+
+      L16,-8
+      L28,10
+      L44,-18
+      L58,6
+      L58,32
+
+      Q40,26 0,24
+      Q-40,26 -58,32
+      Z
+    " fill="url(#goldMain)" stroke="none"/>
+
+    <!-- Crown inner shadow/depth left -->
+    <path d="
+      M-44,-18
+      L-28,10
+      L-16,-8
+      L0,-38
+      L-44,-18
+      Z
+    " fill="url(#goldDark)" opacity="0.5"/>
+
+    <!-- Crown inner shadow/depth right -->
+    <path d="
+      M44,-18
+      L28,10
+      L16,-8
+      L0,-38
+      L44,-18
+      Z
+    " fill="url(#goldDark)" opacity="0.3"/>
+
+    <!-- Central flame highlight -->
+    <path d="
+      M0,-48
+      L6,-32
+      L8,-20
+      L0,-14
+      L-8,-20
+      L-6,-32
+      Z
+    " fill="url(#goldLight)" opacity="0.9"/>
+
+    <!-- Left outer peak highlight -->
+    <path d="M-52,2 L-44,-18 L-40,0 Z" fill="url(#goldLight)" opacity="0.7"/>
+
+    <!-- Right outer peak highlight -->
+    <path d="M52,2 L44,-18 L40,0 Z" fill="url(#goldLight)" opacity="0.7"/>
+
+    <!-- Crown outline stroke for definition -->
+    <path d="
+      M-58,32
+      L-58,6
+      L-44,-18
+      L-28,10
+      L-16,-8
+      L0,-48
+      L16,-8
+      L28,10
+      L44,-18
+      L58,6
+      L58,32
+    " fill="none" stroke="url(#goldLight)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.6"/>
+  </g>
+</svg>

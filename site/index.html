@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
 <title>Concorra ao iPhone 17 Pro — Sorte Certa</title>
 <meta name="description" content="Compre o ebook e concorra a um iPhone 17 Pro 0km. Frete e impostos pagos. Sorteio pela Loteria Federal. Autorizado SPA/ME."/>
-<link rel="icon" type="image/png" href="favicon-crown.png"/>
-<link rel="apple-touch-icon" href="favicon-crown.png"/>
+<link rel="icon" type="image/svg+xml" href="crown-logo.svg"/>
+<link rel="apple-touch-icon" href="crown-logo.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
@@ -211,7 +211,8 @@ button,input,select{font-family:var(--f)}
 }
 .step:hover{border-color:rgba(255,107,0,.25);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.07)}
 .sn{width:30px;height:30px;border-radius:10px;background:rgba(255,107,0,.08);border:1px solid rgba(255,107,0,.14);color:var(--or);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-.si{font-size:1.5rem;margin-bottom:10px;line-height:1}
+.si{width:36px;height:36px;margin-bottom:10px;display:flex;align-items:center;justify-content:center}
+.si svg{width:36px;height:36px}
 .step h3{font-size:.88rem;font-weight:700;color:var(--t1);margin-bottom:8px;letter-spacing:-.2px}
 .step p{font-size:.77rem;color:var(--t3);line-height:1.75}
 
@@ -251,7 +252,7 @@ button,input,select{font-family:var(--f)}
 .prize-info .sh2{margin-bottom:4px}
 .prize-model{font-size:1rem;color:var(--t3);margin-bottom:20px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
-.chip{background:var(--bg2);border:1px solid var(--bo);border-radius:50px;padding:5px 13px;font-size:.73rem;font-weight:500;color:var(--t2)}
+.chip{background:var(--bg2);border:1px solid var(--bo);border-radius:50px;padding:5px 13px;font-size:.73rem;font-weight:500;color:var(--t2);display:inline-flex;align-items:center;gap:5px}
 .chip.g{background:rgba(28,133,52,.06);border-color:rgba(28,133,52,.16);color:var(--green)}
 .valbox{display:flex;align-items:center;gap:18px;background:rgba(200,134,10,.05);border:1px solid rgba(200,134,10,.15);border-radius:var(--r2);padding:16px 20px;margin-bottom:22px}
 .val-big{font-size:1.7rem;font-weight:900;color:var(--gold)}
@@ -487,14 +488,14 @@ button,input,select{font-family:var(--f)}
 <body>
 
 <div class="topbar">
-  ✅ Autorizado SPA/ME &nbsp;·&nbsp; Promoção 100% Legal &nbsp;·&nbsp; <a href="#participar">Quero concorrer →</a>
+  Autorizado SPA/ME &nbsp;·&nbsp; Promoção 100% Legal &nbsp;·&nbsp; <a href="#participar">Quero concorrer →</a>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="w">
     <div class="logo">
-      <img src="favicon-crown.png" alt="Sorte Certa" class="logo-icon-img"/>
+      <img src="crown-logo.svg" alt="Sorte Certa" class="logo-icon-img"/>
       Sorte Certa
     </div>
     <div class="nav-links">
@@ -542,7 +543,7 @@ button,input,select{font-family:var(--f)}
     </div>
 
     <div class="hero-actions">
-      <a href="#participar" class="btn btn-fire">🎯 Quero concorrer</a>
+      <a href="#participar" class="btn btn-fire">Quero concorrer →</a>
       <a href="#como-funciona" class="btn btn-ghost">Como funciona?</a>
     </div>
 
@@ -587,11 +588,11 @@ button,input,select{font-family:var(--f)}
 <div class="progbar">
   <div class="w">
     <div class="prog-row">
-      <p>📊 Vendidos: <strong id="pSold">347</strong> de <strong>1.000</strong></p>
+      <p>Vendidos: <strong id="pSold">347</strong> de <strong>1.000</strong></p>
       <span class="prog-pct" id="pPct">34,7%</span>
     </div>
     <div class="track"><div class="fill" id="pFill" style="width:34.7%"></div></div>
-    <p class="prog-note">⚡ Números se esgotam a cada compra</p>
+    <p class="prog-note">Números se esgotam a cada compra</p>
   </div>
 </div>
 
@@ -604,10 +605,58 @@ button,input,select{font-family:var(--f)}
       <p class="sdesc">Você compra, recebe seus números, e o ganhador é decidido pelos resultados públicos da Loteria Federal — sem interferência nossa.</p>
     </div>
     <div class="steps rv">
-      <div class="step"><div class="sn">1</div><div class="si">📚</div><h3>Compre o Ebook</h3><p>Escolha o pacote e adquira nosso ebook digital via PIX ou cartão.</p></div>
-      <div class="step"><div class="sn">2</div><div class="si">⚡</div><h3>Receba os Números</h3><p>Seus números chegam por e-mail automaticamente após o pagamento.</p></div>
-      <div class="step"><div class="sn">3</div><div class="si">🏦</div><h3>Loteria Federal decide</h3><p>O ganhador é calculado com base no resultado oficial da Loteria Federal da Caixa.</p></div>
-      <div class="step"><div class="sn">4</div><div class="si">📦</div><h3>iPhone na sua porta</h3><p>Se o seu número vencer, entregamos o iPhone 17 Pro onde você estiver.</p></div>
+      <div class="step">
+        <div class="sn">1</div>
+        <div class="si">
+          <!-- Carrinho / compra -->
+          <svg viewBox="0 0 36 36" fill="none" stroke="var(--or)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5h3l2.5 13h14l2.5-9H9"/>
+            <circle cx="13" cy="27" r="2"/>
+            <circle cx="22" cy="27" r="2"/>
+          </svg>
+        </div>
+        <h3>Compre o Ebook</h3>
+        <p>Escolha o pacote e adquira nosso ebook digital via PIX ou cartão.</p>
+      </div>
+      <div class="step">
+        <div class="sn">2</div>
+        <div class="si">
+          <!-- Envelope / receba -->
+          <svg viewBox="0 0 36 36" fill="none" stroke="var(--or)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="8" width="28" height="20" rx="3"/>
+            <path d="M4 12l14 9 14-9"/>
+          </svg>
+        </div>
+        <h3>Receba os Números</h3>
+        <p>Seus números chegam por e-mail automaticamente após o pagamento.</p>
+      </div>
+      <div class="step">
+        <div class="sn">3</div>
+        <div class="si">
+          <!-- Bola de loteria / sorteio -->
+          <svg viewBox="0 0 36 36" fill="none" stroke="var(--or)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="18" r="13"/>
+            <path d="M5 18h26"/>
+            <path d="M18 5c-4 4-4 18 0 26"/>
+            <path d="M18 5c4 4 4 18 0 26"/>
+          </svg>
+        </div>
+        <h3>Loteria Federal decide</h3>
+        <p>O ganhador é calculado com base no resultado oficial da Loteria Federal da Caixa.</p>
+      </div>
+      <div class="step">
+        <div class="sn">4</div>
+        <div class="si">
+          <!-- iPhone / smartphone -->
+          <svg viewBox="0 0 36 36" fill="none" stroke="var(--or)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="2" width="16" height="32" rx="3"/>
+            <circle cx="18" cy="29" r="1.2" fill="var(--or)"/>
+            <path d="M15 6h6"/>
+          </svg>
+        </div>
+        <h3>iPhone na sua porta</h3>
+        <p>Se o seu número vencer, entregamos o iPhone 17 Pro onde você estiver.</p>
+      </div>
     </div>
 
     <!-- Exemplo de apuração: novo layout vertical -->
@@ -678,15 +727,27 @@ button,input,select{font-family:var(--f)}
         </div>
       </div>
       <div class="prize-info rv">
-        <span class="slabel">🏆 O Prêmio</span>
+        <span class="slabel">O Prêmio</span>
         <h2 class="sh2">iPhone 17 Pro</h2>
         <p class="prize-model">256GB · <span id="prizeColor">Cosmic Orange</span> · Alumínio premium</p>
         <p class="sdesc" style="margin-bottom:20px">A câmera mais avançada que a Apple já criou. Chip A19 Pro, sistema Fusion de 48MP, tela de 6,3" com ProMotion 120Hz e 30 horas de bateria.</p>
         <div class="chips">
-          <span class="chip g">✅ Nota Fiscal</span>
-          <span class="chip g">🚚 Frete Grátis</span>
-          <span class="chip">🍎 Garantia Apple 1 ano</span>
-          <span class="chip">📦 Lacrado</span>
+          <span class="chip g">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,8 6,12 14,4"/></svg>
+            Nota Fiscal
+          </span>
+          <span class="chip g">
+            <svg width="14" height="13" viewBox="0 0 20 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="18" height="9" rx="2"/><path d="M1 7h18"/><circle cx="5" cy="13" r="2" fill="currentColor" stroke="none"/><circle cx="15" cy="13" r="2" fill="currentColor" stroke="none"/></svg>
+            Frete Grátis
+          </span>
+          <span class="chip">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1l1.5 3 3.5.5-2.5 2.5.5 3.5L8 9l-3 1.5.5-3.5L3 4.5 6.5 4z"/></svg>
+            Garantia Apple 1 ano
+          </span>
+          <span class="chip">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l6-3 6 3v7l-6 3-6-3V5z"/><path d="M8 2v13M2 5l6 3 6-3"/></svg>
+            Lacrado
+          </span>
         </div>
         <div class="valbox">
           <div><div style="font-size:.68rem;color:var(--t4);margin-bottom:3px">Valor de mercado</div><div class="val-big">R$ 11.499,00</div></div>
@@ -862,16 +923,30 @@ button,input,select{font-family:var(--f)}
         <div class="fg">
           <label>Pagamento</label>
           <div class="pm-grid">
-            <label class="pml"><input type="radio" name="pm" value="pix" checked onchange="updateSummary()"/><div class="pmf"><span class="pmf-ico">💠</span>PIX<span class="pmh">Aprovação imediata</span></div></label>
-            <label class="pml"><input type="radio" name="pm" value="cartao" onchange="updateSummary()"/><div class="pmf"><span class="pmf-ico">💳</span>Cartão<span class="pmh">Parcelado</span></div></label>
+            <label class="pml"><input type="radio" name="pm" value="pix" checked onchange="updateSummary()"/><div class="pmf">
+              <span class="pmf-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--or)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l4-4 4 4 4-4 4 4"/><path d="M4 16l4-4 4 4 4-4 4 4"/></svg></span>
+              PIX<span class="pmh">Aprovação imediata</span>
+            </div></label>
+            <label class="pml"><input type="radio" name="pm" value="cartao" onchange="updateSummary()"/><div class="pmf">
+              <span class="pmf-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--or)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="22" height="14" rx="3"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+              Cartão<span class="pmh">Parcelado</span>
+            </div></label>
           </div>
         </div>
         <label class="cbox"><input type="checkbox" required/><span>Li e aceito o <a href="#regulamento">Regulamento</a> e a <a href="#regulamento">Política de Privacidade</a>. Tenho 18 anos ou mais.</span></label>
-        <button type="submit" class="btn-sub">🎯 Confirmar e Pagar</button>
-        <div class="sec-note">🔒 Pagamento seguro · LGPD</div>
+        <button type="submit" class="btn-sub">Confirmar e Pagar →</button>
+        <div class="sec-note">
+          <svg width="11" height="13" viewBox="0 0 11 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="9" height="7" rx="1.5"/><path d="M3 6V4a2.5 2.5 0 015 0v2"/></svg>
+          Pagamento seguro · LGPD
+        </div>
       </form>
       <div class="sumbox">
-        <div class="sum-prize"><span class="spico">📱</span><div><div class="spname">iPhone 17 Pro</div><div class="spsub" id="s-cor">256GB · Cosmic Orange</div></div></div>
+        <div class="sum-prize">
+          <span class="spico">
+            <svg width="28" height="28" viewBox="0 0 36 36" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="2" width="16" height="32" rx="3"/><circle cx="18" cy="29" r="1.2" fill="var(--gold)" stroke="none"/><path d="M15 6h6"/></svg>
+          </span>
+          <div><div class="spname">iPhone 17 Pro</div><div class="spsub" id="s-cor">256GB · Cosmic Orange</div></div>
+        </div>
         <div class="srows">
           <div class="srow"><span>Pacote</span><span class="sv" id="s-pkg">—</span></div>
           <div class="srow"><span>Números</span><span class="svb" id="s-nums">—</span></div>
@@ -879,7 +954,7 @@ button,input,select{font-family:var(--f)}
           <div class="srow"><span>Sorteio</span><span class="sv">Loteria Federal</span></div>
         </div>
         <div class="pixbox">
-          <p>💠 Chave PIX para pagamento</p>
+          <p>Chave PIX para pagamento</p>
           <div class="pixkey" id="pixKey" onclick="copyPix()">Selecione um pacote</div>
           <p class="pixhint">Clique para copiar · Números chegam após confirmação</p>
         </div>
@@ -906,12 +981,15 @@ button,input,select{font-family:var(--f)}
 <!-- FRAUDE -->
 <div class="fraud">
   <div class="w">
-    <h3>⚠️ Atenção: Prevenção a golpes</h3>
+    <h3>
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M10 2L2 17h16L10 2z"/><line x1="10" y1="9" x2="10" y2="13"/><circle cx="10" cy="16" r=".5" fill="currentColor"/></svg>
+      Atenção: Prevenção a golpes
+    </h3>
     <p><strong>Não fazemos ligações pedindo depósito ou dados bancários.</strong> Desconfie de qualquer contato fora dos canais abaixo.</p>
     <div class="fraud-c">
-      <span>📧 <strong>contato@sortecerta.com.br</strong></span>
-      <span>💬 WhatsApp: <strong>(11) 99999-9999</strong></span>
-      <span>📷 <strong>@sortecerta</strong></span>
+      <span><strong>contato@sortecerta.com.br</strong></span>
+      <span>WhatsApp: <strong>(11) 99999-9999</strong></span>
+      <span><strong>@sortecerta</strong></span>
     </div>
   </div>
 </div>
@@ -929,7 +1007,10 @@ button,input,select{font-family:var(--f)}
       <div class="regcell"><div class="rl">Reclamação</div><div class="rcv">180 dias após divulgação</div></div>
       <div class="regcell"><div class="rl">Autorização</div><div class="rcv">SPA/ME nº [NÚMERO]</div></div>
       <div class="regcell" style="display:flex;align-items:center">
-        <a href="#" style="display:inline-flex;align-items:center;gap:5px;background:var(--bg2);border:1px solid var(--bo);border-radius:50px;padding:8px 15px;font-size:.74rem;font-weight:600;color:var(--t3);transition:.15s" onmouseover="this.style.color='var(--t1)'" onmouseout="this.style.color='var(--t3)'">📄 Baixar PDF</a>
+        <a href="#" style="display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--bo);border-radius:50px;padding:8px 15px;font-size:.74rem;font-weight:600;color:var(--t3);transition:.15s" onmouseover="this.style.color='var(--t1)'" onmouseout="this.style.color='var(--t3)'">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6L9 2z"/><polyline points="9,2 9,6 13,6"/><line x1="5" y1="10" x2="11" y2="10"/><line x1="5" y1="12" x2="8" y2="12"/></svg>
+          Baixar PDF
+        </a>
       </div>
     </div>
   </div>
@@ -941,15 +1022,27 @@ button,input,select{font-family:var(--f)}
     <div class="fg-grid">
       <div>
         <div class="logo" style="margin-bottom:8px">
-          <img src="favicon-crown.png" alt="Sorte Certa" class="logo-icon-img"/>
+          <img src="crown-logo.svg" alt="Sorte Certa" class="logo-icon-img"/>
           Sorte Certa
         </div>
         <p class="fdesc">Promoção Comercial autorizada pela SPA/ME. Sorteio pelo resultado público da Loteria Federal sem interferência nossa.</p>
         <div class="fsoc">
-          <a href="#" title="Instagram">📷</a>
-          <a href="#" title="WhatsApp">💬</a>
-          <a href="#" title="YouTube">▶️</a>
-          <a href="#" title="TikTok">🎵</a>
+          <!-- Instagram -->
+          <a href="#" title="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <!-- WhatsApp -->
+          <a href="#" title="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" title="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 001.94-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <!-- TikTok -->
+          <a href="#" title="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+          </a>
         </div>
       </div>
       <div class="fc">
@@ -962,8 +1055,8 @@ button,input,select{font-family:var(--f)}
       </div>
       <div class="fc">
         <h4>Contato</h4>
-        <p>📧 contato@sortecerta.com.br</p><p>💬 (11) 99999-9999</p><p>📷 @sortecerta</p>
-        <div class="paytags"><span class="paytag">💠 PIX</span><span class="paytag">💳 Cartão</span></div>
+        <p>contato@sortecerta.com.br</p><p>(11) 99999-9999</p><p>@sortecerta</p>
+        <div class="paytags"><span class="paytag">PIX</span><span class="paytag">Cartão</span></div>
       </div>
     </div>
     <div class="foot-bottom">
@@ -973,7 +1066,9 @@ button,input,select{font-family:var(--f)}
   </div>
 </footer>
 
-<a class="wa" href="https://wa.me/5511999999999" target="_blank" title="WhatsApp">💬</a>
+<a class="wa" href="https://wa.me/5511999999999" target="_blank" title="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <!-- MODAL -->
 <div class="mbg" id="mbg">
@@ -1121,7 +1216,7 @@ window.selectPkg=function(pkg){
 /* ── PIX ─────────────────────────────────── */
 window.copyPix=function(){
   const k=document.getElementById('pixKey')?.textContent||'';
-  navigator.clipboard?.writeText(k).then(()=>toast('📋 PIX copiado!','#1C8534'));
+  navigator.clipboard?.writeText(k).then(()=>toast('PIX copiado!','#1C8534'));
 };
 
 /* ── FORM ────────────────────────────────── */
@@ -1139,7 +1234,7 @@ window.submitForm=function(e){
   if(!pk){toast('Selecione um pacote.','#D70015');return;}
   if(na){const a=(Date.now()-new Date(na))/31557600000;if(a<18){toast('Necessário 18 anos ou mais.','#D70015');return;}}
   const d=C.pkgs[pk];
-  const pix=pm==='pix'?`<div class="pixcfm"><p>Chave PIX para pagamento:</p><div class="key" onclick="navigator.clipboard?.writeText('${C.pix}').then(()=>toast('PIX copiado!','#1C8534'))">${C.pix}</div></div>`:`<div class="pixcfm"><p>💳 Você será redirecionado ao checkout seguro.</p></div>`;
+  const pix=pm==='pix'?`<div class="pixcfm"><p>Chave PIX para pagamento:</p><div class="key" onclick="navigator.clipboard?.writeText('${C.pix}').then(()=>toast('PIX copiado!','#1C8534'))">${C.pix}</div></div>`:`<div class="pixcfm"><p>Você será redirecionado ao checkout seguro.</p></div>`;
   document.getElementById('mbody').innerHTML=`
     <h2>Confirme seu pedido</h2><p class="msub">Revise antes de finalizar.</p>
     <div class="crow"><span>Nome</span><strong>${n}</strong></div>
@@ -1147,7 +1242,7 @@ window.submitForm=function(e){
     <div class="crow"><span>Pacote</span><strong>${d.n}</strong></div>
     <div class="crow"><span>Números</span><strong class="hl">${d.nums}</strong></div>
     <div class="crow"><span>Total</span><strong style="color:var(--gold)">R$ ${d.val.toFixed(2).replace('.',',')}</strong></div>
-    <div class="crow"><span>Pagamento</span><strong>${pm==='pix'?'💠 PIX':'💳 Cartão'}</strong></div>
+    <div class="crow"><span>Pagamento</span><strong>${pm==='pix'?'PIX':'Cartão'}</strong></div>
     ${pix}
     <div class="mbtns">
       <button class="mback" onclick="closeModal()">Voltar</button>
@@ -1159,7 +1254,7 @@ window.submitForm=function(e){
 };
 window.confirmar=function(n){
   closeModal();
-  toast('🎉 Pedido de '+n+' confirmado! Verifique seu e-mail.','#1C8534');
+  toast('Pedido de '+n+' confirmado! Verifique seu e-mail.','#1C8534');
   document.getElementById('mainForm').reset();
   updateSummary();
 };

@@ -97,6 +97,8 @@ button,input,select{font-family:var(--f)}
   object-fit:cover;object-position:center;
   z-index:0;pointer-events:none;
 }
+/* Por padrão, vídeo mobile oculto */
+.hero-vid-mobile{display:none}
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
   background:
@@ -446,7 +448,8 @@ button,input,select{font-family:var(--f)}
   .nav-links,.nav-cta{display:none}
   .ham{display:flex}
   .hero{min-height:100svh}
-  .hero-vid{object-position:62% center}
+  .hero-vid-desktop{display:none}
+  .hero-vid-mobile{display:block;object-position:center center}
   .hero-text{padding:56px 24px 72px;align-items:center;text-align:center;max-width:100%}
   .hero-badge,.hero-actions,.hero-stats,.cdrow{justify-content:center}
   .hero-sub{text-align:center}
@@ -518,10 +521,16 @@ button,input,select{font-family:var(--f)}
 <!-- ══ HERO ══ -->
 <section class="hero" id="inicio">
 
-  <!-- VÍDEO DE FUNDO -->
-  <video class="hero-vid" autoplay muted playsinline preload="metadata">
+  <!-- VÍDEO DE FUNDO — desktop (landscape) -->
+  <video class="hero-vid hero-vid-desktop" autoplay muted playsinline preload="metadata">
     <source src="hero-bg.mp4" type="video/mp4"/>
   </video>
+
+  <!-- VÍDEO DE FUNDO — mobile (vertical 9:16) -->
+  <video class="hero-vid hero-vid-mobile" autoplay muted playsinline preload="metadata">
+    <source src="hero-mobile.mp4" type="video/mp4"/>
+  </video>
+
   <div class="hero-overlay"></div>
 
   <!-- TEXTO -->

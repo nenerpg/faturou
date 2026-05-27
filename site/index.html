@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<title>Concorra ao iPhone 17 Pro — FaturouRifa</title>
+<title>Concorra ao iPhone 17 Pro — Sorte Certa</title>
 <meta name="description" content="Compre o ebook e concorra a um iPhone 17 Pro 0km. Frete e impostos pagos. Sorteio pela Loteria Federal. Autorizado SPA/ME."/>
+<link rel="icon" type="image/png" href="favicon-crown.png"/>
+<link rel="apple-touch-icon" href="favicon-crown.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
@@ -65,7 +67,7 @@ button,input,select{font-family:var(--f)}
 }
 .nav .w{display:flex;align-items:center;width:100%}
 .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.98rem;color:var(--t1);margin-right:auto}
-.logo-icon{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--or),var(--or2));display:flex;align-items:center;justify-content:center;font-size:.82rem}
+.logo-icon-img{width:28px;height:28px;border-radius:8px;object-fit:cover}
 .nav-links{display:flex;gap:24px;margin-right:20px}
 .nav-links a{font-size:.82rem;font-weight:500;color:var(--t3);transition:color .15s}
 .nav-links a:hover{color:var(--t1)}
@@ -213,31 +215,27 @@ button,input,select{font-family:var(--f)}
 .step h3{font-size:.88rem;font-weight:700;color:var(--t1);margin-bottom:8px;letter-spacing:-.2px}
 .step p{font-size:.77rem;color:var(--t3);line-height:1.75}
 
-/* Apuração */
+/* ─── APURAÇÃO (novo layout) ─────────────── */
 .apur{margin-top:36px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r3);overflow:hidden}
-.apur-top{padding:16px 22px;border-bottom:1px solid var(--bo2);display:flex;align-items:center;gap:10px}
+.apur-top{padding:16px 22px;border-bottom:1px solid var(--bo2);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .apur-top h3{font-size:.82rem;font-weight:600;color:var(--t2)}
 .apur-top span{background:rgba(255,107,0,.08);border:1px solid rgba(255,107,0,.15);color:var(--or);font-size:.65rem;font-weight:700;padding:2px 10px;border-radius:50px}
-.apur-scroll{overflow-x:auto;padding:20px}
-.apur-inner{display:flex;gap:6px;align-items:center;min-width:580px}
-.lcard{flex:1;background:var(--card);border:1px solid var(--bo);border-radius:var(--r2);padding:12px 8px;text-align:center;min-width:84px}
-.lpos{font-size:.57rem;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
-.lnum{font-family:'SF Mono','JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--t1);letter-spacing:1.5px;margin-bottom:5px}
-.lnum .dim{color:var(--t4)}
-.lnum .blue{color:var(--blue);text-decoration:underline dotted}
-.lnum .oran{color:var(--or);font-weight:900}
-.lhint{font-size:.58rem;color:var(--t4);line-height:1.5}
-.lhint b{color:var(--or)}
-.larr{flex-shrink:0;font-size:1rem;color:var(--t4);padding:0 2px}
-.lresult{
-  flex:1.4;min-width:120px;
-  background:rgba(200,134,10,.05);border:1px solid rgba(200,134,10,.18);
-  border-radius:var(--r2);padding:16px 10px;text-align:center;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
-}
-.lr-label{font-size:.6rem;color:var(--t4);letter-spacing:.4px}
-.lr-num{font-family:'SF Mono','JetBrains Mono',monospace;font-size:1.9rem;font-weight:900;color:var(--gold);letter-spacing:2px}
-.lr-hint{font-size:.62rem;color:var(--t3)}
+.apur-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.apur-prizes{padding:20px 22px;display:flex;flex-direction:column;gap:10px;border-right:1px solid var(--bo2)}
+.apur-prize-row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bo);border-radius:var(--r);padding:10px 14px}
+.apur-pos{font-size:.58rem;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;min-width:42px}
+.apur-num{font-family:'SF Mono','JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--t1);letter-spacing:1.5px}
+.apur-num .dim{color:var(--t4)}
+.apur-num .blue{color:var(--blue);text-decoration:underline dotted}
+.apur-num .oran{color:var(--or);font-weight:900}
+.apur-hint{font-size:.62rem;color:var(--t3);margin-left:auto;text-align:right}
+.apur-hint b{color:var(--or)}
+.apur-result{padding:20px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}
+.apur-result-label{font-size:.65rem;color:var(--t4);letter-spacing:.4px;text-transform:uppercase}
+.apur-result-num{font-family:'SF Mono','JetBrains Mono',monospace;font-size:2.2rem;font-weight:900;color:var(--gold);letter-spacing:3px}
+.apur-result-sub{font-size:.72rem;color:var(--t3);line-height:1.6}
+.apur-result-sub b{color:var(--blue)}
+.apur-result-sub strong{color:var(--or)}
 
 /* ─── PRÊMIO ─────────────────────────────── */
 .prize-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
@@ -265,53 +263,63 @@ button,input,select{font-family:var(--f)}
 .spec .sl{font-size:.6rem;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
 .spec .sv{font-size:.82rem;font-weight:600;color:var(--t2)}
 
-/* ─── PACOTES ────────────────────────────── */
-.launch-strip{
-  display:flex;align-items:center;gap:14px;
-  background:rgba(255,107,0,.04);border:1px solid rgba(255,107,0,.14);
-  border-radius:var(--r2);padding:14px 18px;margin-bottom:28px;
+/* ─── PACOTES (estilo Retornar) ──────────── */
+.pkgs-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
 }
-.launch-strip .ico{font-size:1.2rem;flex-shrink:0}
-.launch-strip p{font-size:.82rem;color:var(--t3);line-height:1.5}
-.launch-strip strong{color:var(--or);font-weight:700}
-.pkgs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.pkg{
-  background:var(--card);border:1px solid var(--bo);border-radius:var(--r2);
-  padding:24px 18px;display:flex;flex-direction:column;
-  transition:border-color .2s,transform .2s,box-shadow .2s;position:relative;
+.pkg-card{
+  background:var(--card);
+  border:1.5px solid var(--bo);
+  border-radius:var(--r2);
+  padding:22px 18px;
+  display:flex;flex-direction:column;
+  gap:12px;
+  cursor:pointer;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  position:relative;
 }
-.pkg:hover{border-color:rgba(255,107,0,.22);transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.07)}
-.pkg.hot{border-color:rgba(255,107,0,.32);box-shadow:0 0 0 1px rgba(255,107,0,.1),0 6px 24px rgba(255,107,0,.05)}
-.pkg.hot:hover{border-color:rgba(255,107,0,.5);box-shadow:0 0 0 1px rgba(255,107,0,.22),0 14px 40px rgba(255,107,0,.08)}
-.pkg-star{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--or);color:#fff;font-size:.58rem;font-weight:800;letter-spacing:.6px;padding:4px 14px;border-radius:0 0 10px 10px;white-space:nowrap}
-.ptag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 11px;border-radius:50px;margin-bottom:13px;width:fit-content}
-.pt-d{background:rgba(0,0,0,.04);color:var(--t4)}
-.pt-p{background:rgba(0,0,0,.05);color:var(--t3)}
-.pt-o{background:rgba(200,134,10,.08);color:var(--gold)}
-.pt-e{background:rgba(255,107,0,.08);color:var(--or)}
-.pname{font-size:.9rem;font-weight:700;color:var(--t1);margin-bottom:16px}
-.pnbox{background:var(--bg2);border:1px solid var(--bo2);border-radius:var(--r);padding:14px 10px;text-align:center;margin-bottom:14px}
-.pnbig{font-size:2.6rem;font-weight:900;color:var(--t1);line-height:1;display:block}
-.pnlbl{font-size:.65rem;color:var(--t4);display:block;margin-bottom:4px}
-.pnl{display:inline-block;background:rgba(255,107,0,.08);border:1px solid rgba(255,107,0,.14);color:var(--or);font-size:.66rem;font-weight:700;padding:2px 8px;border-radius:50px}
-.pprice{font-size:.85rem;color:var(--t3);margin-bottom:16px}
-.pprice span{font-size:1.6rem;font-weight:900;color:var(--t1)}
-.pfeat{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px;flex:1}
-.pfeat li{font-size:.76rem;color:var(--t3);display:flex;align-items:center;gap:7px}
-.pfeat li::before{content:'✓';color:var(--green);font-size:.75rem;font-weight:700;flex-shrink:0}
-.pfeat li.hi{color:var(--t1);font-weight:500}
-.pbtn{width:100%;padding:11px;border-radius:50px;font-size:.8rem;font-weight:700;border:none;transition:.2s;cursor:pointer;margin-top:auto}
-.pbtn-fire{background:var(--or);color:#fff;box-shadow:0 2px 12px rgba(255,107,0,.2)}
-.pbtn-fire:hover{background:var(--or2);box-shadow:0 4px 20px rgba(255,107,0,.3)}
-.pbtn-g{background:var(--bg2);color:var(--t2);border:1px solid var(--bo)}
-.pbtn-g:hover{background:var(--bg3);color:var(--t1)}
-.mults{display:grid;grid-template-columns:repeat(4,1fr);border-radius:var(--r3);overflow:hidden;border:1px solid var(--bo);gap:1px;background:var(--bo2);margin-top:24px}
-.mult{background:var(--card);padding:18px 16px;transition:background .2s}
-.mult:hover{background:var(--bg2)}
-.mico{font-size:1.3rem;margin-bottom:8px}
-.mname{font-size:.82rem;font-weight:700;color:var(--t1);margin-bottom:3px}
-.mdesc{font-size:.73rem;color:var(--t3);line-height:1.6}
-.mtag{display:inline-block;margin-top:6px;background:rgba(255,107,0,.08);border:1px solid rgba(255,107,0,.14);color:var(--or);font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:50px}
+.pkg-card:hover{border-color:rgba(255,107,0,.35);transform:translateY(-4px);box-shadow:0 12px 36px rgba(255,107,0,.10)}
+.pkg-card.destaque{border-color:var(--or);box-shadow:0 0 0 1px rgba(255,107,0,.15),0 8px 28px rgba(255,107,0,.08)}
+.pkg-badge-popular{
+  position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  background:var(--or);color:#fff;font-size:.58rem;font-weight:800;
+  letter-spacing:.6px;padding:4px 14px;border-radius:0 0 10px 10px;white-space:nowrap;
+}
+.pkg-name-badge{
+  display:inline-block;font-size:.65rem;font-weight:800;letter-spacing:.8px;
+  text-transform:uppercase;padding:4px 12px;border-radius:50px;width:fit-content;
+}
+.pkg-name{font-size:.95rem;font-weight:700;color:var(--t1)}
+.pkg-nums-box{
+  background:var(--bg2);border:1px solid var(--bo2);
+  border-radius:var(--r);padding:14px 10px;text-align:center;
+}
+.pkg-nums-big{font-size:2.8rem;font-weight:900;color:var(--t1);line-height:1;display:block}
+.pkg-nums-lbl{font-size:.65rem;color:var(--t4);display:block;margin-bottom:4px}
+.pkg-price-area{display:flex;flex-direction:column;gap:3px}
+.pkg-anchor{font-size:.78rem;color:var(--t4);text-decoration:line-through}
+.pkg-real{font-size:1.5rem;font-weight:900;color:var(--t1);line-height:1.1}
+.pkg-real small{font-size:.78rem;font-weight:500;color:var(--t3)}
+.pkg-per{font-size:.67rem;color:var(--t4)}
+.pkg-btn{
+  width:100%;padding:11px;border-radius:50px;font-size:.82rem;font-weight:700;
+  border:none;cursor:pointer;margin-top:auto;transition:.2s;
+}
+.pkg-btn-fire{background:var(--or);color:#fff;box-shadow:0 2px 12px rgba(255,107,0,.2)}
+.pkg-btn-fire:hover{background:var(--or2);box-shadow:0 4px 20px rgba(255,107,0,.3)}
+.pkg-btn-ghost{background:var(--bg2);color:var(--t2);border:1px solid var(--bo)}
+.pkg-btn-ghost:hover{background:var(--bg3);color:var(--t1)}
+
+/* Badges de cor por plano */
+.badge-cobre{background:rgba(205,127,50,.1);color:#8B4513}
+.badge-bronze{background:rgba(140,90,50,.1);color:#6B4020}
+.badge-prata{background:rgba(120,120,130,.1);color:#606068}
+.badge-ouro{background:rgba(200,134,10,.1);color:var(--gold)}
+.badge-rubi{background:rgba(155,0,30,.08);color:#9B001E}
+.badge-esmeralda{background:rgba(0,120,80,.08);color:#007850}
+.badge-diamante{background:rgba(90,100,200,.1);color:#3040A0}
 
 /* ─── CHECKOUT ───────────────────────────── */
 .co-grid{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start;margin-top:40px}
@@ -364,14 +372,6 @@ button,input,select{font-family:var(--f)}
 .faqbody{display:none;padding:0 20px 18px;font-size:.84rem;color:var(--t3);line-height:1.82;border-top:1px solid var(--bo2);padding-top:14px}
 .faqitem.open .faqbody{display:block}
 
-/* ─── GANHADORES ─────────────────────────── */
-.winners{display:grid;grid-template-columns:repeat(3,1fr);border-radius:var(--r3);overflow:hidden;border:1px solid var(--bo);gap:1px;background:var(--bo);margin-top:36px}
-.winner{background:var(--card);padding:22px;display:flex;gap:12px;align-items:flex-start}
-.wav{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--or),var(--or2));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.88rem;color:#fff}
-.wn{font-size:.85rem;font-weight:700;color:var(--t1);margin-bottom:3px}
-.wnum{font-size:.68rem;color:var(--t4);font-family:monospace;margin-bottom:3px}
-.wprize{font-size:.7rem;color:var(--gold)}
-
 /* ─── FRAUDE ─────────────────────────────── */
 .fraud{background:rgba(215,0,21,.03);border-top:1px solid rgba(215,0,21,.08);border-bottom:1px solid rgba(215,0,21,.08);padding:22px 0}
 .fraud .w{text-align:center}
@@ -401,7 +401,7 @@ button,input,select{font-family:var(--f)}
 .paytag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:4px 9px;font-size:.65rem}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;text-align:center;font-size:.66rem;line-height:2}
 .footer .logo{color:rgba(255,255,255,.85)}
-.footer .logo-icon{background:linear-gradient(135deg,var(--or),var(--or2))}
+.footer .logo-icon-img{width:28px;height:28px;border-radius:8px;object-fit:cover}
 
 /* WhatsApp */
 .wa{position:fixed;bottom:20px;right:18px;z-index:500;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;font-size:1.35rem;box-shadow:0 4px 16px rgba(37,211,102,.32);transition:.2s}
@@ -440,10 +440,11 @@ button,input,select{font-family:var(--f)}
 /* ─── RESPONSIVE ──────────────────────────── */
 @media(max-width:1024px){
   .steps{grid-template-columns:repeat(2,1fr)}
-  .pkgs{grid-template-columns:repeat(2,1fr)}
-  .mults{grid-template-columns:repeat(2,1fr)}
+  .pkgs-grid{grid-template-columns:repeat(2,1fr)}
   .reggrid{grid-template-columns:repeat(2,1fr)}
   .fg-grid{grid-template-columns:1fr 1fr}
+  .apur-body{grid-template-columns:1fr}
+  .apur-prizes{border-right:none;border-bottom:1px solid var(--bo2)}
 }
 @media(max-width:860px){
   .nav-links,.nav-cta{display:none}
@@ -462,12 +463,10 @@ button,input,select{font-family:var(--f)}
   .specs{grid-template-columns:1fr 1fr}
   .co-grid{grid-template-columns:1fr}
   .sumbox{position:static}
-  .winners{grid-template-columns:1fr}
 }
 @media(max-width:580px){
   .steps{grid-template-columns:1fr}
-  .pkgs{grid-template-columns:1fr}
-  .mults{grid-template-columns:1fr 1fr}
+  .pkgs-grid{grid-template-columns:1fr 1fr}
   .reggrid{grid-template-columns:1fr 1fr}
   .fg-grid{grid-template-columns:1fr}
   .frow{grid-template-columns:1fr}
@@ -475,26 +474,29 @@ button,input,select{font-family:var(--f)}
   .iphone{width:180px}
   .cdu b{font-size:1.2rem}
   .cdu{min-width:44px}
-  .apur-inner{gap:3px}
-  .lcard{min-width:76px;padding:9px 5px}
-  .lnum{font-size:.88rem}
   .s{padding:64px 0}
   .sh{margin-bottom:38px}
   .prize-grid{gap:28px}
   .prize-img{max-width:220px}
+}
+@media(max-width:400px){
+  .pkgs-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  🔥 Lançamento: <strong>3× mais números</strong> nos primeiros 10 dias &nbsp;·&nbsp; ✅ Autorizado SPA/ME &nbsp;·&nbsp; <a href="#participar">Participar →</a>
+  ✅ Autorizado SPA/ME &nbsp;·&nbsp; Promoção 100% Legal &nbsp;·&nbsp; <a href="#participar">Quero concorrer →</a>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="w">
-    <div class="logo"><div class="logo-icon">📱</div>FaturouRifa</div>
+    <div class="logo">
+      <img src="favicon-crown.png" alt="Sorte Certa" class="logo-icon-img"/>
+      Sorte Certa
+    </div>
     <div class="nav-links">
       <a href="#premio">Prêmio</a>
       <a href="#pacotes">Pacotes</a>
@@ -510,7 +512,7 @@ button,input,select{font-family:var(--f)}
   <a href="#pacotes" onclick="closeMnav()">Pacotes</a>
   <a href="#como-funciona" onclick="closeMnav()">Como Funciona</a>
   <a href="#faq" onclick="closeMnav()">FAQ</a>
-  <a href="#participar" class="cta-link" onclick="closeMnav()">→ Participar agora</a>
+  <a href="#participar" class="cta-link" onclick="closeMnav()">Participar agora</a>
 </div>
 
 <!-- ══ HERO ══ -->
@@ -548,11 +550,11 @@ button,input,select{font-family:var(--f)}
     <div class="hero-stats">
       <div class="hst"><b id="hSold">347</b><span>números vendidos</span></div>
       <div class="hst"><b style="color:var(--green)">653</b><span>disponíveis</span></div>
-      <div class="hst"><b style="color:var(--gold)">R$ 9.999</b><span>valor do prêmio</span></div>
+      <div class="hst"><b style="color:var(--gold)">R$ 11.499</b><span>valor do prêmio</span></div>
     </div>
   </div>
 
-  <!-- TELEFONE — retrato, sem corte -->
+  <!-- TELEFONE -->
   <div class="hero-phone" id="heroPhone">
     <img
       id="heroImg"
@@ -561,7 +563,6 @@ button,input,select{font-family:var(--f)}
       alt="iPhone 17 Pro"
       onerror="this.onerror=null;this.src='https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha'"
     />
-    <!-- Seletor de cor -->
     <div class="color-strip">
       <div class="cdot on" style="background:linear-gradient(135deg,#FF6B00,#FF9233)" title="Cosmic Orange"
         data-name="Cosmic Orange"
@@ -609,45 +610,45 @@ button,input,select{font-family:var(--f)}
       <div class="step"><div class="sn">3</div><div class="si">🏦</div><h3>Loteria Federal decide</h3><p>O ganhador é calculado com base no resultado oficial da Loteria Federal da Caixa.</p></div>
       <div class="step"><div class="sn">4</div><div class="si">📦</div><h3>iPhone na sua porta</h3><p>Se o seu número vencer, entregamos o iPhone 17 Pro onde você estiver.</p></div>
     </div>
+
+    <!-- Exemplo de apuração: novo layout vertical -->
     <div class="apur rv">
-      <div class="apur-top"><h3>Exemplo de apuração — Loteria Federal</h3><span>Como é calculado</span></div>
-      <div class="apur-scroll">
-        <div class="apur-inner">
-          <div class="lcard">
-            <div class="lpos">1º Prêmio</div>
-            <div class="lnum"><span class="dim">12</span><span class="blue">5</span><span class="oran">9</span><span class="dim">5</span></div>
-            <div class="lhint">Dezena→Série: <b>9</b><br/>Unid: <b>5</b></div>
+      <div class="apur-top">
+        <h3>Exemplo de apuração: Loteria Federal</h3>
+        <span>Como é calculado</span>
+      </div>
+      <div class="apur-body">
+        <div class="apur-prizes">
+          <div class="apur-prize-row">
+            <span class="apur-pos">1º Prêmio</span>
+            <span class="apur-num"><span class="dim">12</span><span class="blue">5</span><span class="oran">9</span><span class="dim">5</span></span>
+            <span class="apur-hint">Dezena/Série: <b>9</b> · Unid: <b>5</b></span>
           </div>
-          <span class="larr">→</span>
-          <div class="lcard">
-            <div class="lpos">2º Prêmio</div>
-            <div class="lnum"><span class="dim">3444</span><span class="oran">7</span></div>
-            <div class="lhint">Unidade: <b>7</b></div>
+          <div class="apur-prize-row">
+            <span class="apur-pos">2º Prêmio</span>
+            <span class="apur-num"><span class="dim">3444</span><span class="oran">7</span></span>
+            <span class="apur-hint">Unidade: <b>7</b></span>
           </div>
-          <span class="larr">→</span>
-          <div class="lcard">
-            <div class="lpos">3º Prêmio</div>
-            <div class="lnum"><span class="dim">9410</span><span class="oran">1</span></div>
-            <div class="lhint">Unidade: <b>1</b></div>
+          <div class="apur-prize-row">
+            <span class="apur-pos">3º Prêmio</span>
+            <span class="apur-num"><span class="dim">9410</span><span class="oran">1</span></span>
+            <span class="apur-hint">Unidade: <b>1</b></span>
           </div>
-          <span class="larr">→</span>
-          <div class="lcard">
-            <div class="lpos">4º Prêmio</div>
-            <div class="lnum"><span class="dim">3211</span><span class="oran">0</span></div>
-            <div class="lhint">Unidade: <b>0</b></div>
+          <div class="apur-prize-row">
+            <span class="apur-pos">4º Prêmio</span>
+            <span class="apur-num"><span class="dim">3211</span><span class="oran">0</span></span>
+            <span class="apur-hint">Unidade: <b>0</b></span>
           </div>
-          <span class="larr">→</span>
-          <div class="lcard">
-            <div class="lpos">5º Prêmio</div>
-            <div class="lnum"><span class="dim">2036</span><span class="oran">2</span></div>
-            <div class="lhint">Unidade: <b>2</b></div>
+          <div class="apur-prize-row">
+            <span class="apur-pos">5º Prêmio</span>
+            <span class="apur-num"><span class="dim">2036</span><span class="oran">2</span></span>
+            <span class="apur-hint">Unidade: <b>2</b></span>
           </div>
-          <span class="larr">=</span>
-          <div class="lresult">
-            <span class="lr-label">Número vencedor</span>
-            <span class="lr-num">9.57102</span>
-            <span class="lr-hint">Série <b style="color:var(--blue)">9</b> · Elemento <b style="color:var(--or)">57102</b></span>
-          </div>
+        </div>
+        <div class="apur-result">
+          <span class="apur-result-label">Número vencedor</span>
+          <span class="apur-result-num">9.57102</span>
+          <span class="apur-result-sub">Série <b>9</b> (dezena do 1º prêmio)<br/>Elemento <strong>57102</strong> (unidades dos 5 prêmios)</span>
         </div>
       </div>
     </div>
@@ -689,7 +690,7 @@ button,input,select{font-family:var(--f)}
           <span class="chip">📦 Lacrado</span>
         </div>
         <div class="valbox">
-          <div><div style="font-size:.68rem;color:var(--t4);margin-bottom:3px">Valor de mercado</div><div class="val-big">R$ 9.999</div></div>
+          <div><div style="font-size:.68rem;color:var(--t4);margin-bottom:3px">Valor de mercado</div><div class="val-big">R$ 11.499,00</div></div>
           <div class="val-div"></div>
           <div class="val-note">Frete e impostos<br/><strong>pagos pela empresa</strong></div>
         </div>
@@ -712,52 +713,116 @@ button,input,select{font-family:var(--f)}
     <div class="sh c">
       <span class="slabel">Participar</span>
       <h2 class="sh2">Escolha seu pacote</h2>
-      <p class="sdesc">Todos incluem o ebook completo. Quanto mais números, mais chances de ganhar.</p>
+      <p class="sdesc">Todos incluem o ebook completo. Clique no plano e vá direto para participar.</p>
     </div>
-    <div class="launch-strip">
-      <span class="ico">⚡</span>
-      <p><strong>Oferta de lançamento ativa:</strong> nos primeiros 10 dias você recebe <strong>3× mais números</strong> sem custo extra. Expira em <span id="launchExp" style="color:var(--or);font-weight:700">...</span></p>
-    </div>
-    <div class="pkgs">
-      <div class="pkg rv">
-        <span class="ptag pt-d">Popular</span>
-        <div class="pname">Pacote Básico</div>
-        <div class="pnbox"><span class="pnlbl">números base</span><span class="pnbig">5</span><span class="pnl">→ 15 no lançamento</span></div>
-        <div class="pprice">R$ <span>19,90</span></div>
-        <ul class="pfeat"><li>Ebook em PDF</li><li>5 números da sorte</li><li>E-mail automático</li><li>Área do cliente</li></ul>
-        <button class="pbtn pbtn-g" onclick="selectPkg('popular')">Quero este</button>
+    <div class="pkgs-grid">
+
+      <!-- COBRE -->
+      <div class="pkg-card rv" onclick="selectPkg('cobre')">
+        <span class="pkg-name-badge badge-cobre">Cobre</span>
+        <div class="pkg-nums-box">
+          <span class="pkg-nums-lbl">números</span>
+          <span class="pkg-nums-big">5</span>
+        </div>
+        <div class="pkg-price-area">
+          <span class="pkg-anchor">R$ 30,00</span>
+          <span class="pkg-real"><small>R$</small> 7,90</span>
+          <span class="pkg-per">R$ 1,58 por número</span>
+        </div>
+        <button class="pkg-btn pkg-btn-ghost">Participar →</button>
       </div>
-      <div class="pkg rv">
-        <span class="ptag pt-p">Prata</span>
-        <div class="pname">Pacote Prata</div>
-        <div class="pnbox"><span class="pnlbl">números base</span><span class="pnbig">12</span><span class="pnl">→ 36 no lançamento</span></div>
-        <div class="pprice">R$ <span>39,90</span></div>
-        <ul class="pfeat"><li>Ebook em PDF</li><li>12 números da sorte</li><li>E-mail automático</li><li>Área do cliente</li><li>Suporte prioritário</li></ul>
-        <button class="pbtn pbtn-g" onclick="selectPkg('prata')">Quero este</button>
+
+      <!-- BRONZE -->
+      <div class="pkg-card rv" onclick="selectPkg('bronze')">
+        <span class="pkg-name-badge badge-bronze">Bronze</span>
+        <div class="pkg-nums-box">
+          <span class="pkg-nums-lbl">números</span>
+          <span class="pkg-nums-big">12</span>
+        </div>
+        <div class="pkg-price-area">
+          <span class="pkg-anchor">R$ 60,00</span>
+          <span class="pkg-real"><small>R$</small> 14,90</span>
+          <span class="pkg-per">R$ 1,24 por número</span>
+        </div>
+        <button class="pkg-btn pkg-btn-ghost">Participar →</button>
       </div>
-      <div class="pkg hot rv">
-        <div class="pkg-star">⭐ MAIS POPULAR</div>
-        <span class="ptag pt-o">Ouro</span>
-        <div class="pname">Pacote Ouro</div>
-        <div class="pnbox"><span class="pnlbl">números base</span><span class="pnbig">20</span><span class="pnl">→ 60 no lançamento</span></div>
-        <div class="pprice">R$ <span>59,90</span></div>
-        <ul class="pfeat"><li>Ebook em PDF</li><li>20 números da sorte</li><li>E-mail automático</li><li>Área do cliente</li><li>Suporte VIP</li><li class="hi">Notificação do sorteio</li></ul>
-        <button class="pbtn pbtn-fire" onclick="selectPkg('ouro')">Quero este</button>
+
+      <!-- PRATA -->
+      <div class="pkg-card rv" onclick="selectPkg('prata')">
+        <span class="pkg-name-badge badge-prata">Prata</span>
+        <div class="pkg-nums-box">
+          <span class="pkg-nums-lbl">números</span>
+          <span class="pkg-nums-big">25</span>
+        </div>
+        <div class="pkg-price-area">
+          <span class="pkg-anchor">R$ 120,00</span>
+          <span class="pkg-real"><small>R$</small> 27,90</span>
+          <span class="pkg-per">R$ 1,12 por número</span>
+        </div>
+        <button class="pkg-btn pkg-btn-ghost">Participar →</button>
       </div>
-      <div class="pkg rv">
-        <span class="ptag pt-e">Elite 🔥</span>
-        <div class="pname">Pacote Elite</div>
-        <div class="pnbox"><span class="pnlbl">números base</span><span class="pnbig">50</span><span class="pnl">→ 150 no lançamento</span></div>
-        <div class="pprice">R$ <span>99,90</span></div>
-        <ul class="pfeat"><li>Ebook em PDF</li><li>50 números da sorte</li><li>E-mail automático</li><li>Área do cliente</li><li>Suporte VIP exclusivo</li><li class="hi">Notificação do sorteio</li><li class="hi">TURBO 2× via PIX</li></ul>
-        <button class="pbtn pbtn-g" onclick="selectPkg('elite')">Quero este</button>
+
+      <!-- OURO -->
+      <div class="pkg-card destaque rv" onclick="selectPkg('ouro')">
+        <div class="pkg-badge-popular">⭐ MAIS POPULAR</div>
+        <span class="pkg-name-badge badge-ouro">Ouro</span>
+        <div class="pkg-nums-box">
+          <span class="pkg-nums-lbl">números</span>
+          <span class="pkg-nums-big">45</span>
+        </div>
+        <div class="pkg-price-area">
+          <span class="pkg-anchor">R$ 200,00</span>
+          <span class="pkg-real"><small>R$</small> 44,90</span>
+          <span class="pkg-per">R$ 1,00 por número</span>
+        </div>
+        <button class="pkg-btn pkg-btn-fire">Participar →</button>
       </div>
-    </div>
-    <div class="mults rv">
-      <div class="mult"><div class="mico">⚡</div><div class="mname">TURBO 2×</div><div class="mdesc">Pacote Elite + PIX = dobro de números</div><span class="mtag">Elite</span></div>
-      <div class="mult"><div class="mico">🚀</div><div class="mname">Lançamento 3×</div><div class="mdesc">Primeiros 10 dias: 3× em qualquer pacote</div><span class="mtag" style="background:rgba(28,133,52,.08);border-color:rgba(28,133,52,.18);color:var(--green)">Ativo!</span></div>
-      <div class="mult"><div class="mico">📱</div><div class="mname">App 3×</div><div class="mdesc">Compre pelo app oficial e triplique seus números</div><span class="mtag">Em breve</span></div>
-      <div class="mult"><div class="mico">👑</div><div class="mname">Prime 6×</div><div class="mdesc">Assinantes Prime: 6× mais números em toda compra</div><span class="mtag">Assinar</span></div>
+
+      <!-- RUBI -->
+      <div class="pkg-card rv" onclick="selectPkg('rubi')">
+        <span class="pkg-name-badge badge-rubi">Rubi</span>
+        <div class="pkg-nums-box">
+          <span class="pkg-nums-lbl">números</span>
+          <span class="pkg-nums-big">80</span>
+        </div>
+        <div class="pkg-price-area">
+          <span class="pkg-anchor">R$ 320,00</span>
+          <span class="pkg-real"><small>R$</small> 69,90</span>
+          <span class="pkg-per">R$ 0,87 por número</span>
+        </div>
+        <button class="pkg-btn pkg-btn-ghost">Participar →</button>
+      </div>
+
+      <!-- ESMERALDA -->
+      <div class="pkg-card rv" onclick="selectPkg('esmeralda')">
+        <span class="pkg-name-badge badge-esmeralda">Esmeralda</span>
+        <div class="pkg-nums-box">
+          <span class="pkg-nums-lbl">números</span>
+          <span class="pkg-nums-big">150</span>
+        </div>
+        <div class="pkg-price-area">
+          <span class="pkg-anchor">R$ 500,00</span>
+          <span class="pkg-real"><small>R$</small> 114,90</span>
+          <span class="pkg-per">R$ 0,77 por número</span>
+        </div>
+        <button class="pkg-btn pkg-btn-ghost">Participar →</button>
+      </div>
+
+      <!-- DIAMANTE -->
+      <div class="pkg-card rv" onclick="selectPkg('diamante')">
+        <span class="pkg-name-badge badge-diamante">Diamante</span>
+        <div class="pkg-nums-box">
+          <span class="pkg-nums-lbl">números</span>
+          <span class="pkg-nums-big">300</span>
+        </div>
+        <div class="pkg-price-area">
+          <span class="pkg-anchor">R$ 900,00</span>
+          <span class="pkg-real"><small>R$</small> 189,90</span>
+          <span class="pkg-per">R$ 0,63 por número</span>
+        </div>
+        <button class="pkg-btn pkg-btn-ghost">Participar →</button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -781,15 +846,18 @@ button,input,select{font-family:var(--f)}
           <div class="fg"><label>E-mail</label><input type="email" id="f-email" placeholder="seu@email.com" required/></div>
           <div class="fg"><label>WhatsApp</label><input type="tel" id="f-tel" placeholder="(11) 99999-9999" required/></div>
         </div>
-        <div class="fg"><label>Endereço completo</label><input type="text" id="f-end" placeholder="Rua, número, bairro, cidade — UF" required/></div>
+        <div class="fg"><label>Endereço completo</label><input type="text" id="f-end" placeholder="Rua, número, bairro, cidade, UF" required/></div>
         <div class="fg">
           <label>Pacote</label>
           <select id="f-pkg" required onchange="updateSummary()">
-            <option value="">— Selecione seu pacote —</option>
-            <option value="popular">Básico — 5 números — R$ 19,90</option>
-            <option value="prata">Prata — 12 números — R$ 39,90</option>
-            <option value="ouro">Ouro — 20 números — R$ 59,90 ⭐</option>
-            <option value="elite">Elite — 50 números — R$ 99,90 🔥</option>
+            <option value="">Selecione seu pacote</option>
+            <option value="cobre">Cobre — 5 números — R$ 7,90</option>
+            <option value="bronze">Bronze — 12 números — R$ 14,90</option>
+            <option value="prata">Prata — 25 números — R$ 27,90</option>
+            <option value="ouro">Ouro — 45 números — R$ 44,90 ⭐</option>
+            <option value="rubi">Rubi — 80 números — R$ 69,90</option>
+            <option value="esmeralda">Esmeralda — 150 números — R$ 114,90</option>
+            <option value="diamante">Diamante — 300 números — R$ 189,90</option>
           </select>
         </div>
         <div class="fg">
@@ -808,7 +876,6 @@ button,input,select{font-family:var(--f)}
         <div class="srows">
           <div class="srow"><span>Pacote</span><span class="sv" id="s-pkg">—</span></div>
           <div class="srow"><span>Números</span><span class="svb" id="s-nums">—</span></div>
-          <div class="srow"><span>Multiplicador</span><span class="sv" id="s-mult">—</span></div>
           <div class="srow"><span>Total</span><span class="sv" id="s-val" style="color:var(--gold);font-weight:800">—</span></div>
           <div class="srow"><span>Sorteio</span><span class="sv">Loteria Federal</span></div>
         </div>
@@ -822,32 +889,15 @@ button,input,select{font-family:var(--f)}
   </div>
 </section>
 
-<!-- ══ GANHADORES ══ -->
-<section class="s s-b">
-  <div class="w">
-    <div class="sh c">
-      <span class="slabel">Histórico</span>
-      <h2 class="sh2">Ganhadores anteriores</h2>
-      <p class="sdesc">Resultados verificáveis nos extratos públicos da Loteria Federal.</p>
-    </div>
-    <div class="winners rv">
-      <div class="winner"><div class="wav">M</div><div><div class="wn">Maria S. · São Paulo</div><div class="wnum">Número: 3.41205</div><div class="wprize">🏆 iPhone 16 Pro Max</div></div></div>
-      <div class="winner"><div class="wav">J</div><div><div class="wn">João P. · Rio de Janeiro</div><div class="wnum">Número: 7.89034</div><div class="wprize">🏆 iPhone 16 Pro Max</div></div></div>
-      <div class="winner"><div class="wav">A</div><div><div class="wn">Ana L. · Belo Horizonte</div><div class="wnum">Número: 1.22891</div><div class="wprize">🏆 MacBook Air M3</div></div></div>
-    </div>
-  </div>
-</section>
-
 <!-- ══ FAQ ══ -->
 <section class="s s-a" id="faq">
   <div class="wm">
     <div class="sh c"><span class="slabel">Dúvidas</span><h2 class="sh2">Perguntas frequentes</h2></div>
     <div class="faqlist">
-      <div class="faqitem rv"><button class="faqbtn">Como funciona a promoção?<div class="faqic">+</div></button><div class="faqbody">Você compra nosso ebook digital e recebe automaticamente números da sorte. O ganhador é apurado pelos resultados públicos da Loteria Federal da Caixa Econômica Federal — total transparência. Não interferimos no resultado.</div></div>
+      <div class="faqitem rv"><button class="faqbtn">Como funciona a promoção?<div class="faqic">+</div></button><div class="faqbody">Você compra nosso ebook digital e recebe automaticamente números da sorte. O ganhador é apurado pelos resultados públicos da Loteria Federal da Caixa Econômica Federal com total transparência. Não interferimos no resultado.</div></div>
       <div class="faqitem rv"><button class="faqbtn">Quando recebo meus números?<div class="faqic">+</div></button><div class="faqbody">Os números são enviados por e-mail imediatamente após a confirmação do pagamento. Via PIX, a confirmação é quase instantânea. Via cartão, pode levar alguns minutos.</div></div>
-      <div class="faqitem rv"><button class="faqbtn">Como o ganhador é calculado?<div class="faqic">+</div></button><div class="faqbody">A apuração usa os 5 primeiros prêmios da Loteria Federal. A dezena do 1º prêmio define a série (0–9) e as unidades dos 5 prêmios formam o elemento de 5 dígitos. O número completo (ex: 9.57102) é cruzado com nossa base de participantes.</div></div>
+      <div class="faqitem rv"><button class="faqbtn">Como o ganhador é calculado?<div class="faqic">+</div></button><div class="faqbody">A apuração usa os 5 primeiros prêmios da Loteria Federal. A dezena do 1º prêmio define a série (0 a 9) e as unidades dos 5 prêmios formam o elemento de 5 dígitos. O número completo (ex: 9.57102) é cruzado com nossa base de participantes.</div></div>
       <div class="faqitem rv"><button class="faqbtn">E se o número sorteado não foi distribuído?<div class="faqic">+</div></button><div class="faqbody">O sistema busca automaticamente o número imediatamente superior na série. Se não houver, busca o inferior. Se a série estiver vazia, avança para a próxima. Sempre haverá um ganhador entre os participantes elegíveis.</div></div>
-      <div class="faqitem rv"><button class="faqbtn">O que é o multiplicador de lançamento?<div class="faqic">+</div></button><div class="faqbody">Nos primeiros 10 dias, você recebe 3× mais números que o padrão do pacote escolhido, sem custo adicional. É nossa forma de recompensar quem acredita desde o início!</div></div>
       <div class="faqitem rv"><button class="faqbtn">A promoção é legalizada?<div class="faqic">+</div></button><div class="faqbody">Sim. Promoção Comercial com Distribuição Gratuita de Prêmios, autorizada pela SPA (Secretaria de Prêmios e Apostas do Ministério da Fazenda), conforme a Lei Federal nº 5.768/71.</div></div>
       <div class="faqitem rv"><button class="faqbtn">Como recebo o iPhone se ganhar?<div class="faqic">+</div></button><div class="faqbody">Entramos em contato pelo e-mail e WhatsApp cadastrados. O iPhone é entregue pelos Correios com frete pago, nota fiscal incluída. O ganhador tem 180 dias para resgatar.</div></div>
     </div>
@@ -857,12 +907,12 @@ button,input,select{font-family:var(--f)}
 <!-- FRAUDE -->
 <div class="fraud">
   <div class="w">
-    <h3>⚠️ Atenção — Prevenção a golpes</h3>
+    <h3>⚠️ Atenção: Prevenção a golpes</h3>
     <p><strong>Não fazemos ligações pedindo depósito ou dados bancários.</strong> Desconfie de qualquer contato fora dos canais abaixo.</p>
     <div class="fraud-c">
-      <span>📧 <strong>contato@faturourifa.com.br</strong></span>
+      <span>📧 <strong>contato@sortecerta.com.br</strong></span>
       <span>💬 WhatsApp: <strong>(11) 99999-9999</strong></span>
-      <span>📷 <strong>@faturourifa</strong></span>
+      <span>📷 <strong>@sortecerta</strong></span>
     </div>
   </div>
 </div>
@@ -874,9 +924,9 @@ button,input,select{font-family:var(--f)}
     <div class="reggrid rv">
       <div class="regcell"><div class="rl">Modalidade</div><div class="rcv">Promoção Comercial · Distribuição Gratuita</div></div>
       <div class="regcell"><div class="rl">Período</div><div class="rcv">[DATA INÍCIO] até [DATA FIM]</div></div>
-      <div class="regcell"><div class="rl">Extração</div><div class="rcv">[DATA] — Loteria Federal CEF</div></div>
+      <div class="regcell"><div class="rl">Extração</div><div class="rcv">[DATA] via Loteria Federal CEF</div></div>
       <div class="regcell"><div class="rl">Apuração</div><div class="rcv">[DATA] às 09h00 (Brasília)</div></div>
-      <div class="regcell"><div class="rl">Prêmio</div><div class="rcv">1× iPhone 17 Pro 256GB</div></div>
+      <div class="regcell"><div class="rl">Prêmio</div><div class="rcv">1x iPhone 17 Pro 256GB</div></div>
       <div class="regcell"><div class="rl">Reclamação</div><div class="rcv">180 dias após divulgação</div></div>
       <div class="regcell"><div class="rl">Autorização</div><div class="rcv">SPA/ME nº [NÚMERO]</div></div>
       <div class="regcell" style="display:flex;align-items:center">
@@ -891,8 +941,11 @@ button,input,select{font-family:var(--f)}
   <div class="w">
     <div class="fg-grid">
       <div>
-        <div class="logo" style="margin-bottom:8px"><div class="logo-icon">📱</div>FaturouRifa</div>
-        <p class="fdesc">Promoção Comercial autorizada pela SPA/ME. Sorteio pelo resultado público da Loteria Federal — sem interferência nossa.</p>
+        <div class="logo" style="margin-bottom:8px">
+          <img src="favicon-crown.png" alt="Sorte Certa" class="logo-icon-img"/>
+          Sorte Certa
+        </div>
+        <p class="fdesc">Promoção Comercial autorizada pela SPA/ME. Sorteio pelo resultado público da Loteria Federal sem interferência nossa.</p>
         <div class="fsoc">
           <a href="#" title="Instagram">📷</a>
           <a href="#" title="WhatsApp">💬</a>
@@ -910,12 +963,12 @@ button,input,select{font-family:var(--f)}
       </div>
       <div class="fc">
         <h4>Contato</h4>
-        <p>📧 contato@faturourifa.com.br</p><p>💬 (11) 99999-9999</p><p>📷 @faturourifa</p>
+        <p>📧 contato@sortecerta.com.br</p><p>💬 (11) 99999-9999</p><p>📷 @sortecerta</p>
         <div class="paytags"><span class="paytag">💠 PIX</span><span class="paytag">💳 Cartão</span></div>
       </div>
     </div>
     <div class="foot-bottom">
-      <p>© 2026 FaturouRifa · Promoção Comercial autorizada por SPA/ME · CNPJ: XX.XXX.XXX/0001-XX</p>
+      <p>© 2026 Sorte Certa · Promoção Comercial autorizada por SPA/ME · CNPJ: XX.XXX.XXX/0001-XX</p>
       <p>Conforme Lei Federal nº 5.768/71 · Secretaria de Prêmios e Apostas / Ministério da Fazenda</p>
     </div>
   </div>
@@ -936,13 +989,17 @@ button,input,select{font-family:var(--f)}
 /* ── CONFIG ───────────────────────────────── */
 const C={
   fim: new Date('2026-08-01T23:59:59'),
-  ini: new Date('2026-05-25'),
-  lanc:10, pix:'11999999999', total:1000, vendidos:347,
+  pix:'11999999999',
+  total:1000,
+  vendidos:347,
   pkgs:{
-    popular:{n:'Básico', nums:5, val:19.9},
-    prata:  {n:'Prata',  nums:12,val:39.9},
-    ouro:   {n:'Ouro',   nums:20,val:59.9},
-    elite:  {n:'Elite',  nums:50,val:99.9},
+    cobre:     {n:'Cobre',     nums:5,   val:7.90},
+    bronze:    {n:'Bronze',    nums:12,  val:14.90},
+    prata:     {n:'Prata',     nums:25,  val:27.90},
+    ouro:      {n:'Ouro',      nums:45,  val:44.90},
+    rubi:      {n:'Rubi',      nums:80,  val:69.90},
+    esmeralda: {n:'Esmeralda', nums:150, val:114.90},
+    diamante:  {n:'Diamante',  nums:300, val:189.90},
   }
 };
 
@@ -955,16 +1012,6 @@ const C={
   document.getElementById('cd-m').textContent=p(Math.floor(d%3600000/60000));
   document.getElementById('cd-s').textContent=p(Math.floor(d%60000/1000));
   setTimeout(t,1000);
-})();
-
-/* ── LANÇAMENTO ──────────────────────────── */
-(function tl(){
-  const f=new Date(C.ini); f.setDate(f.getDate()+C.lanc);
-  const d=f-Date.now(), el=document.getElementById('launchExp');
-  if(!el) return;
-  if(d<=0){el.textContent='Expirado';return;}
-  el.textContent=Math.floor(d/86400000)+'d '+String(Math.floor(d%86400000/3600000)).padStart(2,'0')+'h';
-  setTimeout(tl,60000);
 })();
 
 /* ── PROGRESSO ───────────────────────────── */
@@ -1049,21 +1096,14 @@ document.getElementById('f-tel').addEventListener('input',function(){
 });
 
 /* ── RESUMO ──────────────────────────────── */
-function diasD(){return Math.floor((Date.now()-C.ini)/86400000)}
-function calcN(pkg,pm){
-  const b=C.pkgs[pkg]?.nums||0, d=diasD();
-  if(pkg==='elite'&&(pm==='pix'||pm==='cartao')) return {n:b*2,t:'TURBO 2×'};
-  if(d<=10) return {n:b*3,t:'Lançamento 3×'};
-  if(d<=17) return {n:b+5,t:'Lançamento +5'};
-  return {n:b,t:'—'};
-}
 function updateSummary(){
   const pkg=document.getElementById('f-pkg').value;
   const pm=document.querySelector('input[name="pm"]:checked')?.value||'pix';
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  if(!pkg){['s-pkg','s-nums','s-mult','s-val'].forEach(id=>set(id,'—'));return;}
-  const d=C.pkgs[pkg],{n,t}=calcN(pkg,pm);
-  set('s-pkg',d.n); set('s-nums',n+' números'); set('s-mult',t);
+  if(!pkg){['s-pkg','s-nums','s-val'].forEach(id=>set(id,'—'));return;}
+  const d=C.pkgs[pkg];
+  set('s-pkg',d.n);
+  set('s-nums',d.nums+' números');
   set('s-val','R$ '+d.val.toFixed(2).replace('.',','));
   const pk=document.getElementById('pixKey');
   if(pk) pk.textContent=pm==='pix'?C.pix:'Pague via cartão no checkout';
@@ -1099,14 +1139,14 @@ window.submitForm=function(e){
   if(!em||!em.includes('@')){toast('E-mail inválido.','#D70015');return;}
   if(!pk){toast('Selecione um pacote.','#D70015');return;}
   if(na){const a=(Date.now()-new Date(na))/31557600000;if(a<18){toast('Necessário 18 anos ou mais.','#D70015');return;}}
-  const d=C.pkgs[pk],{n:nums,t}=calcN(pk,pm);
+  const d=C.pkgs[pk];
   const pix=pm==='pix'?`<div class="pixcfm"><p>Chave PIX para pagamento:</p><div class="key" onclick="navigator.clipboard?.writeText('${C.pix}').then(()=>toast('PIX copiado!','#1C8534'))">${C.pix}</div></div>`:`<div class="pixcfm"><p>💳 Você será redirecionado ao checkout seguro.</p></div>`;
   document.getElementById('mbody').innerHTML=`
     <h2>Confirme seu pedido</h2><p class="msub">Revise antes de finalizar.</p>
     <div class="crow"><span>Nome</span><strong>${n}</strong></div>
     <div class="crow"><span>E-mail</span><strong>${em}</strong></div>
     <div class="crow"><span>Pacote</span><strong>${d.n}</strong></div>
-    <div class="crow"><span>Números</span><strong class="hl">${nums}${t!=='—'?' · '+t:''}</strong></div>
+    <div class="crow"><span>Números</span><strong class="hl">${d.nums}</strong></div>
     <div class="crow"><span>Total</span><strong style="color:var(--gold)">R$ ${d.val.toFixed(2).replace('.',',')}</strong></div>
     <div class="crow"><span>Pagamento</span><strong>${pm==='pix'?'💠 PIX':'💳 Cartão'}</strong></div>
     ${pix}

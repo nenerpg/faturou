@@ -86,18 +86,50 @@ button,input,select{font-family:var(--f)}
 
 /* ─── HERO ──────────────────────────────── */
 .hero{
-  display:grid;
-  grid-template-columns:1fr 420px;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
   min-height:calc(100svh - 56px);
   background:var(--bg);
 }
+.hero-vid{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  z-index:0;pointer-events:none;
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(105deg,
+      rgba(0,0,0,.90) 0%,
+      rgba(0,0,0,.72) 45%,
+      rgba(0,0,0,.32) 100%
+    ),
+    linear-gradient(to bottom,
+      transparent 65%,
+      rgba(0,0,0,.88) 100%
+    );
+}
+.hero-overlay::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,
+    transparent,
+    rgba(201,168,76,.25) 30%,
+    rgba(201,168,76,.45) 50%,
+    rgba(201,168,76,.25) 70%,
+    transparent
+  );
+}
 .hero-text{
+  position:relative;z-index:2;
   display:flex;flex-direction:column;justify-content:center;gap:28px;
-  padding:72px 56px 72px max(28px,5%);
+  max-width:680px;
+  padding:80px max(48px,8%);
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:7px;
-  background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.18);
+  background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.22);
   color:var(--green);font-size:.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
   padding:6px 13px;border-radius:var(--r);width:fit-content;
 }
@@ -109,14 +141,14 @@ button,input,select{font-family:var(--f)}
   background:linear-gradient(105deg,var(--gold2) 0%,var(--gold) 45%,var(--gold3) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.hero-sub{font-size:.95rem;color:var(--t3);line-height:1.8;max-width:420px}
-.hero-sub strong{color:var(--t2);font-weight:600}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.75);line-height:1.8;max-width:480px}
+.hero-sub strong{color:rgba(255,255,255,.9);font-weight:600}
 
 /* Countdown */
 .cdrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .cdlabel{font-size:.7rem;color:var(--t4);white-space:nowrap}
 .cdunits{display:flex;align-items:center;gap:4px}
-.cdu{background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r2);padding:7px 10px;min-width:48px;display:flex;flex-direction:column;align-items:center}
+.cdu{background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);border-radius:var(--r2);padding:7px 10px;min-width:48px;display:flex;flex-direction:column;align-items:center}
 .cdu b{font-size:1.3rem;font-weight:800;color:var(--t1);line-height:1;font-variant-numeric:tabular-nums}
 .cdu small{font-size:.5rem;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
 .cdsep{font-size:1rem;font-weight:800;color:var(--gold);line-height:1;margin-bottom:4px}
@@ -124,52 +156,15 @@ button,input,select{font-family:var(--f)}
 /* Buttons */
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:13px 26px;border-radius:var(--r);font-size:.88rem;font-weight:700;transition:.2s;border:none;cursor:pointer}
-.btn-fire{background:var(--gold);color:#000;box-shadow:0 4px 16px rgba(201,168,76,.22)}
-.btn-fire:hover{background:var(--gold2);box-shadow:0 6px 24px rgba(201,168,76,.35);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--t2);border:1.5px solid var(--bo)}
-.btn-ghost:hover{background:rgba(255,255,255,.04);color:var(--t1)}
+.btn-fire{background:var(--gold);color:#000;box-shadow:0 4px 16px rgba(201,168,76,.28)}
+.btn-fire:hover{background:var(--gold2);box-shadow:0 6px 24px rgba(201,168,76,.45);transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--t1);border:1.5px solid rgba(255,255,255,.2);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.14);color:var(--t1)}
 
 .hero-stats{display:flex;gap:24px;flex-wrap:wrap;padding-top:4px}
 .hst{display:flex;flex-direction:column;gap:2px}
 .hst b{font-size:1.05rem;font-weight:800;color:var(--t1)}
-.hst span{font-size:.68rem;color:var(--t4)}
-
-/* Hero phone */
-.hero-phone{
-  display:flex;align-items:center;justify-content:center;
-  padding:56px 40px 72px;
-  background:linear-gradient(155deg,#0a0800 0%,#1a1200 45%,#100a00 100%);
-  border-left:1px solid rgba(201,168,76,.1);
-  position:relative;overflow:visible;
-}
-.hero-phone::before{
-  content:'';position:absolute;
-  width:300px;height:300px;border-radius:50%;
-  background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 70%);
-  pointer-events:none;z-index:0;
-}
-.iphone{
-  position:relative;z-index:1;
-  width:260px;height:auto;
-  object-fit:contain;
-  filter:drop-shadow(0 32px 56px rgba(0,0,0,.5)) drop-shadow(0 8px 20px rgba(201,168,76,.08));
-  animation:float 7s ease-in-out infinite;
-}
-@keyframes float{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(-12px) rotate(.4deg)}}
-
-.color-strip{
-  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
-  display:flex;align-items:center;gap:8px;z-index:2;
-  background:rgba(0,0,0,.8);
-  backdrop-filter:blur(12px);
-  border:1px solid var(--bo);border-radius:var(--r2);
-  padding:8px 16px;white-space:nowrap;
-  box-shadow:var(--sh);
-}
-.cdot{width:18px;height:18px;border-radius:50%;cursor:pointer;transition:.2s;border:2.5px solid transparent;flex-shrink:0}
-.cdot:hover{transform:scale(1.15)}
-.cdot.on{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,168,76,.25)}
-.cname{font-size:.7rem;color:var(--t3);letter-spacing:.1px}
+.hst span{font-size:.68rem;color:rgba(255,255,255,.5)}
 
 /* ─── PROGRESS BAR ──────────────────────── */
 .progbar{
@@ -450,11 +445,9 @@ button,input,select{font-family:var(--f)}
 @media(max-width:860px){
   .nav-links,.nav-cta{display:none}
   .ham{display:flex}
-  .hero{grid-template-columns:1fr;min-height:auto}
-  .hero-phone{order:-1;min-height:360px;padding:48px 40px 56px;border-left:none;border-bottom:1px solid rgba(201,168,76,.08)}
-  .iphone{width:210px}
-  .color-strip{bottom:16px}
-  .hero-text{padding:44px 22px 52px;align-items:center;text-align:center}
+  .hero{min-height:100svh}
+  .hero-vid{object-position:62% center}
+  .hero-text{padding:56px 24px 72px;align-items:center;text-align:center;max-width:100%}
   .hero-badge,.hero-actions,.hero-stats,.cdrow{justify-content:center}
   .hero-sub{text-align:center}
   .prize-grid{grid-template-columns:1fr;gap:32px;text-align:center}
@@ -472,7 +465,6 @@ button,input,select{font-family:var(--f)}
   .fg-grid{grid-template-columns:1fr}
   .frow{grid-template-columns:1fr}
   .hero-h{letter-spacing:-.8px;font-size:clamp(2rem,8vw,2.4rem)}
-  .iphone{width:180px}
   .cdu b{font-size:1.2rem}
   .cdu{min-width:44px}
   .s{padding:64px 0}
@@ -525,6 +517,13 @@ button,input,select{font-family:var(--f)}
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="inicio">
+
+  <!-- VÍDEO DE FUNDO -->
+  <video class="hero-vid" autoplay muted playsinline preload="metadata">
+    <source src="hero-bg.mp4" type="video/mp4"/>
+  </video>
+  <div class="hero-overlay"></div>
+
   <!-- TEXTO -->
   <div class="hero-text">
     <div class="hero-badge"><i></i>Autorizado SPA/ME · Promoção 100% Legal</div>
@@ -561,34 +560,6 @@ button,input,select{font-family:var(--f)}
     </div>
   </div>
 
-  <!-- TELEFONE -->
-  <div class="hero-phone" id="heroPhone">
-    <img
-      id="heroImg"
-      class="iphone"
-      src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha"
-      alt="iPhone 17 Pro"
-      onerror="this.onerror=null;this.src='https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha'"
-    />
-    <div class="color-strip">
-      <div class="cdot on" style="background:linear-gradient(135deg,#FF6B00,#FF9233)" title="Cosmic Orange"
-        data-name="Cosmic Orange"
-        data-filter="hue-rotate(0deg) saturate(1)"
-        data-glow="rgba(201,168,76,.15)"
-        onclick="trocarCor(this)"></div>
-      <div class="cdot" style="background:linear-gradient(135deg,#1a3a5c,#2a6db5)" title="Deep Blue"
-        data-name="Deep Blue"
-        data-filter="hue-rotate(210deg) saturate(1.4) brightness(.95)"
-        data-glow="rgba(96,165,250,.15)"
-        onclick="trocarCor(this)"></div>
-      <div class="cdot" style="background:linear-gradient(135deg,#c0c0c8,#e0e0e8)" title="Silver"
-        data-name="Silver"
-        data-filter="hue-rotate(180deg) saturate(.15) brightness(1.1)"
-        data-glow="rgba(180,180,200,.1)"
-        onclick="trocarCor(this)"></div>
-      <span class="cname" id="heroColorName">Cosmic Orange</span>
-    </div>
-  </div>
 </section>
 
 <!-- PROGRESSO -->

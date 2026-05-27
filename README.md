@@ -1,4 +1,4 @@
-# 📱 RifaTechPro — iPhone 16 Pro Max
+# 📱 Sorte Certa — iPhone 17 Pr
 
 > Promoção Comercial com Distribuição Gratuita de Prêmios  
 > Autorizada pela **SPA/ME** — Lei Federal nº 5.768/71

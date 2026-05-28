@@ -1040,28 +1040,35 @@ const C={
 (function(){
   const h=document.querySelector('.hero-h');
   if(!h) return;
-  // Wrap each word (preserving child elements like <span> and <br>)
-  function wrapWords(node){
+  // Snapshot children BEFORE clearing, then re-insert with .ld
+  // Rule: text nodes → split into per-word spans
+  //       <br> → kept as-is (no animation)
+  //       element nodes (e.g. .gr) → animated as ONE unit to preserve gradient
+  const orig=Array.from(h.childNodes);
+  h.innerHTML='';
+  let idx=0;
+  orig.forEach(function(node){
     if(node.nodeType===3){
-      const parts=node.textContent.split(/(\s+)/);
-      const frag=document.createDocumentFragment();
-      parts.forEach(p=>{
+      node.textContent.split(/(\s+)/).forEach(function(p){
         if(p.trim()){
           const s=document.createElement('span');
-          s.className='ld';s.textContent=p;
-          frag.appendChild(s);
+          s.className='ld';
+          s.textContent=p;
+          s.style.animationDelay=(idx++*0.08)+'s';
+          h.appendChild(s);
         } else if(p){
-          frag.appendChild(document.createTextNode(p));
+          h.appendChild(document.createTextNode(p));
         }
       });
-      node.parentNode.replaceChild(frag,node);
-    } else if(node.nodeType===1 && node.tagName!=='BR'){
-      Array.from(node.childNodes).forEach(wrapWords);
+    } else if(node.tagName==='BR'){
+      h.appendChild(node);
+    } else {
+      // Animate the whole child element (keeps .gr gradient intact)
+      node.classList.add('ld');
+      node.style.display='block'; // force block so it stays on its own line
+      node.style.animationDelay=(idx++*0.08)+'s';
+      h.appendChild(node);
     }
-  }
-  wrapWords(h);
-  h.querySelectorAll('.ld').forEach((el,i)=>{
-    el.style.animationDelay=(i*0.07)+'s';
   });
 })();
 

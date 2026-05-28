@@ -502,18 +502,18 @@ button,input,select{font-family:var(--f)}
   .hero{min-height:100svh;align-items:flex-end}
   .hero-vid-desktop{display:none}
   .hero-vid-mobile{display:block;object-position:center top}
-  /* Overlay: topo transparente (coroa), meio leve (iPhones visíveis), fundo escuro (texto) */
+  /* Overlay mobile: quase zerado — só escurece no rodapé para o texto */
   .hero-overlay{
     background:linear-gradient(to bottom,
-      rgba(0,0,0,.05) 0%,
-      rgba(0,0,0,.08) 30%,
-      rgba(0,0,0,.42) 65%,
-      rgba(0,0,0,.82) 100%
+      transparent 0%,
+      transparent 50%,
+      rgba(0,0,0,.55) 78%,
+      rgba(0,0,0,.80) 100%
     );
   }
   .hero-text{
     padding:24px 24px 52px;align-items:center;text-align:center;max-width:100%;
-    background:radial-gradient(ellipse 100% 60% at center bottom,rgba(0,0,0,.55) 0%,transparent 100%);
+    background:none;
   }
   .hero-h{text-shadow:0 2px 20px rgba(0,0,0,.9),0 0 40px rgba(0,0,0,.7)}
   .hero-badge,.hero-actions,.hero-stats,.cdrow{justify-content:center}

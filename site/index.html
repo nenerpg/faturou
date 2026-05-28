@@ -543,7 +543,7 @@ button,input,select{font-family:var(--f)}
   <a href="#pacotes" onclick="closeMnav()">Pacotes</a>
   <a href="#como-funciona" onclick="closeMnav()">Como Funciona</a>
   <a href="#faq" onclick="closeMnav()">FAQ</a>
-  <a href="#participar" class="cta-link" onclick="closeMnav()">Participar agora</a>
+  <a href="#pacotes" class="cta-link" onclick="closeMnav()">Participar agora</a>
 </div>
 
 <!-- ══ HERO ══ -->
@@ -586,33 +586,81 @@ button,input,select{font-family:var(--f)}
     </div>
 
     <div class="hero-actions">
-      <a href="#participar" class="btn btn-fire">PARTICIPAR AGORA</a>
+      <a href="#pacotes" class="btn btn-fire">PARTICIPAR AGORA</a>
       <a href="#como-funciona" class="btn btn-ghost">Como funciona?</a>
     </div>
 
-    <div class="hero-stats">
-      <div class="hst"><b id="hSold">347</b><span>números vendidos</span></div>
-      <div class="hst"><b style="color:var(--green)">653</b><span>disponíveis</span></div>
-      <div class="hst"><b style="color:var(--gold)">R$ 11.499</b><span>valor do prêmio</span></div>
-    </div>
   </div>
 
 </section>
 
-<!-- PROGRESSO -->
-<div class="progbar">
+
+<!-- ══ PRÊMIO ══ -->
+<section class="s s-b" id="premio">
   <div class="w">
-    <div class="prog-row">
-      <p>Vendidos: <strong id="pSold">347</strong> de <strong>1.000</strong></p>
-      <span class="prog-pct" id="pPct">34,7%</span>
+    <div class="prize-grid">
+      <div class="prize-phone rv">
+        <img id="prizeImg" class="prize-img"
+          src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha"
+          alt="iPhone 17 Pro"
+          onerror="this.onerror=null;this.src='https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha'"
+        />
+        <div class="color-row">
+          <div class="cdot2 on" style="background:linear-gradient(135deg,#FF6B00,#FF9233)" title="Cosmic Orange"
+            data-name="Cosmic Orange" data-filter="hue-rotate(0deg) saturate(1)" data-glow="rgba(201,168,76,.15)"
+            onclick="trocarCor2(this)"></div>
+          <div class="cdot2" style="background:linear-gradient(135deg,#1a3a5c,#2a6db5)" title="Deep Blue"
+            data-name="Deep Blue" data-filter="hue-rotate(210deg) saturate(1.4) brightness(.95)" data-glow="rgba(96,165,250,.15)"
+            onclick="trocarCor2(this)"></div>
+          <div class="cdot2" style="background:linear-gradient(135deg,#c0c0c8,#e0e0e8)" title="Silver"
+            data-name="Silver" data-filter="hue-rotate(180deg) saturate(.15) brightness(1.1)" data-glow="rgba(180,180,200,.1)"
+            onclick="trocarCor2(this)"></div>
+          <span class="cname2" id="prizeColorName">Cosmic Orange</span>
+        </div>
+      </div>
+      <div class="prize-info rv">
+        <span class="slabel">O Prêmio</span>
+        <h2 class="sh2">iPhone 17 Pro</h2>
+        <p class="prize-model">256GB · <span id="prizeColor">Cosmic Orange</span> · Titânio premium</p>
+        <p class="sdesc" style="margin-bottom:20px">A câmera mais avançada que a Apple já criou. Chip A19 Pro, sistema Fusion de 48MP, tela de 6,3" com ProMotion 120Hz e 30 horas de bateria.</p>
+        <div class="chips">
+          <span class="chip g">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,8 6,12 14,4"/></svg>
+            Nota Fiscal
+          </span>
+          <span class="chip g">
+            <svg width="14" height="13" viewBox="0 0 20 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="18" height="9" rx="2"/><path d="M1 7h18"/><circle cx="5" cy="13" r="2" fill="currentColor" stroke="none"/><circle cx="15" cy="13" r="2" fill="currentColor" stroke="none"/></svg>
+            Frete Grátis
+          </span>
+          <span class="chip">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1l1.5 3 3.5.5-2.5 2.5.5 3.5L8 9l-3 1.5.5-3.5L3 4.5 6.5 4z"/></svg>
+            Garantia Apple 1 ano
+          </span>
+          <span class="chip">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l6-3 6 3v7l-6 3-6-3V5z"/><path d="M8 2v13M2 5l6 3 6-3"/></svg>
+            Lacrado
+          </span>
+        </div>
+        <div class="valbox">
+          <div><div style="font-size:.68rem;color:var(--t4);margin-bottom:3px">Valor de mercado</div><div class="val-big">R$ 11.499,00</div></div>
+          <div class="val-div"></div>
+          <div class="val-note">Frete e impostos<br/><strong>pagos pela empresa</strong></div>
+        </div>
+        <div class="specs">
+          <div class="spec"><div class="sl">Tela</div><div class="sv">6,3" OLED 120Hz</div></div>
+          <div class="spec"><div class="sl">Chip</div><div class="sv">Apple A19 Pro</div></div>
+          <div class="spec"><div class="sl">Câmera</div><div class="sv">48MP Fusion + 48MP Ultra</div></div>
+          <div class="spec"><div class="sl">Bateria</div><div class="sv">30h de vídeo</div></div>
+          <div class="spec"><div class="sl">Armazenamento</div><div class="sv">256GB</div></div>
+          <div class="spec"><div class="sl">Conectividade</div><div class="sv">5G · Wi-Fi 7</div></div>
+        </div>
+      </div>
     </div>
-    <div class="track"><div class="fill" id="pFill" style="width:34.7%"></div></div>
-    <p class="prog-note">Números se esgotam a cada compra</p>
   </div>
-</div>
+</section>
 
 <!-- ══ COMO FUNCIONA ══ -->
-<section class="s s-b" id="como-funciona">
+<section class="s s-a" id="como-funciona">
   <div class="w">
     <div class="sh c">
       <span class="slabel">Transparência</span>
@@ -708,70 +756,6 @@ button,input,select{font-family:var(--f)}
           <span class="apur-result-label">Número vencedor</span>
           <span class="apur-result-num">9.57102</span>
           <span class="apur-result-sub">Série <b>9</b> (dezena do 1º prêmio)<br/>Elemento <strong>57102</strong> (unidades dos 5 prêmios)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ PRÊMIO ══ -->
-<section class="s s-a" id="premio">
-  <div class="w">
-    <div class="prize-grid">
-      <div class="prize-phone rv">
-        <img id="prizeImg" class="prize-img"
-          src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha"
-          alt="iPhone 17 Pro"
-          onerror="this.onerror=null;this.src='https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha'"
-        />
-        <div class="color-row">
-          <div class="cdot2 on" style="background:linear-gradient(135deg,#FF6B00,#FF9233)" title="Cosmic Orange"
-            data-name="Cosmic Orange" data-filter="hue-rotate(0deg) saturate(1)" data-glow="rgba(201,168,76,.15)"
-            onclick="trocarCor2(this)"></div>
-          <div class="cdot2" style="background:linear-gradient(135deg,#1a3a5c,#2a6db5)" title="Deep Blue"
-            data-name="Deep Blue" data-filter="hue-rotate(210deg) saturate(1.4) brightness(.95)" data-glow="rgba(96,165,250,.15)"
-            onclick="trocarCor2(this)"></div>
-          <div class="cdot2" style="background:linear-gradient(135deg,#c0c0c8,#e0e0e8)" title="Silver"
-            data-name="Silver" data-filter="hue-rotate(180deg) saturate(.15) brightness(1.1)" data-glow="rgba(180,180,200,.1)"
-            onclick="trocarCor2(this)"></div>
-          <span class="cname2" id="prizeColorName">Cosmic Orange</span>
-        </div>
-      </div>
-      <div class="prize-info rv">
-        <span class="slabel">O Prêmio</span>
-        <h2 class="sh2">iPhone 17 Pro</h2>
-        <p class="prize-model">256GB · <span id="prizeColor">Cosmic Orange</span> · Titânio premium</p>
-        <p class="sdesc" style="margin-bottom:20px">A câmera mais avançada que a Apple já criou. Chip A19 Pro, sistema Fusion de 48MP, tela de 6,3" com ProMotion 120Hz e 30 horas de bateria.</p>
-        <div class="chips">
-          <span class="chip g">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,8 6,12 14,4"/></svg>
-            Nota Fiscal
-          </span>
-          <span class="chip g">
-            <svg width="14" height="13" viewBox="0 0 20 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="18" height="9" rx="2"/><path d="M1 7h18"/><circle cx="5" cy="13" r="2" fill="currentColor" stroke="none"/><circle cx="15" cy="13" r="2" fill="currentColor" stroke="none"/></svg>
-            Frete Grátis
-          </span>
-          <span class="chip">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1l1.5 3 3.5.5-2.5 2.5.5 3.5L8 9l-3 1.5.5-3.5L3 4.5 6.5 4z"/></svg>
-            Garantia Apple 1 ano
-          </span>
-          <span class="chip">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l6-3 6 3v7l-6 3-6-3V5z"/><path d="M8 2v13M2 5l6 3 6-3"/></svg>
-            Lacrado
-          </span>
-        </div>
-        <div class="valbox">
-          <div><div style="font-size:.68rem;color:var(--t4);margin-bottom:3px">Valor de mercado</div><div class="val-big">R$ 11.499,00</div></div>
-          <div class="val-div"></div>
-          <div class="val-note">Frete e impostos<br/><strong>pagos pela empresa</strong></div>
-        </div>
-        <div class="specs">
-          <div class="spec"><div class="sl">Tela</div><div class="sv">6,3" OLED 120Hz</div></div>
-          <div class="spec"><div class="sl">Chip</div><div class="sv">Apple A19 Pro</div></div>
-          <div class="spec"><div class="sl">Câmera</div><div class="sv">48MP Fusion + 48MP Ultra</div></div>
-          <div class="spec"><div class="sl">Bateria</div><div class="sv">30h de vídeo</div></div>
-          <div class="spec"><div class="sl">Armazenamento</div><div class="sv">256GB</div></div>
-          <div class="spec"><div class="sl">Conectividade</div><div class="sv">5G · Wi-Fi 7</div></div>
         </div>
       </div>
     </div>
@@ -898,82 +882,6 @@ button,input,select{font-family:var(--f)}
   </div>
 </section>
 
-<!-- ══ CHECKOUT ══ -->
-<section class="s s-c" id="participar">
-  <div class="w">
-    <div class="sh c">
-      <span class="slabel">Participar</span>
-      <h2 class="sh2">Seus dados</h2>
-      <p class="sdesc">Preencha abaixo. Seus números chegam no e-mail em até 5 minutos após o pagamento.</p>
-    </div>
-    <div class="co-grid">
-      <form class="form-card" id="mainForm" onsubmit="submitForm(event)" novalidate>
-        <div class="fg"><label>Nome completo</label><input type="text" id="f-nome" placeholder="Seu nome completo" required/></div>
-        <div class="frow">
-          <div class="fg"><label>CPF</label><input type="text" id="f-cpf" placeholder="000.000.000-00" maxlength="14" required/></div>
-          <div class="fg"><label>Data de nascimento</label><input type="date" id="f-nasc" required/></div>
-        </div>
-        <div class="frow">
-          <div class="fg"><label>E-mail</label><input type="email" id="f-email" placeholder="seu@email.com" required/></div>
-          <div class="fg"><label>WhatsApp</label><input type="tel" id="f-tel" placeholder="(11) 99999-9999" required/></div>
-        </div>
-        <div class="fg"><label>Endereço completo</label><input type="text" id="f-end" placeholder="Rua, número, bairro, cidade, UF" required/></div>
-        <div class="fg">
-          <label>Pacote</label>
-          <select id="f-pkg" required onchange="updateSummary()">
-            <option value="">Selecione seu pacote</option>
-            <option value="cobre">Cobre — 5 números — R$ 7,90</option>
-            <option value="bronze">Bronze — 12 números — R$ 14,90</option>
-            <option value="prata">Prata — 25 números — R$ 27,90</option>
-            <option value="ouro">Ouro — 45 números — R$ 44,90</option>
-            <option value="rubi">Rubi — 80 números — R$ 69,90</option>
-            <option value="esmeralda">Esmeralda — 150 números — R$ 114,90</option>
-            <option value="diamante">Diamante — 300 números — R$ 189,90</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label>Pagamento</label>
-          <div class="pm-grid">
-            <label class="pml"><input type="radio" name="pm" value="pix" checked onchange="updateSummary()"/><div class="pmf">
-              <span class="pmf-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l4-4 4 4 4-4 4 4"/><path d="M4 16l4-4 4 4 4-4 4 4"/></svg></span>
-              PIX<span class="pmh">Aprovação imediata</span>
-            </div></label>
-            <label class="pml"><input type="radio" name="pm" value="cartao" onchange="updateSummary()"/><div class="pmf">
-              <span class="pmf-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="22" height="14" rx="3"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
-              Cartão<span class="pmh">Parcelado</span>
-            </div></label>
-          </div>
-        </div>
-        <label class="cbox"><input type="checkbox" required/><span>Li e aceito o <a href="#regulamento">Regulamento</a> e a <a href="#regulamento">Política de Privacidade</a>. Tenho 18 anos ou mais.</span></label>
-        <button type="submit" class="btn-sub">Confirmar e Pagar →</button>
-        <div class="sec-note">
-          <svg width="11" height="13" viewBox="0 0 11 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="9" height="7" rx="1.5"/><path d="M3 6V4a2.5 2.5 0 015 0v2"/></svg>
-          Pagamento seguro · LGPD
-        </div>
-      </form>
-      <div class="sumbox">
-        <div class="sum-prize">
-          <span class="spico">
-            <svg width="28" height="28" viewBox="0 0 36 36" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="2" width="16" height="32" rx="3"/><circle cx="18" cy="29" r="1.2" fill="var(--gold)" stroke="none"/><path d="M15 6h6"/></svg>
-          </span>
-          <div><div class="spname">iPhone 17 Pro</div><div class="spsub" id="s-cor">256GB · Cosmic Orange</div></div>
-        </div>
-        <div class="srows">
-          <div class="srow"><span>Pacote</span><span class="sv" id="s-pkg">—</span></div>
-          <div class="srow"><span>Números</span><span class="svb" id="s-nums">—</span></div>
-          <div class="srow"><span>Total</span><span class="sv" id="s-val" style="color:var(--gold);font-weight:800">—</span></div>
-          <div class="srow"><span>Sorteio</span><span class="sv">Loteria Federal</span></div>
-        </div>
-        <div class="pixbox">
-          <p>Chave PIX para pagamento</p>
-          <div class="pixkey" id="pixKey" onclick="copyPix()">Selecione um pacote</div>
-          <p class="pixhint">Clique para copiar · Números chegam após confirmação</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ══ FAQ ══ -->
 <section class="s s-a" id="faq">
   <div class="wm">
@@ -1090,13 +998,6 @@ button,input,select{font-family:var(--f)}
   <svg width="26" height="26" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- MODAL -->
-<div class="mbg" id="mbg">
-  <div class="modal">
-    <button class="mcl" onclick="closeModal()">✕</button>
-    <div id="mbody"></div>
-  </div>
-</div>
 <div id="toasts"></div>
 
 <script>
@@ -1104,8 +1005,6 @@ button,input,select{font-family:var(--f)}
 const C={
   fim: new Date('2026-08-01T23:59:59'),
   pix:'11999999999',
-  total:1000,
-  vendidos:347,
   pkgs:{
     cobre:     {n:'Cobre',     nums:5,   val:7.90},
     bronze:    {n:'Bronze',    nums:12,  val:14.90},
@@ -1127,18 +1026,6 @@ const C={
   document.getElementById('cd-s').textContent=p(Math.floor(d%60000/1000));
   setTimeout(t,1000);
 })();
-
-/* ── PROGRESSO ───────────────────────────── */
-let sold=C.vendidos;
-function updP(){
-  const pct=(sold/C.total*100).toFixed(1);
-  const b=document.getElementById('pFill'); if(b) b.style.width=pct+'%';
-  const s=document.getElementById('pSold'); if(s) s.textContent=sold;
-  const p=document.getElementById('pPct'); if(p) p.textContent=pct.replace('.',',')+' %';
-  const h=document.getElementById('hSold'); if(h) h.textContent=sold;
-}
-updP();
-setInterval(()=>{if(sold<C.total){sold+=Math.floor(Math.random()*2)+1;updP();}},32000);
 
 /* ── NAV ─────────────────────────────────── */
 document.getElementById('hamBtn').addEventListener('click',()=>document.getElementById('mnav').classList.toggle('open'));
@@ -1172,7 +1059,6 @@ function applyColor(filter, glow, name){
   ['prizeColor','prizeColorName','heroColorName'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.textContent=name;
   });
-  const sc=document.getElementById('s-cor'); if(sc) sc.textContent='256GB · '+name;
 }
 
 window.trocarCor=function(dot){
@@ -1193,93 +1079,11 @@ window.trocarCor2=function(dot){
   applyColor(dot.dataset.filter, dot.dataset.glow, dot.dataset.name);
 };
 
-/* ── MÁSCARAS ────────────────────────────── */
-document.getElementById('f-cpf').addEventListener('input',function(){
-  let v=this.value.replace(/\D/g,'').slice(0,11);
-  if(v.length>9)v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
-  else if(v.length>6)v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
-  else if(v.length>3)v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
-  this.value=v;
-});
-document.getElementById('f-tel').addEventListener('input',function(){
-  let v=this.value.replace(/\D/g,'').slice(0,11);
-  if(v.length>10)v=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
-  else if(v.length>6)v=v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');
-  else if(v.length>2)v=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
-  this.value=v;
-});
-
-/* ── RESUMO ──────────────────────────────── */
-function updateSummary(){
-  const pkg=document.getElementById('f-pkg').value;
-  const pm=document.querySelector('input[name="pm"]:checked')?.value||'pix';
-  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  if(!pkg){['s-pkg','s-nums','s-val'].forEach(id=>set(id,'—'));return;}
-  const d=C.pkgs[pkg];
-  set('s-pkg',d.n);
-  set('s-nums',d.nums+' números');
-  set('s-val','R$ '+d.val.toFixed(2).replace('.',','));
-  const pk=document.getElementById('pixKey');
-  if(pk) pk.textContent=pm==='pix'?C.pix:'Pague via cartão no checkout';
-}
-document.getElementById('f-pkg').addEventListener('change',updateSummary);
-document.querySelectorAll('input[name="pm"]').forEach(r=>r.addEventListener('change',updateSummary));
-
 /* ── SELECIONAR PACOTE ───────────────────── */
 window.selectPkg=function(pkg){
-  document.getElementById('f-pkg').value=pkg;
-  updateSummary();
-  document.getElementById('participar').scrollIntoView({behavior:'smooth',block:'start'});
-  toast('Pacote '+C.pkgs[pkg]?.n+' selecionado!','#C9A84C');
+  // TODO: substituir pela URL real do checkout quando estiver pronto
+  window.location.href='checkout.html?pacote='+pkg;
 };
-
-/* ── PIX ─────────────────────────────────── */
-window.copyPix=function(){
-  const k=document.getElementById('pixKey')?.textContent||'';
-  navigator.clipboard?.writeText(k).then(()=>toast('PIX copiado!','#22C55E'));
-};
-
-/* ── FORM ────────────────────────────────── */
-window.submitForm=function(e){
-  e.preventDefault();
-  const n=document.getElementById('f-nome').value.trim();
-  const c=document.getElementById('f-cpf').value.replace(/\D/g,'');
-  const em=document.getElementById('f-email').value.trim();
-  const na=document.getElementById('f-nasc').value;
-  const pk=document.getElementById('f-pkg').value;
-  const pm=document.querySelector('input[name="pm"]:checked')?.value;
-  if(!n){toast('Informe o nome.','#EF4444');return;}
-  if(c.length!==11){toast('CPF inválido.','#EF4444');return;}
-  if(!em||!em.includes('@')){toast('E-mail inválido.','#EF4444');return;}
-  if(!pk){toast('Selecione um pacote.','#EF4444');return;}
-  if(na){const a=(Date.now()-new Date(na))/31557600000;if(a<18){toast('Necessário 18 anos ou mais.','#EF4444');return;}}
-  const d=C.pkgs[pk];
-  const pix=pm==='pix'?`<div class="pixcfm"><p>Chave PIX para pagamento:</p><div class="key" onclick="navigator.clipboard?.writeText('${C.pix}').then(()=>toast('PIX copiado!','#22C55E'))">${C.pix}</div></div>`:`<div class="pixcfm"><p>Você será redirecionado ao checkout seguro.</p></div>`;
-  document.getElementById('mbody').innerHTML=`
-    <h2>Confirme seu pedido</h2><p class="msub">Revise antes de finalizar.</p>
-    <div class="crow"><span>Nome</span><strong>${n}</strong></div>
-    <div class="crow"><span>E-mail</span><strong>${em}</strong></div>
-    <div class="crow"><span>Pacote</span><strong>${d.n}</strong></div>
-    <div class="crow"><span>Números</span><strong class="hl">${d.nums}</strong></div>
-    <div class="crow"><span>Total</span><strong style="color:var(--gold)">R$ ${d.val.toFixed(2).replace('.',',')}</strong></div>
-    <div class="crow"><span>Pagamento</span><strong>${pm==='pix'?'PIX':'Cartão'}</strong></div>
-    ${pix}
-    <div class="mbtns">
-      <button class="mback" onclick="closeModal()">Voltar</button>
-      <button class="mconfirm" onclick="confirmar('${n}')">Confirmar →</button>
-    </div>
-    <p style="font-size:.62rem;color:var(--t4);text-align:center;margin-top:10px">Números chegam no e-mail em até 5 min após confirmação.</p>
-  `;
-  document.getElementById('mbg').classList.add('open');
-};
-window.confirmar=function(n){
-  closeModal();
-  toast('Pedido de '+n+' confirmado! Verifique seu e-mail.','#22C55E');
-  document.getElementById('mainForm').reset();
-  updateSummary();
-};
-window.closeModal=function(){document.getElementById('mbg').classList.remove('open');};
-document.getElementById('mbg').addEventListener('click',e=>{if(e.target===document.getElementById('mbg'))closeModal();});
 
 /* ── TOAST ───────────────────────────────── */
 function toast(msg,color='#C9A84C'){

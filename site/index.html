@@ -97,7 +97,7 @@ button,input,select{font-family:var(--f)}
   object-fit:cover;object-position:center;
   z-index:0;pointer-events:none;
 }
-/* Por padrão, vídeo mobile oculto */
+/* Por padrão, imagem mobile oculta */
 .hero-vid-mobile{display:none}
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
@@ -453,10 +453,10 @@ button,input,select{font-family:var(--f)}
 @media(max-width:860px){
   .nav-links,.nav-cta{display:none}
   .ham{display:flex}
-  /* Texto ancorado no rodapé — coroa+SORTE do vídeo ficam na parte superior como backdrop */
+  /* Texto ancorado no rodapé — parte superior da imagem fica como backdrop */
   .hero{min-height:100svh;align-items:flex-end}
   .hero-vid-desktop{display:none}
-  .hero-vid-mobile{display:block;object-position:center center}
+  .hero-vid-mobile{display:block;object-position:center top}
   /* Overlay: topo claro (coroa visível), fundo escuro (zona do texto) */
   .hero-overlay{
     background:linear-gradient(to bottom,
@@ -549,15 +549,11 @@ button,input,select{font-family:var(--f)}
 <!-- ══ HERO ══ -->
 <section class="hero" id="inicio">
 
-  <!-- VÍDEO DE FUNDO — desktop (landscape) -->
-  <video class="hero-vid hero-vid-desktop" autoplay muted playsinline preload="metadata">
-    <source src="hero-bg.mp4" type="video/mp4"/>
-  </video>
+  <!-- IMAGEM DE FUNDO — desktop (landscape) -->
+  <img class="hero-vid hero-vid-desktop" src="hero-desktop.png" alt="" aria-hidden="true"/>
 
-  <!-- VÍDEO DE FUNDO — mobile (vertical 9:16) -->
-  <video class="hero-vid hero-vid-mobile" autoplay muted playsinline preload="metadata">
-    <source src="hero-mobile.mp4" type="video/mp4"/>
-  </video>
+  <!-- IMAGEM DE FUNDO — mobile (vertical 9:16) -->
+  <img class="hero-vid hero-vid-mobile" src="hero-mobile.png" alt="" aria-hidden="true"/>
 
   <div class="hero-overlay"></div>
 

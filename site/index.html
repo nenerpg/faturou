@@ -141,8 +141,9 @@ button,input,select{font-family:var(--f)}
 .hero-h{font-size:clamp(1.9rem,3.1vw,3.4rem);font-weight:900;line-height:1.08;letter-spacing:-1.5px;color:var(--t1)}
 .hero-h .gr{
   display:block;
-  background:linear-gradient(105deg,var(--gold2) 0%,var(--gold) 45%,var(--gold3) 100%);
+  background:linear-gradient(105deg,#D4A017 0%,#FFD700 30%,#F5C842 55%,#E8B800 80%,#C9A84C 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 10px rgba(255,210,50,.65)) drop-shadow(0 0 22px rgba(201,168,76,.40));
 }
 
 /* ── Letter-fall intro animation ─────────── */
@@ -502,12 +503,13 @@ button,input,select{font-family:var(--f)}
   .hero{min-height:100svh;align-items:flex-end}
   .hero-vid-desktop{display:none}
   .hero-vid-mobile{display:block;object-position:center top}
-  /* Overlay: topo claro (coroa visível), fundo escuro (zona do texto) */
+  /* Overlay: topo bem claro (coroa visível), fundo escuro (zona do texto) */
   .hero-overlay{
     background:linear-gradient(to bottom,
-      rgba(0,0,0,.52) 0%,
-      rgba(0,0,0,.58) 50%,
-      rgba(0,0,0,.90) 100%
+      rgba(0,0,0,.10) 0%,
+      rgba(0,0,0,.22) 30%,
+      rgba(0,0,0,.60) 62%,
+      rgba(0,0,0,.88) 100%
     );
   }
   .hero-text{

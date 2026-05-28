@@ -516,6 +516,11 @@ button,input,select{font-family:var(--f)}
     background:none;
   }
   .hero-h{text-shadow:0 2px 20px rgba(0,0,0,.9),0 0 40px rgba(0,0,0,.7)}
+  /* Dourado mais claro no mobile para legibilidade sobre fundo escuro */
+  .hero-h .gr{
+    background:linear-gradient(105deg,#E8C044 0%,#FFD95A 40%,#FFE87A 70%,#F5CB3A 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
   .hero-badge,.hero-actions,.hero-stats,.cdrow{justify-content:center}
   /* Texto corrido movido para baixo do iPhone na seção prêmio */
   .hero-sub{display:none}

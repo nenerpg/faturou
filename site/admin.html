@@ -153,6 +153,9 @@
   <div class="nav-item active" data-tab="dashboard">
     <span class="nav-icon">📊</span> Dashboard
   </div>
+  <div class="nav-item" data-tab="campanhas">
+    <span class="nav-icon">🎯</span> Campanhas
+  </div>
   <div class="nav-item" data-tab="gerar">
     <span class="nav-icon">🎲</span> Gerar Números
   </div>
@@ -178,8 +181,12 @@
 <main class="main">
   <div class="topbar">
     <h1 id="pageTitle">📊 Dashboard</h1>
+    <div style="display:flex;align-items:center;gap:8px;margin-right:auto;margin-left:16px">
+      <span style="font-size:0.78rem;color:var(--muted)">Campanha:</span>
+      <select id="campanhaAtual" onchange="onCampanhaAtualChange()" style="background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:0.8rem"></select>
+    </div>
     <div class="topbar-badges">
-      <span id="dbStatus" class="badge badge-yellow">⏳ Conectando ao MongoDB...</span>
+      <span id="dbStatus" class="badge badge-yellow">⏳ Conectando ao Supabase...</span>
       <span class="badge badge-green">🟢 Demonstração</span>
       <span class="badge badge-yellow" id="campanhaBadge">Campanha Ativa</span>
     </div>
@@ -466,6 +473,101 @@
     </div>
   </div>
 
+  <!-- ═══════════════════ CAMPANHAS ═══════════════════ -->
+  <div class="content" id="tab-campanhas">
+    <div class="panel">
+      <div class="panel-title"><span>🎯</span> Campanhas</div>
+      <p class="section-sub">Crie e gerencie campanhas: prêmio, pacotes, status e contador de tempo.</p>
+      <div class="flex-row" style="margin-bottom:16px">
+        <button class="btn btn-primary" onclick="novaCampanha()">+ Nova campanha</button>
+        <button class="btn btn-ghost btn-sm" onclick="carregarCampanhas()">🔄 Recarregar</button>
+      </div>
+      <div id="campanhasList"><div class="empty-state">Carregando…</div></div>
+    </div>
+
+    <div class="panel" id="campanhaForm" style="display:none">
+      <div class="panel-title"><span>📝</span> <span id="campanhaFormTitle">Nova campanha</span></div>
+      <input type="hidden" id="c-id"/>
+
+      <div class="panel-title" style="font-size:.8rem;color:var(--muted)">IDENTIDADE</div>
+      <div class="form-grid">
+        <div><label>Título *</label><input id="c-titulo" type="text"/></div>
+        <div><label>Slug (URL)</label><input id="c-slug" type="text" placeholder="auto a partir do título"/></div>
+        <div style="grid-column:1/-1"><label>Subtítulo</label><input id="c-subtitulo" type="text"/></div>
+        <div style="grid-column:1/-1"><label>Descrição</label><input id="c-descricao" type="text"/></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="panel-title" style="font-size:.8rem;color:var(--muted)">PRÊMIO</div>
+      <div class="form-grid">
+        <div><label>Nome do prêmio</label><input id="c-premioNome" type="text"/></div>
+        <div><label>Valor estimado (R$)</label><input id="c-valorPremioEstimado" type="number" step="0.01"/></div>
+        <div style="grid-column:1/-1"><label>URL da imagem do prêmio</label><input id="c-premioImagem" type="text" oninput="atualizarPreviewPremio()"/></div>
+      </div>
+      <div id="c-premioPreviewWrap" style="margin-top:8px"></div>
+
+      <div class="divider"></div>
+      <div class="panel-title" style="font-size:.8rem;color:var(--muted)">VISUAL</div>
+      <div class="form-grid">
+        <div><label>Hero desktop (URL/arquivo)</label><input id="c-heroDesktop" type="text"/></div>
+        <div><label>Hero mobile (URL/arquivo)</label><input id="c-heroMobile" type="text"/></div>
+        <div><label>Ordem</label><input id="c-ordem" type="number" value="1"/></div>
+        <div><label>Destaque</label><select id="c-destaque"><option value="true">Sim</option><option value="false" selected>Não</option></select></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="panel-title" style="font-size:.8rem;color:var(--muted)">STATUS E TEMPO</div>
+      <div class="form-grid">
+        <div><label>Status</label><select id="c-status"><option value="rascunho">Rascunho</option><option value="ativa">Ativa</option><option value="encerrada">Encerrada</option></select></div>
+        <div><label>Data de início</label><input id="c-dataInicio" type="date"/></div>
+        <div><label>Data de extração</label><input id="c-dataExtracao" type="date"/></div>
+        <div><label>Encerra em (contador)</label><input id="c-dataFim" type="text" readonly placeholder="defina pelo contador abaixo"/></div>
+      </div>
+      <div style="margin-top:12px">
+        <label>Iniciar contador (ativa a campanha e define o encerramento):</label>
+        <div class="flex-row" style="margin-top:6px">
+          <button class="btn btn-outline btn-sm" onclick="iniciarContador(1)">1 dia</button>
+          <button class="btn btn-outline btn-sm" onclick="iniciarContador(3)">3 dias</button>
+          <button class="btn btn-outline btn-sm" onclick="iniciarContador(7)">7 dias</button>
+          <button class="btn btn-outline btn-sm" onclick="iniciarContador(15)">15 dias</button>
+          <button class="btn btn-outline btn-sm" onclick="iniciarContador(30)">30 dias</button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="panel-title" style="font-size:.8rem;color:var(--muted)">NÚMEROS</div>
+      <div class="form-grid">
+        <div><label>Total de séries</label><input id="c-totalSeries" type="number" value="10"/></div>
+        <div><label>Elementos por série</label><input id="c-elementosPorSerie" type="number" value="100000"/></div>
+        <div><label>Série inicial</label><input id="c-serieInicial" type="number" value="0"/></div>
+        <div><label>Total p/ barra de progresso</label><input id="c-totalNumerosDisplay" type="number" value="1000"/></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="panel-title" style="font-size:.8rem;color:var(--muted)">PACOTES</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>ID</th><th>Nome</th><th>Números</th><th>Valor</th><th>Âncora</th><th>Destaque</th><th></th></tr></thead>
+          <tbody id="c-pacotesBody"></tbody>
+        </table>
+      </div>
+      <button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="addPacoteRow()">+ Adicionar pacote</button>
+
+      <div class="divider"></div>
+      <div class="panel-title" style="font-size:.8rem;color:var(--muted)">PAGAMENTO / CONTATO</div>
+      <div class="form-grid">
+        <div><label>Chave PIX</label><input id="c-chavePix" type="text"/></div>
+        <div><label>WhatsApp</label><input id="c-whatsapp" type="text" placeholder="5511999999999"/></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="flex-row">
+        <button class="btn btn-primary" onclick="salvarCampanha()">💾 Salvar campanha</button>
+        <button class="btn btn-ghost" onclick="fecharCampanhaForm()">✕ Cancelar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════════════════ CONFIG ═══════════════════ -->
   <div class="content" id="tab-config">
     <div class="panel">
@@ -520,7 +622,7 @@
 
 <script>
 /* ═══════════════════════════════════════════
-   DATABASE — MongoDB via API (localhost:3000)
+   DATABASE — Supabase via API
    ═══════════════════════════════════════════ */
 const API_BASE = window.location.origin + '/api';
 
@@ -549,7 +651,7 @@ async function carregarBanco() {
   DB.apuracoes = data.apuracoes;
   const badge = document.getElementById('dbStatus');
   if (badge) {
-    badge.textContent = '🟢 MongoDB conectado';
+    badge.textContent = '🟢 Supabase conectado';
     badge.className = 'badge badge-green';
   }
 }
@@ -670,7 +772,8 @@ async function simularCompra() {
   }
   if (cpf.length !== 11) { toast('CPF inválido.', 'red'); return; }
 
-  const pkg  = PACOTES[pacote];
+  const pkg  = PACOTES_ATUAL[pacote] || PACOTES[pacote];
+  if (!pkg) { toast('Selecione um pacote válido.', 'red'); return; }
   const mult = calcMultiplicador(pkg.tag, pgto, multOv);
   const qtd  = calcNumerosFinais(pkg.numeros, mult);
 
@@ -678,7 +781,7 @@ async function simularCompra() {
     const { participante, log } = await apiFetch('/participantes', {
       method: 'POST',
       body: JSON.stringify({
-        campanhaSlug: 'iphone-17-pro',
+        campanhaSlug: getCampanhaAtualSlug(),
         nome, cpf, email, tel,
         pacote, nomePacote: pkg.nome,
         pagamento: pgto,
@@ -761,7 +864,8 @@ function atualizarPreviewGeracao() {
   const box    = document.getElementById('previewBox');
   if (!box || !pacote) return;
 
-  const pkg  = PACOTES[pacote];
+  const pkg  = PACOTES_ATUAL[pacote] || PACOTES[pacote];
+  if (!pkg) return;
   const mult = calcMultiplicador(pkg.tag, pgto, multOv);
   const qtd  = calcNumerosFinais(pkg.numeros, mult);
   const label = MULT_LABELS[mult.tipo] || mult.tipo;
@@ -1155,6 +1259,286 @@ function exportarCSV() {
 }
 
 /* ═══════════════════════════════════════════
+   CAMPANHAS (CRUD)
+   ═══════════════════════════════════════════ */
+let CAMPANHAS = [];
+let editandoCampanhaId = null;
+let PACOTES_ATUAL = {};
+
+function getCampanhaAtualSlug() {
+  const sel = document.getElementById('campanhaAtual');
+  if (sel && sel.value) return sel.value;
+  const ativa = CAMPANHAS.find(c => c.status === 'ativa');
+  return ativa ? ativa.slug : (CAMPANHAS[0] ? CAMPANHAS[0].slug : 'iphone-17-pro');
+}
+
+function getCampanhaAtual() {
+  const slug = getCampanhaAtualSlug();
+  return CAMPANHAS.find(c => c.slug === slug) || null;
+}
+
+async function carregarCampanhas() {
+  try {
+    CAMPANHAS = await apiFetch('/admin/campanhas');
+  } catch (e) {
+    CAMPANHAS = [];
+    toast('Erro ao carregar campanhas: ' + e.message, 'red');
+  }
+  popularSeletorCampanha();
+  atualizarPacotesGerar();
+  renderCampanhasList();
+}
+
+function popularSeletorCampanha() {
+  const sel = document.getElementById('campanhaAtual');
+  if (!sel) return;
+  const anterior = sel.value;
+  sel.innerHTML = CAMPANHAS.map(c =>
+    `<option value="${c.slug}">${c.titulo}${c.status !== 'ativa' ? ' (' + c.status + ')' : ''}</option>`
+  ).join('');
+  const ativa = CAMPANHAS.find(c => c.status === 'ativa');
+  sel.value = anterior || (ativa ? ativa.slug : (CAMPANHAS[0] ? CAMPANHAS[0].slug : ''));
+}
+
+function onCampanhaAtualChange() {
+  atualizarPacotesGerar();
+}
+
+function atualizarPacotesGerar() {
+  const sel = document.getElementById('g-pacote');
+  if (!sel) return;
+  const c = getCampanhaAtual();
+  PACOTES_ATUAL = {};
+  if (!c || !c.pacotes || !c.pacotes.length) return;
+  sel.innerHTML = c.pacotes.map(p => {
+    PACOTES_ATUAL[p.id] = { id: p.id, nome: p.nome, tag: p.tag || p.nome, numeros: p.numeros, valor: p.valor };
+    return `<option value="${p.id}">${p.nome} — ${p.numeros} números — R$ ${Number(p.valor).toFixed(2).replace('.', ',')}</option>`;
+  }).join('');
+  atualizarPreviewGeracao();
+}
+
+function statusChipCampanha(s) {
+  return { ativa: 'chip-green', encerrada: 'chip-red', rascunho: 'chip-yellow' }[s] || 'chip-blue';
+}
+
+function fmtDataFim(raw) {
+  if (!raw) return '—';
+  const d = raw.includes('T') ? new Date(raw) : new Date(raw + 'T23:59:59');
+  return d.toLocaleString('pt-BR');
+}
+
+function renderCampanhasList() {
+  const box = document.getElementById('campanhasList');
+  if (!box) return;
+  if (!CAMPANHAS.length) {
+    box.innerHTML = '<div class="empty-state">Nenhuma campanha. Clique em “Nova campanha”.</div>';
+    return;
+  }
+  box.innerHTML = `<div class="table-wrap"><table>
+    <thead><tr><th>Título</th><th>Prêmio</th><th>Status</th><th>Encerra</th><th>Vendidos</th><th>Ações</th></tr></thead>
+    <tbody>
+      ${CAMPANHAS.map(c => `
+        <tr>
+          <td><strong>${c.titulo || '—'}</strong><br/><small style="color:var(--muted)">${c.slug}</small></td>
+          <td>${c.premioNome || '—'}</td>
+          <td><span class="chip ${statusChipCampanha(c.status)}">${c.status}</span></td>
+          <td style="font-size:0.78rem;color:var(--muted)">${fmtDataFim(c.dataFim)}</td>
+          <td style="color:var(--green);font-weight:700">${c.numerosVendidos || 0}</td>
+          <td>
+            <div style="display:flex;gap:4px;flex-wrap:wrap">
+              <button class="btn btn-ghost btn-sm" onclick="editarCampanha('${c.id}')">✏️ Editar</button>
+              ${c.status === 'ativa' ? `<button class="btn btn-red btn-sm" onclick="encerrarCampanha('${c.id}')">⏹️ Encerrar</button>` : ''}
+              <button class="btn btn-red btn-sm" onclick="excluirCampanha('${c.id}')">🗑️</button>
+            </div>
+          </td>
+        </tr>`).join('')}
+    </tbody></table></div>`;
+}
+
+function atualizarPreviewPremio() {
+  const url = document.getElementById('c-premioImagem').value.trim();
+  const wrap = document.getElementById('c-premioPreviewWrap');
+  wrap.innerHTML = url ? `<img src="${url}" alt="prêmio" style="max-height:120px;border-radius:8px;border:1px solid var(--border)"/>` : '';
+}
+
+function novaCampanha() {
+  editandoCampanhaId = null;
+  document.getElementById('campanhaFormTitle').textContent = 'Nova campanha';
+  preencherCampanhaForm({
+    titulo: '', slug: '', subtitulo: '', descricao: '',
+    premioNome: '', premioImagem: '', valorPremioEstimado: '',
+    heroDesktop: '', heroMobile: '', ordem: CAMPANHAS.length + 1, destaque: false,
+    status: 'rascunho', dataInicio: '', dataExtracao: '', dataFim: '',
+    totalSeries: 10, elementosPorSerie: 100000, serieInicial: 0, totalNumerosDisplay: 1000,
+    pacotes: [], chavePix: '', whatsapp: '',
+  });
+  const form = document.getElementById('campanhaForm');
+  form.style.display = 'block';
+  form.scrollIntoView({ behavior: 'smooth' });
+}
+
+function editarCampanha(id) {
+  const c = CAMPANHAS.find(x => String(x.id) === String(id));
+  if (!c) return;
+  editandoCampanhaId = c.id;
+  document.getElementById('campanhaFormTitle').textContent = 'Editar: ' + c.titulo;
+  preencherCampanhaForm(c);
+  const form = document.getElementById('campanhaForm');
+  form.style.display = 'block';
+  form.scrollIntoView({ behavior: 'smooth' });
+}
+
+function preencherCampanhaForm(c) {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = (v === null || v === undefined) ? '' : v; };
+  set('c-id', c.id || '');
+  set('c-titulo', c.titulo);
+  set('c-slug', c.slug);
+  set('c-subtitulo', c.subtitulo);
+  set('c-descricao', c.descricao);
+  set('c-premioNome', c.premioNome);
+  set('c-premioImagem', c.premioImagem);
+  set('c-valorPremioEstimado', c.valorPremioEstimado);
+  set('c-heroDesktop', c.heroDesktop);
+  set('c-heroMobile', c.heroMobile);
+  set('c-ordem', c.ordem != null ? c.ordem : 1);
+  document.getElementById('c-destaque').value = c.destaque ? 'true' : 'false';
+  document.getElementById('c-status').value = c.status || 'rascunho';
+  set('c-dataInicio', c.dataInicio);
+  set('c-dataExtracao', c.dataExtracao);
+  set('c-dataFim', c.dataFim || '');
+  set('c-totalSeries', c.totalSeries != null ? c.totalSeries : 10);
+  set('c-elementosPorSerie', c.elementosPorSerie != null ? c.elementosPorSerie : 100000);
+  set('c-serieInicial', c.serieInicial != null ? c.serieInicial : 0);
+  set('c-totalNumerosDisplay', c.totalNumerosDisplay != null ? c.totalNumerosDisplay : 1000);
+  set('c-chavePix', c.chavePix);
+  set('c-whatsapp', c.whatsapp);
+  renderPacotesEditor(c.pacotes || []);
+  atualizarPreviewPremio();
+}
+
+function renderPacotesEditor(pacotes) {
+  document.getElementById('c-pacotesBody').innerHTML = '';
+  (pacotes || []).forEach(p => addPacoteRow(p));
+}
+
+function addPacoteRow(p) {
+  p = p || {};
+  const body = document.getElementById('c-pacotesBody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input type="text" class="pkg-id" value="${p.id || ''}" style="width:90px"/></td>
+    <td><input type="text" class="pkg-nome" value="${p.nome || ''}" style="width:110px"/></td>
+    <td><input type="number" class="pkg-numeros" value="${p.numeros != null ? p.numeros : ''}" style="width:80px"/></td>
+    <td><input type="number" step="0.01" class="pkg-valor" value="${p.valor != null ? p.valor : ''}" style="width:90px"/></td>
+    <td><input type="number" step="0.01" class="pkg-anchor" value="${p.valorAnchor != null ? p.valorAnchor : ''}" style="width:90px"/></td>
+    <td style="text-align:center"><input type="checkbox" class="pkg-destaque" ${p.destaque ? 'checked' : ''}/></td>
+    <td><button class="btn btn-red btn-sm" onclick="this.closest('tr').remove()">✕</button></td>`;
+  body.appendChild(tr);
+}
+
+function lerPacotes() {
+  const pacotes = [];
+  document.querySelectorAll('#c-pacotesBody tr').forEach(tr => {
+    const id = tr.querySelector('.pkg-id').value.trim();
+    const nome = tr.querySelector('.pkg-nome').value.trim();
+    if (!id || !nome) return;
+    pacotes.push({
+      id, nome,
+      numeros: parseInt(tr.querySelector('.pkg-numeros').value) || 0,
+      valor: parseFloat(tr.querySelector('.pkg-valor').value) || 0,
+      valorAnchor: parseFloat(tr.querySelector('.pkg-anchor').value) || 0,
+      tag: nome,
+      destaque: tr.querySelector('.pkg-destaque').checked,
+    });
+  });
+  return pacotes;
+}
+
+function lerCampanhaForm() {
+  const val = id => document.getElementById(id).value.trim();
+  const num = id => { const v = document.getElementById(id).value; return v === '' ? null : Number(v); };
+  return {
+    titulo: val('c-titulo'),
+    slug: val('c-slug'),
+    subtitulo: val('c-subtitulo'),
+    descricao: val('c-descricao'),
+    premioNome: val('c-premioNome'),
+    premioImagem: val('c-premioImagem'),
+    valorPremioEstimado: num('c-valorPremioEstimado'),
+    heroDesktop: val('c-heroDesktop'),
+    heroMobile: val('c-heroMobile'),
+    ordem: num('c-ordem'),
+    destaque: document.getElementById('c-destaque').value === 'true',
+    status: document.getElementById('c-status').value,
+    dataInicio: val('c-dataInicio') || null,
+    dataExtracao: val('c-dataExtracao') || null,
+    totalSeries: num('c-totalSeries'),
+    elementosPorSerie: num('c-elementosPorSerie'),
+    serieInicial: num('c-serieInicial'),
+    totalNumerosDisplay: num('c-totalNumerosDisplay'),
+    chavePix: val('c-chavePix'),
+    whatsapp: val('c-whatsapp'),
+    pacotes: lerPacotes(),
+  };
+}
+
+async function salvarCampanha() {
+  const payload = lerCampanhaForm();
+  if (!payload.titulo) { toast('Informe o título da campanha.', 'red'); return; }
+  try {
+    let saved;
+    if (editandoCampanhaId) {
+      saved = await apiFetch('/admin/campanhas/' + editandoCampanhaId, { method: 'PUT', body: JSON.stringify(payload) });
+      toast('Campanha atualizada!', 'green');
+    } else {
+      saved = await apiFetch('/admin/campanhas', { method: 'POST', body: JSON.stringify(payload) });
+      editandoCampanhaId = saved.id;
+      document.getElementById('c-id').value = saved.id;
+      document.getElementById('campanhaFormTitle').textContent = 'Editar: ' + saved.titulo;
+      toast('Campanha criada!', 'green');
+    }
+    await carregarCampanhas();
+  } catch (e) { toast(e.message, 'red'); }
+}
+
+async function iniciarContador(dias) {
+  if (!editandoCampanhaId) { toast('Salve a campanha antes de iniciar o contador.', 'yellow'); return; }
+  try {
+    const saved = await apiFetch('/admin/campanhas/' + editandoCampanhaId + '/iniciar', {
+      method: 'POST', body: JSON.stringify({ dias }),
+    });
+    document.getElementById('c-dataFim').value = saved.dataFim || '';
+    document.getElementById('c-status').value = saved.status;
+    toast(`Campanha ativa! Contador de ${dias} dia(s) iniciado.`, 'green');
+    await carregarCampanhas();
+  } catch (e) { toast(e.message, 'red'); }
+}
+
+async function encerrarCampanha(id) {
+  if (!confirm('Encerrar esta campanha? Ela deixa de aparecer na página pública.')) return;
+  try {
+    await apiFetch('/admin/campanhas/' + id + '/encerrar', { method: 'POST', body: '{}' });
+    toast('Campanha encerrada.', 'yellow');
+    await carregarCampanhas();
+  } catch (e) { toast(e.message, 'red'); }
+}
+
+async function excluirCampanha(id) {
+  if (!confirm('Excluir esta campanha definitivamente?')) return;
+  try {
+    await apiFetch('/admin/campanhas/' + id, { method: 'DELETE' });
+    if (String(editandoCampanhaId) === String(id)) fecharCampanhaForm();
+    toast('Campanha excluída.', 'yellow');
+    await carregarCampanhas();
+  } catch (e) { toast(e.message, 'red'); }
+}
+
+function fecharCampanhaForm() {
+  editandoCampanhaId = null;
+  document.getElementById('campanhaForm').style.display = 'none';
+}
+
+/* ═══════════════════════════════════════════
    CONFIG
    ═══════════════════════════════════════════ */
 async function salvarConfig() {
@@ -1170,7 +1554,7 @@ async function salvarConfig() {
   };
   try {
     DB.config = await apiFetch('/config', { method: 'PUT', body: JSON.stringify(payload) });
-    toast('Configurações salvas no MongoDB!', 'green');
+    toast('Configurações salvas no Supabase!', 'green');
     renderLogStats();
   } catch (e) { toast(e.message, 'red'); }
 }
@@ -1322,10 +1706,11 @@ function irPara(tab) {
   document.querySelectorAll('.content').forEach(c => {
     c.classList.toggle('active', c.id === 'tab-'+tab);
   });
-  const titles = { dashboard:'📊 Dashboard', gerar:'🎲 Gerar Números', participantes:'👥 Participantes',
+  const titles = { dashboard:'📊 Dashboard', campanhas:'🎯 Campanhas', gerar:'🎲 Gerar Números', participantes:'👥 Participantes',
     apuracao:'🏆 Apuração', csv:'📄 Exportar CSV', config:'⚙️ Configurações' };
   document.getElementById('pageTitle').textContent = titles[tab] || tab;
 
+  if (tab === 'campanhas') carregarCampanhas();
   if (tab === 'participantes') renderParticipantes();
   if (tab === 'csv') renderCSVPreview();
   if (tab === 'config') { carregarConfig(); renderLogStats(); }
@@ -1333,7 +1718,7 @@ function irPara(tab) {
 }
 
 async function resetarTudo() {
-  if (!confirm('⚠️ Isso apagará TODOS os participantes, números e apurações no MongoDB.\nTem certeza?')) return;
+  if (!confirm('⚠️ Isso apagará TODOS os participantes, números e apurações no Supabase.\nTem certeza?')) return;
   try {
     await apiFetch('/reset', { method: 'DELETE' });
     DB.participantes = [];
@@ -1341,7 +1726,7 @@ async function resetarTudo() {
     DB.apuracoes = [];
     atualizarStats();
     renderParticipantes();
-    toast('Base de dados limpa no MongoDB!', 'yellow');
+    toast('Base de dados limpa no Supabase!', 'yellow');
   } catch (e) { toast(e.message, 'red'); }
 }
 
@@ -1368,6 +1753,7 @@ document.querySelectorAll('.nav-item[data-tab]').forEach(item => {
 window.addEventListener('DOMContentLoaded', async () => {
   try {
     await carregarBanco();
+    await carregarCampanhas();
     carregarConfig();
     atualizarStats();
     atualizarPreviewGeracao();
@@ -1375,10 +1761,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   } catch (e) {
     const badge = document.getElementById('dbStatus');
     if (badge) {
-      badge.textContent = 'MongoDB offline — rode npm start';
+      badge.textContent = 'Supabase offline';
       badge.className = 'badge badge-yellow';
     }
-    toast('Não conectou à API: ' + e.message + '. Execute "npm start" na pasta do projeto.', 'red');
+    toast('Não conectou à API: ' + e.message, 'red');
   }
 });
 </script>

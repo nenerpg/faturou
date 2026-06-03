@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const apiRouter = require('../server/routes/api');
 const campanhasRouter = require('../server/routes/campanhas');
+const adminCampanhasRouter = require('../server/routes/adminCampanhas');
 const pedidosRouter = require('../server/routes/pedidos');
 const webhookRouter = require('../server/routes/webhook');
 const { seedCampanhas } = require('../server/seedCampanhas');
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json({ limit: '2mb' }));
 
 app.use('/api', apiRouter);
+app.use('/api/admin/campanhas', adminCampanhasRouter);
 app.use('/api/campanhas', campanhasRouter);
 app.use('/api/pedidos', pedidosRouter);
 app.use('/api/webhooks', webhookRouter);

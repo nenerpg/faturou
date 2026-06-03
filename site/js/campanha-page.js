@@ -48,7 +48,8 @@ function renderPacotes(pacotes) {
 
 function initCountdownCampanha() {
   if (!CAMPANHA?.dataFim) return;
-  const fim = new Date(CAMPANHA.dataFim + 'T23:59:59');
+  const raw = CAMPANHA.dataFim;
+  const fim = raw.includes('T') ? new Date(raw) : new Date(raw + 'T23:59:59');
   const ids = ['cd-d', 'cd-h', 'cd-m', 'cd-s'];
   function tick() {
     const diff = fim - new Date();

@@ -47,7 +47,12 @@ function renderPacotes(pacotes) {
 }
 
 function initCountdownCampanha() {
-  if (!CAMPANHA?.dataFim) return;
+  const row = document.querySelector('.cdrow');
+  if (!CAMPANHA?.dataFim) {
+    if (row) row.style.display = 'none';
+    return;
+  }
+  if (row) row.style.display = '';
   const raw = CAMPANHA.dataFim;
   const fim = raw.includes('T') ? new Date(raw) : new Date(raw + 'T23:59:59');
   const ids = ['cd-d', 'cd-h', 'cd-m', 'cd-s'];

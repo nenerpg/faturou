@@ -1074,16 +1074,10 @@ const C={
   }
 };
 
-/* ── COUNTDOWN ───────────────────────────── */
-(function t(){
-  const d=C.fim-Date.now(); if(d<=0) return;
-  const p=n=>String(n).padStart(2,'0');
-  document.getElementById('cd-d').textContent=p(Math.floor(d/86400000));
-  document.getElementById('cd-h').textContent=p(Math.floor(d%86400000/3600000));
-  document.getElementById('cd-m').textContent=p(Math.floor(d%3600000/60000));
-  document.getElementById('cd-s').textContent=p(Math.floor(d%60000/1000));
-  setTimeout(t,1000);
-})();
+/* ── COUNTDOWN ───────────────────────────────
+   O contador é controlado por js/campanha-page.js
+   com base na data definida no painel (Supabase).
+   Quando não há data_fim, o bloco é ocultado. */
 
 /* ── LETTER-FALL INTRO ───────────────────── */
 (function(){

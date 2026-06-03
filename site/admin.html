@@ -144,6 +144,26 @@
 </head>
 <body>
 
+<!-- LOGIN -->
+<div id="loginOverlay" style="display:none;position:fixed;inset:0;z-index:9999;background:var(--bg,#0d0f14);align-items:center;justify-content:center">
+  <div class="panel" style="width:340px;max-width:90vw">
+    <div class="panel-title"><span>🔒</span> Painel Administrativo</div>
+    <p class="section-sub">Acesso restrito. Faça login para continuar.</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div>
+        <label>E-mail</label>
+        <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="username"/>
+      </div>
+      <div>
+        <label>Senha</label>
+        <input type="password" id="login-senha" placeholder="••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')fazerLogin()"/>
+      </div>
+      <div id="login-erro" style="color:var(--red);font-size:0.8rem;min-height:16px"></div>
+      <button class="btn btn-primary" onclick="fazerLogin()">Entrar</button>
+    </div>
+  </div>
+</div>
+
 <!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sidebar-logo">
@@ -174,6 +194,9 @@
   </div>
   <div class="nav-item" onclick="resetarTudo()" style="color:var(--red);margin-top:auto">
     <span class="nav-icon">🗑️</span> Limpar Tudo
+  </div>
+  <div class="nav-item" onclick="logout()">
+    <span class="nav-icon">🚪</span> Sair
   </div>
 </aside>
 
@@ -626,6 +649,8 @@
    ═══════════════════════════════════════════ */
 const API_BASE = window.location.origin + '/api';
 
+let ADMIN_TOKEN = localStorage.getItem('admin_token') || '';
+
 const DB = {
   participantes: [],
   numerosUsados: [],
@@ -635,12 +660,56 @@ const DB = {
 
 async function apiFetch(path, options = {}) {
   const res = await fetch(API_BASE + path, {
-    headers: { 'Content-Type': 'application/json', ...options.headers },
+    headers: { 'Content-Type': 'application/json', 'x-admin-token': ADMIN_TOKEN, ...options.headers },
     ...options,
   });
+  if (res.status === 401) {
+    localStorage.removeItem('admin_token');
+    ADMIN_TOKEN = '';
+    mostrarLogin();
+    throw new Error('Sessão expirada. Faça login novamente.');
+  }
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || res.statusText || 'Erro na API');
   return data;
+}
+
+/* ═══════════════════════════════════════════
+   AUTENTICAÇÃO
+   ═══════════════════════════════════════════ */
+function mostrarLogin() {
+  document.getElementById('loginOverlay').style.display = 'flex';
+}
+function esconderLogin() {
+  document.getElementById('loginOverlay').style.display = 'none';
+}
+
+async function fazerLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const senha = document.getElementById('login-senha').value;
+  const erro = document.getElementById('login-erro');
+  erro.textContent = '';
+  try {
+    const res = await fetch(API_BASE + '/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, senha }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || 'Falha no login.');
+    ADMIN_TOKEN = data.token;
+    localStorage.setItem('admin_token', ADMIN_TOKEN);
+    esconderLogin();
+    iniciarPainel();
+  } catch (e) {
+    erro.textContent = e.message;
+  }
+}
+
+function logout() {
+  localStorage.removeItem('admin_token');
+  ADMIN_TOKEN = '';
+  location.reload();
 }
 
 async function carregarBanco() {
@@ -1750,7 +1819,7 @@ document.querySelectorAll('.nav-item[data-tab]').forEach(item => {
 });
 
 // INIT
-window.addEventListener('DOMContentLoaded', async () => {
+async function iniciarPainel() {
   try {
     await carregarBanco();
     await carregarCampanhas();
@@ -1765,6 +1834,14 @@ window.addEventListener('DOMContentLoaded', async () => {
       badge.className = 'badge badge-yellow';
     }
     toast('Não conectou à API: ' + e.message, 'red');
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (ADMIN_TOKEN) {
+    iniciarPainel();
+  } else {
+    mostrarLogin();
   }
 });
 </script>

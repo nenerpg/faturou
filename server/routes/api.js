@@ -2,6 +2,7 @@ const express = require('express');
 const supabase = require('../supabase');
 const CONFIG_PADRAO = require('../configPadrao');
 const { gerarNumerosAleatorios, registrarNumerosUsados } = require('../gerarNumeros');
+const { requireAdmin } = require('../adminAuth');
 
 const router = express.Router();
 
@@ -80,7 +81,7 @@ router.get('/health', (_req, res) => {
   res.json({ ok: true, db: 'supabase' });
 });
 
-router.get('/bootstrap', async (_req, res) => {
+router.get('/bootstrap', requireAdmin, async (_req, res) => {
   const [configResult, participantesResult, numerosResult, apuracoesResult] = await Promise.all([
     getConfigDoc(),
     supabase.from('participantes').select('*').order('created_at', { ascending: false }),
@@ -103,7 +104,7 @@ router.get('/config', async (_req, res) => {
   res.json(await getConfigDoc());
 });
 
-router.put('/config', async (req, res) => {
+router.put('/config', requireAdmin, async (req, res) => {
   const { data: cfg } = await supabase
     .from('configs')
     .upsert({ key: 'campanha', ...req.body, updated_at: new Date().toISOString() }, { onConflict: 'key' })
@@ -113,7 +114,7 @@ router.put('/config', async (req, res) => {
   res.json(rest);
 });
 
-router.post('/participantes', async (req, res) => {
+router.post('/participantes', requireAdmin, async (req, res) => {
   const body = req.body;
   const cpf = String(body.cpf || '').replace(/\D/g, '');
 
@@ -185,7 +186,7 @@ router.post('/participantes', async (req, res) => {
   res.status(201).json({ participante: toParticipanteJSON(participante), log });
 });
 
-router.patch('/participantes/:id', async (req, res) => {
+router.patch('/participantes/:id', requireAdmin, async (req, res) => {
   const updates = {};
   if (req.body.statusPagamento !== undefined) updates.status_pagamento = req.body.statusPagamento;
   if (req.body.elegivel !== undefined) updates.elegivel = req.body.elegivel;
@@ -201,7 +202,7 @@ router.patch('/participantes/:id', async (req, res) => {
   res.json(toParticipanteJSON(p));
 });
 
-router.post('/participantes/cancelar-lote', async (req, res) => {
+router.post('/participantes/cancelar-lote', requireAdmin, async (req, res) => {
   const ids = req.body.ids || [];
   if (!ids.length) return res.status(400).json({ error: 'Nenhum ID informado.' });
 
@@ -218,7 +219,7 @@ router.post('/participantes/cancelar-lote', async (req, res) => {
   res.json({ participantes: (lista || []).map(toParticipanteJSON) });
 });
 
-router.post('/apuracoes', async (req, res) => {
+router.post('/apuracoes', requireAdmin, async (req, res) => {
   const body = req.body;
   const { data: ap, error } = await supabase
     .from('apuracoes')
@@ -241,7 +242,7 @@ router.post('/apuracoes', async (req, res) => {
   res.status(201).json(ap);
 });
 
-router.delete('/reset', async (_req, res) => {
+router.delete('/reset', requireAdmin, async (_req, res) => {
   await Promise.all([
     supabase.from('participantes').delete().neq('id', '00000000-0000-0000-0000-000000000000'),
     supabase.from('numeros_usados').delete().neq('id', '00000000-0000-0000-0000-000000000000'),

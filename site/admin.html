@@ -179,6 +179,7 @@
   <div class="topbar">
     <h1 id="pageTitle">📊 Dashboard</h1>
     <div class="topbar-badges">
+      <span id="dbStatus" class="badge badge-yellow">⏳ Conectando ao MongoDB...</span>
       <span class="badge badge-green">🟢 Demonstração</span>
       <span class="badge badge-yellow" id="campanhaBadge">Campanha Ativa</span>
     </div>
@@ -519,18 +520,39 @@
 
 <script>
 /* ═══════════════════════════════════════════
-   DATABASE — localStorage como banco de dados
+   DATABASE — MongoDB via API (localhost:3000)
    ═══════════════════════════════════════════ */
+const API_BASE = window.location.origin + '/api';
+
 const DB = {
-  get participantes() { return JSON.parse(localStorage.getItem('rifa_participantes') || '[]') },
-  set participantes(v){ localStorage.setItem('rifa_participantes', JSON.stringify(v)) },
-  get numerosUsados()  { return JSON.parse(localStorage.getItem('rifa_numeros') || '[]') },
-  set numerosUsados(v) { localStorage.setItem('rifa_numeros', JSON.stringify(v)) },
-  get config()         { return JSON.parse(localStorage.getItem('rifa_config') || 'null') || CONFIG_PADRAO },
-  set config(v)        { localStorage.setItem('rifa_config', JSON.stringify(v)) },
-  get apuracoes()      { return JSON.parse(localStorage.getItem('rifa_apuracoes') || '[]') },
-  set apuracoes(v)     { localStorage.setItem('rifa_apuracoes', JSON.stringify(v)) },
+  participantes: [],
+  numerosUsados: [],
+  config: null,
+  apuracoes: [],
 };
+
+async function apiFetch(path, options = {}) {
+  const res = await fetch(API_BASE + path, {
+    headers: { 'Content-Type': 'application/json', ...options.headers },
+    ...options,
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || res.statusText || 'Erro na API');
+  return data;
+}
+
+async function carregarBanco() {
+  const data = await apiFetch('/bootstrap');
+  DB.participantes = data.participantes;
+  DB.numerosUsados = data.numerosUsados;
+  DB.config = data.config;
+  DB.apuracoes = data.apuracoes;
+  const badge = document.getElementById('dbStatus');
+  if (badge) {
+    badge.textContent = '🟢 MongoDB conectado';
+    badge.className = 'badge badge-green';
+  }
+}
 
 const CONFIG_PADRAO = {
   nome: 'iPhone 16 Pro Max — Campanha 2026',
@@ -633,7 +655,7 @@ function gerarNumerosAleatorios(quantidade) {
 /* ═══════════════════════════════════════════
    SIMULAÇÃO DE COMPRA
    ═══════════════════════════════════════════ */
-function simularCompra() {
+async function simularCompra() {
   const nome   = document.getElementById('g-nome').value.trim();
   const cpf    = document.getElementById('g-cpf').value.replace(/\D/g,'');
   const email  = document.getElementById('g-email').value.trim();
@@ -643,59 +665,41 @@ function simularCompra() {
   const multOv = document.getElementById('g-mult').value;
   const status = document.getElementById('g-status').value;
 
-  // Validações básicas
   if (!nome || !cpf || !email || !pacote) {
     toast('Preencha os campos obrigatórios (nome, CPF, e-mail, pacote).', 'red'); return;
   }
   if (cpf.length !== 11) { toast('CPF inválido.', 'red'); return; }
 
-  // CPF duplicado
-  const existente = DB.participantes.find(p => p.cpf === cpf);
-  if (existente) {
-    toast(`CPF já cadastrado! (${existente.nome})`, 'yellow'); return;
-  }
-
   const pkg  = PACOTES[pacote];
   const mult = calcMultiplicador(pkg.tag, pgto, multOv);
   const qtd  = calcNumerosFinais(pkg.numeros, mult);
 
-  // Gera os números
-  const { numeros, log, erro } = gerarNumerosAleatorios(qtd);
-  renderLog('logGeracao', log);
-
-  if (erro || numeros.length === 0) {
-    toast('Erro na geração de números. Verifique o log.', 'red'); return;
+  try {
+    const { participante, log } = await apiFetch('/participantes', {
+      method: 'POST',
+      body: JSON.stringify({
+        campanhaSlug: 'iphone-17-pro',
+        nome, cpf, email, tel,
+        pacote, nomePacote: pkg.nome,
+        pagamento: pgto,
+        valorPago: pkg.valor,
+        multiplicadorTipo: mult.tipo,
+        multiplicadorFator: mult.fator,
+        multiplicadorBonus: mult.bonus,
+        quantidadeNumeros: qtd,
+        statusPagamento: status,
+        elegivel: status === 'confirmado',
+      }),
+    });
+    renderLog('logGeracao', log);
+    DB.participantes.unshift(participante);
+    DB.numerosUsados.push(...participante.numerosGerados);
+    mostrarResultadoGeracao(participante);
+    toast(`✅ ${participante.numerosGerados.length} número(s) gerado(s) para ${nome}!`, 'green');
+    atualizarStats();
+  } catch (e) {
+    toast(e.message, 'red');
   }
-
-  // Salva na base
-  const participante = {
-    id: Date.now(),
-    nome, cpf, email, tel,
-    pacote, nomePacote: pkg.nome,
-    pagamento: pgto,
-    valorPago: pkg.valor,
-    multiplicadorTipo: mult.tipo,
-    multiplicadorFator: mult.fator,
-    multiplicadorBonus: mult.bonus,
-    numerosGerados: numeros,
-    statusPagamento: status,
-    elegivel: status === 'confirmado',
-    created_at: new Date().toISOString(),
-  };
-
-  const lista = DB.participantes;
-  lista.push(participante);
-  DB.participantes = lista;
-
-  // Marca números como usados
-  const usados = DB.numerosUsados;
-  numeros.forEach(n => usados.push(n));
-  DB.numerosUsados = usados;
-
-  // Exibe resultado
-  mostrarResultadoGeracao(participante);
-  toast(`✅ ${numeros.length} número(s) gerado(s) para ${nome}!`, 'green');
-  atualizarStats();
 }
 
 function mostrarResultadoGeracao(p) {
@@ -829,7 +833,7 @@ function renderParticipantes() {
 }
 
 function verNumeros(id) {
-  const p = DB.participantes.find(x => x.id === id);
+  const p = DB.participantes.find(x => String(x.id) === String(id));
   if (!p) return;
   const box = document.getElementById('detalheParticipante');
   const content = document.getElementById('detalheContent');
@@ -842,25 +846,31 @@ function verNumeros(id) {
   box.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function cancelarParticipante(id) {
-  const lista = DB.participantes.map(p => {
-    if (p.id === id) return {...p, statusPagamento:'cancelado', elegivel:false};
-    return p;
-  });
-  DB.participantes = lista;
-  renderParticipantes();
-  atualizarStats();
-  toast('Participante cancelado e marcado como inelegível.', 'yellow');
+async function cancelarParticipante(id) {
+  try {
+    const p = await apiFetch('/participantes/' + id, {
+      method: 'PATCH',
+      body: JSON.stringify({ statusPagamento: 'cancelado', elegivel: false }),
+    });
+    DB.participantes = DB.participantes.map(x => String(x.id) === String(id) ? p : x);
+    renderParticipantes();
+    atualizarStats();
+    toast('Participante cancelado e marcado como inelegível.', 'yellow');
+  } catch (e) { toast(e.message, 'red'); }
 }
 
-function toggleElegivel(id) {
-  const lista = DB.participantes.map(p => {
-    if (p.id === id) return {...p, elegivel: !p.elegivel};
-    return p;
-  });
-  DB.participantes = lista;
-  renderParticipantes();
-  toast('Elegibilidade alterada.', 'blue');
+async function toggleElegivel(id) {
+  const atual = DB.participantes.find(x => String(x.id) === String(id));
+  if (!atual) return;
+  try {
+    const p = await apiFetch('/participantes/' + id, {
+      method: 'PATCH',
+      body: JSON.stringify({ elegivel: !atual.elegivel }),
+    });
+    DB.participantes = DB.participantes.map(x => String(x.id) === String(id) ? p : x);
+    renderParticipantes();
+    toast('Elegibilidade alterada.', 'blue');
+  } catch (e) { toast(e.message, 'red'); }
 }
 
 function toggleCheckAll() {
@@ -868,16 +878,19 @@ function toggleCheckAll() {
   document.querySelectorAll('.check-part').forEach(c => c.checked = all);
 }
 
-function cancelarSelecionados() {
-  const ids = [...document.querySelectorAll('.check-part:checked')].map(c => parseInt(c.dataset.id));
+async function cancelarSelecionados() {
+  const ids = [...document.querySelectorAll('.check-part:checked')].map(c => c.dataset.id);
   if (!ids.length) { toast('Nenhum selecionado.', 'yellow'); return; }
-  const lista = DB.participantes.map(p =>
-    ids.includes(p.id) ? {...p, statusPagamento:'cancelado', elegivel:false} : p
-  );
-  DB.participantes = lista;
-  renderParticipantes();
-  atualizarStats();
-  toast(`${ids.length} participante(s) cancelado(s).`, 'yellow');
+  try {
+    const { participantes } = await apiFetch('/participantes/cancelar-lote', {
+      method: 'POST',
+      body: JSON.stringify({ ids }),
+    });
+    DB.participantes = participantes;
+    renderParticipantes();
+    atualizarStats();
+    toast(`${ids.length} participante(s) cancelado(s).`, 'yellow');
+  } catch (e) { toast(e.message, 'red'); }
 }
 
 /* ═══════════════════════════════════════════
@@ -1001,10 +1014,24 @@ function executarApuracao() {
   if (resultado.ganhador) {
     toast(`🏆 Ganhador: ${resultado.ganhador.nome} — ${resultado.numero}`, 'green');
 
-    // Salva apuração
-    const aps = DB.apuracoes;
-    aps.push({ ...resultado, premios, dataApuracao: new Date().toISOString(), log });
-    DB.apuracoes = aps;
+    apiFetch('/apuracoes', {
+      method: 'POST',
+      body: JSON.stringify({
+        tipo: resultado.tipo,
+        numero: resultado.numero,
+        premios,
+        dataApuracao: new Date().toISOString(),
+        log,
+        ganhador: resultado.ganhador ? {
+          nome: resultado.ganhador.nome,
+          email: resultado.ganhador.email,
+          cpf: resultado.ganhador.cpf,
+        } : null,
+      }),
+    }).then(ap => {
+      DB.apuracoes.push(ap);
+      atualizarStats();
+    }).catch(e => toast('Apuração ok, mas falhou ao salvar: ' + e.message, 'yellow'));
   }
 }
 
@@ -1130,8 +1157,8 @@ function exportarCSV() {
 /* ═══════════════════════════════════════════
    CONFIG
    ═══════════════════════════════════════════ */
-function salvarConfig() {
-  DB.config = {
+async function salvarConfig() {
+  const payload = {
     nome:              document.getElementById('cfg-nome').value,
     totalSeries:       parseInt(document.getElementById('cfg-series').value),
     elementosPorSerie: parseInt(document.getElementById('cfg-elementos').value),
@@ -1141,12 +1168,15 @@ function salvarConfig() {
     dataExtracao:      document.getElementById('cfg-extracao').value,
     dataApuracao:      document.getElementById('cfg-apuracao').value,
   };
-  toast('Configurações salvas!', 'green');
-  renderLogStats();
+  try {
+    DB.config = await apiFetch('/config', { method: 'PUT', body: JSON.stringify(payload) });
+    toast('Configurações salvas no MongoDB!', 'green');
+    renderLogStats();
+  } catch (e) { toast(e.message, 'red'); }
 }
 
 function carregarConfig() {
-  const cfg = DB.config;
+  const cfg = DB.config || CONFIG_PADRAO;
   document.getElementById('cfg-nome').value         = cfg.nome;
   document.getElementById('cfg-series').value       = cfg.totalSeries;
   document.getElementById('cfg-elementos').value    = cfg.elementosPorSerie;
@@ -1302,14 +1332,17 @@ function irPara(tab) {
   if (tab === 'dashboard') atualizarStats();
 }
 
-function resetarTudo() {
-  if (!confirm('⚠️ Isso apagará TODOS os participantes, números e apurações.\nTem certeza?')) return;
-  localStorage.removeItem('rifa_participantes');
-  localStorage.removeItem('rifa_numeros');
-  localStorage.removeItem('rifa_apuracoes');
-  atualizarStats();
-  renderParticipantes();
-  toast('Base de dados limpa!', 'yellow');
+async function resetarTudo() {
+  if (!confirm('⚠️ Isso apagará TODOS os participantes, números e apurações no MongoDB.\nTem certeza?')) return;
+  try {
+    await apiFetch('/reset', { method: 'DELETE' });
+    DB.participantes = [];
+    DB.numerosUsados = [];
+    DB.apuracoes = [];
+    atualizarStats();
+    renderParticipantes();
+    toast('Base de dados limpa no MongoDB!', 'yellow');
+  } catch (e) { toast(e.message, 'red'); }
 }
 
 // Máscara CPF
@@ -1332,10 +1365,21 @@ document.querySelectorAll('.nav-item[data-tab]').forEach(item => {
 });
 
 // INIT
-window.addEventListener('DOMContentLoaded', () => {
-  atualizarStats();
-  atualizarPreviewGeracao();
-  renderLogStats();
+window.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await carregarBanco();
+    carregarConfig();
+    atualizarStats();
+    atualizarPreviewGeracao();
+    renderLogStats();
+  } catch (e) {
+    const badge = document.getElementById('dbStatus');
+    if (badge) {
+      badge.textContent = 'MongoDB offline — rode npm start';
+      badge.className = 'badge badge-yellow';
+    }
+    toast('Não conectou à API: ' + e.message + '. Execute "npm start" na pasta do projeto.', 'red');
+  }
 });
 </script>
 </body>

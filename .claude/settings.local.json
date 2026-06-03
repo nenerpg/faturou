@@ -3,7 +3,13 @@
     "allow": [
       "PowerShell(Start-Process \"C:\\\\Users\\\\Jeferson\\\\Documents\\\\RIFAS\\\\site\\\\index.html\")",
       "WebSearch",
-      "WebFetch(domain:www.apple.com)"
+      "WebFetch(domain:www.apple.com)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\Jeferson\\\\.claude\\\\projects\\\\C--Users-Jeferson-Documents-RIFAS\\\\4dde3657-0bac-4b00-b2cf-dcd9c22627be\\\\tool-results\\\\webfetch-1779733849624-rzd6vx.jpg\"\\); \"Width: $\\($img.Width\\) x Height: $\\($img.Height\\)\"; $img.Dispose\\(\\))",
+      "WebFetch(domain:store.storeimages.cdn-apple.com)",
+      "WebFetch(domain:renegade.retornar.com.br)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Jeferson\\\\Documents\\\\RIFAS\" -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)"
     ]
   }
 }

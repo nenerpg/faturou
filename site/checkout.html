@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Participar — Sorte Real</title>
+  <link rel="icon" href="crown-logo.svg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#000;--card:#111;--bo:rgba(255,255,255,.1);--t1:#fff;--t2:#aaa;--gold:#C9A84C;--green:#22C55E;--red:#EF4444;--f:'Montserrat',sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--f);background:var(--bg);color:var(--t1);padding:24px}
+    .w{max-width:800px;margin:0 auto}
+    .back{color:var(--t2);font-size:.85rem;margin-bottom:24px;display:inline-block}
+    .back:hover{color:var(--gold)}
+    h1{font-size:1.5rem;margin-bottom:8px}
+    .sub{color:var(--t2);font-size:.9rem;margin-bottom:32px}
+    .layout{display:grid;grid-template-columns:1fr 300px;gap:24px}
+    @media(max-width:700px){.layout{grid-template-columns:1fr}}
+    .panel{background:var(--card);border:1px solid var(--bo);border-radius:10px;padding:24px}
+    label{display:block;font-size:.75rem;font-weight:600;color:var(--t2);margin-bottom:6px}
+    input{width:100%;background:#1a1a1a;border:1px solid var(--bo);border-radius:6px;padding:10px 12px;color:#fff;margin-bottom:14px;font-family:inherit;font-size:.9rem}
+    input:focus{outline:none;border-color:var(--gold)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:500px){.row{grid-template-columns:1fr}}
+    .btn{width:100%;background:var(--gold);color:#000;border:none;padding:14px;border-radius:6px;font-weight:800;cursor:pointer;font-size:.95rem;transition:.15s}
+    .btn:hover{background:#b8962e}
+    .btn:disabled{opacity:.5;cursor:not-allowed}
+    .sum h3{font-size:1rem;margin-bottom:16px;border-bottom:1px solid var(--bo);padding-bottom:12px}
+    .sum-row{display:flex;justify-content:space-between;margin-bottom:10px;font-size:.88rem;color:var(--t2)}
+    .sum-row strong{color:#fff}
+    .sum-total{border-top:1px solid var(--bo);margin-top:14px;padding-top:14px;font-size:1.15rem;font-weight:800;display:flex;justify-content:space-between}
+    .sum-total span{color:var(--gold)}
+    .info-box{margin-top:18px;padding:14px;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:8px;font-size:.78rem;color:var(--t2);line-height:1.6}
+    .err{color:var(--red);font-size:.85rem;margin-top:10px;min-height:20px}
+    .redirecting{text-align:center;padding:24px;display:none}
+    .redirecting p{color:var(--t2);margin-top:12px;font-size:.9rem}
+    .spinner{width:36px;height:36px;border:3px solid rgba(201,168,76,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+<div class="w">
+  <a href="campanha.html?slug=iphone-17-pro" class="back">← Voltar à campanha</a>
+  <h1 id="page-title">Finalizar participação</h1>
+  <p class="sub" id="page-sub">Carregando...</p>
+
+  <div class="layout" id="main-layout">
+    <form class="panel" id="checkout-form">
+      <div class="row">
+        <div>
+          <label>Nome completo *</label>
+          <input name="nome" placeholder="João Silva" required/>
+        </div>
+        <div>
+          <label>CPF *</label>
+          <input name="cpf" id="cpf" placeholder="000.000.000-00" required/>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>E-mail *</label>
+          <input type="email" name="email" placeholder="joao@email.com" required/>
+        </div>
+        <div>
+          <label>WhatsApp</label>
+          <input name="tel" id="tel" placeholder="(11) 90000-0000"/>
+        </div>
+      </div>
+      <p style="font-size:.78rem;color:var(--t2);margin-bottom:18px">
+        Após confirmar, você será redirecionado para a página de pagamento. Seus números da sorte chegam por e-mail após o PIX ser confirmado.
+      </p>
+      <button type="submit" class="btn" id="btn-submit">Ir para pagamento →</button>
+      <p class="err" id="form-err"></p>
+    </form>
+
+    <aside class="panel sum">
+      <h3>Resumo do pedido</h3>
+      <div class="sum-row"><span>Campanha</span><strong id="s-campanha">—</strong></div>
+      <div class="sum-row"><span>Pacote</span><strong id="s-pacote">—</strong></div>
+      <div class="sum-row"><span>Números da sorte</span><strong id="s-numeros">—</strong></div>
+      <div class="sum-total"><span>Total</span><span id="s-valor">R$ —</span></div>
+      <div class="info-box">
+        Após o pagamento, seus números são gerados e enviados para o e-mail cadastrado. O ebook é entregue no fluxo de compra.
+      </div>
+    </aside>
+  </div>
+
+  <div class="redirecting" id="redirecting-box">
+    <div class="spinner"></div>
+    <p>Redirecionando para o pagamento...</p>
+  </div>
+</div>
+
+<script src="js/public.js"></script>
+<script>
+let CAMPANHA = null;
+let PACOTE = null;
+
+async function init() {
+  const slug = getQuery('campanha') || 'iphone-17-pro';
+  const pacoteId = getQuery('pacote');
+  if (!pacoteId) {
+    window.location.href = 'campanha.html?slug=' + slug;
+    return;
+  }
+
+  CAMPANHA = await apiGet('/campanhas/' + slug);
+  PACOTE = CAMPANHA.pacotes.find(p => p.id === pacoteId);
+  if (!PACOTE) {
+    window.location.href = 'campanha.html?slug=' + slug;
+    return;
+  }
+
+  document.title = 'Participar — ' + CAMPANHA.titulo;
+  document.getElementById('page-title').textContent = 'Participar — ' + CAMPANHA.premioNome;
+  document.getElementById('page-sub').textContent =
+    'Preencha seus dados e você será redirecionado para o pagamento.';
+  document.getElementById('s-campanha').textContent = CAMPANHA.premioNome;
+  document.getElementById('s-pacote').textContent = PACOTE.nome;
+  document.getElementById('s-numeros').textContent = PACOTE.numeros;
+  document.getElementById('s-valor').textContent = 'R$ ' + fmtMoney(PACOTE.valor);
+
+  maskCPF(document.getElementById('cpf'));
+  maskPhone(document.getElementById('tel'));
+}
+
+document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const errEl = document.getElementById('form-err');
+  const btn = document.getElementById('btn-submit');
+  errEl.textContent = '';
+
+  const fd = new FormData(e.target);
+  const cpf = fd.get('cpf').replace(/\D/g, '');
+  if (!validarCPF(cpf)) {
+    errEl.textContent = 'CPF inválido. Verifique e tente novamente.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Aguarde...';
+
+  try {
+    const res = await apiPost('/pedidos', {
+      campanhaSlug: CAMPANHA.slug,
+      pacote: PACOTE.id,
+      nome: fd.get('nome'),
+      cpf,
+      email: fd.get('email'),
+      tel: fd.get('tel') || '',
+    });
+
+    if (res.checkoutUrl) {
+      document.getElementById('main-layout').style.display = 'none';
+      document.getElementById('redirecting-box').style.display = 'block';
+      setTimeout(() => { window.location.href = res.checkoutUrl; }, 800);
+    } else {
+      errEl.textContent =
+        'Configure ANIMUS_CHECKOUT_BASE_URL no servidor para ativar o redirecionamento. ' +
+        'Pedido criado: ' + res.orderId;
+      btn.disabled = false;
+      btn.textContent = 'Ir para pagamento →';
+    }
+  } catch (err) {
+    errEl.textContent = err.message;
+    btn.disabled = false;
+    btn.textContent = 'Ir para pagamento →';
+  }
+});
+
+init().catch(() => { window.location.href = 'campanha.html?slug=iphone-17-pro'; });
+</script>
+</body>
+</html>

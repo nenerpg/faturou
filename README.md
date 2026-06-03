@@ -17,11 +17,89 @@ O sorteio é realizado com base nos resultados públicos da **Loteria Federal da
 
 ```
 RIFAS/
-└── site/
-    ├── index.html   # Landing page completa
-    ├── style.css    # Estilos (dark mode, responsivo)
-    └── app.js       # Lógica: countdown, pacotes, algoritmo de apuração
+├── server/              # API Node.js + MongoDB
+│   ├── models/          # Campanha, Participante, NumeroUsado, etc.
+│   ├── routes/          # api, campanhas, pedidos, webhooks/cash
+│   ├── services/        # cashApi, fulfillPedido, email
+│   └── seedCampanhas.js # campanha iPhone ativa no 1º start
+├── site/
+│   ├── index.html       # Redireciona para iPhone 17 Pro
+│   ├── campanha.html    # Página da campanha (?slug=iphone-17-pro)
+│   ├── checkout.html    # Pedido + PIX (Cash API)
+│   ├── admin.html       # Painel administrativo
+│   ├── js/              # public.js, campanha-page.js
+│   ├── style.css        # CSS legado (não usado pelo index atual)
+│   └── app.js           # JS legado (checkout antigo)
+├── package.json
+└── .env
 ```
+
+### Fluxo do visitante (PIX + Cash API)
+
+1. **Campanha** — escolhe pacote
+2. **Checkout** — `POST /api/pedidos` → QR Code PIX (Cash API)
+3. Cliente paga → webhook `POST /api/webhooks/cash` com `status: paid`
+4. API confirma depósito, gera números, grava participante e envia e-mail (Resend)
+
+---
+
+## Cash API (Animus Pay)
+
+| Endpoint interno | Função |
+|------------------|--------|
+| `POST /api/pedidos` | Cria pedido + PIX (`externalId` = `orderId`) |
+| `POST /api/webhooks/cash` | Recebe postback da Cash (`postbackUrl`) |
+| `GET /api/pedidos/:orderId` | Status do pedido (polling no checkout) |
+
+Configure no `.env`: `CASH_API_TOKEN`, `CASH_POSTBACK_URL`, `RESEND_API_KEY`, `ALLOW_PUBLIC_PARTICIPAR=false`.
+
+---
+
+## Deploy gratuito (nuvem)
+
+| Serviço | Uso |
+|---------|-----|
+| **MongoDB Atlas** M0 | Banco `rifas` |
+| **Render** | API Node (`npm start`, env vars do `.env.example`) |
+| **Vercel** | Site estático em `site/` — defina `API_URL` apontando para o Render |
+
+Webhook na Cash: `https://sua-api.onrender.com/api/webhooks/cash`
+
+---
+
+## 🗄️ MongoDB (local)
+
+### Pré-requisitos
+
+- [MongoDB Community](https://www.mongodb.com/try/download/community) instalado
+- Serviço **MongoDB** em execução no Windows (Services → MongoDB → Running)
+- [Node.js](https://nodejs.org/) 18+
+
+### Rodar o projeto
+
+```bash
+# Na pasta RIFAS
+npm install
+npm start
+```
+
+Abra no navegador:
+
+- Site: http://localhost:3000
+- Admin: http://localhost:3000/admin.html
+
+O painel admin grava participantes, números usados, configurações e apurações no banco **`rifas`** (coleções criadas automaticamente).
+
+### Variáveis de ambiente
+
+Copie `.env.example` para `.env` se ainda não existir:
+
+```
+PORT=3000
+MONGODB_URI=mongodb://127.0.0.1:27017/rifas
+```
+
+Se o MongoDB usar outra porta ou autenticação, ajuste `MONGODB_URI`.
 
 ---
 
@@ -72,9 +150,9 @@ Formato: `SÉRIE.ELEMENTO` — ex: `9.57102`
 
 ## 🛠️ Próximos Passos (Backend)
 
-- [ ] Node.js / Python API para geração de números únicos por campanha
-- [ ] Integração com gateway de pagamento (Mercado Pago / PagSeguro)
-- [ ] Envio automático de e-mail com números (Nodemailer / SendGrid)
+- [x] Node.js API + MongoDB para participantes e números únicos
+- [x] Cash API PIX + webhook
+- [x] E-mail com números (Resend)
 - [ ] Área do cliente "Minha Conta"
 - [ ] Painel admin com algoritmo de apuração
 - [ ] Exportação CSV no formato SCPC/SPA

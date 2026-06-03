@@ -18,7 +18,7 @@ app.use('/api/webhooks', webhookRouter);
 
 const siteDir = path.join(__dirname, '..', 'site');
 app.use(express.static(siteDir));
-app.get('*', (_req, res) => res.sendFile(path.join(siteDir, 'index.html')));
+app.get('/{*path}', (_req, res) => res.sendFile(path.join(siteDir, 'index.html')));
 
 let initialized = false;
 

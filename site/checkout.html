@@ -157,8 +157,7 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
       setTimeout(() => { window.location.href = res.checkoutUrl; }, 800);
     } else {
       errEl.textContent =
-        'Configure ANIMUS_CHECKOUT_BASE_URL no servidor para ativar o redirecionamento. ' +
-        'Pedido criado: ' + res.orderId;
+        'Link de pagamento não configurado para este pacote. Pedido criado: ' + res.orderId;
       btn.disabled = false;
       btn.textContent = 'Ir para pagamento →';
     }

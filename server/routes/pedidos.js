@@ -8,27 +8,28 @@ function newOrderId() {
   return `ord_${crypto.randomBytes(12).toString('hex')}`;
 }
 
-function buildCheckoutUrl(pedido, pkg) {
-  const base = process.env.ANIMUS_CHECKOUT_BASE_URL || '';
+function buildCheckoutUrl(pedido, pkg, campanha) {
+  const base = pkg.checkoutUrl || process.env.ANIMUS_CHECKOUT_BASE_URL || '';
+  if (!base) return null;
+
   const postbackUrl =
     process.env.CASH_POSTBACK_URL ||
     `${process.env.PUBLIC_API_URL || 'http://localhost:3000'}/api/webhooks/cash`;
   const returnUrl = `${process.env.PUBLIC_SITE_URL || 'http://localhost:3000'}/obrigado.html?orderId=${pedido.order_id}`;
-
-  if (!base) return null;
 
   const params = new URLSearchParams({
     externalId: pedido.order_id,
     postbackUrl,
     returnUrl,
     amount: String(pedido.amount_centavos),
-    description: `${pkg.nome} — Sorte Real iPhone 17 Pro`,
+    description: `${pkg.nome} — ${campanha.titulo || 'Sorte Real'}`,
     name: pedido.nome,
     email: pedido.email,
     document: pedido.cpf,
   });
 
-  return `${base}?${params.toString()}`;
+  const sep = base.includes('?') ? '&' : '?';
+  return `${base}${sep}${params.toString()}`;
 }
 
 router.post('/', async (req, res) => {
@@ -89,7 +90,7 @@ router.post('/', async (req, res) => {
 
   if (errPedido) return res.status(500).json({ error: errPedido.message });
 
-  const checkoutUrl = buildCheckoutUrl(pedido, pkg);
+  const checkoutUrl = buildCheckoutUrl(pedido, pkg, campanha);
 
   res.status(201).json({
     orderId: pedido.order_id,

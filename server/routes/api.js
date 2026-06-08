@@ -40,27 +40,63 @@ function cfgFromCampanha(c) {
     dataInicio: c.data_inicio,
     dataFim: c.data_fim,
     dataExtracao: c.data_extracao,
+    dataApuracao: c.data_extracao,
+  };
+}
+
+function configBodyToRow(body) {
+  return {
+    nome: body.nome,
+    total_series: body.totalSeries,
+    elementos_por_serie: body.elementosPorSerie,
+    serie_inicial: body.serieInicial,
+    data_inicio: body.dataInicio,
+    data_fim: body.dataFim,
+    data_extracao: body.dataExtracao,
+    data_apuracao: body.dataApuracao,
+  };
+}
+
+function configRowToApi(row) {
+  if (!row) return { ...CONFIG_PADRAO };
+  return {
+    nome: row.nome,
+    totalSeries: row.total_series,
+    elementosPorSerie: row.elementos_por_serie,
+    serieInicial: row.serie_inicial,
+    dataInicio: row.data_inicio,
+    dataFim: row.data_fim,
+    dataExtracao: row.data_extracao,
+    dataApuracao: row.data_apuracao,
   };
 }
 
 async function getConfigDoc() {
-  let { data: cfg } = await supabase
+  const { data: cfg, error } = await supabase
     .from('configs')
     .select('*')
     .eq('key', 'campanha')
     .maybeSingle();
 
-  if (!cfg) {
-    const { data: created } = await supabase
-      .from('configs')
-      .insert({ key: 'campanha', ...CONFIG_PADRAO })
-      .select()
-      .single();
-    cfg = created;
-  }
+  if (error) throw new Error(error.message);
 
-  const { id, key, created_at, updated_at, ...rest } = cfg;
-  return rest;
+  if (cfg) return configRowToApi(cfg);
+
+  const row = { key: 'campanha', ...configBodyToRow(CONFIG_PADRAO) };
+  const { data: created, error: errIns } = await supabase
+    .from('configs')
+    .insert(row)
+    .select()
+    .single();
+
+  if (created) return configRowToApi(created);
+
+  // Fallback: usa campanha ativa se configs falhar
+  const campanha = await resolveCampanha();
+  if (campanha) return cfgFromCampanha(campanha);
+
+  if (errIns) throw new Error(errIns.message);
+  return { ...CONFIG_PADRAO };
 }
 
 async function resolveCampanha(slug) {
@@ -83,22 +119,30 @@ router.get('/health', (_req, res) => {
 });
 
 router.get('/bootstrap', requireAdmin, async (_req, res) => {
-  const [configResult, participantesResult, numerosResult, apuracoesResult] = await Promise.all([
-    getConfigDoc(),
-    supabase.from('participantes').select('*').order('created_at', { ascending: false }),
-    supabase.from('numeros_usados').select('numero'),
-    supabase.from('apuracoes').select('*').order('created_at', { ascending: false }),
-  ]);
+  try {
+    const [configResult, participantesResult, numerosResult, apuracoesResult] = await Promise.all([
+      getConfigDoc(),
+      supabase.from('participantes').select('*').order('created_at', { ascending: false }),
+      supabase.from('numeros_usados').select('numero'),
+      supabase.from('apuracoes').select('*').order('created_at', { ascending: false }),
+    ]);
 
-  res.json({
-    config: configResult,
-    participantes: (participantesResult.data || []).map(toParticipanteJSON),
-    numerosUsados: (numerosResult.data || []).map((n) => n.numero),
-    apuracoes: (apuracoesResult.data || []).map((a) => ({
-      ...a,
-      dataApuracao: a.data_apuracao || a.created_at,
-    })),
-  });
+    if (participantesResult.error) throw new Error(participantesResult.error.message);
+    if (numerosResult.error) throw new Error(numerosResult.error.message);
+    if (apuracoesResult.error) throw new Error(apuracoesResult.error.message);
+
+    res.json({
+      config: configResult,
+      participantes: (participantesResult.data || []).map(toParticipanteJSON),
+      numerosUsados: (numerosResult.data || []).map((n) => n.numero),
+      apuracoes: (apuracoesResult.data || []).map((a) => ({
+        ...a,
+        dataApuracao: a.data_apuracao || a.created_at,
+      })),
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message || 'Erro ao carregar dados do Supabase.' });
+  }
 });
 
 router.get('/config', async (_req, res) => {
@@ -106,13 +150,16 @@ router.get('/config', async (_req, res) => {
 });
 
 router.put('/config', requireAdmin, async (req, res) => {
-  const { data: cfg } = await supabase
+  const { data: cfg, error } = await supabase
     .from('configs')
-    .upsert({ key: 'campanha', ...req.body, updated_at: new Date().toISOString() }, { onConflict: 'key' })
+    .upsert(
+      { key: 'campanha', ...configBodyToRow(req.body), updated_at: new Date().toISOString() },
+      { onConflict: 'key' }
+    )
     .select()
     .single();
-  const { id, key, created_at, updated_at, ...rest } = cfg;
-  res.json(rest);
+  if (error || !cfg) return res.status(500).json({ error: error?.message || 'Erro ao salvar config.' });
+  res.json(configRowToApi(cfg));
 });
 
 router.post('/participantes', requireAdmin, async (req, res) => {

@@ -3,6 +3,7 @@ const supabase = require('../supabase');
 const CONFIG_PADRAO = require('../configPadrao');
 const { gerarNumerosAleatorios, registrarNumerosUsados } = require('../gerarNumeros');
 const { requireAdmin } = require('../adminAuth');
+const { calcNumeroVencedor, executarApuracao } = require('../apuracao');
 
 const router = express.Router();
 
@@ -217,6 +218,70 @@ router.post('/participantes/cancelar-lote', requireAdmin, async (req, res) => {
     .order('created_at', { ascending: false });
 
   res.json({ participantes: (lista || []).map(toParticipanteJSON) });
+});
+
+router.post('/apurar', requireAdmin, async (req, res) => {
+  const premios = req.body.premios;
+  if (!Array.isArray(premios) || premios.length !== 5) {
+    return res.status(400).json({ error: 'Informe os 5 primeiros prêmios da Loteria Federal.' });
+  }
+
+  const campanha = await resolveCampanha(req.body.campanhaSlug);
+  if (!campanha) return res.status(404).json({ error: 'Campanha não encontrada.' });
+
+  const { data: participantes } = await supabase
+    .from('participantes')
+    .select('*')
+    .eq('campanha_id', campanha.id)
+    .eq('elegivel', true);
+
+  const lista = (participantes || []).map(toParticipanteJSON);
+  const resultado = executarApuracao(premios, lista, campanha.elementos_por_serie);
+
+  let apuracaoSalva = null;
+  if (resultado.ganhador) {
+    const { data: ap } = await supabase
+      .from('apuracoes')
+      .insert({
+        campanha_id: campanha.id,
+        campanha_slug: campanha.slug,
+        tipo: resultado.tipo,
+        numero: resultado.numero,
+        premios,
+        data_apuracao: new Date().toISOString(),
+        log: resultado.log,
+        ganhador_nome: resultado.ganhador.nome,
+        ganhador_email: resultado.ganhador.email,
+        ganhador_cpf: resultado.ganhador.cpf,
+      })
+      .select()
+      .single();
+    apuracaoSalva = ap;
+  }
+
+  res.json({
+    ...resultado,
+    campanhaSlug: campanha.slug,
+    apuracaoId: apuracaoSalva?.id || null,
+    ganhador: resultado.ganhador
+      ? { nome: resultado.ganhador.nome, email: resultado.ganhador.email, cpf: resultado.ganhador.cpf }
+      : null,
+  });
+});
+
+router.get('/apuracao/preview', requireAdmin, (req, res) => {
+  try {
+    const premios = String(req.query.premios || '')
+      .split(',')
+      .map((p) => p.trim())
+      .filter(Boolean);
+    if (premios.length !== 5) {
+      return res.status(400).json({ error: 'Informe 5 prêmios separados por vírgula.' });
+    }
+    res.json(calcNumeroVencedor(premios));
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 });
 
 router.post('/apuracoes', requireAdmin, async (req, res) => {

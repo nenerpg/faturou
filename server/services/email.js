@@ -17,7 +17,7 @@ async function sendNumerosEmail({ to, nome, campanhaTitulo, pacoteNome, numeros 
       <p>Pacote: <strong>${pacoteNome}</strong> — ${numeros.length} número(s) da sorte:</p>
       <ul>${numerosHtml}</ul>
       ${ebookUrl ? `<p><a href="${ebookUrl}">Baixar seu ebook digital</a></p>` : ''}
-      <p style="font-size:12px;color:#666">Guarde este e-mail. Apuração conforme Loteria Federal. Promoção autorizada SPA/ME.</p>
+      <p style="font-size:12px;color:#666">Guarde este e-mail. Apuração conforme resultado público da Loteria Federal da Caixa.</p>
       <p style="font-size:12px"><a href="${siteUrl}">${siteUrl}</a></p>
     </div>
   `;

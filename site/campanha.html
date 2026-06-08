@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
 <title>Concorra ao iPhone 17 Pro — Sorte Real</title>
-<meta name="description" content="Compre o ebook e concorra a um iPhone 17 Pro 256GB. Frete e impostos pagos. Sorteio pela Loteria Federal. Autorizado SPA/ME."/>
+<meta name="description" content="Compre o ebook e concorra a um iPhone 17 Pro 256GB. Frete e impostos pagos. Sorteio pela Loteria Federal da Caixa."/>
 <link rel="icon" type="image/svg+xml" href="crown-logo.svg"/>
 <link rel="apple-touch-icon" href="crown-logo.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -574,7 +574,7 @@ button,input,select{font-family:var(--f)}
 <body>
 
 <div class="topbar">
-  Autorizado SPA/ME &nbsp;·&nbsp; Promoção 100% Legal &nbsp;·&nbsp; <a href="#participar">Quero concorrer →</a>
+  Sorteio pela Loteria Federal &nbsp;·&nbsp; Apuração transparente &nbsp;·&nbsp; <a href="#participar">Quero concorrer →</a>
 </div>
 
 <!-- NAV -->
@@ -619,7 +619,7 @@ button,input,select{font-family:var(--f)}
 
   <!-- TEXTO -->
   <div class="hero-text">
-    <div class="hero-badge"><i></i>Autorizado SPA/ME · Promoção 100% Legal</div>
+    <div class="hero-badge"><i></i>Sorteio pela Loteria Federal · Apuração transparente</div>
 
     <h1 class="hero-h">
       A sorte é real,<br/>
@@ -960,7 +960,7 @@ button,input,select{font-family:var(--f)}
       <div class="faqitem rv"><button class="faqbtn">Quando recebo meus números?<div class="faqic">+</div></button><div class="faqbody">Os números são enviados por e-mail imediatamente após a confirmação do pagamento. Via PIX, a confirmação é quase instantânea. Via cartão, pode levar alguns minutos.</div></div>
       <div class="faqitem rv"><button class="faqbtn">Como o ganhador é calculado?<div class="faqic">+</div></button><div class="faqbody">A apuração usa os 5 primeiros prêmios da Loteria Federal. A dezena do 1º prêmio define a série (0 a 9) e as unidades dos 5 prêmios formam o elemento de 5 dígitos. O número completo (ex: 9.57102) é cruzado com nossa base de participantes.</div></div>
       <div class="faqitem rv"><button class="faqbtn">E se o número sorteado não foi distribuído?<div class="faqic">+</div></button><div class="faqbody">O sistema busca automaticamente o número imediatamente superior na série. Se não houver, busca o inferior. Se a série estiver vazia, avança para a próxima. Sempre haverá um ganhador entre os participantes elegíveis.</div></div>
-      <div class="faqitem rv"><button class="faqbtn">A promoção é legalizada?<div class="faqic">+</div></button><div class="faqbody">Sim. Promoção Comercial com Distribuição Gratuita de Prêmios, autorizada pela SPA (Secretaria de Prêmios e Apostas do Ministério da Fazenda), conforme a Lei Federal nº 5.768/71.</div></div>
+      <div class="faqitem rv"><button class="faqbtn">Posso confiar no resultado?<div class="faqic">+</div></button><div class="faqbody">Sim. O ganhador é definido exclusivamente pelos resultados públicos da Loteria Federal da Caixa Econômica Federal. Não interferimos no sorteio. Se o número sorteado não foi distribuído, aplicamos a regra de aproximação (superior, depois inferior, depois próxima série).</div></div>
       <div class="faqitem rv"><button class="faqbtn">Como recebo o iPhone se ganhar?<div class="faqic">+</div></button><div class="faqbody">Entramos em contato pelo e-mail e WhatsApp cadastrados. O iPhone é entregue pelos Correios com frete pago, nota fiscal incluída. O ganhador tem 180 dias para resgatar.</div></div>
     </div>
   </div>
@@ -985,19 +985,22 @@ button,input,select{font-family:var(--f)}
 <!-- ══ REGULAMENTO ══ -->
 <section class="s s-b" id="regulamento">
   <div class="w">
-    <div class="sh c"><span class="slabel">Legal</span><h2 class="sh2">Regulamento</h2></div>
+    <div class="sh c"><span class="slabel">Regras</span><h2 class="sh2">Regulamento</h2></div>
     <div class="reggrid rv">
-      <div class="regcell"><div class="rl">Modalidade</div><div class="rcv">Promoção Comercial · Distribuição Gratuita</div></div>
-      <div class="regcell"><div class="rl">Período</div><div class="rcv">[DATA INÍCIO] até [DATA FIM]</div></div>
-      <div class="regcell"><div class="rl">Extração</div><div class="rcv">[DATA] via Loteria Federal CEF</div></div>
-      <div class="regcell"><div class="rl">Apuração</div><div class="rcv">[DATA] às 09h00 (Brasília)</div></div>
-      <div class="regcell"><div class="rl">Prêmio</div><div class="rcv">1x iPhone 17 Pro 256GB</div></div>
-      <div class="regcell"><div class="rl">Reclamação</div><div class="rcv">180 dias após divulgação</div></div>
-      <div class="regcell"><div class="rl">Autorização</div><div class="rcv">SPA/ME nº [NÚMERO]</div></div>
+      <div class="regcell"><div class="rl">Modalidade</div><div class="rcv">Assemelhada a Sorteio</div></div>
+      <div class="regcell"><div class="rl">Período</div><div class="rcv" id="reg-periodo">—</div></div>
+      <div class="regcell"><div class="rl">Área</div><div class="rcv">Todo o território nacional</div></div>
+      <div class="regcell"><div class="rl">Extração</div><div class="rcv" id="reg-extracao">Loteria Federal da Caixa</div></div>
+      <div class="regcell"><div class="rl">Séries</div><div class="rcv" id="reg-series">10 séries (0 a 9)</div></div>
+      <div class="regcell"><div class="rl">Elementos/série</div><div class="rcv" id="reg-elementos">100.000 números</div></div>
+      <div class="regcell"><div class="rl">Prêmio</div><div class="rcv" id="reg-premio">1x iPhone 17 Pro 256GB</div></div>
+      <div class="regcell"><div class="rl">Forma de apuração</div><div class="rcv">Dezena do 1º prêmio = série · Unidades dos 5 prêmios = elemento (ex: 9.57102)</div></div>
+      <div class="regcell"><div class="rl">Aproximação</div><div class="rcv">Superior → inferior → próxima série (9 volta para 0)</div></div>
+      <div class="regcell"><div class="rl">Prescrição</div><div class="rcv">180 dias após a apuração para resgate do prêmio</div></div>
       <div class="regcell" style="display:flex;align-items:center">
-        <a href="#" style="display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:8px 15px;font-size:.74rem;font-weight:600;color:var(--t3);transition:.15s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--t3)'">
+        <a href="regulamento.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:8px 15px;font-size:.74rem;font-weight:600;color:var(--t3);transition:.15s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--t3)'">
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6L9 2z"/><polyline points="9,2 9,6 13,6"/><line x1="5" y1="10" x2="11" y2="10"/><line x1="5" y1="12" x2="8" y2="12"/></svg>
-          Baixar PDF
+          Baixar regulamento (PDF)
         </a>
       </div>
     </div>
@@ -1015,7 +1018,7 @@ button,input,select{font-family:var(--f)}
             <span class="logo-s">SORTE</span><span class="logo-r">REAL</span>
           </span>
         </div>
-        <p class="fdesc">Promoção Comercial autorizada pela SPA/ME. Sorteio pelo resultado público da Loteria Federal sem interferência nossa.</p>
+        <p class="fdesc">Promoção comercial vinculada à compra de ebook. Sorteio pelo resultado público da Loteria Federal — sem interferência nossa.</p>
         <div class="fsoc">
           <a href="#" title="Instagram">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -1046,8 +1049,8 @@ button,input,select{font-family:var(--f)}
       </div>
     </div>
     <div class="foot-bottom">
-      <p>© 2026 Sorte Real · Promoção Comercial autorizada por SPA/ME · CNPJ: XX.XXX.XXX/0001-XX</p>
-      <p>Conforme Lei Federal nº 5.768/71 · Secretaria de Prêmios e Apostas / Ministério da Fazenda</p>
+      <p>© 2026 Sorte Real · Promoção Comercial · Sorteio pela Loteria Federal</p>
+      <p>Não há venda de números. Participação mediante compra de produto digital.</p>
     </div>
   </div>
 </footer>

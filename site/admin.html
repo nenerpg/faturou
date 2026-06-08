@@ -453,15 +453,14 @@
   <!-- ═══════════════════ CSV ═══════════════════ -->
   <div class="content" id="tab-csv">
     <div class="panel">
-      <div class="panel-title"><span>📄</span> Exportar CSV — Formato SCPC/SPA</div>
+      <div class="panel-title"><span>📄</span> Exportar CSV de Participantes</div>
       <p class="section-sub">
-        Exporta a lista de participantes elegíveis no formato exigido pela SPA para upload no SCPC.
-        Deve ser enviado <strong>antes</strong> da data da extração da Loteria Federal.
+        Exporta a lista de participantes elegíveis com CPF, nome, série, elemento, data e contato.
+        Envie os números aos participantes <strong>antes</strong> da extração da Loteria Federal.
       </p>
 
       <div class="alert alert-warn">
-        ⚠️ <strong>Prazo legal:</strong> Os números devem ser divulgados aos participantes com no mínimo
-        <strong>24 horas</strong> de antecedência em relação à extração da Loteria Federal.
+        ⚠️ Os números devem ser divulgados aos participantes com antecedência em relação à extração da Loteria Federal.
       </div>
 
       <div class="divider"></div>
@@ -962,7 +961,7 @@ function renderParticipantes() {
   const tbody  = document.getElementById('tabelaParticipantes');
   const search = document.getElementById('searchPart')?.value.toLowerCase() || '';
   const filter = document.getElementById('filterStatus')?.value || '';
-  let lista = DB.participantes;
+  let lista = participantesDaCampanha();
 
   if (search) lista = lista.filter(p =>
     p.nome.toLowerCase().includes(search) ||
@@ -990,7 +989,7 @@ function renderParticipantes() {
         <td><span class="chip chip-gold">${multLabel}</span></td>
         <td>
           <span style="color:var(--green);font-weight:700">${p.numerosGerados.length}</span>
-          <button class="btn btn-ghost btn-sm" onclick="verNumeros(${p.id})" style="margin-left:6px;padding:2px 8px;font-size:0.7rem">ver</button>
+          <button class="btn btn-ghost btn-sm" onclick="verNumeros('${p.id}')" style="margin-left:6px;padding:2px 8px;font-size:0.7rem">ver</button>
         </td>
         <td><span class="chip ${statusChip}">${p.statusPagamento}</span></td>
         <td>${p.elegivel ? '<span class="chip chip-green">✅ Sim</span>' : '<span class="chip chip-red">❌ Não</span>'}</td>
@@ -1119,147 +1118,47 @@ function preencherExemplo() {
   toast('Exemplo preenchido: resultado esperado 9.57102', 'blue');
 }
 
-function executarApuracao() {
+async function executarApuracao() {
   const premios = [1,2,3,4,5].map(i => document.getElementById('lot'+i)?.value?.trim());
   if (premios.some(p => !p || p.length !== 5)) {
     toast('Preencha todos os 5 prêmios com 5 dígitos cada.', 'red'); return;
   }
 
-  const serie    = calcSerie(premios[0]);
-  const elemento = calcElemento(premios);
-  const log      = [];
-
-  log.push(`=== APURAÇÃO INICIADA ===`);
-  log.push(`Prêmios: [${premios.join(', ')}]`);
-  log.push(`Série calculada: ${serie}  (dezena do 1º prêmio = ${String(premios[0]).padStart(5,'0').slice(-2,-1)})`);
-  log.push(`Elemento calculado: ${elemento}  (unidades dos 5 prêmios)`);
-  log.push(`Número vencedor calculado: ${serie}.${elemento}`);
-  log.push(`---`);
-
-  // Monta base de dados
-  const baseDados = {};
-  DB.participantes.forEach(p => {
-    p.numerosGerados.forEach(num => {
-      const [s, e] = num.split('.');
-      baseDados[num] = {
-        ...p,
-        serie: parseInt(s),
-        elemento: parseInt(e),
-        elegivel: p.elegivel,
-      };
-    });
-  });
-
-  log.push(`Participantes na base: ${DB.participantes.length}`);
-  log.push(`Números totais na base: ${Object.keys(baseDados).length}`);
-  log.push(`Números elegíveis: ${Object.values(baseDados).filter(x=>x.elegivel).length}`);
-  log.push(`---`);
-
-  if (Object.keys(baseDados).length === 0) {
-    log.push(`ERRO: Nenhum participante na base. Cadastre participantes primeiro.`);
-    renderLog('logApuracao', log);
-    toast('Nenhum participante cadastrado!', 'red'); return;
-  }
-
-  // Algoritmo de apuração
-  const resultado = apurar(serie, parseInt(elemento), baseDados, log);
-
-  renderLog('logApuracao', log);
-
-  // Exibe resultado
-  const box = document.getElementById('resultBox');
-  box.classList.add('show');
-
-  const tipoLabel = {
-    exato: '🎯 Número exato encontrado!',
-    aproximacao_superior: '⬆️ Aproximação por número SUPERIOR',
-    aproximacao_inferior: '⬇️ Aproximação por número INFERIOR',
-    troca_serie: '🔄 Troca de série aplicada',
-    sem_ganhador: '❌ Nenhum ganhador encontrado',
-  };
-
-  document.getElementById('resultTipo').textContent    = tipoLabel[resultado.tipo] || resultado.tipo;
-  document.getElementById('resultNumero').textContent  = resultado.numero || '—';
-  document.getElementById('resultNome').textContent    = resultado.ganhador ? resultado.ganhador.nome : 'Sem ganhador';
-  document.getElementById('resultEmail').textContent   = resultado.ganhador ? resultado.ganhador.email : '';
-
-  // Destaca o número vencedor na tabela de participantes
-  if (resultado.ganhador) {
-    toast(`🏆 Ganhador: ${resultado.ganhador.nome} — ${resultado.numero}`, 'green');
-
-    apiFetch('/apuracoes', {
+  const slug = getCampanhaAtualSlug();
+  try {
+    const resultado = await apiFetch('/apurar', {
       method: 'POST',
-      body: JSON.stringify({
-        tipo: resultado.tipo,
-        numero: resultado.numero,
-        premios,
-        dataApuracao: new Date().toISOString(),
-        log,
-        ganhador: resultado.ganhador ? {
-          nome: resultado.ganhador.nome,
-          email: resultado.ganhador.email,
-          cpf: resultado.ganhador.cpf,
-        } : null,
-      }),
-    }).then(ap => {
-      DB.apuracoes.push(ap);
-      atualizarStats();
-    }).catch(e => toast('Apuração ok, mas falhou ao salvar: ' + e.message, 'yellow'));
-  }
-}
+      body: JSON.stringify({ premios, campanhaSlug: slug }),
+    });
 
-function apurar(serieInicial, elementoInicial, baseDados, log) {
-  let serie   = serieInicial;
-  let elemento = elementoInicial;
-  const seriesVisitadas = new Set();
-  const cfg = DB.config;
+    renderLog('logApuracao', resultado.log || []);
 
-  while (true) {
-    if (seriesVisitadas.has(serie)) {
-      log.push(`ERRO: Voltou à série ${serie}. Nenhum ganhador encontrado.`);
-      return { ganhador: null, numero: null, tipo: 'sem_ganhador' };
-    }
-    seriesVisitadas.add(serie);
+    const box = document.getElementById('resultBox');
+    box.classList.add('show');
 
-    // CASO 1: Exato
-    const chaveExata = `${serie}.${String(elemento).padStart(5,'0')}`;
-    if (baseDados[chaveExata]) {
-      if (baseDados[chaveExata].elegivel) {
-        log.push(`✅ GANHADOR EXATO: ${chaveExata}`);
-        return { ganhador: baseDados[chaveExata], numero: chaveExata, tipo: 'exato' };
-      } else {
-        log.push(`⚠️ Número exato ${chaveExata} existe mas participante INELEGÍVEL.`);
+    const tipoLabel = {
+      exato: '🎯 Número exato encontrado!',
+      aproximacao_superior: '⬆️ Aproximação por número SUPERIOR',
+      aproximacao_inferior: '⬇️ Aproximação por número INFERIOR',
+      sem_ganhador: '❌ Nenhum ganhador encontrado',
+    };
+
+    document.getElementById('resultTipo').textContent   = tipoLabel[resultado.tipo] || resultado.tipo;
+    document.getElementById('resultNumero').textContent = resultado.numero || resultado.numeroCalculado || '—';
+    document.getElementById('resultNome').textContent   = resultado.ganhador ? resultado.ganhador.nome : 'Sem ganhador';
+    document.getElementById('resultEmail').textContent  = resultado.ganhador ? resultado.ganhador.email : '';
+
+    if (resultado.ganhador) {
+      toast(`🏆 Ganhador: ${resultado.ganhador.nome} — ${resultado.numero}`, 'green');
+      if (resultado.apuracaoId) {
+        await carregarBanco();
+        atualizarStats();
       }
     } else {
-      log.push(`Número exato ${chaveExata} não distribuído.`);
+      toast('Apuração concluída sem ganhador elegível.', 'yellow');
     }
-
-    // CASO 2: Superior
-    log.push(`Buscando superior na série ${serie} a partir do elemento ${elemento+1}...`);
-    let achouSuperior = false;
-    for (let e = elemento + 1; e < cfg.elementosPorSerie; e++) {
-      const chave = `${serie}.${String(e).padStart(5,'0')}`;
-      if (baseDados[chave] && baseDados[chave].elegivel) {
-        log.push(`✅ GANHADOR por aproximação SUPERIOR: ${chave}`);
-        return { ganhador: baseDados[chave], numero: chave, tipo: 'aproximacao_superior' };
-      }
-    }
-
-    // CASO 3: Inferior
-    log.push(`Nenhum superior. Buscando inferior na série ${serie}...`);
-    for (let e = elemento - 1; e >= 0; e--) {
-      const chave = `${serie}.${String(e).padStart(5,'0')}`;
-      if (baseDados[chave] && baseDados[chave].elegivel) {
-        log.push(`✅ GANHADOR por aproximação INFERIOR: ${chave}`);
-        return { ganhador: baseDados[chave], numero: chave, tipo: 'aproximacao_inferior' };
-      }
-    }
-
-    // CASO 4: Próxima série
-    const proxima = (serie + 1) % 10;
-    log.push(`Série ${serie} vazia. Avançando para série ${proxima}.`);
-    serie = proxima;
-    elemento = 0;
+  } catch (e) {
+    toast(e.message, 'red');
   }
 }
 
@@ -1280,11 +1179,16 @@ function exportarApuracao() {
 }
 
 /* ═══════════════════════════════════════════
-   CSV SCPC
+   CSV PARTICIPANTES
    ═══════════════════════════════════════════ */
+function participantesDaCampanha() {
+  const slug = getCampanhaAtualSlug();
+  return DB.participantes.filter(p => !slug || p.campanhaSlug === slug);
+}
+
 function gerarLinhasCSV() {
   const cabecalho = 'CPF/CNPJ,Nome,Numero_Serie,Elemento_Sorteavel,Data,Horario,Email,Telefone';
-  const participantes = DB.participantes.filter(p => p.elegivel);
+  const participantes = participantesDaCampanha().filter(p => p.elegivel);
   const linhas = [];
 
   participantes.forEach(p => {
@@ -1323,7 +1227,7 @@ function exportarCSV() {
   const { cabecalho, linhas } = gerarLinhasCSV();
   if (!linhas.length) { toast('Nenhum participante elegível para exportar.', 'yellow'); return; }
   const conteudo = [cabecalho, ...linhas].join('\n');
-  downloadArquivo('participantes_scpc.csv', conteudo, 'text/csv;charset=utf-8');
+  downloadArquivo('participantes_' + getCampanhaAtualSlug() + '.csv', conteudo, 'text/csv;charset=utf-8');
   toast(`CSV exportado: ${linhas.length} linha(s)`, 'green');
 }
 
@@ -1371,6 +1275,8 @@ function popularSeletorCampanha() {
 
 function onCampanhaAtualChange() {
   atualizarPacotesGerar();
+  atualizarStats();
+  renderParticipantes();
 }
 
 function atualizarPacotesGerar() {
@@ -1669,10 +1575,14 @@ function renderLogStats() {
    DASHBOARD
    ═══════════════════════════════════════════ */
 function atualizarStats() {
-  const participantes = DB.participantes;
-  const numerosUsados = DB.numerosUsados.length;
-  const cfg = DB.config;
-  const max = cfg.totalSeries * cfg.elementosPorSerie;
+  const participantes = participantesDaCampanha();
+  const campanha = getCampanhaAtual();
+  const numerosUsados = participantes.reduce((n, p) => n + (p.numerosGerados?.length || 0), 0);
+  const cfg = campanha ? {
+    totalSeries: campanha.totalSeries || 10,
+    elementosPorSerie: campanha.elementosPorSerie || 100000,
+  } : DB.config;
+  const max = (cfg.totalSeries || 10) * (cfg.elementosPorSerie || 100000);
   const confirmados = participantes.filter(p => p.statusPagamento === 'confirmado').length;
   const cancelados  = participantes.filter(p => p.statusPagamento === 'cancelado').length;
   const receita = participantes

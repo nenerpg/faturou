@@ -16,7 +16,7 @@ const CAMPANHAS = [
     titulo: 'iPhone 17 Pro 256GB',
     subtitulo: 'Cosmic Orange · Nota fiscal e frete inclusos',
     descricao:
-      'Compre nosso ebook e receba números da sorte. Sorteio com base na Loteria Federal. Autorizado SPA/ME.',
+      'Compre nosso ebook e receba números da sorte. Sorteio com base na Loteria Federal da Caixa.',
     premio_nome: 'iPhone 17 Pro',
     premio_imagem:
       'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha',

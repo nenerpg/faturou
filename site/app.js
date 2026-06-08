@@ -5,7 +5,7 @@
 
 // ===== CONFIG =====
 const CONFIG = {
-  // Datas da campanha — ajuste conforme autorização SPA
+  // Datas da campanha
   dataFimCampanha: new Date('2026-08-01T23:59:59'),
   dataLancamento: new Date('2026-05-25T00:00:00'),
   diasLancamento: 10,
@@ -575,7 +575,7 @@ const Apuracao = {
   },
 
   /**
-   * Gera CSV no formato SCPC/SPA.
+   * Gera CSV de participantes elegíveis.
    * @param {Array} participantes
    * @returns {string} conteúdo do CSV
    */
@@ -627,6 +627,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   console.log('%c🎯 RifaTechPro', 'color:#6C63FF;font-size:1.5rem;font-weight:800');
-  console.log('%cSistema de Promoção Comercial | SPA/ME Autorizado', 'color:#9090AA');
+  console.log('%cSistema de Promoção Comercial | Sorteio Loteria Federal', 'color:#9090AA');
   console.log('%cAlgoritmo de Apuração disponível em: window.Apuracao', 'color:#00D4AA');
 });

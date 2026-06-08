@@ -1,7 +1,7 @@
 # 📱 Sorte Certa — iPhone 17 Pr
 
 > Promoção Comercial com Distribuição Gratuita de Prêmios  
-> Autorizada pela **SPA/ME** — Lei Federal nº 5.768/71
+> Sorteio pela **Loteria Federal da Caixa**
 
 ---
 
@@ -155,16 +155,16 @@ Formato: `SÉRIE.ELEMENTO` — ex: `9.57102`
 - [x] E-mail com números (Resend)
 - [ ] Área do cliente "Minha Conta"
 - [ ] Painel admin com algoritmo de apuração
-- [ ] Exportação CSV no formato SCPC/SPA
+- [x] Exportação CSV de participantes elegíveis
 - [ ] Integração com API da Loteria Federal (loterias.caixa.gov.br)
 
 ---
 
-## 📋 Legal
+## 📋 Regras
 
-- Modalidade: Promoção Comercial com Distribuição Gratuita de Prêmios
-- Regulamentação: Lei Federal nº 5.768/71
-- Órgão: SPA — Secretaria de Prêmios e Apostas / Ministério da Fazenda
+- Modalidade: Assemelhada a Sorteio (Loteria Federal)
+- Apuração: dezena do 1º prêmio = série; unidades dos 5 prêmios = elemento
+- Aproximação: superior → inferior → próxima série
 - Prazo de reclamação do prêmio: 180 dias após divulgação
 
 ---

@@ -3,15 +3,7 @@ const supabase = require('../supabase');
 
 const router = express.Router();
 
-const PACOTES_PADRAO = [
-  { id: 'cobre', nome: 'Cobre', numeros: 5, valor: 7.9, valorAnchor: 30, tag: 'Cobre', checkoutUrl: 'https://go.animuspay.com.br/pmifycsf6w' },
-  { id: 'bronze', nome: 'Bronze', numeros: 12, valor: 14.9, valorAnchor: 60, tag: 'Bronze', checkoutUrl: 'https://go.animuspay.com.br/mtpkc' },
-  { id: 'prata', nome: 'Prata', numeros: 25, valor: 27.9, valorAnchor: 120, tag: 'Prata', checkoutUrl: 'https://go.animuspay.com.br/ao7us' },
-  { id: 'ouro', nome: 'Ouro', numeros: 45, valor: 44.9, valorAnchor: 200, tag: 'Ouro', destaque: true, checkoutUrl: 'https://go.animuspay.com.br/iodnw' },
-  { id: 'rubi', nome: 'Rubi', numeros: 80, valor: 69.9, valorAnchor: 320, tag: 'Rubi', checkoutUrl: 'https://go.animuspay.com.br/mypye' },
-  { id: 'esmeralda', nome: 'Esmeralda', numeros: 150, valor: 114.9, valorAnchor: 500, tag: 'Esmeralda', checkoutUrl: 'https://go.animuspay.com.br/ernzk' },
-  { id: 'diamante', nome: 'Diamante', numeros: 300, valor: 199.9, valorAnchor: 900, tag: 'Diamante', checkoutUrl: 'https://go.animuspay.com.br/9lwtb' },
-];
+const { PACOTES_PADRAO } = require('../pacotesCheckout');
 
 // camelCase (API) -> snake_case (coluna do banco)
 const FIELD_MAP = {

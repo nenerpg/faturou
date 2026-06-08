@@ -1,6 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const supabase = require('../supabase');
+const { getCheckoutUrlForPacote } = require('../pacotesCheckout');
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ function newOrderId() {
 }
 
 function buildCheckoutUrl(pedido, pkg, campanha) {
-  const base = pkg.checkoutUrl || process.env.ANIMUS_CHECKOUT_BASE_URL || '';
+  const base = getCheckoutUrlForPacote(pkg) || process.env.ANIMUS_CHECKOUT_BASE_URL || '';
   if (!base) return null;
 
   const postbackUrl =

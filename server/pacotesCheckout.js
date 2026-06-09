@@ -44,6 +44,15 @@ function aplicarCheckoutUrls(pacotes) {
   }));
 }
 
+/** Somente pacotes com checkout Animus oficial (7 planos) */
+function filtrarPacotesVendaveis(pacotes) {
+  return aplicarCheckoutUrls(pacotes).filter((p) => !!p.checkoutUrl);
+}
+
+function isPacoteVendavel(pkg) {
+  return !!getCheckoutUrlForPacote(pkg);
+}
+
 const PACOTES_PADRAO = aplicarCheckoutUrls([
   { id: 'cobre', nome: 'Cobre', numeros: 5, valor: 7.9, valorAnchor: 30, tag: 'Cobre' },
   { id: 'bronze', nome: 'Bronze', numeros: 12, valor: 14.9, valorAnchor: 60, tag: 'Bronze' },
@@ -80,5 +89,7 @@ module.exports = {
   PACOTES_PADRAO,
   getCheckoutUrlForPacote,
   aplicarCheckoutUrls,
+  filtrarPacotesVendaveis,
+  isPacoteVendavel,
   syncCheckoutUrls,
 };

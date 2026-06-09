@@ -1,7 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const supabase = require('../supabase');
-const { getCheckoutUrlForPacote } = require('../pacotesCheckout');
+const { getCheckoutUrlForPacote, isPacoteVendavel } = require('../pacotesCheckout');
 const { syncPedidoPayment } = require('../services/paymentSync');
 const cashApi = require('../services/cashApi');
 
@@ -94,6 +94,9 @@ router.post('/', async (req, res) => {
 
   const pkg = campanha.pacotes.find((p) => p.id === body.pacote);
   if (!pkg) return res.status(400).json({ error: 'Pacote inválido.' });
+  if (!isPacoteVendavel(pkg)) {
+    return res.status(400).json({ error: 'Este pacote não está disponível para compra online.' });
+  }
 
   const amountCentavos = Math.round(pkg.valor * 100);
   const orderId = newOrderId();
@@ -119,6 +122,19 @@ router.post('/', async (req, res) => {
   if (errPedido) return res.status(500).json({ error: errPedido.message });
 
   const siteUrl = process.env.PUBLIC_SITE_URL || 'http://localhost:3000';
+  const checkoutUrl = buildCheckoutUrl(pedido, pkg, campanha);
+
+  if (checkoutUrl) {
+    return res.status(201).json({
+      orderId: pedido.order_id,
+      amountCentavos,
+      amountReais: pkg.valor,
+      pacote: pkg.nome,
+      campanha: campanha.titulo,
+      checkoutUrl,
+    });
+  }
+
   const deposit = await createPixForPedido(pedido);
 
   if (deposit?.pix?.code) {
@@ -137,16 +153,14 @@ router.post('/', async (req, res) => {
     });
   }
 
-  const checkoutUrl = buildCheckoutUrl(pedido, pkg, campanha);
-
   res.status(201).json({
     orderId: pedido.order_id,
     amountCentavos,
     amountReais: pkg.valor,
     pacote: pkg.nome,
     campanha: campanha.titulo,
-    checkoutUrl,
-    mockMode: !checkoutUrl,
+    checkoutUrl: null,
+    mockMode: true,
   });
 });
 

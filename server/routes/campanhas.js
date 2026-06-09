@@ -1,6 +1,7 @@
 const express = require('express');
 const supabase = require('../supabase');
 const { gerarNumerosAleatorios, registrarNumerosUsados } = require('../gerarNumeros');
+const { filtrarPacotesVendaveis } = require('../pacotesCheckout');
 
 const router = express.Router();
 
@@ -26,7 +27,7 @@ function toCampanhaPublic(row) {
     serieInicial: row.serie_inicial,
     numerosVendidos: row.numeros_vendidos,
     totalNumerosDisplay: row.total_numeros_display,
-    pacotes: row.pacotes,
+    pacotes: filtrarPacotesVendaveis(row.pacotes),
     chavePix: row.chave_pix,
     whatsapp: row.whatsapp,
   };

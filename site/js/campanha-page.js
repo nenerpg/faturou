@@ -20,7 +20,12 @@ function badgeClass(id) {
 function renderPacotes(pacotes) {
   const grid = document.getElementById('pkgs-grid');
   if (!grid) return;
-  grid.innerHTML = pacotes
+  const vendaveis = (pacotes || []).filter((p) => p.checkoutUrl);
+  if (!vendaveis.length) {
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--t3);padding:24px">Nenhum pacote disponível no momento.</p>';
+    return;
+  }
+  grid.innerHTML = vendaveis
     .map((p) => {
       const cardClass = p.destaque ? 'pkg-card destaque rv' : 'pkg-card rv';
       const per = p.valor / p.numeros;

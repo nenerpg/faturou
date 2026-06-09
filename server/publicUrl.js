@@ -15,4 +15,9 @@ function resolvePublicUrl() {
 
   return 'http://localhost:3000';
 }
-module.exports = { resolvePublicUrl };
+function resolveEbookUrl() {
+  const siteUrl = resolvePublicUrl();
+  return pickPublicUrl(process.env.EBOOK_URL) || `${siteUrl}/ebook.pdf`;
+}
+
+module.exports = { resolvePublicUrl, resolveEbookUrl, pickPublicUrl };

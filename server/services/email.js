@@ -1,6 +1,14 @@
 const RESEND_API = 'https://api.resend.com/emails';
 
-async function sendNumerosEmail({ to, nome, campanhaTitulo, pacoteNome, numeros }) {
+async function sendNumerosEmail({
+  to,
+  nome,
+  campanhaTitulo,
+  pacoteNome,
+  numeros,
+  compraAdicional = false,
+  totalNumeros = null,
+}) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM || 'onboarding@resend.dev';
   const ebookUrl = process.env.EBOOK_URL || '';
@@ -10,12 +18,24 @@ async function sendNumerosEmail({ to, nome, campanhaTitulo, pacoteNome, numeros 
     .map((n) => `<li style="font-family:monospace;font-size:1.1em;margin:4px 0">${n}</li>`)
     .join('');
 
+  const tituloCompra = compraAdicional
+    ? `Novos números confirmados — ${campanhaTitulo}`
+    : `Seus números da sorte — ${campanhaTitulo}`;
+  const intro = compraAdicional
+    ? `Sua <strong>nova compra</strong> na promoção <strong>${campanhaTitulo}</strong> foi confirmada.`
+    : `Seu pagamento foi confirmado na promoção <strong>${campanhaTitulo}</strong>.`;
+  const totalInfo =
+    compraAdicional && totalNumeros
+      ? `<p style="font-size:13px;color:#444">Você agora possui <strong>${totalNumeros}</strong> número(s) nesta campanha.</p>`
+      : '';
+
   const html = `
     <div style="font-family:sans-serif;max-width:560px;color:#111">
       <h2>Olá, ${nome}!</h2>
-      <p>Seu pagamento foi confirmado na promoção <strong>${campanhaTitulo}</strong>.</p>
-      <p>Pacote: <strong>${pacoteNome}</strong> — ${numeros.length} número(s) da sorte:</p>
+      <p>${intro}</p>
+      <p>Pacote: <strong>${pacoteNome}</strong> — ${numeros.length} número(s) ${compraAdicional ? 'novos' : 'da sorte'}:</p>
       <ul>${numerosHtml}</ul>
+      ${totalInfo}
       ${ebookUrl ? `<p><a href="${ebookUrl}">Baixar seu ebook digital</a></p>` : ''}
       <p style="font-size:12px;color:#666">Guarde este e-mail. Apuração conforme resultado público da Loteria Federal da Caixa.</p>
       <p style="font-size:12px"><a href="${siteUrl}">${siteUrl}</a></p>
@@ -38,7 +58,7 @@ async function sendNumerosEmail({ to, nome, campanhaTitulo, pacoteNome, numeros 
     body: JSON.stringify({
       from,
       to: [to],
-      subject: `Seus números da sorte — ${campanhaTitulo}`,
+      subject: tituloCompra,
       html,
     }),
   });

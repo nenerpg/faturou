@@ -15,12 +15,15 @@ async function fulfillPedido(pedido, cashDepositId, amountCentavos) {
     const { data: existing } = await supabase
       .from('participantes')
       .select('*')
-      .eq('pedido_id', pedido.order_id)
+      .eq('campanha_id', pedido.campanha_id)
+      .eq('cpf', pedido.cpf)
       .maybeSingle();
 
-    if (existing) {
-      return { alreadyFulfilled: true, participante: existing, numeros: existing.numeros_gerados };
-    }
+    return {
+      alreadyFulfilled: true,
+      participante: existing,
+      numeros: existing?.numeros_gerados || [],
+    };
   }
 
   const { data: campanha } = await supabase
@@ -51,17 +54,6 @@ async function fulfillPedido(pedido, cashDepositId, amountCentavos) {
     );
   }
 
-  const { data: existenteParticipante } = await supabase
-    .from('participantes')
-    .select('id, nome')
-    .eq('campanha_id', campanha.id)
-    .eq('cpf', pedido.cpf)
-    .maybeSingle();
-
-  if (existenteParticipante) {
-    throw new Error(`CPF já participa desta campanha (${existenteParticipante.nome}).`);
-  }
-
   if (cashDepositId) {
     const { data: existenteDeposito } = await supabase
       .from('participantes')
@@ -78,45 +70,86 @@ async function fulfillPedido(pedido, cashDepositId, amountCentavos) {
     }
   }
 
-  const qtd = pkg.numeros;
-  const { numeros, erro } = await gerarNumerosAleatorios(qtd, cfgFromCampanha(campanha), campanha.id);
+  const { data: existenteParticipante } = await supabase
+    .from('participantes')
+    .select('*')
+    .eq('campanha_id', campanha.id)
+    .eq('cpf', pedido.cpf)
+    .maybeSingle();
 
-  if (erro || !numeros.length) {
+  const qtd = pkg.numeros;
+  const { numeros: numerosNovos, erro } = await gerarNumerosAleatorios(
+    qtd,
+    cfgFromCampanha(campanha),
+    campanha.id
+  );
+
+  if (erro || !numerosNovos.length) {
     throw new Error('Erro ao gerar números da sorte.');
   }
 
-  const { data: participante, error: errP } = await supabase
-    .from('participantes')
-    .insert({
-      campanha_id: campanha.id,
-      campanha_slug: campanha.slug,
-      pedido_id: pedido.order_id,
-      cash_deposit_id: cashDepositId || null,
-      nome: pedido.nome,
-      cpf: pedido.cpf,
-      email: pedido.email,
-      tel: pedido.tel || '',
-      pacote: pkg.id,
-      nome_pacote: pkg.nome,
-      pagamento: 'pix',
-      valor_pago: pkg.valor,
-      multiplicador_tipo: 'padrao',
-      multiplicador_fator: 1,
-      multiplicador_bonus: 0,
-      numeros_gerados: numeros,
-      status_pagamento: 'confirmado',
-      elegivel: true,
-    })
-    .select()
-    .single();
+  let participante;
 
-  if (errP) throw new Error(`Erro ao criar participante: ${errP.message}`);
+  if (existenteParticipante) {
+    const numerosTotal = [...(existenteParticipante.numeros_gerados || []), ...numerosNovos];
+    const valorPago = Number(existenteParticipante.valor_pago || 0) + Number(pkg.valor);
 
-  await registrarNumerosUsados(numeros, campanha.id);
+    const { data: atualizado, error: errU } = await supabase
+      .from('participantes')
+      .update({
+        pedido_id: pedido.order_id,
+        cash_deposit_id: cashDepositId || existenteParticipante.cash_deposit_id,
+        nome: pedido.nome,
+        email: pedido.email,
+        tel: pedido.tel || existenteParticipante.tel || '',
+        pacote: pkg.id,
+        nome_pacote: pkg.nome,
+        valor_pago: valorPago,
+        numeros_gerados: numerosTotal,
+        status_pagamento: 'confirmado',
+        elegivel: true,
+      })
+      .eq('id', existenteParticipante.id)
+      .select()
+      .single();
+
+    if (errU) throw new Error(`Erro ao atualizar participante: ${errU.message}`);
+    participante = atualizado;
+  } else {
+    const { data: criado, error: errP } = await supabase
+      .from('participantes')
+      .insert({
+        campanha_id: campanha.id,
+        campanha_slug: campanha.slug,
+        pedido_id: pedido.order_id,
+        cash_deposit_id: cashDepositId || null,
+        nome: pedido.nome,
+        cpf: pedido.cpf,
+        email: pedido.email,
+        tel: pedido.tel || '',
+        pacote: pkg.id,
+        nome_pacote: pkg.nome,
+        pagamento: 'pix',
+        valor_pago: pkg.valor,
+        multiplicador_tipo: 'padrao',
+        multiplicador_fator: 1,
+        multiplicador_bonus: 0,
+        numeros_gerados: numerosNovos,
+        status_pagamento: 'confirmado',
+        elegivel: true,
+      })
+      .select()
+      .single();
+
+    if (errP) throw new Error(`Erro ao criar participante: ${errP.message}`);
+    participante = criado;
+  }
+
+  await registrarNumerosUsados(numerosNovos, campanha.id);
 
   await supabase
     .from('campanhas')
-    .update({ numeros_vendidos: (campanha.numeros_vendidos || 0) + numeros.length })
+    .update({ numeros_vendidos: (campanha.numeros_vendidos || 0) + numerosNovos.length })
     .eq('id', campanha.id);
 
   await supabase
@@ -130,13 +163,22 @@ async function fulfillPedido(pedido, cashDepositId, amountCentavos) {
       nome: pedido.nome,
       campanhaTitulo: campanha.titulo,
       pacoteNome: pkg.nome,
-      numeros,
+      numeros: numerosNovos,
+      compraAdicional: !!existenteParticipante,
+      totalNumeros: participante.numeros_gerados.length,
     });
   } catch (emailErr) {
     console.error('[email] Falha ao enviar:', emailErr.message);
   }
 
-  return { participante, numeros, campanha, pkg };
+  return {
+    participante,
+    numeros: numerosNovos,
+    numerosNovos,
+    compraAdicional: !!existenteParticipante,
+    campanha,
+    pkg,
+  };
 }
 
 module.exports = { fulfillPedido, cfgFromCampanha };

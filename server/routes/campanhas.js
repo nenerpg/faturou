@@ -91,14 +91,10 @@ router.post('/:slug/participar', async (req, res) => {
 
   const { data: existente } = await supabase
     .from('participantes')
-    .select('nome')
+    .select('*')
     .eq('campanha_id', campanha.id)
     .eq('cpf', cpf)
     .maybeSingle();
-
-  if (existente) {
-    return res.status(409).json({ error: `Você já participa desta campanha (${existente.nome}).` });
-  }
 
   const pkg = campanha.pacotes.find((p) => p.id === body.pacote);
   if (!pkg) return res.status(400).json({ error: 'Pacote inválido.' });
@@ -109,28 +105,54 @@ router.post('/:slug/participar', async (req, res) => {
     return res.status(400).json({ error: 'Não foi possível gerar os números. Tente outro pacote.' });
   }
 
-  const { data: participante } = await supabase
-    .from('participantes')
-    .insert({
-      campanha_id: campanha.id,
-      campanha_slug: campanha.slug,
-      nome: body.nome,
-      cpf,
-      email: body.email,
-      tel: body.tel || '',
-      pacote: pkg.id,
-      nome_pacote: pkg.nome,
-      pagamento: body.pagamento || 'pix',
-      valor_pago: pkg.valor,
-      multiplicador_tipo: 'padrao',
-      multiplicador_fator: 1,
-      multiplicador_bonus: 0,
-      numeros_gerados: numeros,
-      status_pagamento: body.statusPagamento || 'pendente',
-      elegivel: body.statusPagamento === 'confirmado',
-    })
-    .select()
-    .single();
+  let participante;
+
+  if (existente) {
+    const numerosTotal = [...(existente.numeros_gerados || []), ...numeros];
+    const valorPago = Number(existente.valor_pago || 0) + Number(pkg.valor);
+    const { data } = await supabase
+      .from('participantes')
+      .update({
+        nome: body.nome,
+        email: body.email,
+        tel: body.tel || existente.tel || '',
+        pacote: pkg.id,
+        nome_pacote: pkg.nome,
+        pagamento: body.pagamento || 'pix',
+        valor_pago: valorPago,
+        numeros_gerados: numerosTotal,
+        status_pagamento: body.statusPagamento || 'pendente',
+        elegivel: body.statusPagamento === 'confirmado',
+      })
+      .eq('id', existente.id)
+      .select()
+      .single();
+    participante = data;
+  } else {
+    const { data } = await supabase
+      .from('participantes')
+      .insert({
+        campanha_id: campanha.id,
+        campanha_slug: campanha.slug,
+        nome: body.nome,
+        cpf,
+        email: body.email,
+        tel: body.tel || '',
+        pacote: pkg.id,
+        nome_pacote: pkg.nome,
+        pagamento: body.pagamento || 'pix',
+        valor_pago: pkg.valor,
+        multiplicador_tipo: 'padrao',
+        multiplicador_fator: 1,
+        multiplicador_bonus: 0,
+        numeros_gerados: numeros,
+        status_pagamento: body.statusPagamento || 'pendente',
+        elegivel: body.statusPagamento === 'confirmado',
+      })
+      .select()
+      .single();
+    participante = data;
+  }
 
   await registrarNumerosUsados(numeros, campanha.id);
   await supabase

@@ -180,14 +180,10 @@ router.post('/participantes', requireAdmin, async (req, res) => {
 
   const { data: existente } = await supabase
     .from('participantes')
-    .select('nome')
+    .select('*')
     .eq('campanha_id', campanha.id)
     .eq('cpf', cpf)
     .maybeSingle();
-
-  if (existente) {
-    return res.status(409).json({ error: `CPF já cadastrado nesta campanha! (${existente.nome})` });
-  }
 
   const cfg = cfgFromCampanha(campanha);
   const qtd = body.quantidadeNumeros;
@@ -200,28 +196,60 @@ router.post('/participantes', requireAdmin, async (req, res) => {
     return res.status(400).json({ error: 'Erro na geração de números.', log });
   }
 
-  const { data: participante, error: errP } = await supabase
-    .from('participantes')
-    .insert({
-      campanha_id: campanha.id,
-      campanha_slug: campanha.slug,
-      nome: body.nome,
-      cpf,
-      email: body.email,
-      tel: body.tel || '',
-      pacote: body.pacote,
-      nome_pacote: body.nomePacote,
-      pagamento: body.pagamento,
-      valor_pago: body.valorPago,
-      multiplicador_tipo: body.multiplicadorTipo,
-      multiplicador_fator: body.multiplicadorFator,
-      multiplicador_bonus: body.multiplicadorBonus,
-      numeros_gerados: numeros,
-      status_pagamento: body.statusPagamento,
-      elegivel: body.elegivel,
-    })
-    .select()
-    .single();
+  let participante;
+  let errP;
+
+  if (existente) {
+    const numerosTotal = [...(existente.numeros_gerados || []), ...numeros];
+    const valorPago = Number(existente.valor_pago || 0) + Number(body.valorPago || 0);
+    const resUp = await supabase
+      .from('participantes')
+      .update({
+        nome: body.nome,
+        email: body.email,
+        tel: body.tel || existente.tel || '',
+        pacote: body.pacote,
+        nome_pacote: body.nomePacote,
+        pagamento: body.pagamento,
+        valor_pago: valorPago,
+        multiplicador_tipo: body.multiplicadorTipo,
+        multiplicador_fator: body.multiplicadorFator,
+        multiplicador_bonus: body.multiplicadorBonus,
+        numeros_gerados: numerosTotal,
+        status_pagamento: body.statusPagamento,
+        elegivel: body.elegivel,
+      })
+      .eq('id', existente.id)
+      .select()
+      .single();
+    participante = resUp.data;
+    errP = resUp.error;
+  } else {
+    const resIn = await supabase
+      .from('participantes')
+      .insert({
+        campanha_id: campanha.id,
+        campanha_slug: campanha.slug,
+        nome: body.nome,
+        cpf,
+        email: body.email,
+        tel: body.tel || '',
+        pacote: body.pacote,
+        nome_pacote: body.nomePacote,
+        pagamento: body.pagamento,
+        valor_pago: body.valorPago,
+        multiplicador_tipo: body.multiplicadorTipo,
+        multiplicador_fator: body.multiplicadorFator,
+        multiplicador_bonus: body.multiplicadorBonus,
+        numeros_gerados: numeros,
+        status_pagamento: body.statusPagamento,
+        elegivel: body.elegivel,
+      })
+      .select()
+      .single();
+    participante = resIn.data;
+    errP = resIn.error;
+  }
 
   if (errP) return res.status(500).json({ error: errP.message });
 

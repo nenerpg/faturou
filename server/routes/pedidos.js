@@ -95,17 +95,6 @@ router.post('/', async (req, res) => {
   const pkg = campanha.pacotes.find((p) => p.id === body.pacote);
   if (!pkg) return res.status(400).json({ error: 'Pacote inválido.' });
 
-  const { data: jaParticipa } = await supabase
-    .from('participantes')
-    .select('nome')
-    .eq('campanha_id', campanha.id)
-    .eq('cpf', cpf)
-    .maybeSingle();
-
-  if (jaParticipa) {
-    return res.status(409).json({ error: `CPF já participa desta campanha (${jaParticipa.nome}).` });
-  }
-
   const amountCentavos = Math.round(pkg.valor * 100);
   const orderId = newOrderId();
 

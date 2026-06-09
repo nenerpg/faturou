@@ -31,10 +31,26 @@ async function cashFetch(path, options = {}) {
   return data;
 }
 
+function normalizePixImage(imageBase64) {
+  if (!imageBase64) return null;
+  if (String(imageBase64).startsWith('data:')) return imageBase64;
+  return `data:image/png;base64,${imageBase64}`;
+}
+
+function normalizePix(pix) {
+  if (!pix) return pix;
+  return {
+    ...pix,
+    imageBase64: normalizePixImage(pix.imageBase64),
+  };
+}
+
 function unwrapDeposit(data) {
-  if (data?.data && typeof data.data === 'object' && !Array.isArray(data.data)) return data.data;
-  if (data?.id) return data;
-  return data;
+  let deposit = data;
+  if (data?.data && typeof data.data === 'object' && !Array.isArray(data.data)) deposit = data.data;
+  else if (!data?.id) deposit = data;
+  if (deposit?.pix) deposit = { ...deposit, pix: normalizePix(deposit.pix) };
+  return deposit;
 }
 
 function unwrapDepositList(data) {

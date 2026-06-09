@@ -79,7 +79,10 @@ async function load() {
 
   const qr = document.getElementById('qr-box');
   if (p.pix.imageBase64) {
-    qr.innerHTML = '<img src="' + p.pix.imageBase64 + '" alt="QR Code PIX"/>';
+    const src = p.pix.imageBase64.startsWith('data:')
+      ? p.pix.imageBase64
+      : 'data:image/png;base64,' + p.pix.imageBase64;
+    qr.innerHTML = '<img src="' + src + '" alt="QR Code PIX"/>';
   } else {
     qr.innerHTML = '<span style="color:#666;font-size:.75rem">Use o código copia e cola</span>';
   }

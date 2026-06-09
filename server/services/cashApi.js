@@ -58,10 +58,29 @@ async function listDeposits(params = {}) {
   return unwrapDepositList(raw);
 }
 
+async function createPixDeposit({ amount, externalId, postbackUrl, payer }) {
+  const raw = await cashFetch('/deposits/pix', {
+    method: 'POST',
+    body: JSON.stringify({
+      amount,
+      externalId,
+      postbackUrl,
+      method: 'pix',
+      transactionOrigin: 'cashin',
+      payer: {
+        name: payer.name,
+        email: payer.email,
+        document: payer.document || null,
+      },
+    }),
+  });
+  return unwrapDeposit(raw);
+}
+
 async function findDepositByExternalId(externalId) {
   if (!externalId) return null;
 
-  const statuses = ['paid', 'waiting_payment', 'processing', 'pending'];
+  const statuses = ['paid', 'waiting_payment', 'processing', 'pad_approved'];
   for (const status of statuses) {
     const lista = await listDeposits({ perPage: 50, status });
     const found = lista.find((d) => d.externalId === externalId);
@@ -72,4 +91,4 @@ async function findDepositByExternalId(externalId) {
   return all.find((d) => d.externalId === externalId) || null;
 }
 
-module.exports = { getDeposit, listDeposits, findDepositByExternalId };
+module.exports = { getDeposit, listDeposits, findDepositByExternalId, createPixDeposit };

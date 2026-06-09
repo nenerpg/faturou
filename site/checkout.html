@@ -151,7 +151,11 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
       tel: fd.get('tel') || '',
     });
 
-    if (res.checkoutUrl) {
+    if (res.pixMode && res.pixUrl) {
+      document.getElementById('main-layout').style.display = 'none';
+      document.getElementById('redirecting-box').style.display = 'block';
+      setTimeout(() => { window.location.href = res.pixUrl; }, 800);
+    } else if (res.checkoutUrl) {
       document.getElementById('main-layout').style.display = 'none';
       document.getElementById('redirecting-box').style.display = 'block';
       setTimeout(() => { window.location.href = res.checkoutUrl; }, 800);

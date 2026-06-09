@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Pagamento PIX — Sorte Real</title>
+  <link rel="icon" href="crown-logo.svg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#000;--card:#111;--bo:rgba(255,255,255,.08);--t1:#fff;--t2:#aaa;--gold:#C9A84C;--green:#22C55E;--f:'Montserrat',sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--f);background:var(--bg);color:var(--t1);min-height:100vh;padding:24px}
+    .w{max-width:480px;margin:0 auto}
+    h1{font-size:1.4rem;margin-bottom:8px;text-align:center}
+    .sub{color:var(--t2);font-size:.88rem;text-align:center;margin-bottom:28px;line-height:1.6}
+    .card{background:var(--card);border:1px solid var(--bo);border-radius:14px;padding:28px;text-align:center}
+    .valor{font-size:1.8rem;font-weight:800;color:var(--gold);margin-bottom:20px}
+    .qr{width:220px;height:220px;border-radius:10px;background:#fff;margin:0 auto 20px;display:flex;align-items:center;justify-content:center}
+    .qr img{max-width:100%;max-height:100%}
+    .code-box{background:#1a1a1a;border:1px solid var(--bo);border-radius:8px;padding:12px;font-size:.72rem;word-break:break-all;color:var(--t2);margin-bottom:14px;text-align:left;max-height:80px;overflow:auto}
+    .btn{width:100%;background:var(--gold);color:#000;border:none;padding:13px;border-radius:6px;font-weight:800;cursor:pointer;font-size:.9rem}
+    .btn:hover{background:#b8962e}
+    .btn.ok{background:var(--green)}
+    .hint{font-size:.78rem;color:var(--t2);margin-top:16px;line-height:1.6}
+    .status{margin-top:20px;padding:12px;border-radius:8px;font-size:.82rem;display:none}
+    .status.show{display:block}
+    .status.wait{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--t2)}
+    .status.done{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);color:var(--green)}
+    .err{color:#EF4444;text-align:center;margin-top:16px;font-size:.85rem}
+  </style>
+</head>
+<body>
+<div class="w">
+  <h1>Pague com PIX</h1>
+  <p class="sub">Escaneie o QR Code ou copie o código abaixo.<br/>Após o pagamento, seus números chegam por e-mail.</p>
+
+  <div class="card" id="pix-card">
+    <div class="valor" id="valor">—</div>
+    <div class="qr" id="qr-box"><span style="color:#666;font-size:.8rem">Carregando...</span></div>
+    <div class="code-box" id="pix-code"></div>
+    <button class="btn" id="btn-copy" type="button">Copiar código PIX</button>
+    <p class="hint">O pagamento é confirmado automaticamente. Você pode fechar esta página após pagar.</p>
+    <div class="status wait" id="status-wait">Aguardando confirmação do pagamento...</div>
+    <div class="status done" id="status-done">
+      <strong>Pagamento confirmado!</strong> Seus números foram enviados por e-mail.
+    </div>
+  </div>
+  <p class="err" id="err"></p>
+</div>
+
+<script src="js/public.js"></script>
+<script>
+const orderId = getQuery('orderId');
+const errEl = document.getElementById('err');
+let pixCode = '';
+
+async function load() {
+  if (!orderId) {
+    errEl.textContent = 'Pedido não informado.';
+    return;
+  }
+
+  const p = await apiGet('/pedidos/' + orderId);
+  document.getElementById('valor').textContent = 'R$ ' + fmtMoney(p.amountCentavos / 100);
+
+  if (p.status === 'pago') {
+    document.getElementById('status-wait').classList.remove('show');
+    document.getElementById('status-done').classList.add('show');
+    return;
+  }
+
+  if (!p.pix?.code) {
+    errEl.textContent = 'QR Code não disponível. Tente novamente pelo checkout.';
+    return;
+  }
+
+  pixCode = p.pix.code;
+  document.getElementById('pix-code').textContent = pixCode;
+
+  const qr = document.getElementById('qr-box');
+  if (p.pix.imageBase64) {
+    qr.innerHTML = '<img src="' + p.pix.imageBase64 + '" alt="QR Code PIX"/>';
+  } else {
+    qr.innerHTML = '<span style="color:#666;font-size:.75rem">Use o código copia e cola</span>';
+  }
+
+  document.getElementById('status-wait').classList.add('show');
+  startPoll();
+}
+
+document.getElementById('btn-copy').addEventListener('click', async () => {
+  if (!pixCode) return;
+  try {
+    await navigator.clipboard.writeText(pixCode);
+    const btn = document.getElementById('btn-copy');
+    btn.textContent = 'Copiado!';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = 'Copiar código PIX'; btn.classList.remove('ok'); }, 2000);
+  } catch (_) {
+    errEl.textContent = 'Não foi possível copiar. Selecione o código manualmente.';
+  }
+});
+
+function startPoll() {
+  let tries = 0;
+  const poll = setInterval(async () => {
+    tries++;
+    if (tries > 72) { clearInterval(poll); return; }
+    try {
+      if (tries % 2 === 1) {
+        await fetch('/api/pedidos/' + orderId + '/sync', { method: 'POST' }).catch(() => {});
+      }
+      const p = await apiGet('/pedidos/' + orderId);
+      if (p.status === 'pago') {
+        clearInterval(poll);
+        document.getElementById('status-wait').classList.remove('show');
+        document.getElementById('status-done').classList.add('show');
+        setTimeout(() => {
+          window.location.href = 'obrigado.html?orderId=' + orderId;
+        }, 2000);
+      }
+    } catch (_) {}
+  }, 5000);
+}
+
+load().catch((e) => { errEl.textContent = e.message || 'Erro ao carregar pagamento.'; });
+</script>
+</body>
+</html>

@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const supabase = require('../supabase');
 const { getCheckoutUrlForPacote } = require('../pacotesCheckout');
 const { syncPedidoPayment } = require('../services/paymentSync');
+const cashApi = require('../services/cashApi');
 
 const router = express.Router();
 
@@ -32,6 +33,42 @@ function buildCheckoutUrl(pedido, pkg, campanha) {
 
   const sep = base.includes('?') ? '&' : '?';
   return `${base}${sep}${params.toString()}`;
+}
+
+function postbackUrl() {
+  return (
+    process.env.CASH_POSTBACK_URL ||
+    `${process.env.PUBLIC_API_URL || 'http://localhost:3000'}/api/webhooks/cash`
+  );
+}
+
+async function createPixForPedido(pedido) {
+  if (!process.env.CASH_API_TOKEN) return null;
+
+  try {
+    const deposit = await cashApi.createPixDeposit({
+      amount: pedido.amount_centavos,
+      externalId: pedido.order_id,
+      postbackUrl: postbackUrl(),
+      payer: {
+        name: pedido.nome,
+        email: pedido.email,
+        document: pedido.cpf,
+      },
+    });
+
+    if (deposit?.id) {
+      await supabase
+        .from('pedidos')
+        .update({ cash_deposit_id: deposit.id, updated_at: new Date().toISOString() })
+        .eq('id', pedido.id);
+    }
+
+    return deposit;
+  } catch (err) {
+    console.error('[pedidos] createPixDeposit:', err.message);
+    return null;
+  }
 }
 
 router.post('/', async (req, res) => {
@@ -92,6 +129,25 @@ router.post('/', async (req, res) => {
 
   if (errPedido) return res.status(500).json({ error: errPedido.message });
 
+  const siteUrl = process.env.PUBLIC_SITE_URL || 'http://localhost:3000';
+  const deposit = await createPixForPedido(pedido);
+
+  if (deposit?.pix?.code) {
+    return res.status(201).json({
+      orderId: pedido.order_id,
+      amountCentavos,
+      amountReais: pkg.valor,
+      pacote: pkg.nome,
+      campanha: campanha.titulo,
+      pixMode: true,
+      pixUrl: `${siteUrl}/pix.html?orderId=${pedido.order_id}`,
+      pix: {
+        code: deposit.pix.code,
+        imageBase64: deposit.pix.imageBase64 || null,
+      },
+    });
+  }
+
   const checkoutUrl = buildCheckoutUrl(pedido, pkg, campanha);
 
   res.status(201).json({
@@ -119,19 +175,33 @@ router.post('/:orderId/sync', async (req, res) => {
 router.get('/:orderId', async (req, res) => {
   const { data: pedido } = await supabase
     .from('pedidos')
-    .select('order_id, status, pacote_id, nome_pacote, amount_centavos')
+    .select('order_id, status, pacote_id, nome_pacote, amount_centavos, cash_deposit_id')
     .eq('order_id', req.params.orderId)
     .maybeSingle();
 
   if (!pedido) return res.status(404).json({ error: 'Pedido não encontrado.' });
 
-  res.json({
+  const out = {
     orderId: pedido.order_id,
     status: pedido.status,
     pacoteId: pedido.pacote_id,
     nomePacote: pedido.nome_pacote,
     amountCentavos: pedido.amount_centavos,
-  });
+  };
+
+  if (pedido.status === 'aguardando_pix' && pedido.cash_deposit_id && process.env.CASH_API_TOKEN) {
+    try {
+      const deposit = await cashApi.getDeposit(pedido.cash_deposit_id);
+      if (deposit?.pix?.code) {
+        out.pix = {
+          code: deposit.pix.code,
+          imageBase64: deposit.pix.imageBase64 || null,
+        };
+      }
+    } catch (_) {}
+  }
+
+  res.json(out);
 });
 
 module.exports = router;

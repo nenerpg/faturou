@@ -2,6 +2,7 @@ const express = require('express');
 const crypto = require('crypto');
 const supabase = require('../supabase');
 const { getCheckoutUrlForPacote } = require('../pacotesCheckout');
+const { syncPedidoPayment } = require('../services/paymentSync');
 
 const router = express.Router();
 
@@ -102,6 +103,17 @@ router.post('/', async (req, res) => {
     checkoutUrl,
     mockMode: !checkoutUrl,
   });
+});
+
+router.post('/:orderId/sync', async (req, res) => {
+  try {
+    const result = await syncPedidoPayment(req.params.orderId);
+    if (!result.ok) return res.status(404).json({ error: result.error });
+    res.json(result);
+  } catch (err) {
+    console.error('[pedidos/sync]', err.message);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 router.get('/:orderId', async (req, res) => {

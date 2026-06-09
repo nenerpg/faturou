@@ -39,8 +39,15 @@ async function fulfillPedido(pedido, cashDepositId, amountCentavos) {
   }
 
   if (amountCentavos != null && amountCentavos !== pedido.amount_centavos) {
-    throw new Error(
-      `Valor do pagamento (${amountCentavos}) não confere com o pedido (${pedido.amount_centavos}).`
+    const diff = Math.abs(amountCentavos - pedido.amount_centavos);
+    const tolerancia = Math.max(50, Math.round(pedido.amount_centavos * 0.05));
+    if (diff > tolerancia) {
+      throw new Error(
+        `Valor do pagamento (${amountCentavos}) não confere com o pedido (${pedido.amount_centavos}).`
+      );
+    }
+    console.warn(
+      `[fulfill] valor divergente aceito (${amountCentavos} vs ${pedido.amount_centavos}) — checkout hospedado`
     );
   }
 

@@ -55,8 +55,11 @@ if (orderId) {
   let tries = 0;
   const poll = setInterval(async () => {
     tries++;
-    if (tries > 24) { clearInterval(poll); return; }
+    if (tries > 36) { clearInterval(poll); return; }
     try {
+      if (tries % 2 === 1) {
+        await fetch('/api/pedidos/' + orderId + '/sync', { method: 'POST' }).catch(() => {});
+      }
       const p = await apiGet('/pedidos/' + orderId);
       if (p.status === 'pago') {
         clearInterval(poll);

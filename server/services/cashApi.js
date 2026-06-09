@@ -32,9 +32,15 @@ async function cashFetch(path, options = {}) {
 }
 
 function unwrapDeposit(data) {
-  if (data?.data && typeof data.data === 'object') return data.data;
+  if (data?.data && typeof data.data === 'object' && !Array.isArray(data.data)) return data.data;
   if (data?.id) return data;
   return data;
+}
+
+function unwrapDepositList(data) {
+  if (Array.isArray(data?.data)) return data.data;
+  if (Array.isArray(data)) return data;
+  return [];
 }
 
 async function getDeposit(depositId) {
@@ -42,4 +48,28 @@ async function getDeposit(depositId) {
   return unwrapDeposit(raw);
 }
 
-module.exports = { getDeposit };
+async function listDeposits(params = {}) {
+  const qs = new URLSearchParams();
+  if (params.perPage) qs.set('perPage', String(params.perPage));
+  if (params.page) qs.set('page', String(params.page));
+  if (params.status) qs.set('status', params.status);
+  const query = qs.toString();
+  const raw = await cashFetch(`/deposits${query ? `?${query}` : ''}`);
+  return unwrapDepositList(raw);
+}
+
+async function findDepositByExternalId(externalId) {
+  if (!externalId) return null;
+
+  const statuses = ['paid', 'waiting_payment', 'processing', 'pending'];
+  for (const status of statuses) {
+    const lista = await listDeposits({ perPage: 50, status });
+    const found = lista.find((d) => d.externalId === externalId);
+    if (found) return found;
+  }
+
+  const all = await listDeposits({ perPage: 100 });
+  return all.find((d) => d.externalId === externalId) || null;
+}
+
+module.exports = { getDeposit, listDeposits, findDepositByExternalId };

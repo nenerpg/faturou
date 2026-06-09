@@ -122,6 +122,28 @@ router.post('/', async (req, res) => {
   if (errPedido) return res.status(500).json({ error: errPedido.message });
 
   const siteUrl = process.env.PUBLIC_SITE_URL || 'http://localhost:3000';
+  const useHostedCheckout = process.env.PAYMENT_MODE === 'hosted';
+
+  if (!useHostedCheckout && process.env.CASH_API_TOKEN) {
+    const deposit = await createPixForPedido(pedido);
+
+    if (deposit?.pix?.code) {
+      return res.status(201).json({
+        orderId: pedido.order_id,
+        amountCentavos,
+        amountReais: pkg.valor,
+        pacote: pkg.nome,
+        campanha: campanha.titulo,
+        pixMode: true,
+        pixUrl: `${siteUrl}/pix.html?orderId=${pedido.order_id}`,
+        pix: {
+          code: deposit.pix.code,
+          imageBase64: deposit.pix.imageBase64 || null,
+        },
+      });
+    }
+  }
+
   const checkoutUrl = buildCheckoutUrl(pedido, pkg, campanha);
 
   if (checkoutUrl) {
@@ -132,24 +154,6 @@ router.post('/', async (req, res) => {
       pacote: pkg.nome,
       campanha: campanha.titulo,
       checkoutUrl,
-    });
-  }
-
-  const deposit = await createPixForPedido(pedido);
-
-  if (deposit?.pix?.code) {
-    return res.status(201).json({
-      orderId: pedido.order_id,
-      amountCentavos,
-      amountReais: pkg.valor,
-      pacote: pkg.nome,
-      campanha: campanha.titulo,
-      pixMode: true,
-      pixUrl: `${siteUrl}/pix.html?orderId=${pedido.order_id}`,
-      pix: {
-        code: deposit.pix.code,
-        imageBase64: deposit.pix.imageBase64 || null,
-      },
     });
   }
 

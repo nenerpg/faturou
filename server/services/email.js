@@ -11,9 +11,9 @@ async function sendNumerosEmail({
 }) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM || 'onboarding@resend.dev';
-  const ebookUrl = process.env.EBOOK_URL || '';
+  const siteUrl = (process.env.PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
+  const ebookUrl = process.env.EBOOK_URL || `${siteUrl}/ebook.pdf`;
   const ebookTitulo = process.env.EBOOK_TITULO || 'O Legado de Steve Jobs';
-  const siteUrl = process.env.PUBLIC_SITE_URL || 'http://localhost:3000';
 
   const numerosHtml = numeros
     .map((n) => `<li style="font-family:monospace;font-size:1.1em;margin:4px 0">${n}</li>`)
@@ -37,11 +37,10 @@ async function sendNumerosEmail({
       <p>Pacote: <strong>${pacoteNome}</strong> — ${numeros.length} número(s) ${compraAdicional ? 'novos' : 'da sorte'}:</p>
       <ul>${numerosHtml}</ul>
       ${totalInfo}
-      ${ebookUrl ? `
       <p style="margin-top:20px;padding:14px;background:#f5f5f5;border-radius:8px">
         <strong>🎁 Seu bônus digital</strong><br/>
         <a href="${ebookUrl}" style="color:#111;font-weight:600">Baixar: ${ebookTitulo} (PDF)</a>
-      </p>` : ''}
+      </p>
       <p style="font-size:12px;color:#666">Guarde este e-mail. Apuração conforme resultado público da Loteria Federal da Caixa.</p>
       <p style="font-size:12px"><a href="${siteUrl}">${siteUrl}</a></p>
     </div>
@@ -51,6 +50,7 @@ async function sendNumerosEmail({
     console.log('[email] RESEND_API_KEY ausente — simulação:');
     console.log(`  Para: ${to}`);
     console.log(`  Números: ${numeros.join(', ')}`);
+    console.log(`  Ebook: ${ebookUrl}`);
     return { simulated: true };
   }
 

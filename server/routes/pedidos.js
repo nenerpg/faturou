@@ -4,6 +4,7 @@ const supabase = require('../supabase');
 const { getCheckoutUrlForPacote, isPacoteVendavel } = require('../pacotesCheckout');
 const { syncPedidoPayment } = require('../services/paymentSync');
 const cashApi = require('../services/cashApi');
+const { resolvePublicUrl } = require('../publicUrl');
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ function buildCheckoutUrl(pedido, pkg, campanha) {
   const postbackUrl =
     process.env.CASH_POSTBACK_URL ||
     `${process.env.PUBLIC_API_URL || 'http://localhost:3000'}/api/webhooks/cash`;
-  const returnUrl = `${process.env.PUBLIC_SITE_URL || 'http://localhost:3000'}/obrigado.html?orderId=${pedido.order_id}`;
+  const returnUrl = `${resolvePublicUrl()}/obrigado.html?orderId=${pedido.order_id}`;
 
   const params = new URLSearchParams({
     externalId: pedido.order_id,
@@ -121,7 +122,7 @@ router.post('/', async (req, res) => {
 
   if (errPedido) return res.status(500).json({ error: errPedido.message });
 
-  const siteUrl = process.env.PUBLIC_SITE_URL || 'http://localhost:3000';
+  const siteUrl = resolvePublicUrl();
   const useHostedCheckout = process.env.PAYMENT_MODE === 'hosted';
 
   if (!useHostedCheckout && process.env.CASH_API_TOKEN) {

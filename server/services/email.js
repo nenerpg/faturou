@@ -1,4 +1,5 @@
 const RESEND_API = 'https://api.resend.com/emails';
+const { resolvePublicUrl } = require('../publicUrl');
 
 async function sendNumerosEmail({
   to,
@@ -11,8 +12,8 @@ async function sendNumerosEmail({
 }) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM || 'onboarding@resend.dev';
-  const siteUrl = (process.env.PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-  const ebookUrl = process.env.EBOOK_URL || `${siteUrl}/ebook.pdf`;
+  const siteUrl = resolvePublicUrl();
+  const ebookUrl = (process.env.EBOOK_URL || `${siteUrl}/ebook.pdf`).replace(/\/$/, '');
   const ebookTitulo = process.env.EBOOK_TITULO || 'O Legado de Steve Jobs';
 
   const numerosHtml = numeros

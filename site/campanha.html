@@ -8,7 +8,11 @@
 <link rel="icon" type="image/svg+xml" href="crown-logo.svg"/>
 <link rel="apple-touch-icon" href="crown-logo.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preload" as="image" href="hero-nova-mobile.webp" type="image/webp" media="(max-width:768px)" fetchpriority="high"/>
+<link rel="preload" as="image" href="hero-desktop-new.webp" type="image/webp" media="(min-width:769px)" fetchpriority="high"/>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap"/></noscript>
 <style>
 /* ─── TOKENS ────────────────────────────────── */
 :root{
@@ -66,7 +70,7 @@ button,input,select{font-family:var(--f)}
 }
 .nav .w{display:flex;align-items:center;width:100%}
 .logo{display:flex;align-items:center;gap:9px;margin-right:auto;text-decoration:none}
-.logo-crown{height:40px;width:auto;flex-shrink:0;object-fit:contain}
+.logo-crown{height:40px;width:70px;flex-shrink:0;object-fit:contain}
 .logo-text{display:flex;align-items:baseline;gap:0;line-height:1}
 .logo-s{font-weight:900;font-size:.9rem;color:#fff;letter-spacing:.06em;font-family:var(--f)}
 .logo-r{font-weight:500;font-size:.9rem;color:var(--gold);letter-spacing:.22em;font-family:var(--f);margin-left:2px}
@@ -91,11 +95,16 @@ button,input,select{font-family:var(--f)}
   min-height:calc(100svh - 56px);
   background:var(--bg);
 }
-.hero-vid{
+.hero-vid,
+picture.hero-vid{
   position:absolute;inset:0;
   width:100%;height:100%;
-  object-fit:cover;object-position:center 15%;
   z-index:0;pointer-events:none;
+}
+.hero-vid img,
+img.hero-vid{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 15%;
 }
 /* Por padrão, imagem mobile oculta */
 .hero-vid-mobile{display:none}
@@ -438,11 +447,11 @@ button,input,select{font-family:var(--f)}
 /* ─── FOOTER ──────────────────────────────── */
 .footer{background:#000;color:var(--t3);padding:52px 0 28px;border-top:1px solid var(--bo)}
 .fg-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:36px;margin-bottom:36px}
-.fdesc{font-size:.76rem;line-height:1.7;margin:10px 0 14px}
+.fdesc{font-size:.76rem;line-height:1.7;margin:10px 0 14px;color:rgba(255,255,255,.72)}
 .fsoc{display:flex;gap:7px}
 .fsoc a{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:.15s}
 .fsoc a:hover{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.3)}
-.fc h4{font-size:.68rem;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px}
+.fc h3{font-size:.68rem;font-weight:700;color:rgba(255,255,255,.72);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px}
 .fc a{display:block;font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:8px;transition:color .15s}
 .fc a:hover{color:var(--gold)}
 .fc p{font-size:.78rem;line-height:1.5;margin-bottom:7px}
@@ -501,7 +510,8 @@ button,input,select{font-family:var(--f)}
   /* Texto ancorado no rodapé — parte superior da imagem fica como backdrop */
   .hero{min-height:100svh;align-items:flex-end}
   .hero-vid-desktop{display:none}
-  .hero-vid-mobile{display:block;object-position:center top}
+  .hero-vid-mobile{display:block}
+  .hero-vid-mobile img{object-position:center top}
   /* Overlay mobile: quase zerado — só escurece no rodapé para o texto */
   .hero-overlay{
     background:linear-gradient(to bottom,
@@ -581,7 +591,7 @@ button,input,select{font-family:var(--f)}
 <nav class="nav">
   <div class="w">
     <div class="logo">
-      <img class="logo-crown" src="crown-logo.png" alt="Sorte Real"/>
+      <img class="logo-crown" src="crown-logo.svg" alt="" width="70" height="40" decoding="async"/>
       <span class="logo-text">
         <span class="logo-s">SORTE</span><span class="logo-r">REAL</span>
       </span>
@@ -594,7 +604,7 @@ button,input,select{font-family:var(--f)}
       <a href="#faq">FAQ</a>
     </div>
     <button class="nav-cta" onclick="ir('participar')">Participar agora</button>
-    <button class="ham" id="hamBtn"><span></span><span></span><span></span></button>
+    <button class="ham" id="hamBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mnav" id="mnav">
@@ -606,14 +616,21 @@ button,input,select{font-family:var(--f)}
   <a href="#pacotes" class="cta-link" onclick="closeMnav()">Participar agora</a>
 </div>
 
+<main id="conteudo">
 <!-- ══ HERO ══ -->
 <section class="hero" id="inicio">
 
   <!-- IMAGEM DE FUNDO — desktop (landscape) -->
-  <img class="hero-vid hero-vid-desktop" src="hero-desktop-new.png" alt="" aria-hidden="true"/>
+  <picture class="hero-vid hero-vid-desktop">
+    <source srcset="hero-desktop-new.webp" type="image/webp"/>
+    <img src="hero-desktop-new.png" alt="" aria-hidden="true" width="1400" height="788" decoding="async" fetchpriority="high"/>
+  </picture>
 
-  <!-- IMAGEM DE FUNDO — mobile (vertical 9:16) -->
-  <img class="hero-vid hero-vid-mobile" src="hero-nova-mobile.png" alt="" aria-hidden="true"/>
+  <!-- IMAGEM DE FUNDO — mobile (vertical 9:16) — LCP -->
+  <picture class="hero-vid hero-vid-mobile">
+    <source srcset="hero-nova-mobile.webp" type="image/webp"/>
+    <img src="hero-nova-mobile.png" alt="" aria-hidden="true" width="828" height="1471" decoding="async" fetchpriority="high"/>
+  </picture>
 
   <div class="hero-overlay"></div>
 
@@ -663,9 +680,10 @@ button,input,select{font-family:var(--f)}
         </div>
         <div class="phone-3d-wrap" id="phoneTiltWrap">
           <img id="prizeImg" class="prize-img"
-            src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha"
+            src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=300&hei=384&fmt=png-alpha"
             alt="iPhone 17 Pro"
-            onerror="this.onerror=null;this.src='https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=400&hei=512&fmt=png-alpha'"
+            width="300" height="384" loading="lazy" decoding="async"
+            onerror="this.onerror=null;this.src='https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-compare-iphone-17-pro-202509?wid=300&hei=384&fmt=png-alpha'"
           />
           <div class="phone-glare" id="phoneGlare"></div>
         </div>
@@ -1006,6 +1024,7 @@ button,input,select{font-family:var(--f)}
     </div>
   </div>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -1013,7 +1032,7 @@ button,input,select{font-family:var(--f)}
     <div class="fg-grid">
       <div>
         <div class="logo" style="margin-bottom:8px">
-          <img class="logo-crown" src="crown-logo.png" alt="Sorte Real"/>
+          <img class="logo-crown" src="crown-logo.svg" alt="" width="70" height="40" decoding="async"/>
           <span class="logo-text">
             <span class="logo-s">SORTE</span><span class="logo-r">REAL</span>
           </span>
@@ -1035,15 +1054,15 @@ button,input,select{font-family:var(--f)}
         </div>
       </div>
       <div class="fc">
-        <h4>Navegação</h4>
+        <h3>Navegação</h3>
         <a href="#premio">O Prêmio</a><a href="#pacotes">Pacotes</a><a href="#como-funciona">Como Funciona</a><a href="#faq">FAQ</a><a href="admin.html">Admin</a>
       </div>
       <div class="fc">
-        <h4>Legal</h4>
+        <h3>Legal</h3>
         <a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a><a href="#">Regulamento</a><a href="#">LGPD</a>
       </div>
       <div class="fc">
-        <h4>Contato</h4>
+        <h3>Contato</h3>
         <p>contato@sortereal.com.br</p><p>(11) 99999-9999</p><p>@sortereal</p>
         <div class="paytags"><span class="paytag">PIX</span><span class="paytag">Cartão</span></div>
       </div>
@@ -1119,7 +1138,10 @@ const C={
 })();
 
 /* ── NAV ─────────────────────────────────── */
-document.getElementById('hamBtn').addEventListener('click',()=>document.getElementById('mnav').classList.toggle('open'));
+document.getElementById('hamBtn').addEventListener('click',function(){
+  const open=document.getElementById('mnav').classList.toggle('open');
+  this.setAttribute('aria-expanded',open?'true':'false');
+});
 window.closeMnav=()=>document.getElementById('mnav').classList.remove('open');
 
 /* ── SMOOTH SCROLL ───────────────────────── */
@@ -1230,7 +1252,7 @@ const io=new IntersectionObserver(entries=>{
 },{threshold:.07});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script>
-<script src="js/public.js"></script>
-<script src="js/campanha-page.js"></script>
+<script src="js/public.js" defer></script>
+<script src="js/campanha-page.js" defer></script>
 </body>
 </html>

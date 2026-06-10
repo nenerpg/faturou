@@ -13,6 +13,10 @@ function resolvePublicUrl() {
   const vercel = (process.env.VERCEL_URL || '').trim().replace(/^https?:\/\//, '');
   if (vercel) return `https://${vercel}`;
 
+  if (process.env.NODE_ENV === 'production') {
+    return 'https://www.sortereal.org';
+  }
+
   return 'http://localhost:3000';
 }
 function resolveEbookUrl() {

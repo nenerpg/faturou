@@ -1,5 +1,13 @@
 {
   "version": 2,
+  "headers": [
+    {
+      "source": "/(.*)\\.(webp|png|svg|jpg|jpeg|pdf|ico)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index.js" }
   ]

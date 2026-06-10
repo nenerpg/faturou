@@ -106,10 +106,15 @@ async function carregarCampanha() {
   const prizeImg = document.getElementById('prizeImg');
   if (prizeImg && CAMPANHA.premioImagem) prizeImg.src = CAMPANHA.premioImagem;
 
-  const desk = document.querySelector('.hero-vid-desktop');
-  const mob = document.querySelector('.hero-vid-mobile');
-  if (desk && CAMPANHA.heroDesktop) desk.src = CAMPANHA.heroDesktop;
-  if (mob && CAMPANHA.heroMobile) mob.src = CAMPANHA.heroMobile;
+  function setHeroMedia(el, url) {
+    if (!el || !url) return;
+    const img = el.querySelector('img') || el;
+    img.src = url;
+    const source = el.querySelector('source[type="image/webp"]');
+    if (source && /\.png$/i.test(url)) source.srcset = url.replace(/\.png$/i, '.webp');
+  }
+  setHeroMedia(document.querySelector('.hero-vid-desktop'), CAMPANHA.heroDesktop);
+  setHeroMedia(document.querySelector('.hero-vid-mobile'), CAMPANHA.heroMobile);
 
   const loading = document.getElementById('pkgs-loading');
   if (loading) loading.remove();

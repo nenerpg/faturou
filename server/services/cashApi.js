@@ -2,7 +2,7 @@ const BASE_URL =
   process.env.CASH_API_BASE_URL || 'https://api.animuspay.com.br/api/public/cash';
 
 function getToken() {
-  return process.env.CASH_API_TOKEN || '';
+  return (process.env.CASH_API_TOKEN || '').trim();
 }
 
 async function cashFetch(path, options = {}) {

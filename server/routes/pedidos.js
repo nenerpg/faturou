@@ -125,7 +125,15 @@ router.post('/', async (req, res) => {
   const siteUrl = resolvePublicUrl();
   const useHostedCheckout = process.env.PAYMENT_MODE === 'hosted';
 
-  if (!useHostedCheckout && process.env.CASH_API_TOKEN) {
+  if (!useHostedCheckout) {
+    if (!process.env.CASH_API_TOKEN) {
+      console.error('[pedidos] CASH_API_TOKEN ausente — PIX indisponível');
+      return res.status(503).json({
+        error: 'Pagamento PIX temporariamente indisponível. Tente novamente em instantes.',
+        orderId: pedido.order_id,
+      });
+    }
+
     const deposit = await createPixForPedido(pedido);
 
     if (deposit?.pix?.code) {
@@ -143,6 +151,12 @@ router.post('/', async (req, res) => {
         },
       });
     }
+
+    console.error('[pedidos] Falha ao gerar PIX para', pedido.order_id);
+    return res.status(503).json({
+      error: 'Não foi possível gerar o PIX. Tente novamente em instantes.',
+      orderId: pedido.order_id,
+    });
   }
 
   const checkoutUrl = buildCheckoutUrl(pedido, pkg, campanha);
@@ -158,14 +172,9 @@ router.post('/', async (req, res) => {
     });
   }
 
-  res.status(201).json({
+  res.status(503).json({
+    error: 'Checkout hospedado não configurado para este pacote.',
     orderId: pedido.order_id,
-    amountCentavos,
-    amountReais: pkg.valor,
-    pacote: pkg.nome,
-    campanha: campanha.titulo,
-    checkoutUrl: null,
-    mockMode: true,
   });
 });
 

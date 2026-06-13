@@ -385,9 +385,17 @@ router.post('/apuracoes', requireAdmin, async (req, res) => {
 router.delete('/reset', requireAdmin, async (_req, res) => {
   await Promise.all([
     supabase.from('participantes').delete().neq('id', '00000000-0000-0000-0000-000000000000'),
+    supabase.from('pedidos').delete().neq('id', '00000000-0000-0000-0000-000000000000'),
     supabase.from('numeros_usados').delete().neq('id', '00000000-0000-0000-0000-000000000000'),
     supabase.from('apuracoes').delete().neq('id', '00000000-0000-0000-0000-000000000000'),
   ]);
+
+  const { error: campErr } = await supabase
+    .from('campanhas')
+    .update({ numeros_vendidos: 0, updated_at: new Date().toISOString() })
+    .neq('id', '00000000-0000-0000-0000-000000000000');
+
+  if (campErr) return res.status(500).json({ error: campErr.message });
   res.json({ ok: true });
 });
 

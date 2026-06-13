@@ -20,7 +20,7 @@ function badgeClass(id) {
 function renderPacotes(pacotes) {
   const grid = document.getElementById('pkgs-grid');
   if (!grid) return;
-  const vendaveis = (pacotes || []).filter((p) => p.checkoutUrl);
+  const vendaveis = (pacotes || []).filter((p) => p.id && p.numeros > 0 && p.valor > 0);
   if (!vendaveis.length) {
     grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--t3);padding:24px">Nenhum pacote disponível no momento.</p>';
     return;

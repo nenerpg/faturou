@@ -1699,7 +1699,7 @@ function irPara(tab) {
 }
 
 async function resetarTudo() {
-  if (!confirm('⚠️ Isso apagará TODOS os participantes, números e apurações no Supabase.\nTem certeza?')) return;
+  if (!confirm('⚠️ Isso apagará TODOS os participantes, pedidos, números, apurações e zerará vendas no Supabase.\nTem certeza?')) return;
   try {
     await apiFetch('/reset', { method: 'DELETE' });
     DB.participantes = [];

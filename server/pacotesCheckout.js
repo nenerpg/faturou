@@ -29,6 +29,10 @@ const CHECKOUT_POR_NUMEROS = {
   300: CHECKOUT_POR_ID.diamante,
 };
 
+function isPacoteValido(pkg) {
+  return !!(pkg && pkg.id && pkg.numeros > 0 && pkg.valor > 0);
+}
+
 function getCheckoutUrlForPacote(pkg) {
   if (!pkg) return null;
   if (pkg.checkoutUrl) return pkg.checkoutUrl;
@@ -44,13 +48,13 @@ function aplicarCheckoutUrls(pacotes) {
   }));
 }
 
-/** Somente pacotes com checkout Animus oficial (7 planos) */
+/** Pacotes exibidos no site — todos os planos válidos da campanha */
 function filtrarPacotesVendaveis(pacotes) {
-  return aplicarCheckoutUrls(pacotes).filter((p) => !!p.checkoutUrl);
+  return aplicarCheckoutUrls(pacotes).filter(isPacoteValido);
 }
 
 function isPacoteVendavel(pkg) {
-  return !!getCheckoutUrlForPacote(pkg);
+  return isPacoteValido(pkg);
 }
 
 const PACOTES_PADRAO = aplicarCheckoutUrls([

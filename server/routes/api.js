@@ -4,6 +4,7 @@ const CONFIG_PADRAO = require('../configPadrao');
 const { gerarNumerosAleatorios, registrarNumerosUsados } = require('../gerarNumeros');
 const { requireAdmin } = require('../adminAuth');
 const { calcNumeroVencedor, executarApuracao } = require('../apuracao');
+const cashApi = require('../services/cashApi');
 
 const router = express.Router();
 
@@ -116,6 +117,42 @@ async function resolveCampanha(slug) {
 
 router.get('/health', (_req, res) => {
   res.json({ ok: true, db: 'supabase' });
+});
+
+router.get('/cash-health', requireAdmin, async (_req, res) => {
+  const token = (process.env.CASH_API_TOKEN || '').trim();
+  const postbackUrl =
+    process.env.CASH_POSTBACK_URL ||
+    `${process.env.PUBLIC_API_URL || ''}/api/webhooks/cash`;
+
+  if (!token) {
+    return res.json({
+      ok: false,
+      pix: false,
+      reason: 'CASH_API_TOKEN ausente na Vercel',
+      tokenLength: 0,
+      postbackUrl,
+    });
+  }
+
+  try {
+    await cashApi.listDeposits({ perPage: 1, status: 'paid' });
+    return res.json({
+      ok: true,
+      pix: true,
+      tokenLength: token.length,
+      postbackUrl,
+      paymentMode: process.env.PAYMENT_MODE || 'pix',
+    });
+  } catch (err) {
+    return res.json({
+      ok: false,
+      pix: false,
+      reason: err.message,
+      tokenLength: token.length,
+      postbackUrl,
+    });
+  }
 });
 
 router.get('/bootstrap', requireAdmin, async (_req, res) => {

@@ -44,7 +44,7 @@ function postbackUrl() {
 }
 
 async function createPixForPedido(pedido) {
-  if (!process.env.CASH_API_TOKEN) return null;
+  if (!(process.env.CASH_API_TOKEN || '').trim()) return null;
 
   try {
     const deposit = await cashApi.createPixDeposit({
@@ -126,7 +126,7 @@ router.post('/', async (req, res) => {
   const useHostedCheckout = process.env.PAYMENT_MODE === 'hosted';
 
   if (!useHostedCheckout) {
-    if (!process.env.CASH_API_TOKEN) {
+    if (!(process.env.CASH_API_TOKEN || '').trim()) {
       console.error('[pedidos] CASH_API_TOKEN ausente — PIX indisponível');
       return res.status(503).json({
         error: 'Pagamento PIX temporariamente indisponível. Tente novamente em instantes.',

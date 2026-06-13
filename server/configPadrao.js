@@ -4,7 +4,7 @@ module.exports = {
   elementosPorSerie: 100000,
   serieInicial: 0,
   dataInicio: '2026-05-25',
-  dataFim: '2026-08-01',
-  dataExtracao: '2026-08-01',
+  dataFim: '2026-09-05T20:00:00',
+  dataExtracao: '2026-09-05T20:00:00',
   dataApuracao: '2026-08-03',
 };

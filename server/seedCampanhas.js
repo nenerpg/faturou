@@ -18,8 +18,8 @@ const CAMPANHAS = [
     ordem: 1,
     valor_premio_estimado: 8999,
     data_inicio: '2026-05-25',
-    data_fim: '2026-08-01',
-    data_extracao: '2026-08-01',
+    data_fim: '2026-09-05T20:00:00',
+    data_extracao: '2026-09-05T20:00:00',
     numeros_vendidos: 347,
     total_numeros_display: 1000,
     pacotes: PACOTES_PADRAO,
@@ -74,6 +74,21 @@ const CAMPANHAS = [
   },
 ];
 
+async function syncCampanhaDates() {
+  const updates = {
+    'iphone-17-pro': {
+      data_fim: '2026-09-05T20:00:00',
+      data_extracao: '2026-09-05T20:00:00',
+      updated_at: new Date().toISOString(),
+    },
+  };
+
+  for (const [slug, row] of Object.entries(updates)) {
+    const { error } = await supabase.from('campanhas').update(row).eq('slug', slug);
+    if (error) console.error(`[seed] sync dates ${slug}:`, error.message);
+  }
+}
+
 async function seedCampanhas() {
   const { count } = await supabase
     .from('campanhas')
@@ -85,6 +100,7 @@ async function seedCampanhas() {
     else console.log(`Seed: ${CAMPANHAS.length} campanhas criadas.`);
   }
 
+  await syncCampanhaDates();
   await syncCheckoutUrls(supabase);
 }
 

@@ -526,6 +526,7 @@ img.hero-vid{
     background:none;
   }
   .hero-h{text-shadow:0 2px 20px rgba(0,0,0,.9),0 0 40px rgba(0,0,0,.7)}
+  .hero-h .ld{opacity:1;animation:none;transform:none}
   /* Mobile: cor sólida + sombra escura — legível sobre qualquer imagem de fundo */
   .hero-h .gr{
     background:none;
@@ -1101,8 +1102,9 @@ const C={
    com base na data definida no painel (Supabase).
    Quando não há data_fim, o bloco é ocultado. */
 
-/* ── LETTER-FALL INTRO ───────────────────── */
+/* ── LETTER-FALL INTRO (desktop) ─────────── */
 (function(){
+  if (window.matchMedia('(max-width:860px)').matches) return;
   const h=document.querySelector('.hero-h');
   if(!h) return;
   // Snapshot children BEFORE clearing, then re-insert with .ld

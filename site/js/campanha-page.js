@@ -90,13 +90,6 @@ async function carregarCampanha() {
   window.CAMPANHA = CAMPANHA;
 
   document.title = CAMPANHA.titulo + ' — Sorte Real';
-  const heroH = document.querySelector('.hero-h');
-  if (heroH) {
-    heroH.innerHTML =
-      'Concorra ao<br/><span class="gr">' +
-      CAMPANHA.premioNome +
-      '</span>';
-  }
   const heroSub = document.querySelector('.hero-sub');
   if (heroSub) heroSub.innerHTML = CAMPANHA.descricao;
 
@@ -123,12 +116,15 @@ async function carregarCampanha() {
   preencherRegulamento();
 }
 
-function fmtDataBR(iso) {
+function fmtDataBR(iso, withTime = false) {
   if (!iso) return '—';
   const raw = String(iso);
   const d = raw.includes('T') ? new Date(raw) : new Date(raw + 'T12:00:00');
   if (Number.isNaN(d.getTime())) return raw;
-  return d.toLocaleDateString('pt-BR');
+  const date = d.toLocaleDateString('pt-BR');
+  if (!withTime || !raw.includes('T')) return date;
+  const time = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  return `${date} às ${time}`;
 }
 
 function preencherRegulamento() {
@@ -140,7 +136,7 @@ function preencherRegulamento() {
   const ini = fmtDataBR(CAMPANHA.dataInicio);
   const fim = fmtDataBR(CAMPANHA.dataFim);
   set('reg-periodo', ini !== '—' && fim !== '—' ? `${ini} até ${fim}` : ini !== '—' ? `A partir de ${ini}` : 'Consulte o regulamento');
-  set('reg-extracao', CAMPANHA.dataExtracao ? `${fmtDataBR(CAMPANHA.dataExtracao)} — Loteria Federal CEF` : 'Loteria Federal da Caixa');
+  set('reg-extracao', CAMPANHA.dataExtracao ? `${fmtDataBR(CAMPANHA.dataExtracao, true)} — Loteria Federal CEF` : 'Loteria Federal da Caixa');
   set('reg-series', `${CAMPANHA.totalSeries || 10} séries (${CAMPANHA.serieInicial || 0} a ${((CAMPANHA.serieInicial || 0) + (CAMPANHA.totalSeries || 10) - 1) % 10})`);
   set('reg-elementos', `${(CAMPANHA.elementosPorSerie || 100000).toLocaleString('pt-BR')} por série`);
   set('reg-premio', CAMPANHA.premioNome ? `1x ${CAMPANHA.premioNome}` : 'Consulte a campanha');

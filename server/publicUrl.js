@@ -6,6 +6,8 @@ function pickPublicUrl(...values) {
   return '';
 }
 
+const DEFAULT_PUBLIC_URL = 'https://www.sortereal.org';
+
 function resolvePublicUrl() {
   const fromEnv = pickPublicUrl(process.env.PUBLIC_SITE_URL, process.env.PUBLIC_API_URL);
   if (fromEnv) return fromEnv;
@@ -14,14 +16,30 @@ function resolvePublicUrl() {
   if (vercel) return `https://${vercel}`;
 
   if (process.env.NODE_ENV === 'production') {
-    return 'https://www.sortereal.org';
+    return DEFAULT_PUBLIC_URL;
   }
 
   return 'http://localhost:3000';
 }
-function resolveEbookUrl() {
-  const siteUrl = resolvePublicUrl();
-  return pickPublicUrl(process.env.EBOOK_URL) || `${siteUrl}/ebook.pdf`;
+
+/** URLs em e-mails e entregáveis — nunca localhost. */
+function resolveCustomerFacingUrl() {
+  const fromEnv = pickPublicUrl(process.env.PUBLIC_SITE_URL, process.env.PUBLIC_API_URL);
+  if (fromEnv) return fromEnv;
+
+  const vercel = (process.env.VERCEL_URL || '').trim().replace(/^https?:\/\//, '');
+  if (vercel) return `https://${vercel}`;
+
+  return DEFAULT_PUBLIC_URL;
 }
 
-module.exports = { resolvePublicUrl, resolveEbookUrl, pickPublicUrl };
+function resolveEbookUrl() {
+  return pickPublicUrl(process.env.EBOOK_URL) || `${resolveCustomerFacingUrl()}/ebook.pdf`;
+}
+
+module.exports = {
+  resolvePublicUrl,
+  resolveCustomerFacingUrl,
+  resolveEbookUrl,
+  pickPublicUrl,
+};

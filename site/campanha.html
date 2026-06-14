@@ -447,10 +447,25 @@ img.hero-vid{
 .fraud-c strong{color:var(--t2)}
 
 /* ─── REGULAMENTO ────────────────────────── */
-.reggrid{display:grid;grid-template-columns:repeat(4,1fr);border-radius:var(--r3);overflow:hidden;border:1px solid var(--bo);gap:1px;background:var(--bo2);margin-top:36px}
+.reg-summary{display:grid;grid-template-columns:repeat(4,1fr);border-radius:var(--r3);overflow:hidden;border:1px solid var(--bo);gap:1px;background:var(--bo2);margin:28px 0 32px}
 .regcell{background:var(--card);padding:16px 18px}
 .rl{font-size:.6rem;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .rcv{font-size:.82rem;color:#E8E8E8;font-weight:600}
+.reg-actions{display:flex;justify-content:center;margin-bottom:28px}
+.reg-pdf-btn{display:inline-flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:10px 18px;font-size:.78rem;font-weight:600;color:var(--t2);transition:.15s}
+.reg-pdf-btn:hover{color:var(--gold);border-color:rgba(201,168,76,.35)}
+.reg-doc{max-width:900px;margin:0 auto;background:var(--card);border:1px solid var(--bo);border-radius:var(--r3);padding:32px 36px}
+.reg-doc h3{font-size:1rem;font-weight:800;color:var(--gold);margin:28px 0 10px;letter-spacing:.2px}
+.reg-doc h3:first-child{margin-top:0}
+.reg-doc p,.reg-doc li{font-size:.82rem;color:#C8C8C8;line-height:1.85}
+.reg-doc p{margin-bottom:10px}
+.reg-doc ol,.reg-doc ul{margin:8px 0 12px 20px}
+.reg-doc li{margin-bottom:6px}
+.reg-doc table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:.78rem}
+.reg-doc th,.reg-doc td{border:1px solid var(--bo);padding:9px 12px;text-align:left}
+.reg-doc th{background:var(--bg2);color:var(--t2);font-weight:700}
+.reg-doc td{color:#D0D0D0}
+.reg-doc .reg-note{margin-top:24px;padding-top:18px;border-top:1px solid var(--bo);font-size:.72rem;color:var(--t4);line-height:1.7;text-align:center}
 
 /* ─── FOOTER ──────────────────────────────── */
 .footer{background:#000;color:var(--t3);padding:52px 0 28px;border-top:1px solid var(--bo)}
@@ -467,10 +482,6 @@ img.hero-vid{
 .paytag{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:4px 9px;font-size:.65rem}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:18px;text-align:center;font-size:.66rem;line-height:2;color:var(--t4)}
 .footer .logo{color:rgba(255,255,255,.85);margin-bottom:8px}
-
-/* WhatsApp */
-.wa{position:fixed;bottom:20px;right:18px;z-index:500;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.32);transition:.2s}
-.wa:hover{transform:scale(1.08)}
 
 /* ─── MODAL ───────────────────────────────── */
 .mbg{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px}
@@ -495,7 +506,7 @@ img.hero-vid{
 .mconfirm{background:var(--gold);color:#000;box-shadow:0 4px 12px rgba(201,168,76,.2)}
 
 /* ─── TOASTS ──────────────────────────────── */
-#toasts{position:fixed;bottom:82px;right:16px;z-index:700;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+#toasts{position:fixed;bottom:20px;right:16px;z-index:700;display:flex;flex-direction:column;gap:6px;pointer-events:none}
 .toast{background:var(--card);border:1px solid var(--bo);border-left:3px solid var(--gold);border-radius:var(--r);padding:10px 15px;font-size:.78rem;color:var(--t1);box-shadow:0 4px 20px rgba(0,0,0,.5);animation:ti .22s ease;max-width:270px;line-height:1.4}
 @keyframes ti{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
 
@@ -507,7 +518,7 @@ img.hero-vid{
 @media(max-width:1024px){
   .steps{grid-template-columns:repeat(2,1fr)}
   .pkgs-grid{grid-template-columns:repeat(2,1fr)}
-  .reggrid{grid-template-columns:repeat(2,1fr)}
+  .regsummary,.reg-summary{grid-template-columns:repeat(2,1fr)}
   .fg-grid{grid-template-columns:1fr 1fr}
   .apur-body{grid-template-columns:1fr}
   .apur-prizes{border-right:none;border-bottom:1px solid var(--bo2)}
@@ -574,7 +585,7 @@ img.hero-vid{
 @media(max-width:580px){
   .steps{grid-template-columns:1fr}
   .pkgs-grid{grid-template-columns:1fr 1fr}
-  .reggrid{grid-template-columns:1fr 1fr}
+  .regsummary,.reg-summary{grid-template-columns:1fr 1fr}
   .fg-grid{grid-template-columns:1fr}
   .frow{grid-template-columns:1fr}
   .hero-h{letter-spacing:-.8px;font-size:clamp(2rem,8vw,2.4rem)}
@@ -584,6 +595,7 @@ img.hero-vid{
   .sh{margin-bottom:38px}
   .prize-grid{gap:28px}
   .prize-img{max-width:220px}
+  .reg-doc{padding:22px 18px}
 }
 @media(max-width:400px){
   .pkgs-grid{grid-template-columns:1fr}
@@ -1003,7 +1015,6 @@ img.hero-vid{
     <p><strong>Não fazemos ligações pedindo depósito ou dados bancários.</strong> Desconfie de qualquer contato fora dos canais abaixo.</p>
     <div class="fraud-c">
       <span><strong>contato@sortereal.com.br</strong></span>
-      <span>WhatsApp: <strong>(11) 99999-9999</strong></span>
       <span><strong>@sortereal</strong></span>
     </div>
   </div>
@@ -1012,24 +1023,116 @@ img.hero-vid{
 <!-- ══ REGULAMENTO ══ -->
 <section class="s s-b" id="regulamento">
   <div class="w">
-    <div class="sh c"><span class="slabel">Regras</span><h2 class="sh2">Regulamento</h2></div>
-    <div class="reggrid rv">
+    <div class="sh c"><span class="slabel">Regras</span><h2 class="sh2">Regulamento Oficial</h2><p class="sdesc" style="margin:12px auto 0">Sorteio pela Loteria Federal · Promoção comercial vinculada à compra do ebook</p></div>
+
+    <div class="reg-actions rv">
+      <a href="regulamento.pdf" target="_blank" rel="noopener" class="reg-pdf-btn">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6L9 2z"/><polyline points="9,2 9,6 13,6"/><line x1="5" y1="10" x2="11" y2="10"/><line x1="5" y1="12" x2="8" y2="12"/></svg>
+        Baixar regulamento completo (PDF)
+      </a>
+    </div>
+
+    <div class="reg-summary rv">
       <div class="regcell"><div class="rl">Modalidade</div><div class="rcv">Assemelhada a Sorteio</div></div>
-      <div class="regcell"><div class="rl">Período</div><div class="rcv" id="reg-periodo">—</div></div>
-      <div class="regcell"><div class="rl">Área</div><div class="rcv">Todo o território nacional</div></div>
-      <div class="regcell"><div class="rl">Extração</div><div class="rcv" id="reg-extracao">Loteria Federal da Caixa</div></div>
-      <div class="regcell"><div class="rl">Séries</div><div class="rcv" id="reg-series">10 séries (0 a 9)</div></div>
-      <div class="regcell"><div class="rl">Elementos/série</div><div class="rcv" id="reg-elementos">100.000 números</div></div>
-      <div class="regcell"><div class="rl">Prêmio</div><div class="rcv" id="reg-premio">1x iPhone 17 Pro 256GB</div></div>
-      <div class="regcell"><div class="rl">Forma de apuração</div><div class="rcv">Dezena do 1º prêmio = série · Unidades dos 5 prêmios = elemento (ex: 9.57102)</div></div>
-      <div class="regcell"><div class="rl">Aproximação</div><div class="rcv">Superior → inferior → próxima série (9 volta para 0)</div></div>
-      <div class="regcell"><div class="rl">Prescrição</div><div class="rcv">180 dias após a apuração para resgate do prêmio</div></div>
-      <div class="regcell" style="display:flex;align-items:center">
-        <a href="regulamento.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:8px 15px;font-size:.74rem;font-weight:600;color:var(--t3);transition:.15s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--t3)'">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6L9 2z"/><polyline points="9,2 9,6 13,6"/><line x1="5" y1="10" x2="11" y2="10"/><line x1="5" y1="12" x2="8" y2="12"/></svg>
-          Baixar regulamento (PDF)
-        </a>
-      </div>
+      <div class="regcell"><div class="rl">Participação</div><div class="rcv">13/06/2026 a 05/09/2026 (até 19:59)</div></div>
+      <div class="regcell"><div class="rl">Apuração</div><div class="rcv">05/09/2026 — Loteria Federal CEF</div></div>
+      <div class="regcell"><div class="rl">Prêmio</div><div class="rcv">1x iPhone 17 Pro 256GB — R$ 11.499,00</div></div>
+    </div>
+
+    <div class="reg-doc rv">
+      <h3>1. Promotora</h3>
+      <p><strong>1.1</strong> — Empresa Mandatária / Responsável pela Operação: a presente Promoção é operada, conduzida e de inteira responsabilidade do site <a href="https://www.sortereal.org" style="color:var(--gold)">https://www.sortereal.org</a> (doravante denominado "Promotora" ou "Site Responsável"), por meio da campanha disponível em <a href="campanha.html?slug=iphone-17-pro" style="color:var(--gold)">sortereal.org/campanha.html?slug=iphone-17-pro</a>.</p>
+
+      <h3>2. Modalidade</h3>
+      <p>Assemelhada a Sorteio.</p>
+
+      <h3>3. Área de abrangência</h3>
+      <p>Todo o território nacional.</p>
+
+      <h3>4. Período da promoção</h3>
+      <p>A partir de 13/06/2026, encerrando-se com a entrega do prêmio ao Contemplado.</p>
+
+      <h3>5. Período de participação</h3>
+      <p>De 13/06/2026 a 05/09/2026 (encerrando-se às 19:59, 1 minuto antes da extração da Loteria Federal).</p>
+
+      <h3>6. Critério de participação</h3>
+      <ol type="a">
+        <li>Durante o período da Promoção, os clientes, pessoas físicas maiores de 18 (dezoito) anos e civilmente capazes, que adquirirem o ebook intitulado <strong>"O Legado de Steve Jobs"</strong>, produto digital disponibilizado pela Promotora através do site, e concluírem sua compra informando nome, e-mail, endereço, telefone de contato, CPF, RG, CNH, Passaporte ou outro documento de identificação pessoal, receberão automaticamente número(s) da sorte. É vedada a participação por menores de 18 anos.</li>
+        <li>Os clientes poderão escolher e adquirir o ebook por meio de 7 (sete) pacotes pré-determinados:</li>
+      </ol>
+      <table>
+        <thead><tr><th>Pacote</th><th>Valor (R$)</th><th>Números da sorte</th></tr></thead>
+        <tbody>
+          <tr><td>Cobre</td><td>7,90</td><td>05 (cinco)</td></tr>
+          <tr><td>Bronze</td><td>14,90</td><td>12 (doze)</td></tr>
+          <tr><td>Prata</td><td>27,90</td><td>25 (vinte e cinco)</td></tr>
+          <tr><td>Ouro</td><td>45,00</td><td>45 (quarenta e cinco)</td></tr>
+          <tr><td>Rubi</td><td>69,90</td><td>80 (oitenta)</td></tr>
+          <tr><td>Esmeralda</td><td>114,90</td><td>150 (cento e cinquenta)</td></tr>
+          <tr><td>Diamante</td><td>119,90</td><td>300 (trezentos)</td></tr>
+        </tbody>
+      </table>
+      <ol type="a" start="3">
+        <li>Os números da sorte são gerados de forma aleatória e enviados por e-mail após a confirmação de pagamento. O processamento é realizado pela plataforma AnimusPay (<a href="https://animuspay.com.br" style="color:var(--gold)">animuspay.com.br</a>). Formas de pagamento: PIX e cartão de crédito.</li>
+        <li>As compras são cumulativas. O mesmo cliente poderá adquirir mais de um pacote, acumulando números da sorte.</li>
+        <li>O sorteio será realizado com base na extração da Loteria Federal, conforme a Forma de Apuração.</li>
+        <li>Os números da sorte são enviados ao Participante por e-mail após a confirmação do pagamento.</li>
+        <li>Caso todos os números da sorte tenham sido distribuídos antes do término do período de participação, a Promoção será considerada encerrada.</li>
+      </ol>
+
+      <h3>7. Quantidade de séries</h3>
+      <p>10 (dez).</p>
+
+      <h3>8. Quantidade de elementos sorteáveis por série</h3>
+      <p>100.000 (cem mil).</p>
+
+      <h3>9. Apuração e descrição de prêmios</h3>
+      <p><strong>Data da apuração:</strong> 05/09/2026, após a divulgação oficial do resultado da Loteria Federal.</p>
+      <p><strong>Forma de apuração:</strong> realizada com base nos resultados públicos da extração da Loteria Federal da Caixa Econômica Federal, cruzados com a base de Participantes ativos, com resultado divulgado em <a href="https://www.sortereal.org" style="color:var(--gold)">sortereal.org</a>.</p>
+      <table>
+        <thead><tr><th>Qtd.</th><th>Descrição</th><th>Valor R$</th><th>Série</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Smartphone Apple iPhone 17 Pro 256GB, novo, lacrado, com nota fiscal e garantia Apple de 1 ano</td><td>11.499,00</td><td>0 a 9</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Premiação total:</strong> 1 prêmio no valor de R$ 11.499,00.</p>
+
+      <h3>10. Forma de apuração</h3>
+      <p>O número da sorte é composto por 6 dígitos: o primeiro corresponde à série e os 5 restantes ao elemento sorteável.</p>
+      <ul>
+        <li><strong>Série:</strong> algarismo simples da dezena do 1º prêmio da Loteria Federal.</li>
+        <li><strong>Elemento:</strong> algarismos simples das unidades dos 5 primeiros prêmios, lidos de cima para baixo.</li>
+      </ul>
+      <p>Exemplo: 1º 12595, 2º 34447, 3º 94101, 4º 32110, 5º 20362 → número contemplado: <strong>9.57102</strong>.</p>
+      <p>Se o número sorteado não foi distribuído ou o Participante não é elegível, aplica-se a regra de aproximação (superior, depois inferior, depois próxima série — após a 9, volta para 0). Se a extração não ocorrer na data prevista, será considerada a extração subsequente.</p>
+
+      <h3>11. Critérios de desclassificação</h3>
+      <p>Participantes que descumprirem o Regulamento, agirem com fraude, fornecerem dados falsos, cancelarem a compra ou tiverem pagamento estornado serão desclassificados. O Ganhador deve apresentar documento de identificação para retirada do prêmio. A não comunicação no prazo de 72h após notificação cartorária enseja desclassificação.</p>
+
+      <h3>12. Divulgação do resultado</h3>
+      <p>Resultado divulgado em até 7 dias no site. Contemplados notificados por e-mail, telefone ou WhatsApp. Nome e número do Contemplado publicados em até 72h, disponíveis por 30 dias.</p>
+
+      <h3>13. Entrega dos prêmios</h3>
+      <p>Entrega em até 30 dias após apuração ou cumprimento das exigências, em território brasileiro, via Correios ou transportadora, com frete e impostos pagos. Contemplado deve fornecer RG, CPF e assinar Termo de Contemplação. Prêmio pessoal e intransferível.</p>
+
+      <h3>14. Direito de arrependimento (CDC)</h3>
+      <p>Nos termos do art. 49 do CDC, o Participante poderá desistir da compra do ebook em 7 (sete) dias corridos. Valores pagos serão devolvidos integralmente e os números vinculados serão cancelados.</p>
+
+      <h3>15. Disposições gerais</h3>
+      <p>Promoção comercial vinculada exclusivamente à compra do ebook. Não há venda de números. Dados pessoais tratados conforme LGPD. Pagamentos intermediados pela AnimusPay. Prescrição do direito ao prêmio: 180 dias após a apuração. Marcas Apple e iPhone são de titularidade da Apple Inc., utilizadas apenas para identificação do produto premiado.</p>
+
+      <h3>16. Perguntas frequentes</h3>
+      <ul>
+        <li><strong>Como funciona?</strong> Compre o ebook e receba números da sorte. O ganhador é apurado pela Loteria Federal.</li>
+        <li><strong>Quando recebo os números?</strong> Por e-mail após confirmação do pagamento (PIX quase instantâneo).</li>
+        <li><strong>E se o número sorteado não foi distribuído?</strong> Aplica-se a regra de aproximação automaticamente.</li>
+        <li><strong>Como recebo o iPhone?</strong> Contato por e-mail e WhatsApp cadastrados. Entrega pelos Correios com frete e nota fiscal.</li>
+      </ul>
+
+      <h3>17. Disposições finais</h3>
+      <p>Participação restrita a maiores de 18 anos. Regulamento completo disponível em <a href="https://www.sortereal.org" style="color:var(--gold)">sortereal.org</a>. Reclamações podem ser dirigidas ao PROCON. Casos omissos resolvidos pela Promotora conforme legislação aplicável.</p>
+
+      <p class="reg-note">© 2026 Sorte Real · Promoção Comercial · Sorteio pela Loteria Federal<br/>Não há venda de números. Participação mediante compra de produto digital.</p>
     </div>
   </div>
 </section>
@@ -1051,9 +1154,6 @@ img.hero-vid{
           <a href="#" title="Instagram">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           </a>
-          <a href="#" title="WhatsApp">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-          </a>
           <a href="#" title="YouTube">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 001.94-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
           </a>
@@ -1068,11 +1168,13 @@ img.hero-vid{
       </div>
       <div class="fc">
         <h3>Legal</h3>
-        <a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a><a href="#">Regulamento</a><a href="#">LGPD</a>
+        <a href="#regulamento">Regulamento</a>
       </div>
       <div class="fc">
         <h3>Contato</h3>
-        <p>contato@sortereal.com.br</p><p>(11) 99999-9999</p><p>@sortereal</p>
+        <p>contato@sortereal.com.br</p>
+        <p>(54) 98105-4036</p>
+        <p>@sortereal</p>
         <div class="paytags"><span class="paytag">PIX</span><span class="paytag">Cartão</span></div>
       </div>
     </div>
@@ -1082,10 +1184,6 @@ img.hero-vid{
     </div>
   </div>
 </footer>
-
-<a class="wa" href="https://wa.me/5511999999999" target="_blank" title="WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
 
 <div id="toasts"></div>
 

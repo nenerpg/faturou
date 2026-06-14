@@ -265,12 +265,24 @@ img.hero-vid{
 .prize-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
 .prize-phone{display:flex;flex-direction:column;align-items:center;gap:24px;position:relative}
 .prize-phone::before{content:'';position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none}
-.prize-img{position:relative;z-index:1;max-width:320px;width:100%;filter:drop-shadow(0 32px 56px rgba(0,0,0,.6)) drop-shadow(0 0 40px rgba(201,168,76,.06));animation:float 7s ease-in-out infinite;transition:transform .12s ease-out,filter .4s;will-change:transform}
+.prize-img{
+  position:relative;z-index:1;
+  width:auto;height:auto;max-width:320px;
+  aspect-ratio:300/384;object-fit:contain;
+  filter:drop-shadow(0 32px 56px rgba(0,0,0,.6)) drop-shadow(0 0 40px rgba(201,168,76,.06));
+  animation:prizeFloat 7s ease-in-out infinite;
+  transition:transform .12s ease-out,filter .4s;
+}
+@keyframes prizeFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
 
 /* ── PHONE 3D TILT ───────────────── */
 .phone-3d-wrap{
   position:relative;display:inline-block;
   cursor:grab;perspective:900px;
+  transform-style:preserve-3d;
 }
 .phone-3d-wrap:active{cursor:grabbing}
 .phone-glare{
@@ -287,15 +299,11 @@ img.hero-vid{
 /* Mobile-only prize elements (hidden on desktop) */
 .prize-title-m{display:none}
 .prize-sub-m{display:none}
-/* Mobile: auto-rotate */
-@keyframes phoneRotate{
-  0%,100%{transform:rotateY(0deg) rotateX(2deg)}
-  25%    {transform:rotateY(14deg) rotateX(-2deg)}
-  75%    {transform:rotateY(-14deg) rotateX(3deg)}
-}
+/* Mobile: sem rotação 3D — evita imagem achatada */
 @media(max-width:860px){
+  .phone-3d-wrap{perspective:none;transform-style:flat}
   .phone-hint{display:none}
-  .prize-img{animation:float 7s ease-in-out infinite,phoneRotate 7s ease-in-out 1s infinite}
+  .prize-img{max-width:260px;animation:prizeFloat 7s ease-in-out infinite}
 }
 
 .color-row{display:flex;align-items:center;gap:8px}
@@ -540,7 +548,7 @@ img.hero-vid{
   /* Seção prêmio — mobile */
   .prize-grid{grid-template-columns:1fr;gap:24px;text-align:center}
   .prize-phone{order:-1}
-  .prize-img{max-width:240px}
+  .prize-img{max-width:240px;width:auto;height:auto}
   .color-row,.chips,.valbox{justify-content:center}
   /* Título acima do iPhone (mobile-only) */
   .prize-title-m{
@@ -575,7 +583,7 @@ img.hero-vid{
   .s{padding:64px 0}
   .sh{margin-bottom:38px}
   .prize-grid{gap:28px}
-  .prize-img{max-width:220px}
+  .prize-img{max-width:220px;width:auto;height:auto}
 }
 @media(max-width:400px){
   .pkgs-grid{grid-template-columns:1fr}
@@ -1218,7 +1226,7 @@ function toast(msg,color='#C9A84C'){
     cRX=lerp(cRX,tRX,.1); cRY=lerp(cRY,tRY,.1);
     img.style.transform='rotateX('+cRX+'deg) rotateY('+cRY+'deg) scale(1.05)';
     if(active||Math.abs(cRX)>.05||Math.abs(cRY)>.05) raf=requestAnimationFrame(tick);
-    else{img.style.transform='';img.style.animation='float 7s ease-in-out infinite';}
+    else{img.style.transform='';img.style.animation='prizeFloat 7s ease-in-out infinite';}
   }
 
   wrap.addEventListener('mouseenter',function(){

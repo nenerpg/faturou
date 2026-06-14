@@ -267,11 +267,11 @@ img.hero-vid{
 .prize-phone::before{content:'';position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none}
 .prize-img{
   position:relative;z-index:1;
-  width:auto;height:auto;max-width:320px;
-  aspect-ratio:300/384;object-fit:contain;
+  display:block;
+  width:100%;max-width:320px;height:auto;
   filter:drop-shadow(0 32px 56px rgba(0,0,0,.6)) drop-shadow(0 0 40px rgba(201,168,76,.06));
   animation:prizeFloat 7s ease-in-out infinite;
-  transition:transform .12s ease-out,filter .4s;
+  transition:filter .4s;
 }
 @keyframes prizeFloat{
   0%,100%{transform:translateY(0)}
@@ -280,9 +280,9 @@ img.hero-vid{
 
 /* ── PHONE 3D TILT ───────────────── */
 .phone-3d-wrap{
-  position:relative;display:inline-block;
+  position:relative;display:block;
+  width:100%;max-width:320px;
   cursor:grab;perspective:900px;
-  transform-style:preserve-3d;
 }
 .phone-3d-wrap:active{cursor:grabbing}
 .phone-glare{
@@ -301,9 +301,9 @@ img.hero-vid{
 .prize-sub-m{display:none}
 /* Mobile: sem rotação 3D — evita imagem achatada */
 @media(max-width:860px){
-  .phone-3d-wrap{perspective:none;transform-style:flat}
+  .phone-3d-wrap{perspective:none;max-width:260px}
   .phone-hint{display:none}
-  .prize-img{max-width:260px;animation:prizeFloat 7s ease-in-out infinite}
+  .prize-img{max-width:260px}
 }
 
 .color-row{display:flex;align-items:center;gap:8px}
@@ -548,7 +548,7 @@ img.hero-vid{
   /* Seção prêmio — mobile */
   .prize-grid{grid-template-columns:1fr;gap:24px;text-align:center}
   .prize-phone{order:-1}
-  .prize-img{max-width:240px;width:auto;height:auto}
+  .prize-img{max-width:240px}
   .color-row,.chips,.valbox{justify-content:center}
   /* Título acima do iPhone (mobile-only) */
   .prize-title-m{
@@ -583,7 +583,7 @@ img.hero-vid{
   .s{padding:64px 0}
   .sh{margin-bottom:38px}
   .prize-grid{gap:28px}
-  .prize-img{max-width:220px;width:auto;height:auto}
+  .prize-img{max-width:220px}
 }
 @media(max-width:400px){
   .pkgs-grid{grid-template-columns:1fr}

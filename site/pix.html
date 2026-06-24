@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8"/>
+  <script src="js/meta-pixel.js"></script>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Pagamento PIX — Sorte Real</title>
   <link rel="icon" href="crown-logo.svg"/>
@@ -30,6 +31,7 @@
   </style>
 </head>
 <body>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1284960663455595&ev=PageView&noscript=1" alt=""/></noscript>
 <div class="w">
   <h1>Pague com PIX</h1>
   <p class="sub">Escaneie o QR Code ou copie o código abaixo.<br/>Após o pagamento, seus números chegam por e-mail.</p>
@@ -54,6 +56,11 @@ const orderId = getQuery('orderId');
 const errEl = document.getElementById('err');
 let pixCode = '';
 
+function trackPurchaseIfPaid(p) {
+  if (p.status !== 'pago' || !window.MetaPixel) return;
+  MetaPixel.purchase(p);
+}
+
 async function load() {
   if (!orderId) {
     errEl.textContent = 'Pedido não informado.';
@@ -64,6 +71,7 @@ async function load() {
   document.getElementById('valor').textContent = 'R$ ' + fmtMoney(p.amountCentavos / 100);
 
   if (p.status === 'pago') {
+    trackPurchaseIfPaid(p);
     document.getElementById('status-wait').classList.remove('show');
     document.getElementById('status-done').classList.add('show');
     return;
@@ -116,6 +124,7 @@ function startPoll() {
       const p = await apiGet('/pedidos/' + orderId);
       if (p.status === 'pago') {
         clearInterval(poll);
+        trackPurchaseIfPaid(p);
         document.getElementById('status-wait').classList.remove('show');
         document.getElementById('status-done').classList.add('show');
         setTimeout(() => {

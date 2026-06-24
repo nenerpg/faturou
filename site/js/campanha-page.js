@@ -117,6 +117,8 @@ async function carregarCampanha() {
 
 window.selectPkg = function (pkg) {
   const slug = getSlug();
+  const pacote = (CAMPANHA?.pacotes || []).find((p) => p.id === pkg);
+  if (pacote && window.MetaPixel) MetaPixel.addToCart(pacote);
   window.location.href = 'checkout.html?campanha=' + slug + '&pacote=' + pkg;
 };
 

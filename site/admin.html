@@ -994,9 +994,10 @@ function renderParticipantes() {
         <td><span class="chip ${statusChip}">${p.statusPagamento}</span></td>
         <td>${p.elegivel ? '<span class="chip chip-green">✅ Sim</span>' : '<span class="chip chip-red">❌ Não</span>'}</td>
         <td>
-          <div style="display:flex;gap:4px">
-            <button class="btn btn-ghost btn-sm" onclick="toggleElegivel(${p.id})" title="Alternar elegibilidade">⚡</button>
-            <button class="btn btn-red btn-sm" onclick="cancelarParticipante(${p.id})" title="Cancelar">❌</button>
+          <div style="display:flex;gap:4px;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" onclick="reenviarEmailParticipante('${p.id}')" title="Reenviar e-mail com números">📧</button>
+            <button class="btn btn-ghost btn-sm" onclick="toggleElegivel('${p.id}')" title="Alternar elegibilidade">⚡</button>
+            <button class="btn btn-red btn-sm" onclick="cancelarParticipante('${p.id}')" title="Cancelar">❌</button>
           </div>
         </td>
       </tr>
@@ -1016,6 +1017,16 @@ function verNumeros(id) {
     <div class="nums-wrap">${chips}</div>
   `;
   box.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+async function reenviarEmailParticipante(id) {
+  const p = DB.participantes.find(x => String(x.id) === String(id));
+  if (!p) return;
+  if (!confirm(`Reenviar e-mail com ${p.numerosGerados.length} número(s) para ${p.email}?`)) return;
+  try {
+    const r = await apiFetch('/participantes/' + id + '/reenviar-email', { method: 'POST', body: '{}' });
+    toast('E-mail enviado para ' + r.email + ' (' + r.numerosCount + ' números).', 'green');
+  } catch (e) { toast(e.message, 'red'); }
 }
 
 async function cancelarParticipante(id) {

@@ -5,6 +5,7 @@ const { gerarNumerosAleatorios, registrarNumerosUsados } = require('../gerarNume
 const { requireAdmin } = require('../adminAuth');
 const { calcNumeroVencedor, executarApuracao } = require('../apuracao');
 const cashApi = require('../services/cashApi');
+const { sendNumerosEmail } = require('../services/email');
 
 const router = express.Router();
 
@@ -313,6 +314,67 @@ router.patch('/participantes/:id', requireAdmin, async (req, res) => {
 
   if (error || !p) return res.status(404).json({ error: 'Participante não encontrado.' });
   res.json(toParticipanteJSON(p));
+});
+
+router.post('/participantes/:id/reenviar-email', requireAdmin, async (req, res) => {
+  const { data: row } = await supabase
+    .from('participantes')
+    .select('*')
+    .eq('id', req.params.id)
+    .maybeSingle();
+
+  if (!row) return res.status(404).json({ error: 'Participante não encontrado.' });
+  if (!row.email) return res.status(400).json({ error: 'Participante sem e-mail cadastrado.' });
+  if (!row.numeros_gerados?.length) {
+    return res.status(400).json({ error: 'Participante sem números gerados.' });
+  }
+
+  const { data: campanha } = await supabase
+    .from('campanhas')
+    .select('titulo')
+    .eq('id', row.campanha_id)
+    .maybeSingle();
+
+  try {
+    const result = await sendNumerosEmail({
+      to: row.email,
+      nome: row.nome,
+      campanhaTitulo: campanha?.titulo || 'Sorte Real',
+      pacoteNome: row.nome_pacote || row.pacote,
+      numeros: row.numeros_gerados,
+      compraAdicional: false,
+      totalNumeros: row.numeros_gerados.length,
+    });
+
+    if (result.simulated) {
+      return res.status(503).json({
+        error: 'RESEND_API_KEY não configurada no servidor. Configure na Vercel e faça redeploy.',
+      });
+    }
+
+    res.json({
+      ok: true,
+      email: row.email,
+      numerosCount: row.numeros_gerados.length,
+      resendId: result.id || null,
+    });
+  } catch (err) {
+    console.error('[reenviar-email]', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get('/email-health', requireAdmin, async (_req, res) => {
+  const apiKey = (process.env.RESEND_API_KEY || '').trim();
+  const from = process.env.EMAIL_FROM || 'onboarding@resend.dev';
+  res.json({
+    ok: !!apiKey,
+    configured: !!apiKey,
+    from,
+    hint: apiKey
+      ? 'Chave presente. Verifique se o domínio do remetente está verificado no Resend.'
+      : 'RESEND_API_KEY ausente na Vercel.',
+  });
 });
 
 router.post('/participantes/cancelar-lote', requireAdmin, async (req, res) => {

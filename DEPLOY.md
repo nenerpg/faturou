@@ -64,7 +64,7 @@ CASH_POSTBACK_URL=https://seudominio.com/api/webhooks/cash
 ANIMUS_CHECKOUT_BASE_URL=https://checkout.animuspay.com.br/c/SEU_ID
 
 RESEND_API_KEY=SEU_KEY_RESEND
-EMAIL_FROM=Sorte Real <noreply@seudominio.com>
+EMAIL_FROM=Sorte Real <noreply@sortereal.org>
 EBOOK_URL=https://seudominio.com/ebook.pdf
 ```
 
